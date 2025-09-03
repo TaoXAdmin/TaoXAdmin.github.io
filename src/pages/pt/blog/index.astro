@@ -2,9 +2,12 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const lang = 'pt'; // ← adapte: 'en' / 'de' / 'pt' dans chaque fichier
+const lang = 'pt'; // 'en' | 'de' | 'pt' par fichier
 const BASE = import.meta.env.BASE_URL ?? '/';
-const posts = (await getCollection('blog')).filter((p) => p.data.locale === lang);
+
+const posts = (await getCollection('blog'))
+  .filter((p) => p.data.locale === lang && !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 const pageTitle = 'Blog - Alexis Fiska';
 const pageDescription = 'Articles techniques et retours d’expérience.';
@@ -12,22 +15,15 @@ const pageDescription = 'Articles techniques et retours d’expérience.';
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
   <h1 class="text-3xl font-bold mb-6 text-center">Blog</h1>
   {posts.length === 0 ? (
-    <p class="text-center text-neutral-600 dark:text-neutral-300">
-      Les articles arrivent très bientôt.
-    </p>
+    <p class="text-center text-neutral-600 dark:text-neutral-300">Les articles arrivent très bientôt.</p>
   ) : (
     <ul class="max-w-3xl mx-auto space-y-4">
       {posts.map((post) => (
         <li class="rounded-lg border border-neutral-200 dark:border-neutral-700 p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
-          <a
-            href={`${BASE}${lang}/blog/${post.data.slug}`}
-            class="text-lg font-semibold text-blue-600 dark:text-blue-400 hover:underline"
-          >
+          <a href={`${BASE}${lang}/blog/${post.data.slug}`} class="text-lg font-semibold text-blue-600 dark:text-blue-400 hover:underline">
             {post.data.title}
           </a>
-          <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">
-            {post.data.description}
-          </p>
+          <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">{post.data.description}</p>
         </li>
       ))}
     </ul>
