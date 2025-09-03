@@ -16,15 +16,11 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://taoxadmin.github.io',
-  integrations: [
-    tailwind({
-      config: {
-        applyBaseStyles: true,
-      },
-    }),
-    sitemap(),
-  ],
-  markdown: {
-    syntaxHighlight: 'prism',
-  },
+  integrations: [tailwind({ config: { applyBaseStyles: true } }), sitemap()],
+  markdown: { syntaxHighlight: 'prism' },
+  alias: {
+    '@layouts': './src/layouts',
+    '@components': './src/components',
+    '@content': './src/content'
+  }
 });

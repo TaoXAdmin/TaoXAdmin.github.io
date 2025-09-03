@@ -2,21 +2,23 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const lang = 'en';
-const { slug } = Astro.params;
-const posts = await getCollection('blog');
-const post = posts.find((p) => p.data.locale === lang && p.data.slug === slug);
-if (!post) {
-  throw new Error(`Article not found: ${slug}`);
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => data.locale === 'en');
+  return posts.map((post) => ({
+    params: { slug: post.data.slug },
+    props: { post },
+  }));
 }
-const { Content, data } = await post.render();
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const lang = 'en';
+const pageTitle = `${post.data.title} - Alexis Fiska`;
+const pageDescription = post.data.description;
 ---
-<BaseLayout lang={lang} title={`${data.title} - Alexis Fiska`} description={data.description}>
-  <article class="prose dark:prose-invert max-w-3xl mx-auto">
-    <h1 class="text-3xl font-bold mb-2">{data.title}</h1>
-    <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-6">
-      {new Date(data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-    </p>
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <article class="prose dark:prose-invert max-w-none">
     <Content />
   </article>
 </BaseLayout>
