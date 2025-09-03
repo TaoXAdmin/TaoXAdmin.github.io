@@ -1,11 +1,10 @@
 ---
-title: "Dompter Playwright : structure de test robuste en 5 étapes"
-description: "Apprenez à concevoir une architecture de tests E2E maintenable avec Playwright et SpecFlow en suivant ces cinq étapes clés."
+title: "\"Dompter Playwright : structure de test robuste en 5 étapes\""
+description: "\"Apprenez à concevoir une architecture de tests E2E maintenable avec Playwright et SpecFlow en suivant ces cinq étapes clés.\""
 locale: fr
 slug: dompter-playwright
 date: 2025-01-15
 ---
-
 Playwright est devenu l’un des outils incontournables pour l’automatisation des tests end‑to‑end. Sa
 syntaxe moderne et sa prise en charge multi‑navigateurs en font un allié de choix. Pourtant, sans
 structure rigoureuse, une suite de tests peut vite devenir un labyrinthe fragile et lent à exécuter.

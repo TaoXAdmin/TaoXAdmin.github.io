@@ -6,9 +6,9 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     locale: z.enum(['fr', 'en', 'de', 'pt']),
-    slug: z.string().min(1),
-    date: z.coerce.date(),     // parse dates "YYYY-MM-DD"
+    date: z.coerce.date(),
     draft: z.boolean().default(false),
+    // ⚠️ pas de `slug` ici : on utilisera `entry.slug` (dérivé du nom de fichier)
   }),
 });
 

@@ -1,11 +1,10 @@
 ---
-title: "Dominar Playwright: estrutura de teste robusta em 5 etapas"
-description: "Aprenda a conceber uma arquitetura de testes E2E sustentável com Playwright e SpecFlow seguindo estas cinco etapas-chave."
+title: "\"Dominar Playwright: estrutura de teste robusta em 5 etapas\""
+description: "\"Aprenda a conceber uma arquitetura de testes E2E sustentável com Playwright e SpecFlow seguindo estas cinco etapas-chave.\""
 locale: pt
 slug: dompter-playwright
 date: 2025-01-15
 ---
-
 Playwright tornou‑se uma das ferramentas indispensáveis para automação end‑to‑end. Sua sintaxe
 moderna e suporte multi‑navegador fazem dele um grande aliado. No entanto, sem uma estrutura
 rigorosa, uma suíte de testes pode rapidamente se tornar um labirinto frágil e lento. Neste artigo

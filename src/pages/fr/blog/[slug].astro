@@ -1,17 +1,18 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
-// Génère toutes les routes /fr/blog/<slug>
+type BlogEntry = CollectionEntry<'blog'>;
+
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => data.locale === 'fr');
+  const posts = await getCollection('blog', ({ data }) => data.locale === 'fr' && !data.draft);
   return posts.map((post) => ({
-    params: { slug: post.data.slug },
+    params: { slug: post.slug }, // ✅ entry.slug (pas data.slug)
     props: { post },
   }));
 }
 
-const { post } = Astro.props;
+const { post } = Astro.props as { post: BlogEntry }; // ✅ typage des props
 const { Content } = await post.render();
 
 const lang = 'fr';
@@ -23,4 +24,3 @@ const pageDescription = post.data.description;
     <Content />
   </article>
 </BaseLayout>
-	

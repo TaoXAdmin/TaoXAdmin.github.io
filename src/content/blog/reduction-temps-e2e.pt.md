@@ -1,11 +1,10 @@
 ---
-title: "Reduzir o tempo de execução E2E para menos de 30 minutos: CI/CD, paralelização e flake‑hunting"
-description: "Otimize seus testes end‑to‑end para que sejam executados em menos de meia hora por meio de pipelines CI/CD eficientes, paralelização e caça a testes instáveis."
+title: "\"Reduzir o tempo de execução E2E para menos de 30 minutos: CI/CD, paralelização e flake‑hunting\""
+description: "\"Otimize seus testes end‑to‑end para que sejam executados em menos de meia hora por meio de pipelines CI/CD eficientes, paralelização e caça a testes instáveis.\""
 locale: pt
 slug: reduction-temps-e2e
 date: 2025-02-05
 ---
-
 Suites E2E longas e instáveis são o pesadelo das equipes de desenvolvimento. Quando a execução
 ultrapassa uma hora, o ciclo de feedback se estende e a tentação de pular a validação aumenta. No
 entanto, com uma abordagem estruturada é possível trazer seus testes E2E para menos de 30 minutos
