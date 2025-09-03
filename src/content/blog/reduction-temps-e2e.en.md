@@ -1,9 +1,10 @@
 ---
-title: "\"Reducing your E2E run time under 30 minutes: CI/CD, parallelisation and flake‑hunting\""
-description: "\"Optimise your end‑to‑end tests to run in less than half an hour through efficient CI/CD pipelines, parallelisation and the hunt for flaky tests.\""
+title: "Reducing your E2E run time under 30 minutes: CI/CD, parallelisation and flake-hunting"
+description: "Optimise your end-to-end tests to run in less than half an hour through efficient CI/CD pipelines, parallelisation and the hunt for flaky tests."
 locale: en
-slug: reduction-temps-e2e
+slug: reduction-temps-e2e.en
 date: 2025-02-05
+draft: false
 ---
 Long and unstable end‑to‑end suites are a nightmare for development teams. When execution exceeds an
 hour the feedback loop stretches and the temptation to skip validation grows. Yet with a structured

@@ -1,9 +1,10 @@
 ---
-title: "\"Réduire votre temps d’exécution E2E sous 30 minutes : CI/CD, parallélisation et flake‑hunting\""
-description: "\"Optimisez vos tests end‑to‑end pour qu’ils s’exécutent en moins d’une demi‑heure grâce à des pipelines CI/CD performants, la parallélisation et la chasse aux tests instables.\""
+title: "Réduire votre temps d’exécution E2E sous 30 minutes : CI/CD, parallélisation et flake-hunting"
+description: "Optimisez vos tests end-to-end pour des exécutions < 30 min grâce à des pipelines CI/CD efficaces, la parallélisation et la chasse aux tests instables."
 locale: fr
-slug: reduction-temps-e2e
+slug: reduction-temps-e2e.fr
 date: 2025-02-05
+draft: false
 ---
 Les suites de tests end‑to‑end longues et instables sont le cauchemar des équipes de développement.
 Lorsque l’exécution dépasse une heure, la boucle de feedback s’allonge et la tentation est grande de

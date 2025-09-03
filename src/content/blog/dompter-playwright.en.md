@@ -1,9 +1,10 @@
 ---
-title: "\"Taming Playwright: building a robust test architecture in 5 steps\""
-description: "\"Learn how to design a maintainable E2E test architecture with Playwright and SpecFlow by following these five key steps.\""
+title: "Taming Playwright: building a robust test architecture in 5 steps"
+description: "Learn how to design a maintainable E2E test architecture with Playwright and SpecFlow by following these five key steps."
 locale: en
-slug: dompter-playwright
+slug: dompter-playwright.en
 date: 2025-01-15
+draft: false
 ---
 Playwright has become one of the go‑to tools for end‑to‑end automation. Its modern syntax and
 multi‑browser support make it a great ally. Yet without a rigorous structure a test suite can

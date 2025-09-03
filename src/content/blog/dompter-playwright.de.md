@@ -1,9 +1,10 @@
 ---
-title: "\"Playwright zähmen: robuste Teststruktur in 5 Schritten\""
-description: "\"Erfahren Sie, wie Sie mit Playwright und SpecFlow eine wartbare E2E‑Testarchitektur in fünf Schritten aufbauen.\""
+title: "Playwright zähmen: robuste Teststruktur in 5 Schritten"
+description: "Erfahren Sie, wie Sie mit Playwright und SpecFlow eine wartbare E2E-Testarchitektur in fünf Schritten aufbauen."
 locale: de
-slug: dompter-playwright
+slug: dompter-playwright.de
 date: 2025-01-15
+draft: false
 ---
 Playwright hat sich zu einem der wichtigsten Werkzeuge für die End‑to‑End‑Automatisierung entwickelt.
 Seine moderne Syntax und der Multi‑Browser‑Support machen es zu einem starken Verbündeten. Ohne

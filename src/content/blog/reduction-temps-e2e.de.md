@@ -1,9 +1,10 @@
 ---
-title: "\"Testlaufzeiten unter 30 Minuten: CI/CD, Parallelisierung und Flaky‑Hunting\""
-description: "\"Optimieren Sie Ihre End‑to‑End‑Tests, um sie in weniger als einer halben Stunde auszuführen, dank effizienter CI/CD‑Pipelines, Parallelisierung und der Jagd nach instabilen Tests.\""
+title: "Testlaufzeiten unter 30 Minuten: CI/CD, Parallelisierung und Flaky-Hunting"
+description: "Optimieren Sie Ihre End-to-End-Tests auf < 30 Min dank effizienter CI/CD-Pipelines, Parallelisierung und der Jagd nach instabilen Tests."
 locale: de
-slug: reduction-temps-e2e
+slug: reduction-temps-e2e.de
 date: 2025-02-05
+draft: false
 ---
 Lange und instabile End‑to‑End‑Suiten sind der Albtraum von Entwicklungsteams. Wenn die Ausführung
 mehr als eine Stunde dauert, verlängert sich die Feedback‑Schleife und die Versuchung wächst, die
