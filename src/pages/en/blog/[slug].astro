@@ -5,9 +5,11 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 type BlogEntry = CollectionEntry<'blog'>;
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => data.locale === 'en' && !data.draft);
-  return posts.map((post) => ({
-    // ✅ normalise ici : retire .fr/.en/.de/.pt
+  const posts: BlogEntry[] = await getCollection(
+    'blog',
+    (entry) => entry.slug.endsWith('.en') && !entry.data.draft
+  );
+  return posts.map((post: BlogEntry) => ({
     params: { slug: post.slug.replace(/\.(fr|en|de|pt)$/, '') },
     props: { post },
   }));

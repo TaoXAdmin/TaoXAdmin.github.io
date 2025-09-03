@@ -1,18 +1,12 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 
 const lang = 'en';
 const BASE = import.meta.env.BASE_URL ?? '/';
 
-function stripLocale(s: string) {
-  return s.replace(/\.(fr|en|de|pt)$/, '');
-}
-
-const all = await getCollection('blog');
-const posts: CollectionEntry<'blog'>[] = all
-  .filter((p) => p.data.locale === lang && !p.data.draft)
-  .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.date.getTime() - a.data.date.getTime());
+const posts = await getCollection('blog', (entry) => entry.slug.endsWith('.en') && !entry.data.draft);
+posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 const pageTitle = 'Blog - Alexis Fiska';
 const pageDescription = 'Technical articles and field notes.';
@@ -23,10 +17,10 @@ const pageDescription = 'Technical articles and field notes.';
     <p class="text-center text-neutral-600 dark:text-neutral-300">Posts coming very soon.</p>
   ) : (
     <ul class="max-w-3xl mx-auto space-y-4">
-      {posts.map((post: CollectionEntry<'blog'>) => (
+      {posts.map((post) => (
         <li class="rounded-lg border border-neutral-200 dark:border-neutral-700 p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
           <a
-            href={`${BASE}${lang}/blog/${stripLocale(post.slug)}`}
+            href={`${BASE}${lang}/blog/${post.slug.replace(/\.(fr|en|de|pt)$/, '')}`}
             class="text-lg font-semibold text-blue-600 dark:text-blue-400 hover:underline"
           >
             {post.data.title}
