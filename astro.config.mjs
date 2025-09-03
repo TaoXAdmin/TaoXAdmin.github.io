@@ -15,7 +15,7 @@ import sitemap from '@astrojs/sitemap';
 //   search engines discover your pages.
 
 export default defineConfig({
-  site: 'https://alexis-fiska.github.io',
+  site: 'https://taoxadmin.github.io',
   integrations: [
     tailwind({
       config: {

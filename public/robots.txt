@@ -10,4 +10,4 @@ Allow: /
 # sitemap is created by the @astrojs/sitemap integration using the
 # `site` configuration in astro.config.mjs.  Update the URL if the
 # deployment domain changes.
-Sitemap: https://alexis-fiska.github.io/sitemap.xml
+Sitemap: https://taoxadmin.github.io/sitemap.xml
