@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+
+const lang = 'de';
+const pageTitle = 'Dienstleistungen - Alexis Fiska';
+const pageDescription =
+  'Entdecken Sie meine Angebote für Testautomatisierung, CI/CD‑Beschleunigung, k6‑Performance, GenAI und Coaching.';
+
+const services = [
+  {
+    title: 'Express E2E Audit',
+    description:
+      'Schnelle Analyse Ihrer End‑to‑End‑Pipeline, um Engpässe zu identifizieren und Maßnahmen zu priorisieren.',
+    bullets: [
+      'Detaillierter Schwachstellenbericht',
+      'Priorisierte Roadmap',
+      'Präsentation für Teams',
+    ],
+  },
+  {
+    title: 'QA‑Framework von Grund auf',
+    description:
+      'Design und Implementierung eines modularen BDD‑Frameworks mit Playwright/SpecFlow, angepasst an Ihren Stack.',
+    bullets: [
+      'Skalierbare Architektur',
+      'Automatisierte Updates',
+      'Umfassende Dokumentation',
+    ],
+  },
+  {
+    title: 'CI/CD‑Beschleunigung',
+    description:
+      'Optimierung Ihrer CI/CD‑Pipeline, um die Testlaufzeiten drastisch zu reduzieren.',
+    bullets: [
+      'Testparallelisierung',
+      'Sharding‑ und Partitionierungsstrategien',
+      'Integration mit Reporting',
+    ],
+  },
+  {
+    title: 'k6‑Performance & Observability',
+    description:
+      'Einrichtung von k6‑Lasttests und Observability zur Überwachung der Anwendungsperformance.',
+    bullets: [
+      'k6‑Skripte basierend auf Ihren Nutzungsfällen',
+      'Alarme und Grafana‑Dashboards',
+      'Engpassanalyse',
+    ],
+  },
+  {
+    title: 'GenAI für die QA',
+    description:
+      'Erforschung generativer Modelle zur Steigerung der QA‑Produktivität.',
+    bullets: [
+      'Datensatzgenerierung',
+      'Automatische Log‑Analyse',
+      'Testschreibassistenten',
+    ],
+  },
+  {
+    title: 'Transfer & Coaching',
+    description:
+      'Schulung und Unterstützung Ihrer Teams bei der Einführung des Frameworks und der Best Practices.',
+    bullets: [
+      'Coaching‑Sitzungen',
+      'Katas und Übungen',
+      'Kontinuierlicher Support',
+    ],
+  },
+];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'QA Automation & GenAI consulting',
+  provider: { '@type': 'Person', name: 'Alexis Fiska' },
+  areaServed: 'France/Remote',
+  priceRange: '€€€',
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'EUR',
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      minPrice: 450,
+      priceCurrency: 'EUR',
+    },
+  },
+};
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <Fragment slot="head">
+    <script type="application/ld+json">
+      {JSON.stringify(serviceSchema)}
+    </script>
+  </Fragment>
+  <h1 class="text-3xl font-bold mb-4 text-center">Dienstleistungen</h1>
+  <p class="max-w-3xl mx-auto mb-8 text-neutral-700 dark:text-neutral-300 text-center">
+    Ich biete verschiedene Leistungen, um Ihre Lieferkette zu beschleunigen und die Softwarequalität zu
+    verbessern. Wählen Sie das passende Angebot für Ihre Bedürfnisse.
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {services.map((service) => (
+      <ServiceCard {...service} />
+    ))}
+  </div>
+</BaseLayout>

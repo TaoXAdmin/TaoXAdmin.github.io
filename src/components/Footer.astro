@@ -1,0 +1,68 @@
+---
+const { lang = 'fr' } = Astro.props;
+const year = new Date().getFullYear();
+
+// Translation dictionary for footer texts.  Each locale defines
+// how to display the copyright notice and the analytics notice.
+const messages = {
+  fr: {
+    rights: `© ${year} Alexis Fiska. Tous droits réservés.`,
+    analytics: 'Ce site utilise Plausible Analytics sans cookies pour mesurer l’audience.',
+    linkedin: 'LinkedIn',
+    github: 'GitHub',
+    email: 'Email',
+  },
+  en: {
+    rights: `© ${year} Alexis Fiska. All rights reserved.`,
+    analytics: 'This site uses Plausible Analytics without cookies to measure traffic.',
+    linkedin: 'LinkedIn',
+    github: 'GitHub',
+    email: 'Email',
+  },
+  de: {
+    rights: `© ${year} Alexis Fiska. Alle Rechte vorbehalten.`,
+    analytics: 'Diese Website verwendet Plausible Analytics ohne Cookies zur Reichweitenmessung.',
+    linkedin: 'LinkedIn',
+    github: 'GitHub',
+    email: 'E‑Mail',
+  },
+  pt: {
+    rights: `© ${year} Alexis Fiska. Todos os direitos reservados.`,
+    analytics: 'Este site usa Plausible Analytics sem cookies para medir o tráfego.',
+    linkedin: 'LinkedIn',
+    github: 'GitHub',
+    email: 'Email',
+  },
+};
+
+const t = messages[lang] ?? messages.fr;
+---
+<footer class="bg-neutral-50 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700 mt-12">
+  <div class="container py-8 text-sm">
+    <p class="mb-4">{t.rights}</p>
+    <nav class="flex space-x-6 mb-4" aria-label="Footer">
+      <a
+        href="https://www.linkedin.com/in/alexis-fiska"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:underline text-blue-600 dark:text-blue-400"
+        >{t.linkedin}</a
+      >
+      <a
+        href="https://github.com/alexis-fiska"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:underline text-blue-600 dark:text-blue-400"
+        >{t.github}</a
+      >
+      <a
+        href="mailto:contact@alexis-fiska.dev"
+        class="hover:underline text-blue-600 dark:text-blue-400"
+        >{t.email}</a
+      >
+    </nav>
+    <p class="text-xs text-neutral-600 dark:text-neutral-400 max-w-lg">
+      {t.analytics}
+    </p>
+  </div>
+</footer>

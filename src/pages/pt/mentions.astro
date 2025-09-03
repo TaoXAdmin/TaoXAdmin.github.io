@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const lang = 'pt';
+const pageTitle = 'Aviso legal - Alexis Fiska';
+const pageDescription =
+  'Informações legais sobre o editor do site, seu status e as condições de uso.';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <h1 class="text-3xl font-bold mb-6 text-center">Aviso legal</h1>
+  <div class="prose dark:prose-invert max-w-3xl mx-auto">
+    <p>
+      <strong>Editor:</strong> este site é editado por Alexis Fiska no âmbito de um contrato de portage.
+    </p>
+    <p>
+      <strong>Endereço:</strong> Nenhum endereço postal é publicado, pois a atividade é exercida de
+      forma remota e nas instalações dos clientes. Para correspondência, utilize o formulário de
+      contato ou o email fornecido.
+    </p>
+    <p>
+      <strong>Status jurídico:</strong> consultor independente em portage. Sem número SIREN.
+    </p>
+    <p>
+      <strong>Hospedagem:</strong> o site é hospedado no GitHub Pages.
+    </p>
+    <p>
+      <strong>Propriedade intelectual:</strong> todo o conteúdo (textos, imagens, código) pertence ao
+      editor, salvo indicação em contrário. Qualquer reprodução ou utilização sem autorização é
+      proibida.
+    </p>
+    <p>
+      Para qualquer pergunta relativa ao aviso legal, por favor entre em contato através do formulário
+      de contato.
+    </p>
+  </div>
+</BaseLayout>

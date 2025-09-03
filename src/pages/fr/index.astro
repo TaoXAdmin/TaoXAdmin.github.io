@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTAButton from '../../components/CTAButton.astro';
+
+const lang = 'fr';
+const pageTitle = 'Accueil - Alexis Fiska';
+const pageDescription =
+  'QA Automation & GenAI pour des releases plus rapides, sans régressions. Framework BDD, Playwright/SpecFlow, CI/CD, performance k6 & observabilité.';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <section class="text-center py-16">
+    <h1 class="text-3xl md:text-5xl font-bold mb-4">
+      QA Automation &amp; GenAI pour des releases plus rapides, sans régressions.
+    </h1>
+    <p class="max-w-2xl mx-auto mb-8 text-lg text-neutral-700 dark:text-neutral-300">
+      Framework BDD, Playwright/SpecFlow, CI/CD, perf k6 &amp; observabilité. Temps de run court, zéro bug
+      critique en prod.
+    </p>
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+      <CTAButton href="/fr/contact#audit" variant="primary">Réserver un audit gratuit de 30 min</CTAButton>
+      <CTAButton href="/fr/contact#quote" variant="ghost">Demander un devis</CTAButton>
+    </div>
+  </section>
+
+  <section class="py-12" id="why">
+    <h2 class="text-2xl font-semibold mb-4 text-center">Pourquoi moi ?</h2>
+    <p class="max-w-3xl mx-auto text-neutral-700 dark:text-neutral-300 mb-6">
+      Avec plus de dix ans d’expérience en automatisation des tests et un intérêt précoce pour les modèles
+      génératifs, je vous aide à accélérer vos releases tout en éliminant les régressions. J’ai conçu des
+      frameworks BDD maintenables, déployé des pipelines CI/CD matures et accompagné des équipes de
+      développement à maîtriser Playwright et SpecFlow. Mon approche pragmatique combine rigueur
+      technique et innovation continue.
+    </p>
+  </section>
+
+  <section class="py-12 bg-neutral-50 dark:bg-neutral-800" id="deliver">
+    <h2 class="text-2xl font-semibold mb-4 text-center">Ce que je livre</h2>
+    <ul class="max-w-3xl mx-auto space-y-4 text-neutral-700 dark:text-neutral-300 list-disc pl-5">
+      <li>Un framework BDD modulaire et scalable adapté à votre stack.</li>
+      <li>Des tests E2E Playwright fiables avec une exécution sous 30 minutes.</li>
+      <li>Une intégration continue avec parallélisation et reporting détaillé.</li>
+      <li>Des scripts k6 pour surveiller la performance et l’observabilité applicative.</li>
+      <li>Une montée en compétence via coaching et documentation exhaustive.</li>
+    </ul>
+  </section>
+
+  <section class="py-12" id="how">
+    <h2 class="text-2xl font-semibold mb-4 text-center">Comment on démarre ?</h2>
+    <ol class="max-w-3xl mx-auto space-y-4 text-neutral-700 dark:text-neutral-300 list-decimal pl-5">
+      <li>
+        <strong>Audit express :</strong> un état des lieux de votre pipeline QA en 30 minutes pour identifier les leviers
+        d’amélioration.
+      </li>
+      <li>
+        <strong>Plan d’action personnalisé :</strong> nous co‑construisons une roadmap priorisée adaptée à vos
+        contraintes et objectifs business.
+      </li>
+      <li>
+        <strong>Mise en œuvre agile :</strong> implémentation incrémentale avec feedback continu et adaptation
+        selon vos retours.
+      </li>
+      <li>
+        <strong>Suivi et support :</strong> transfert de compétences, documentation et assistance pour garantir la
+        pérennité de la solution.
+      </li>
+    </ol>
+  </section>
+</BaseLayout>

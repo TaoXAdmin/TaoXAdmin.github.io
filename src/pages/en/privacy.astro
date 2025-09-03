@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const lang = 'en';
+const pageTitle = 'Privacy policy - Alexis Fiska';
+const pageDescription =
+  'This policy explains how your data is collected and used when you browse the site and use the contact form.';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <h1 class="text-3xl font-bold mb-6 text-center">Privacy policy</h1>
+  <div class="prose dark:prose-invert max-w-3xl mx-auto">
+    <p>
+      This site does not collect personal data other than the information you choose to provide via
+      the contact form. Data submitted through this form is routed through the Formspree service. It
+      is used solely to respond to your request and is kept only as long as necessary for follow‑up.
+      You may request its deletion at any time by writing to
+      <a href="mailto:contact@alexis-fiska.dev">contact@alexis-fiska.dev</a>.
+    </p>
+    <p>
+      For audience measurement we use <strong>Plausible Analytics</strong>, a privacy‑friendly
+      solution that sets no cookies and collects no personally identifiable information. Only
+      anonymous statistics are recorded (page views, referrers, etc.).
+    </p>
+    <p>
+      Under the GDPR you have the right to access, rectify and delete your data. To exercise these
+      rights or ask a question about the privacy policy, please contact us by email.
+    </p>
+  </div>
+</BaseLayout>

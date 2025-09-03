@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const lang = 'en';
+const pageTitle = 'Case studies - Alexis Fiska';
+const pageDescription =
+  'Explore three case studies showing how my services helped Ornikar, Xpollens and GenAI projects improve software quality and speed up releases.';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <h1 class="text-3xl font-bold mb-6 text-center">Case studies</h1>
+  <p class="max-w-3xl mx-auto mb-10 text-neutral-700 dark:text-neutral-300 text-center">
+    Every project is unique. Here is how I helped clients from different sectors achieve effective
+    and sustainable test automation. Exact figures are intentionally omitted or anonymised in
+    accordance with non‑disclosure agreements.
+  </p>
+
+  <article class="mb-12">
+    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Ornikar</h2>
+    <h3 class="text-xl font-medium mt-4 mb-1">Context</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Online driving school platform in hypergrowth requiring increased E2E reliability to support
+      expansion and secure training and payment journeys.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Objectives</h3>
+    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
+      <li>Reduce test execution time and improve stability.</li>
+      <li>Implement a BDD framework with SpecFlow suitable for the .NET team.</li>
+      <li>Automate critical journeys (registration, booking, payment).</li>
+    </ul>
+    <h3 class="text-xl font-medium mt-4 mb-1">Approach</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Following a pipeline audit, I designed a Playwright + SpecFlow framework using the Page Object
+      pattern. Tests were parallelised and integrated into GitHub Actions with clear reporting. The
+      internal developers and QA received training.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Results</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Execution times dropped below 20 minutes with coverage of 80 % of critical journeys. Regression
+      bugs decreased and the team now has a reliable, maintainable pipeline.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Stack</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Playwright, SpecFlow (.NET), GitHub Actions, Azure DevOps.
+    </p>
+    <p class="text-xs italic text-neutral-600 dark:text-neutral-400">
+      Exact figures and results are covered by a confidentiality agreement.
+    </p>
+  </article>
+
+  <article class="mb-12">
+    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Xpollens</h2>
+    <h3 class="text-xl font-medium mt-4 mb-1">Context</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      FinTech providing payment and card APIs with strong regulatory constraints and a high release
+      cadence. Quality and compliance are essential.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Objectives</h3>
+    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
+      <li>Establish reliable contract and UI tests.</li>
+      <li>Fit naturally into the existing CI/CD pipeline under GitLab.</li>
+      <li>Train the internal team to maintain the tests.</li>
+    </ul>
+    <h3 class="text-xl font-medium mt-4 mb-1">Approach</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      I built a suite of API tests using Postman/Newman and BDD UI scenarios. Continuous integration
+      under GitLab CI with parallelisation and reporting was deployed. Training workshops strengthened
+      team autonomy.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Results</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Production bugs were halved, enabling calmer weekly releases. The QA team is now autonomous in
+      maintaining and evolving the framework.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Stack</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Playwright, Postman/Newman, GitLab CI, Kubernetes.
+    </p>
+    <p class="text-xs italic text-neutral-600 dark:text-neutral-400">
+      Exact figures and results are covered by a confidentiality agreement.
+    </p>
+  </article>
+
+  <article class="mb-12">
+    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">GenAI projects</h2>
+    <h3 class="text-xl font-medium mt-4 mb-1">Context</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Experiments exploring the use of generative models to assist QA in data generation and log
+      analysis. The results serve to explore new, innovative approaches.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Objectives</h3>
+    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
+      <li>Generate diverse, realistic synthetic data sets.</li>
+      <li>Automatically analyse logs to detect anomalies and suggest tests.</li>
+      <li>Measure the impact of these tools on QA team productivity.</li>
+    </ul>
+    <h3 class="text-xl font-medium mt-4 mb-1">Approach</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Open‑source models and language APIs were integrated via Python scripts and LangChain. Qualitative
+      and quantitative evaluations compared generated datasets and test suggestions.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Results</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      The proofs of concept showed significant productivity gains, reducing test writing time and
+      proposing new coverage ideas. Progressive adoption is underway.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Stack</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Python, LangChain, OpenAI API / open‑source models.
+    </p>
+    <p class="text-xs italic text-neutral-600 dark:text-neutral-400">
+      Exact figures and results are covered by a confidentiality agreement.
+    </p>
+  </article>
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const lang = 'en';
+const pageTitle = 'Legal notice - Alexis Fiska';
+const pageDescription =
+  'Legal information about the site publisher, status and conditions of use.';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <h1 class="text-3xl font-bold mb-6 text-center">Legal notice</h1>
+  <div class="prose dark:prose-invert max-w-3xl mx-auto">
+    <p>
+      <strong>Publisher:</strong> this site is published by Alexis Fiska under a freelance/portage
+      arrangement.
+    </p>
+    <p>
+      <strong>Address:</strong> No postal address is published because the activity is performed
+      remotely and on site at clients. For correspondence please use the contact form or the email
+      address provided.
+    </p>
+    <p>
+      <strong>Legal status:</strong> independent contractor under a portage contract. No SIREN number.
+    </p>
+    <p>
+      <strong>Hosting:</strong> the site is hosted on GitHub Pages.
+    </p>
+    <p>
+      <strong>Intellectual property:</strong> all content (texts, images, code) is the property of the
+      publisher unless otherwise stated. Any reproduction or use without permission is prohibited.
+    </p>
+    <p>
+      For any questions regarding the legal notice please contact us via the contact form.
+    </p>
+  </div>
+</BaseLayout>

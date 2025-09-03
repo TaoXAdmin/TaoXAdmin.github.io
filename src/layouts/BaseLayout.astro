@@ -1,0 +1,103 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const { title, description, lang = 'fr' } = Astro.props;
+
+// Construct a canonical URL based on the current request and the configured site.
+const pathname = Astro.url?.pathname ?? '/';
+const canonicalUrl = new URL(pathname, Astro.site).toString();
+
+// Schema.org structured data combining Person and Service definitions.  The
+// priceSpecification is intentionally broad and expressed in euros to
+// signal typical day rates without committing to a fixed figure.  This
+// JSON‑LD will appear in the <head> and assists search engines in
+// understanding the nature of the offering.
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    'name': 'Alexis Fiska',
+    'jobTitle': 'Lead QA Automation & GenAI',
+    'url': canonicalUrl,
+    'areaServed': 'France/Remote',
+    'worksFor': { '@type': 'Organization', 'name': 'Independent Consultant' },
+    'priceRange': '€€€',
+    'offers': {
+      '@type': 'Offer',
+      'priceCurrency': 'EUR',
+      'priceSpecification': {
+        '@type': 'PriceSpecification',
+        'minPrice': 450,
+        'priceCurrency': 'EUR',
+      },
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    'name': 'QA Automation & GenAI consulting',
+    'provider': { '@type': 'Person', 'name': 'Alexis Fiska' },
+    'areaServed': 'France/Remote',
+    'priceRange': '€€€',
+    'offers': {
+      '@type': 'Offer',
+      'priceCurrency': 'EUR',
+      'priceSpecification': {
+        '@type': 'PriceSpecification',
+        'minPrice': 450,
+        'priceCurrency': 'EUR',
+      },
+    },
+  },
+];
+---
+<!DOCTYPE html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    {/* Open Graph and Twitter metadata for social sharing */}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Alexis Fiska Portfolio" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    {/* Favicon placeholder – replace with real icon in /public/images */}
+    <link rel="icon" type="image/png" href="/images/favicon.svg" />
+
+    {/* JSON‑LD structured data */}
+    <script type="application/ld+json">
+      {JSON.stringify(structuredData)}
+    </script>
+
+    {/* Plausible analytics – privacy friendly, no cookies */}
+    <script
+      defer
+      data-domain="alexis-fiska.github.io"
+      src="https://plausible.io/js/script.js"
+    ></script>
+  </head>
+  <body class="bg-white text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100">
+    {/* Accessibility: skip link allows keyboard users to jump to main content */}
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only absolute left-0 top-0 m-2 p-2 bg-white dark:bg-neutral-800 text-blue-600 z-50"
+    >
+      Skip to content
+    </a>
+    <Header lang={lang} />
+    <main id="main" class="container mx-auto py-8">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

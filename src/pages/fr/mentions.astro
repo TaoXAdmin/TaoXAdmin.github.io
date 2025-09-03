@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const lang = 'fr';
+const pageTitle = 'Mentions légales - Alexis Fiska';
+const pageDescription =
+  'Informations légales sur l’éditeur du site, son statut et les conditions d’utilisation.';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <h1 class="text-3xl font-bold mb-6 text-center">Mentions légales</h1>
+  <div class="prose dark:prose-invert max-w-3xl mx-auto">
+    <p>
+      <strong>Éditeur :</strong> ce site est édité par Alexis Fiska dans le cadre d’un portage salarial.
+    </p>
+    <p>
+      <strong>Adresse :</strong> Aucune adresse postale n’est publiée car l’activité est exercée en
+      télétravail et en déplacement. Pour toute correspondance, veuillez utiliser le formulaire de
+      contact ou l’adresse email indiquée.
+    </p>
+    <p>
+      <strong>Statut juridique :</strong> travailleur porté. Pas de numéro SIREN.
+    </p>
+    <p>
+      <strong>Hébergement :</strong> le site est hébergé sur GitHub Pages.
+    </p>
+    <p>
+      <strong>Propriété intellectuelle :</strong> l’ensemble des contenus (textes, images, code) est la
+      propriété de l’éditeur sauf mention contraire. Toute reproduction ou utilisation sans
+      autorisation est interdite.
+    </p>
+    <p>
+      Pour toute question relative aux mentions légales, merci de nous contacter via le formulaire de
+      contact.
+    </p>
+  </div>
+</BaseLayout>

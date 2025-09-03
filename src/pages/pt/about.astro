@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const lang = 'pt';
+const pageTitle = 'Sobre - Alexis Fiska';
+const pageDescription =
+  'Saiba mais sobre Alexis Fiska, especialista em automação de QA e GenAI, e como ele pode ajudar você.';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <h1 class="text-3xl font-bold mb-6 text-center">Sobre</h1>
+  <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-8">
+    <img
+      src="/images/profile.jpg"
+      alt="Retrato de Alexis Fiska"
+      class="w-40 h-40 rounded-full object-cover shadow-md mb-4 md:mb-0"
+      loading="lazy"
+    />
+    <div>
+      <p class="mb-4 text-neutral-700 dark:text-neutral-300">
+        Meu nome é Alexis Fiska e sou apaixonado por qualidade de software há mais de uma década.
+        Ajudo empresas a conceber pipelines de QA de alto desempenho. De desenvolvedor a lead QA e
+        agora consultor, trabalhei em diversos setores (educação, fintech, e‑commerce) e aprendi que
+        automação bem pensada e observabilidade aceleram o crescimento.
+      </p>
+      <p class="mb-4 text-neutral-700 dark:text-neutral-300">
+        Acredito que integrar modelos generativos aos processos de teste pode multiplicar a
+        produtividade ao mesmo tempo em que aumenta a confiança nas releases. Gosto de compartilhar
+        conhecimento em conferências e workshops e ver as equipes ganharem autonomia.
+      </p>
+      <p class="mb-4 text-neutral-700 dark:text-neutral-300">
+        Fora do trabalho, sou entusiasta de fotografia e viagens, o que alimenta minha criatividade e
+        curiosidade.
+      </p>
+      <div class="flex space-x-6 mt-4">
+        <a
+          href="https://www.linkedin.com/in/alexis-fiska"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-blue-600 dark:text-blue-400 hover:underline"
+          >LinkedIn</a
+        >
+        <a
+          href="https://github.com/alexis-fiska"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-blue-600 dark:text-blue-400 hover:underline"
+          >GitHub</a
+        >
+      </div>
+    </div>
+  </div>
+</BaseLayout>

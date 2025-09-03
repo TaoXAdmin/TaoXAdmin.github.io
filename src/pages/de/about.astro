@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const lang = 'de';
+const pageTitle = 'Über mich - Alexis Fiska';
+const pageDescription =
+  'Erfahren Sie mehr über Alexis Fiska, Experte für QA‑Automatisierung und GenAI, und wie er Sie unterstützen kann.';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <h1 class="text-3xl font-bold mb-6 text-center">Über mich</h1>
+  <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-8">
+    <img
+      src="/images/profile.jpg"
+      alt="Porträt von Alexis Fiska"
+      class="w-40 h-40 rounded-full object-cover shadow-md mb-4 md:mb-0"
+      loading="lazy"
+    />
+    <div>
+      <p class="mb-4 text-neutral-700 dark:text-neutral-300">
+        Ich heiße Alexis Fiska und begeistere mich seit über zehn Jahren für Softwarequalität. Als
+        Berater helfe ich Unternehmen dabei, leistungsstarke QA‑Pipelines zu gestalten. Meine Stationen
+        reichen vom Entwickler über den Lead QA bis zum Consultant und haben mich durch verschiedene
+        Branchen (Bildung, FinTech, E‑Commerce) geführt. Ich habe gelernt, dass durchdachte
+        Automatisierung und Observability Wachstum beschleunigen können.
+      </p>
+      <p class="mb-4 text-neutral-700 dark:text-neutral-300">
+        Ich bin überzeugt, dass die Integration generativer Modelle in Testprozesse die Produktivität
+        vervielfachen kann, während das Vertrauen in Ihre Releases wächst. Gerne teile ich mein Wissen
+        auf Konferenzen und in Workshops und sehe, wie Teams selbständig werden.
+      </p>
+      <p class="mb-4 text-neutral-700 dark:text-neutral-300">
+        Außerhalb der Arbeit bin ich leidenschaftlicher Fotograf und Reisender, was meine Kreativität
+        und Neugier beflügelt.
+      </p>
+      <div class="flex space-x-6 mt-4">
+        <a
+          href="https://www.linkedin.com/in/alexis-fiska"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-blue-600 dark:text-blue-400 hover:underline"
+          >LinkedIn</a
+        >
+        <a
+          href="https://github.com/alexis-fiska"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-blue-600 dark:text-blue-400 hover:underline"
+          >GitHub</a
+        >
+      </div>
+    </div>
+  </div>
+</BaseLayout>

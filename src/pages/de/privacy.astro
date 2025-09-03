@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const lang = 'de';
+const pageTitle = 'Datenschutzerklärung - Alexis Fiska';
+const pageDescription =
+  'Diese Erklärung erläutert, wie Ihre Daten gesammelt und verwendet werden, wenn Sie die Website besuchen und das Kontaktformular nutzen.';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <h1 class="text-3xl font-bold mb-6 text-center">Datenschutzerklärung</h1>
+  <div class="prose dark:prose-invert max-w-3xl mx-auto">
+    <p>
+      Diese Website sammelt keine personenbezogenen Daten außer den Informationen, die Sie über das
+      Kontaktformular bereitstellen. Die über dieses Formular übermittelten Daten werden über den
+      Dienst Formspree geleitet. Sie werden ausschließlich genutzt, um auf Ihre Anfrage zu
+      antworten, und nur so lange gespeichert, wie es für die Bearbeitung erforderlich ist. Sie
+      können jederzeit deren Löschung verlangen, indem Sie eine E‑Mail an
+      <a href="mailto:contact@alexis-fiska.dev">contact@alexis-fiska.dev</a> senden.
+    </p>
+    <p>
+      Zur Reichweitenmessung verwenden wir <strong>Plausible Analytics</strong>, eine
+      datenschutzfreundliche Lösung, die keine Cookies setzt und keine personenbezogenen Daten
+      sammelt. Es werden lediglich anonyme Statistiken (Seitenaufrufe, Referrer usw.) erfasst.
+    </p>
+    <p>
+      Gemäß der DSGVO haben Sie das Recht auf Auskunft, Berichtigung und Löschung Ihrer Daten. Um
+      diese Rechte auszuüben oder eine Frage zur Datenschutzerklärung zu stellen, kontaktieren Sie
+      uns bitte per E‑Mail.
+    </p>
+  </div>
+</BaseLayout>

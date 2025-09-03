@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const lang = 'en';
+const pageTitle = 'About - Alexis Fiska';
+const pageDescription =
+  'Learn about Alexis Fiska, expert in QA automation and GenAI, and how he can help you.';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <h1 class="text-3xl font-bold mb-6 text-center">About</h1>
+  <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-8">
+    <img
+      src="/images/profile.jpg"
+      alt="Portrait of Alexis Fiska"
+      class="w-40 h-40 rounded-full object-cover shadow-md mb-4 md:mb-0"
+      loading="lazy"
+    />
+    <div>
+      <p class="mb-4 text-neutral-700 dark:text-neutral-300">
+        My name is Alexis Fiska and I’ve been passionate about software quality for more than a decade.
+        I help companies design high‑performance QA pipelines. From developer to lead QA and now
+        consultant, I’ve worked across industries (education, fintech, e‑commerce) and learned that
+        thoughtful automation and observability can accelerate growth.
+      </p>
+      <p class="mb-4 text-neutral-700 dark:text-neutral-300">
+        I believe integrating generative models into testing processes can multiply productivity while
+        increasing confidence in your releases. I enjoy sharing knowledge at conferences and workshops
+        and watching teams become self‑sufficient.
+      </p>
+      <p class="mb-4 text-neutral-700 dark:text-neutral-300">
+        Outside of work I’m an avid photographer and traveller, which fuels my creativity and curiosity.
+      </p>
+      <div class="flex space-x-6 mt-4">
+        <a
+          href="https://www.linkedin.com/in/alexis-fiska"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-blue-600 dark:text-blue-400 hover:underline"
+          >LinkedIn</a
+        >
+        <a
+          href="https://github.com/alexis-fiska"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-blue-600 dark:text-blue-400 hover:underline"
+          >GitHub</a
+        >
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const lang = 'en';
+const pageTitle = 'Blog - Alexis Fiska';
+const pageDescription =
+  'Read my technical articles and experience reports about QA automation, CI/CD, performance and GenAI.';
+
+const posts = (await getCollection('blog')).filter((post) => post.data.locale === lang);
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <h1 class="text-3xl font-bold mb-6 text-center">Blog</h1>
+  <p class="max-w-2xl mx-auto mb-8 text-neutral-700 dark:text-neutral-300 text-center">
+    Find my technical articles and experience reports. They are available in the supported languages.
+  </p>
+  <div class="max-w-3xl mx-auto space-y-6">
+    {posts.map((post) => (
+      <article class="border-b border-neutral-200 dark:border-neutral-700 pb-6">
+        <h2 class="text-xl font-semibold mb-2 text-blue-600 dark:text-blue-400">
+          <a href={`/en/blog/${post.data.slug}`}>{post.data.title}</a>
+        </h2>
+        <p class="text-neutral-700 dark:text-neutral-300 mb-2">{post.data.description}</p>
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          {new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </p>
+      </article>
+    ))}
+  </div>
+</BaseLayout>

@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const lang = 'fr';
+const pageTitle = 'Politique de confidentialité - Alexis Fiska';
+const pageDescription =
+  'Cette politique explique comment vos données sont collectées et utilisées lorsque vous utilisez le site et le formulaire de contact.';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <h1 class="text-3xl font-bold mb-6 text-center">Politique de confidentialité</h1>
+  <div class="prose dark:prose-invert max-w-3xl mx-auto">
+    <p>
+      Ce site ne collecte pas de données personnelles en dehors des informations que vous choisissez de
+      fournir via le formulaire de contact. Les données soumises via ce formulaire transitent par le
+      service Formspree. Elles sont utilisées uniquement pour répondre à votre demande et ne sont
+      conservées que le temps nécessaire au suivi. Vous pouvez demander la suppression de ces
+      informations à tout moment en écrivant à
+      <a href="mailto:contact@alexis-fiska.dev">contact@alexis-fiska.dev</a>.
+    </p>
+    <p>
+      Pour la mesure d’audience, nous utilisons <strong>Plausible Analytics</strong>, une solution
+      respectueuse de la vie privée qui ne dépose aucun cookie et ne collecte pas de données
+      personnelles identifiables. Seules des statistiques anonymes sont enregistrées (pages vues,
+      référents, etc.).
+    </p>
+    <p>
+      Conformément au RGPD, vous disposez d’un droit d’accès, de rectification et de suppression de
+      vos données. Pour exercer ces droits ou poser une question sur la politique de confidentialité,
+      contactez‑nous par email.
+    </p>
+  </div>
+</BaseLayout>

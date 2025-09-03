@@ -1,0 +1,36 @@
+---
+const { currentLang } = Astro.props;
+
+// List of supported locales.  The labels are displayed in uppercase for
+// clarity.  When switching languages the path of the current page
+// preserves all segments after the locale; if the current path has no
+// locale segment, it redirects to the root of the chosen language.
+const locales = ['fr', 'en', 'de', 'pt'];
+
+function switchPath(lang) {
+  const path = Astro.url.pathname || '/';
+  const segments = path.split('/').filter(Boolean);
+  if (segments.length === 0) {
+    return `/${lang}`;
+  }
+  // Replace the first segment which corresponds to the locale
+  segments[0] = lang;
+  return '/' + segments.join('/');
+}
+---
+<nav aria-label="Language selector" class="flex items-center space-x-2">
+  {locales.map((lang) => (
+    <a
+      href={switchPath(lang)}
+      hreflang={lang}
+      class={
+        'uppercase text-sm px-2 py-1 rounded ' +
+        (lang === currentLang
+          ? 'bg-blue-600 text-white'
+          : 'text-blue-600 hover:bg-blue-50 dark:hover:bg-neutral-800')
+      }
+    >
+      {lang}
+    </a>
+  ))}
+</nav>

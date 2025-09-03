@@ -1,0 +1,73 @@
+---
+import LangSwitcher from './LangSwitcher.astro';
+
+const { lang = 'fr' } = Astro.props;
+
+// Translation dictionary for navigation labels.  If a locale is
+// missing, French fallbacks are used.
+const labels = {
+  fr: {
+    home: 'Accueil',
+    services: 'Services',
+    cases: 'Cas',
+    about: 'À propos',
+    blog: 'Blog',
+    contact: 'Contact',
+  },
+  en: {
+    home: 'Home',
+    services: 'Services',
+    cases: 'Cases',
+    about: 'About',
+    blog: 'Blog',
+    contact: 'Contact',
+  },
+  de: {
+    home: 'Startseite',
+    services: 'Dienstleistungen',
+    cases: 'Referenzen',
+    about: 'Über mich',
+    blog: 'Blog',
+    contact: 'Kontakt',
+  },
+  pt: {
+    home: 'Início',
+    services: 'Serviços',
+    cases: 'Projetos',
+    about: 'Sobre',
+    blog: 'Blog',
+    contact: 'Contato',
+  },
+};
+
+const t = labels[lang] ?? labels.fr;
+const navItems = [
+  { href: `/${lang}`, label: t.home },
+  { href: `/${lang}/services`, label: t.services },
+  { href: `/${lang}/cases`, label: t.cases },
+  { href: `/${lang}/about`, label: t.about },
+  { href: `/${lang}/blog`, label: t.blog },
+  { href: `/${lang}/contact`, label: t.contact },
+];
+---
+<header class="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800">
+  <div class="container flex items-center justify-between py-4">
+    <a href={`/${lang}`} class="text-xl font-semibold text-blue-600 dark:text-blue-400">
+      Alexis Fiska
+    </a>
+    <nav class="hidden md:flex space-x-6" aria-label="Primary">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-blue-600 dark:hover:text-blue-400"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+    <div class="flex items-center space-x-4">
+      <LangSwitcher currentLang={lang} />
+      {/* Future mobile menu toggle could go here */}
+    </div>
+  </div>
+</header>

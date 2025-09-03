@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTAButton from '../../components/CTAButton.astro';
+
+const lang = 'en';
+const pageTitle = 'Home - Alexis Fiska';
+const pageDescription =
+  'QA Automation & GenAI for faster releases with zero regressions. BDD framework, Playwright/SpecFlow, CI/CD, k6 performance & observability.';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <section class="text-center py-16">
+    <h1 class="text-3xl md:text-5xl font-bold mb-4">
+      QA Automation &amp; GenAI for faster releases with zero regressions.
+    </h1>
+    <p class="max-w-2xl mx-auto mb-8 text-lg text-neutral-700 dark:text-neutral-300">
+      BDD framework, Playwright/SpecFlow, CI/CD, k6 performance &amp; observability. Short run times, zero
+      critical bugs in production.
+    </p>
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+      <CTAButton href="/en/contact#audit" variant="primary">Book a free 30 min audit</CTAButton>
+      <CTAButton href="/en/contact#quote" variant="ghost">Request a quote</CTAButton>
+    </div>
+  </section>
+
+  <section class="py-12" id="why">
+    <h2 class="text-2xl font-semibold mb-4 text-center">Why work with me?</h2>
+    <p class="max-w-3xl mx-auto text-neutral-700 dark:text-neutral-300 mb-6">
+      With over a decade of experience in automated testing and an early adopter’s perspective on
+      generative models, I help you speed up releases while eliminating regressions. I’ve built
+      maintainable BDD frameworks, deployed mature CI/CD pipelines and coached development teams to
+      master Playwright and SpecFlow. My pragmatic approach blends technical rigour with continuous
+      innovation.
+    </p>
+  </section>
+
+  <section class="py-12 bg-neutral-50 dark:bg-neutral-800" id="deliver">
+    <h2 class="text-2xl font-semibold mb-4 text-center">What I deliver</h2>
+    <ul class="max-w-3xl mx-auto space-y-4 text-neutral-700 dark:text-neutral-300 list-disc pl-5">
+      <li>A modular, scalable BDD framework tailored to your stack.</li>
+      <li>Reliable Playwright end‑to‑end tests with execution under 30 minutes.</li>
+      <li>An optimised CI pipeline with parallelisation and detailed reporting.</li>
+      <li>k6 scripts to monitor performance and application observability.</li>
+      <li>Skill transfer through coaching and exhaustive documentation.</li>
+    </ul>
+  </section>
+
+  <section class="py-12" id="how">
+    <h2 class="text-2xl font-semibold mb-4 text-center">How we get started</h2>
+    <ol class="max-w-3xl mx-auto space-y-4 text-neutral-700 dark:text-neutral-300 list-decimal pl-5">
+      <li>
+        <strong>Express audit:</strong> a 30‑minute review of your QA pipeline to identify improvement
+        levers.
+      </li>
+      <li>
+        <strong>Personalised action plan:</strong> co‑design a prioritised roadmap adapted to your
+        constraints and business objectives.
+      </li>
+      <li>
+        <strong>Agile implementation:</strong> incremental delivery with continuous feedback and
+        adaptation based on your input.
+      </li>
+      <li>
+        <strong>Follow‑up and support:</strong> knowledge transfer, documentation and assistance to
+        ensure sustainability.
+      </li>
+    </ol>
+  </section>
+</BaseLayout>

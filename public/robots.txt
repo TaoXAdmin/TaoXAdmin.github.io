@@ -1,0 +1,13 @@
+# robots.txt for Alexis Fiska portfolio
+#
+# This file instructs crawlers how to index your site.  The sitemap
+# URL helps search engines discover all translated pages.
+
+User-agent: *
+Allow: /
+
+# Point search engines at the automatically generated sitemap.  The
+# sitemap is created by the @astrojs/sitemap integration using the
+# `site` configuration in astro.config.mjs.  Update the URL if the
+# deployment domain changes.
+Sitemap: https://alexis-fiska.github.io/sitemap.xml

@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const lang = 'de';
+const pageTitle = 'Impressum - Alexis Fiska';
+const pageDescription =
+  'Rechtliche Informationen über den Seitenbetreiber, den Status und die Nutzungsbedingungen.';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <h1 class="text-3xl font-bold mb-6 text-center">Impressum</h1>
+  <div class="prose dark:prose-invert max-w-3xl mx-auto">
+    <p>
+      <strong>Betreiber:</strong> Diese Website wird von Alexis Fiska im Rahmen einer
+      freiberuflichen/Portage‑Tätigkeit betrieben.
+    </p>
+    <p>
+      <strong>Adresse:</strong> Es wird keine Postadresse veröffentlicht, da die Tätigkeit remote und
+      beim Kunden ausgeübt wird. Für Korrespondenz nutzen Sie bitte das Kontaktformular oder die
+      angegebene E‑Mail‑Adresse.
+    </p>
+    <p>
+      <strong>Rechtlicher Status:</strong> selbstständiger Berater im Portage. Keine SIREN‑Nummer.
+    </p>
+    <p>
+      <strong>Hosting:</strong> Die Website wird über GitHub Pages gehostet.
+    </p>
+    <p>
+      <strong>Urheberrecht:</strong> Alle Inhalte (Texte, Bilder, Code) sind Eigentum des Betreibers,
+      sofern nicht anders angegeben. Jede Vervielfältigung oder Nutzung ohne Genehmigung ist
+      untersagt.
+    </p>
+    <p>
+      Bei Fragen zum Impressum kontaktieren Sie uns bitte über das Kontaktformular.
+    </p>
+  </div>
+</BaseLayout>

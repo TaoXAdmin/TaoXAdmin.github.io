@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const lang = 'de';
+const pageTitle = 'Fallstudien - Alexis Fiska';
+const pageDescription =
+  'Drei Fallstudien zeigen, wie meine Leistungen Ornikar, Xpollens und GenAI‑Projekten geholfen haben, die Softwarequalität zu verbessern und Releases zu beschleunigen.';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <h1 class="text-3xl font-bold mb-6 text-center">Fallstudien</h1>
+  <p class="max-w-3xl mx-auto mb-10 text-neutral-700 dark:text-neutral-300 text-center">
+    Jedes Projekt ist einzigartig. Hier sehen Sie, wie ich Kunden aus unterschiedlichen Branchen zu
+    einer effektiven und nachhaltigen Testautomatisierung verholfen habe. Genaue Zahlen werden
+    bewusst ausgelassen oder anonymisiert gemäß Vertraulichkeitsvereinbarungen.
+  </p>
+
+  <article class="mb-12">
+    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Ornikar</h2>
+    <h3 class="text-xl font-medium mt-4 mb-1">Kontext</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Online‑Fahrschulplattform im Hyperwachstum, die höhere E2E‑Zuverlässigkeit benötigt, um
+      Expansion zu begleiten und Schulungs‑ und Zahlungsabläufe zu sichern.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Ziele</h3>
+    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
+      <li>Testlaufzeiten verkürzen und Stabilität verbessern.</li>
+      <li>Ein BDD‑Framework mit SpecFlow passend für das .NET‑Team implementieren.</li>
+      <li>Kritische Abläufe (Registrierung, Buchung, Zahlung) automatisieren.</li>
+    </ul>
+    <h3 class="text-xl font-medium mt-4 mb-1">Vorgehen</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Nach einer Prüfung der bestehenden Pipeline habe ich ein Playwright‑/SpecFlow‑Framework mit
+      Page‑Object‑Architektur entwickelt. Die Tests wurden parallelisiert und in GitHub Actions mit
+      aussagekräftigem Reporting integriert. Interne Entwickler und QA erhielten Schulungen.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Ergebnisse</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Die Laufzeiten sanken unter 20 Minuten bei 80 % Abdeckung der kritischen Abläufe. Regressionen
+      im Produktivbetrieb gingen zurück, und das Team verfügt nun über eine zuverlässige,
+      wartbare Pipeline.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Stack</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Playwright, SpecFlow (.NET), GitHub Actions, Azure DevOps.
+    </p>
+    <p class="text-xs italic text-neutral-600 dark:text-neutral-400">
+      Genaue Zahlen und Ergebnisse unterliegen einer Vertraulichkeitsvereinbarung.
+    </p>
+  </article>
+
+  <article class="mb-12">
+    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Xpollens</h2>
+    <h3 class="text-xl font-medium mt-4 mb-1">Kontext</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      FinTech, die Zahlungs‑ und Karten‑APIs bereitstellt, mit strengen regulatorischen Vorgaben und
+      hoher Release‑Frequenz. Qualität und Compliance sind entscheidend.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Ziele</h3>
+    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
+      <li>Zuverlässige Vertrags‑ und UI‑Tests einführen.</li>
+      <li>Sich nahtlos in die bestehende CI/CD‑Pipeline unter GitLab einfügen.</li>
+      <li>Das interne Team schulen, um die Tests eigenständig zu pflegen.</li>
+    </ul>
+    <h3 class="text-xl font-medium mt-4 mb-1">Vorgehen</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Ich habe eine API‑Testbatterie mit Postman/Newman und BDD‑UI‑Szenarien aufgebaut. Kontinuierliche
+      Integration unter GitLab CI mit Parallelisierung und Reporting wurde umgesetzt. Workshops
+      stärkten die Autonomie des Teams.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Ergebnisse</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Die Produktionsfehler wurden halbiert, was entspanntere wöchentliche Releases ermöglichte. Das
+      QA‑Team ist nun selbstständig in der Pflege und Weiterentwicklung des Frameworks.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Stack</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Playwright, Postman/Newman, GitLab CI, Kubernetes.
+    </p>
+    <p class="text-xs italic text-neutral-600 dark:text-neutral-400">
+      Genaue Zahlen und Ergebnisse unterliegen einer Vertraulichkeitsvereinbarung.
+    </p>
+  </article>
+
+  <article class="mb-12">
+    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">GenAI‑Projekte</h2>
+    <h3 class="text-xl font-medium mt-4 mb-1">Kontext</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Experimente zur Nutzung generativer Modelle, um die QA bei der Datengenerierung und Log‑Analyse
+      zu unterstützen. Die Ergebnisse dienen der Erkundung innovativer Ansätze.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Ziele</h3>
+    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
+      <li>Diversifizierte, realistische synthetische Datensätze generieren.</li>
+      <li>Logs automatisch analysieren, um Anomalien zu erkennen und Tests vorzuschlagen.</li>
+      <li>Den Nutzen dieser Tools für die Produktivität der QA‑Teams messen.</li>
+    </ul>
+    <h3 class="text-xl font-medium mt-4 mb-1">Vorgehen</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Open‑Source‑Modelle und Sprach‑APIs wurden mittels Python‑Skripten und LangChain integriert.
+      Qualitative und quantitative Bewertungen verglichen die generierten Datensätze und
+      Testvorschläge.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Ergebnisse</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Die Proof‑of‑Concepts zeigten deutliche Produktivitätsgewinne, verkürzten die Testschreibzeit und
+      eröffneten neue Ansätze für die Testabdeckung. Eine schrittweise Einführung ist im Gange.
+    </p>
+    <h3 class="text-xl font-medium mt-4 mb-1">Stack</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Python, LangChain, OpenAI‑API / Open‑Source‑Modelle.
+    </p>
+    <p class="text-xs italic text-neutral-600 dark:text-neutral-400">
+      Genaue Zahlen und Ergebnisse unterliegen einer Vertraulichkeitsvereinbarung.
+    </p>
+  </article>
+</BaseLayout>

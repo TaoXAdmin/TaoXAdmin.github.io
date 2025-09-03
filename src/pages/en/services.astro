@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+
+const lang = 'en';
+const pageTitle = 'Services - Alexis Fiska';
+const pageDescription =
+  'Discover my consulting offerings in test automation, CI/CD acceleration, k6 performance, GenAI and coaching.';
+
+const services = [
+  {
+    title: 'Express E2E Audit',
+    description:
+      'A quick analysis of your end‑to‑end pipeline to spot bottlenecks and prioritise actions.',
+    bullets: [
+      'Detailed report of weaknesses',
+      'Prioritised roadmap',
+      'Presentation to teams',
+    ],
+  },
+  {
+    title: 'QA Framework From Scratch',
+    description:
+      'Design and implementation of a modular BDD framework with Playwright/SpecFlow tailored to your stack.',
+    bullets: [
+      'Scalable architecture',
+      'Automated updates',
+      'Comprehensive documentation',
+    ],
+  },
+  {
+    title: 'CI/CD Acceleration',
+    description:
+      'Optimise your CI/CD pipeline to drastically reduce test execution time.',
+    bullets: [
+      'Test parallelisation',
+      'Sharding and partitioning strategies',
+      'Integration with reporting',
+    ],
+  },
+  {
+    title: 'k6 Performance & Observability',
+    description:
+      'Set up k6 load testing and observability to monitor application performance.',
+    bullets: [
+      'k6 scripts based on your usage',
+      'Alerts and Grafana dashboards',
+      'Bottleneck analysis',
+    ],
+  },
+  {
+    title: 'GenAI for QA',
+    description:
+      'Explore generative models to augment QA productivity.',
+    bullets: [
+      'Data set generation',
+      'Automatic log analysis',
+      'Test writing assistants',
+    ],
+  },
+  {
+    title: 'Transfer & Coaching',
+    description:
+      'Train and support your teams to adopt the framework and best practices.',
+    bullets: [
+      'Coaching sessions',
+      'Katas and exercises',
+      'Ongoing support',
+    ],
+  },
+];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'QA Automation & GenAI consulting',
+  provider: { '@type': 'Person', name: 'Alexis Fiska' },
+  areaServed: 'France/Remote',
+  priceRange: '€€€',
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'EUR',
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      minPrice: 450,
+      priceCurrency: 'EUR',
+    },
+  },
+};
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <Fragment slot="head">
+    <script type="application/ld+json">
+      {JSON.stringify(serviceSchema)}
+    </script>
+  </Fragment>
+  <h1 class="text-3xl font-bold mb-4 text-center">Services</h1>
+  <p class="max-w-3xl mx-auto mb-8 text-neutral-700 dark:text-neutral-300 text-center">
+    I offer a set of services designed to accelerate your delivery pipeline and improve software
+    quality. Choose the support that best fits your needs.
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {services.map((service) => (
+      <ServiceCard {...service} />
+    ))}
+  </div>
+</BaseLayout>
