@@ -5,14 +5,14 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 type BlogEntry = CollectionEntry<'blog'>;
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => data.locale === 'fr' && !data.draft);
+  const posts = await getCollection('blog', ({ data }) => data.locale === 'pt' && !data.draft);
   return posts.map((post) => ({
-    params: { slug: post.slug }, // ✅ entry.slug (pas data.slug)
+    params: { slug: post.slug.replace(/\.(fr|en|de|pt)$/, '') },
     props: { post },
   }));
 }
 
-const { post } = Astro.props as { post: BlogEntry }; // ✅ typage des props
+const { post } = Astro.props as { post: BlogEntry };
 const { Content } = await post.render();
 
 const lang = 'pt';
