@@ -2,113 +2,94 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const lang = 'en';
-const pageTitle = 'Case studies - Alexis Fiska';
+const pageTitle = 'Case Studies - Alexis Fiska';
 const pageDescription =
-  'Explore three case studies showing how my services helped Ornikar, Xpollens and GenAI projects improve software quality and speed up releases.';
+  "QA & GenAI case studies: Xpollens (BPCE BaaS) — from-scratch automation, Azure CI/CD, reliability of critical payment flows. More to come.";
+const BASE = import.meta.env.BASE_URL ?? '/';
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
   <h1 class="text-3xl font-bold mb-6 text-center">Case studies</h1>
   <p class="max-w-3xl mx-auto mb-10 text-neutral-700 dark:text-neutral-300 text-center">
-    Every project is unique. Here is how I helped clients from different sectors achieve effective
-    and sustainable test automation. Exact figures are intentionally omitted or anonymised in
-    accordance with non‑disclosure agreements.
+    Every project is unique. Here is how I helped a BaaS fintech (BPCE Group) build sustainable and effective test automation.
+    Exact figures are omitted or anonymised under NDA.
   </p>
 
+  <!-- Xpollens -->
   <article class="mb-12">
-    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Ornikar</h2>
-    <h3 class="text-xl font-medium mt-4 mb-1">Context</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Online driving school platform in hypergrowth requiring increased E2E reliability to support
-      expansion and secure training and payment journeys.
-    </p>
-    <h3 class="text-xl font-medium mt-4 mb-1">Objectives</h3>
-    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
-      <li>Reduce test execution time and improve stability.</li>
-      <li>Implement a BDD framework with SpecFlow suitable for the .NET team.</li>
-      <li>Automate critical journeys (registration, booking, payment).</li>
-    </ul>
-    <h3 class="text-xl font-medium mt-4 mb-1">Approach</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Following a pipeline audit, I designed a Playwright + SpecFlow framework using the Page Object
-      pattern. Tests were parallelised and integrated into GitHub Actions with clear reporting. The
-      internal developers and QA received training.
-    </p>
-    <h3 class="text-xl font-medium mt-4 mb-1">Results</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Execution times dropped below 20 minutes with coverage of 80 % of critical journeys. Regression
-      bugs decreased and the team now has a reliable, maintainable pipeline.
-    </p>
-    <h3 class="text-xl font-medium mt-4 mb-1">Stack</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Playwright, SpecFlow (.NET), GitHub Actions, Azure DevOps.
-    </p>
-    <p class="text-xs italic text-neutral-600 dark:text-neutral-400">
-      Exact figures and results are covered by a confidentiality agreement.
-    </p>
-  </article>
+    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Xpollens (BPCE Group)</h2>
 
-  <article class="mb-12">
-    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Xpollens</h2>
-    <h3 class="text-xl font-medium mt-4 mb-1">Context</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      FinTech providing payment and card APIs with strong regulatory constraints and a high release
-      cadence. Quality and compliance are essential.
-    </p>
-    <h3 class="text-xl font-medium mt-4 mb-1">Objectives</h3>
-    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
-      <li>Establish reliable contract and UI tests.</li>
-      <li>Fit naturally into the existing CI/CD pipeline under GitLab.</li>
-      <li>Train the internal team to maintain the tests.</li>
-    </ul>
-    <h3 class="text-xl font-medium mt-4 mb-1">Approach</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      I built a suite of API tests using Postman/Newman and BDD UI scenarios. Continuous integration
-      under GitLab CI with parallelisation and reporting was deployed. Training workshops strengthened
-      team autonomy.
-    </p>
-    <h3 class="text-xl font-medium mt-4 mb-1">Results</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Production bugs were halved, enabling calmer weekly releases. The QA team is now autonomous in
-      maintaining and evolving the framework.
-    </p>
-    <h3 class="text-xl font-medium mt-4 mb-1">Stack</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Playwright, Postman/Newman, GitLab CI, Kubernetes.
-    </p>
-    <p class="text-xs italic text-neutral-600 dark:text-neutral-400">
-      Exact figures and results are covered by a confidentiality agreement.
-    </p>
-  </article>
+    <figure class="mb-4">
+      <img
+        src={`${BASE}images/cases/xpollens/hero.svg`}
+        alt="Xpollens — CI/CD pipeline and critical banking flows"
+        loading="lazy"
+        class="w-full rounded-2xl shadow-sm"
+      />
+      <figcaption class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+        From-scratch automation: E2E/API, Azure CI/CD, Teams/Email reporting.
+      </figcaption>
+    </figure>
 
-  <article class="mb-12">
-    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">GenAI projects</h2>
     <h3 class="text-xl font-medium mt-4 mb-1">Context</h3>
     <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Experiments exploring the use of generative models to assist QA in data generation and log
-      analysis. The results serve to explore new, innovative approaches.
+      BaaS fintech with critical products (Izly, Bimpli, Money Walkie, Leroy Merlin/Adeo marketplace, Autodoc SEPA, Nirio/FDJ...).
+      Initially: 0 automation, 7 squads with manual QA, long regressions, periodic incidents, strict regulation (GDPR/KYC/AML-CFT).
     </p>
-    <h3 class="text-xl font-medium mt-4 mb-1">Objectives</h3>
+
+    <h3 class="text-xl font-medium mt-4 mb-1">Goals</h3>
     <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
-      <li>Generate diverse, realistic synthetic data sets.</li>
-      <li>Automatically analyse logs to detect anomalies and suggest tests.</li>
-      <li>Measure the impact of these tools on QA team productivity.</li>
+      <li>Kick-off E2E/API automation and secure critical money & account paths.</li>
+      <li>Industrialise an <strong>Azure DevOps</strong> pipeline (build/test/report) on qual/integration/prod (smoke).</li>
+      <li>Halve manual recipe time; structure NR/triage/observability.</li>
     </ul>
+
     <h3 class="text-xl font-medium mt-4 mb-1">Approach</h3>
     <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Open‑source models and language APIs were integrated via Python scripts and LangChain. Qualitative
-      and quantitative evaluations compared generated datasets and test suggestions.
+      In-house C# framework: <strong>SpecFlow + Gherkin</strong> (BDD), <strong>Selenium</strong> (UI), <strong>RestSharp</strong> (API),
+      robust Page Objects (<code>data-testid</code>), anonymised CSV datasets, bounded retries (≤3), anti-flakes.
+      Azure CI: 2 runs/day, Teams reporting + email to the squad, screenshots/traceability.
     </p>
+
     <h3 class="text-xl font-medium mt-4 mb-1">Results</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      The proofs of concept showed significant productivity gains, reducing test writing time and
-      proposing new coverage ideas. Progressive adoption is underway.
-    </p>
+    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
+      <li>~60% critical coverage by M2, ≈100% by M6; recipe time ÷2; −23% prod incidents (year 1).</li>
+      <li>BDD adoption across squads, 43 sprints covered, 1,826 E2E runs, hundreds of bugs intercepted in ~3 years, 5 QAs trained, clearly higher stability.</li>
+    </ul>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+      <figure class="border rounded-xl p-3 dark:border-neutral-700">
+        <img
+          src={`${BASE}images/cases/xpollens/pipeline-before.svg`}
+          alt="Before: manual regressions, instability, 0 automation"
+          loading="lazy"
+          class="w-full rounded-lg"
+        />
+        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Before: manual-only, periodic instability.</figcaption>
+      </figure>
+      <figure class="border rounded-xl p-3 dark:border-neutral-700">
+        <img
+          src={`${BASE}images/cases/xpollens/pipeline-after.svg`}
+          alt="After: Azure CI/CD, 2×/day E2E, centralised reporting, prod smoke"
+          loading="lazy"
+          class="w-full rounded-lg"
+        />
+        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">After: Azure CI/CD, 2×/day E2E, reporting &amp; prod smoke.</figcaption>
+      </figure>
+    </div>
+
     <h3 class="text-xl font-medium mt-4 mb-1">Stack</h3>
     <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Python, LangChain, OpenAI API / open‑source models.
+      C#, SpecFlow (Gherkin), Selenium, RestSharp, Azure DevOps, Microsoft Teams.
     </p>
-    <p class="text-xs italic text-neutral-600 dark:text-neutral-400">
-      Exact figures and results are covered by a confidentiality agreement.
+
+    <p class="text-sm italic text-neutral-600 dark:text-neutral-400">
+      NDA: some details anonymised/generalised.
+    </p>
+
+    <p class="mt-4">
+      <a href={`${BASE}en/cases/xpollens`} class="inline-block px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+        Read the full case study
+      </a>
     </p>
   </article>
 </BaseLayout>

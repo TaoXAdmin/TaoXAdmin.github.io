@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+const lang = 'de';
+const pageTitle = "Xpollens — QA-Skalierung: E2E, CI/CD & Stabilität";
+const pageDescription = "Automatisierung von Grund auf (C#, SpecFlow, Selenium, RestSharp), Azure-DevOps-Pipeline, Teams/E-Mail-Reporting, höhere Stabilität.";
+const BASE = import.meta.env.BASE_URL ?? '/';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <article class="prose dark:prose-invert max-w-none">
+    <p class="not-prose">
+      <img
+        src={`${BASE}images/cases/xpollens/hero.svg`}
+        alt="Xpollens — CI/CD-Pipelines und Automatisierung kritischer Zahlungsabläufe"
+        loading="lazy"
+        class="w-full rounded-2xl shadow"
+      />
+    </p>
+
+    <h1>Xpollens (BPCE-Gruppe) — QA-Skalierung: E2E, CI/CD & Stabilität</h1>
+
+    <h2>Kontext & Ausgangslage (M0)</h2>
+    <ul>
+      <li>BaaS-Fintech mit kritischen Produkten: Izly, Bimpli, Money Walkie, Marketplace Leroy Merlin/Adeo, Autodoc SEPA, Nirio (FDJ), France Pay, Be-Bunk…</li>
+      <li>Zu Beginn: <strong>0 Automatisierung</strong>, 7 Squads (manuelles QA), lange NR-Laufzeiten, periodische Incidents, starke Regulierung (DSGVO/KYC/AML-CFT), Azure-Migration im Gang.</li>
+    </ul>
+
+    <h2>Team & Verantwortungsbereich</h2>
+    <ul>
+      <li><strong>Squad-übergreifendes „Foundation“-Duo</strong>: ich (QA-Automation-Engineer) + Kollegin in Porto.</li>
+      <li>Ziele: Testframework erstellen, <strong>Azure DevOps industrialisieren</strong>, NR migrieren, QA/Devs schulen, Umgebungen & Triage stabilisieren.</li>
+      <li>Takt: 5 Tage/Woche, Sprint-Demos, agile Rituale, tägliches Pair-Programming/Pair-Testing.</li>
+    </ul>
+
+    <h2>Vorgehen</h2>
+    <ul>
+      <li><strong>C#-Stack</strong>: SpecFlow + Gherkin (BDD), <strong>Selenium</strong> (UI), <strong>RestSharp</strong> (API), Page Objects & Fixtures.</li>
+      <li>Anonymisierte CSV-Daten, DSGVO-konforme Randomisierung, <strong>≤3 Retries</strong>, Anti-Flake-Waits/Timeouts.</li>
+      <li><strong>Azure DevOps</strong>: 2 E2E-Läufe/Tag, Smoke nach Deployment in Prod, Artefakte, <strong>Teams-Reporting</strong> (QA + allgemein) + gezielte E-Mails pro Squad.</li>
+      <li>Abgedeckte Flows: Visa-Karten, Wallets &amp; Zahlungen, SEPA-Lastschriften, Onboarding/KYC, Refunds, Marketplace-Reconciliation.</li>
+    </ul>
+
+    <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+      <figure class="border rounded-xl p-3 dark:border-neutral-700">
+        <img src={`${BASE}images/cases/xpollens/pipeline-before.svg`} alt="Vorher: lange manuelle Regressionstests, periodische Instabilität" loading="lazy" class="w-full rounded-lg" />
+        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Vorher: ausschließlich manuell, periodisch instabil.</figcaption>
+      </figure>
+      <figure class="border rounded-xl p-3 dark:border-neutral-700">
+        <img src={`${BASE}images/cases/xpollens/pipeline-after.svg`} alt="Nachher: Azure DevOps, 2×/Tag E2E, zentrales Reporting, Prod-Smoke" loading="lazy" class="w-full rounded-lg" />
+        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Nachher: Azure DevOps, 2×/Tag E2E, Reporting &amp; Prod-Smoke.</figcaption>
+      </figure>
+    </div>
+
+    <h2>Karte der abgedeckten Flows</h2>
+    <figure class="not-prose my-6 border rounded-xl p-3 dark:border-neutral-700">
+      <img
+        src={`${BASE}images/cases/xpollens/gen-paths.svg`}
+        alt="Übersicht der abgedeckten kritischen Abläufe: Karten, SEPA, Wallets & Zahlungen, Onboarding/KYC, Refunds, Reconciliation, Marketplace"
+        loading="lazy"
+        class="w-full rounded-lg"
+      />
+      <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">
+        Makro-Sicht der getesteten Flows: Karten, SEPA, Wallets &amp; Zahlungen, Onboarding/KYC, Refunds, Reconciliation, Marketplace.
+      </figcaption>
+    </figure>
+
+    <h2>Manuelle Tests & UAT</h2>
+    <ul>
+      <li>Manueller Fokus auf <strong>Exploration/UAT</strong>; Release-Checklisten bleiben bestehen.</li>
+      <li>Gherkin an Akzeptanzkriterien ausgerichtet; <code>data-testid</code> für stabile Selektoren.</li>
+    </ul>
+
+    <h2>CI/CD, Observability & Laufzeit</h2>
+    <ul>
+      <li>Schrittweise Parallelisierung/Sharding, Umgebungsisolation, Log-Artefakte.</li>
+      <li><strong>Selenium-Screenshots</strong> bei Fehlern + detaillierte API-Logs (Route/Payload/Status); Dashboard für Head of QA; wöchentliches Flake-Triage.</li>
+      <li><strong>Last-Flows</strong> alle 3 Sprints zur Engpass-Analyse (Performance-NR).</li>
+    </ul>
+
+    <h2>Ergebnisse (nach Perioden)</h2>
+    <ul>
+      <li><strong>M1 → M2</strong>: erster vollständiger Lauf, ~60 % kritische Pfade; 2 verlässliche Läufe/Tag.</li>
+      <li><strong>M2 → M6</strong>: ≈100 % kritische E2E; risikobasierte NR; Prod-Smoke.</li>
+      <li><strong>Jahr 1</strong>: −23 % Prod-Incidents; Abnahmedauer ÷2; BDD-Adoption.</li>
+      <li><strong>~3 Jahre</strong>: BDD in Squads verankert, 43 Sprints abgedeckt, 1.826 E2E-Läufe, Hunderte Bugs früh abgefangen, 5 QAs für Automatisierung befähigt, deutlich höhere Stabilität.</li>
+    </ul>
+
+    <h2>Stack</h2>
+    <ul class="columns-2">
+      <li>C#, SpecFlow (Gherkin)</li>
+      <li>Selenium (UI)</li>
+      <li>RestSharp (API)</li>
+      <li>Azure DevOps</li>
+      <li>Microsoft Teams (Reporting)</li>
+      <li>Anonymisierte CSV-Datensätze</li>
+    </ul>
+
+    <blockquote>
+      <strong>NDA-Hinweis</strong> — Sensible Details verallgemeinert; Zahlen auf nicht-sensibles Niveau gerundet.
+    </blockquote>
+  </article>
+</BaseLayout>
