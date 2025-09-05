@@ -2,7 +2,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
   <rect width="1200" height="520" fill="#ffffff"/>
   <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" fill="#0f172a">
-    <text x="600" y="60" font-size="26" font-weight="700" text-anchor="middle">Avant : recettes manuelles & instabilité</text>
+    <text x="600" y="60" font-size="26" font-weight="700" text-anchor="middle">Avant : recettes manuelles &amp; instabilité</text>
   </g>
   <g transform="translate(80,120)">
     <rect x="0" y="0" width="320" height="300" rx="16" fill="#f8fafc" stroke="#e5e7eb"/>

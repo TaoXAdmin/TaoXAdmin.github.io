@@ -34,7 +34,7 @@
     </g>
 
     <text x="520" y="170" font-size="14" fill="#334155" text-anchor="middle">
-      2 exécutions/jour • smoke en prod • notifications Teams + email • artefacts & screenshots
+      2 exécutions/jour • smoke en prod • notifications Teams + email • artefacts &amp; screenshots
     </text>
   </g>
 </svg>
