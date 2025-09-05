@@ -4,114 +4,96 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const lang = 'fr';
 const pageTitle = 'Cas d’étude - Alexis Fiska';
 const pageDescription =
-  'Découvrez trois études de cas illustrant comment mes services ont aidé Ornikar, Xpollens et des projets GenAI à améliorer leur qualité logicielle et à accélérer leurs releases.';
+  "Études de cas QA & GenAI : Xpollens (BaaS BPCE) – automatisation from scratch, CI/CD Azure, fiabilité des parcours critiques. D’autres cas arrivent.";
+const BASE = import.meta.env.BASE_URL ?? '/';
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
   <h1 class="text-3xl font-bold mb-6 text-center">Cas d’étude</h1>
   <p class="max-w-3xl mx-auto mb-10 text-neutral-700 dark:text-neutral-300 text-center">
-    Chaque projet est unique. Voici comment j’ai accompagné des clients de secteurs variés vers une
+    Chaque projet est unique. Voici comment j’ai accompagné une fintech BaaS (groupe BPCE) vers une
     automatisation des tests efficace et durable. Les chiffres précis sont volontairement omis ou
     anonymisés conformément aux accords de confidentialité (NDA).
   </p>
 
+  <!-- Xpollens -->
   <article class="mb-12">
-    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Ornikar</h2>
+    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Xpollens (Groupe BPCE)</h2>
+
+    <figure class="mb-4">
+      <img
+        src={`${BASE}images/cases/xpollens/hero.svg`}
+        alt="Xpollens — pipeline CI/CD et parcours critiques bancaires"
+        loading="lazy"
+        class="w-full rounded-2xl shadow-sm"
+      />
+      <figcaption class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+        Automatisation from scratch : E2E/API, CI/CD Azure, reporting Teams/Email.
+      </figcaption>
+    </figure>
+
     <h3 class="text-xl font-medium mt-4 mb-1">Contexte</h3>
     <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Plateforme d’auto‑école en ligne en hypercroissance ayant besoin d’une fiabilité E2E accrue pour
-      accompagner son expansion et sécuriser les parcours de formation et de paiement.
+      Fintech BaaS opérant des produits critiques (Izly, Bimpli, Money Walkie, marketplace Leroy Merlin/Adeo,
+      Autodoc SEPA, Nirio/FDJ...). À mon arrivée : 0 automatisation, 7 squads avec QA manuel, recettes longues,
+      incidents par périodes, forte contrainte réglementaire (RGPD/KYC/LCB-FT).
     </p>
+
     <h3 class="text-xl font-medium mt-4 mb-1">Objectifs</h3>
     <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
-      <li>Réduire le temps d’exécution des tests et améliorer la stabilité.</li>
-      <li>Mettre en œuvre un framework BDD avec SpecFlow adapté à l’équipe .NET.</li>
-      <li>Automatiser les parcours critiques (inscription, réservation, paiement).</li>
+      <li>Démarrer l’automatisation E2E/API et sécuriser les parcours critiques monétiques & comptes.</li>
+      <li>Industrialiser une pipeline <strong>Azure DevOps</strong> (build/test/report) sur qualif/intégration/prod (smoke).</li>
+      <li>Réduire de moitié la recette manuelle ; structurer NR/triage/observabilité.</li>
     </ul>
+
     <h3 class="text-xl font-medium mt-4 mb-1">Approche</h3>
     <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Après un audit du pipeline existant, j’ai conçu un framework Playwright + SpecFlow avec
-      architecture Page Object. Les tests ont été parallélisés et intégrés à GitHub Actions avec un
-      reporting clair. Une formation a été dispensée aux développeurs et QA internes.
+      Framework C# maison : <strong>SpecFlow + Gherkin</strong> (BDD), <strong>Selenium</strong> (UI), <strong>RestSharp</strong> (API),
+      Page Objects robustes (<code>data-testid</code>), jeux de données CSV anonymisés, retries (≤3) bornés, anti-flakes.
+      CI Azure : 2 runs/jour, reporting Teams + mail à la squad, screenshots/traçabilité.
     </p>
+
     <h3 class="text-xl font-medium mt-4 mb-1">Résultats</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Les temps d’exécution sont passés sous la barre des 20 minutes avec une couverture de 80 % des
-      parcours critiques. Les régressions en production ont chuté, et l’équipe dispose d’un pipeline
-      fiable et maintenable.
-    </p>
+    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
+      <li>~60 % de couverture critique en M2, ≈100 % en M6 ; recette ÷2 ; −23 % d’incidents prod (année 1).</li>
+      <li>Adoption BDD dans les squads, milliers de bugs interceptés en 3 ans, stabilité accrue des plateformes.</li>
+    </ul>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+      <figure class="border rounded-xl p-3 dark:border-neutral-700">
+        <img
+          src={`${BASE}images/cases/xpollens/pipeline-before.svg`}
+          alt="Avant : recettes manuelles longues, instabilité, 0 automatisation"
+          loading="lazy"
+          class="w-full rounded-lg"
+        />
+        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Avant : recettes manuelles, instabilité périodique.</figcaption>
+      </figure>
+      <figure class="border rounded-xl p-3 dark:border-neutral-700">
+        <img
+          src={`${BASE}images/cases/xpollens/pipeline-after.svg`}
+          alt="Après : CI/CD Azure, E2E 2×/jour, reporting centralisé, smoke prod"
+          loading="lazy"
+          class="w-full rounded-lg"
+        />
+        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Après : CI/CD Azure, E2E 2×/jour, reporting & smoke prod.</figcaption>
+      </figure>
+    </div>
+
     <h3 class="text-xl font-medium mt-4 mb-1">Stack</h3>
     <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Playwright, SpecFlow (.NET), GitHub Actions, Azure DevOps.
+      C#, SpecFlow (Gherkin), Selenium, RestSharp, Azure DevOps, Microsoft Teams.
     </p>
-    <p class="text-xs italic text-neutral-600 dark:text-neutral-400">
-      Les chiffres et résultats précis sont couverts par un accord de confidentialité.
+
+    <p class="text-sm italic text-neutral-600 dark:text-neutral-400">
+      NDA : certaines informations sont anonymisées/généralisées.
+    </p>
+
+    <p class="mt-4">
+      <a href={`${BASE}fr/cases/xpollens`} class="inline-block px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+        Lire l’étude détaillée
+      </a>
     </p>
   </article>
 
-  <article class="mb-12">
-    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Xpollens</h2>
-    <h3 class="text-xl font-medium mt-4 mb-1">Contexte</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      FinTech fournissant des API de paiement et de cartes avec des contraintes réglementaires fortes et
-      une cadence de release élevée. La qualité et la conformité sont essentielles.
-    </p>
-    <h3 class="text-xl font-medium mt-4 mb-1">Objectifs</h3>
-    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
-      <li>Mettre en place des tests contractuels et d’interface fiables.</li>
-      <li>S’intégrer naturellement dans le pipeline CI/CD existant sous GitLab.</li>
-      <li>Former l’équipe interne pour assurer la maintenance des tests.</li>
-    </ul>
-    <h3 class="text-xl font-medium mt-4 mb-1">Approche</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      J’ai construit une batterie de tests d’API avec Postman/Newman et des scénarios UI BDD. Une
-      intégration continue sous GitLab CI avec parallélisation et reporting a été déployée. Des
-      ateliers de formation ont renforcé l’autonomie des équipes.
-    </p>
-    <h3 class="text-xl font-medium mt-4 mb-1">Résultats</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Les bugs en production ont été réduits de moitié, permettant des releases hebdomadaires plus
-      sereines. L’équipe QA est aujourd’hui autonome sur la maintenance et l’évolution du framework.
-    </p>
-    <h3 class="text-xl font-medium mt-4 mb-1">Stack</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Playwright, Postman/Newman, GitLab CI, Kubernetes.
-    </p>
-    <p class="text-xs italic text-neutral-600 dark:text-neutral-400">
-      Les chiffres et résultats précis sont couverts par un accord de confidentialité.
-    </p>
-  </article>
-
-  <article class="mb-12">
-    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Projets GenAI</h2>
-    <h3 class="text-xl font-medium mt-4 mb-1">Contexte</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Expérimentations autour de l’utilisation de modèles génératifs pour assister la QA dans la
-      génération de données et l’analyse de logs. Les résultats servent à explorer de nouvelles
-      approches innovantes.
-    </p>
-    <h3 class="text-xl font-medium mt-4 mb-1">Objectifs</h3>
-    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
-      <li>Générer des jeux de données synthétiques variés et réalistes.</li>
-      <li>Analyser automatiquement des journaux pour détecter des anomalies et proposer des tests.</li>
-      <li>Mesurer l’apport de ces outils sur la productivité des équipes QA.</li>
-    </ul>
-    <h3 class="text-xl font-medium mt-4 mb-1">Approche</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Des modèles open‑source et des API de langage ont été intégrés via des scripts Python et
-      LangChain. Des évaluations qualitatives et quantitatives ont été menées pour comparer les
-      jeux de données générés et les suggestions de tests.
-    </p>
-    <h3 class="text-xl font-medium mt-4 mb-1">Résultats</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Les POC ont démontré des gains de productivité significatifs, réduisant le temps de rédaction
-      des tests et proposant de nouvelles pistes de couverture. Une adoption progressive est en cours.
-    </p>
-    <h3 class="text-xl font-medium mt-4 mb-1">Stack</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Python, LangChain, API OpenAI / modèles open‑source.
-    </p>
-    <p class="text-xs italic text-neutral-600 dark:text-neutral-400">
-      Les chiffres et résultats précis sont couverts par un accord de confidentialité.
-    </p>
-  </article>
+  <!-- Tu pourras ajouter ici Ornikar et Projets GenAI au même format -->
 </BaseLayout>
