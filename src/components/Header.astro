@@ -5,11 +5,11 @@ const { lang = 'fr' } = Astro.props;
 
 const t =
   {
-    fr:{home:'Accueil',services:'Services',cases:'Cas',about:'À propos',blog:'Blog',contact:'Contact',menu:'ALEXIS FISKA'},
-    en:{home:'Home',services:'Services',cases:'Cases',about:'About',blog:'Blog',contact:'Contact',menu:'ALEXIS FISKA'},
-    de:{home:'Startseite',services:'Dienstleistungen',cases:'Referenzen',about:'Über mich',blog:'Blog',contact:'Kontakt',menu:'ALEXIS FISKA'},
-    pt:{home:'Início',services:'Serviços',cases:'Projetos',about:'Sobre',blog:'Blog',contact:'Contato',menu:'ALEXIS FISKA'},
-  }[lang] ?? {home:'Accueil',services:'Services',cases:'Cas',about:'À propos',blog:'Blog',contact:'Contact',menu:'Menu'};
+    fr:{home:'Accueil',services:'Services',cases:'Cas',about:'À propos',blog:'Blog',contact:'Contact',menu:'ALEXIS FISKA',search:'Rechercher…',results:'Résultats',nores:'Aucun résultat'},
+    en:{home:'Home',services:'Services',cases:'Cases',about:'About',blog:'Blog',contact:'Contact',menu:'ALEXIS FISKA',search:'Search…',results:'Results',nores:'No results'},
+    de:{home:'Startseite',services:'Dienstleistungen',cases:'Referenzen',about:'Über mich',blog:'Blog',contact:'Kontakt',menu:'ALEXIS FISKA',search:'Suchen…',results:'Ergebnisse',nores:'Keine Ergebnisse'},
+    pt:{home:'Início',services:'Serviços',cases:'Projetos',about:'Sobre',blog:'Blog',contact:'Contato',menu:'ALEXIS FISKA',search:'Pesquisar…',results:'Resultados',nores:'Sem resultados'},
+  }[lang] ?? {home:'Accueil',services:'Services',cases:'Cas',about:'À propos',blog:'Blog',contact:'Contact',menu:'Menu',search:'Rechercher…',results:'Résultats',nores:'Aucun résultat'};
 
 const items = [
   { href: `/${lang}`, label: t.home },
@@ -26,32 +26,66 @@ const isActive = (href) => {
   if (h === `/${lang}`) return current === h;
   return current.startsWith(h);
 };
+
+const BASE = import.meta.env.BASE_URL ?? '/';
 ---
 <header class="sticky top-0 z-50 border-b border-neutral-200 dark:border-neutral-800 bg-white/90 dark:bg-neutral-950/90 backdrop-blur">
   <div class="container mx-auto px-4">
-    <div class="h-14 flex items-center justify-between">
+    <div class="h-14 flex items-center justify-between gap-3">
       <a href={`/${lang}`} class="text-xl font-semibold tracking-tight text-blue-600 dark:text-blue-400">Alexis Fiska</a>
 
-      <!-- Desktop -->
-      <nav class="hidden md:flex items-center gap-6" aria-label="Primary">
-        {items.map((it) => (
-          <a
-            href={it.href}
-            class={`text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 ${
-              isActive(it.href) ? 'text-blue-700 dark:text-blue-300' : 'text-neutral-700 dark:text-neutral-200'
-            }`}
-          >
-            {it.label}
-          </a>
-        ))}
-      </nav>
+      <!-- Desktop NAV + SEARCH -->
+      <div class="hidden md:flex items-center gap-6 flex-1 justify-end">
+        <nav class="flex items-center gap-6" aria-label="Primary">
+          {items.map((it) => (
+            <a
+              href={it.href}
+              class={`text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 ${
+                isActive(it.href) ? 'text-blue-700 dark:text-blue-300' : 'text-neutral-700 dark:text-neutral-200'
+              }`}
+            >
+              {it.label}
+            </a>
+          ))}
+        </nav>
 
-      <!-- Lang + burger -->
-      <div class="flex items-center gap-2">
+        <!-- Search (desktop) -->
+        <div class="relative w-64">
+          <input
+            id="search-desktop"
+            type="search"
+            placeholder={t.search}
+            class="w-full rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 px-9 py-2 text-sm outline-none focus:ring-2 ring-blue-500/40"
+            autocomplete="off"
+            aria-label={t.search}
+            data-index-url={`${BASE}search.json`}
+            data-lang={lang}
+          />
+          <!-- loupe -->
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 opacity-60" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+            <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <!-- résultats -->
+          <div id="search-desktop-results"
+               class="hidden absolute z-50 mt-2 w-[min(28rem,90vw)] right-0 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-xl overflow-hidden">
+            <div class="px-3 py-2 text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{t.results}</div>
+            <ul class="max-h-80 overflow-auto" role="listbox" aria-label={t.results}></ul>
+            <div class="px-3 py-2 text-xs text-neutral-500 dark:text-neutral-400 border-t border-neutral-200 dark:border-neutral-800">
+              ↵ pour ouvrir — Échap pour fermer
+            </div>
+          </div>
+        </div>
+
+        <LangSwitcher currentLang={lang} />
+      </div>
+
+      <!-- Mobile: Lang + burger -->
+      <div class="md:hidden flex items-center gap-2">
         <LangSwitcher currentLang={lang} />
         <button
           id="menu-open"
-          class="md:hidden inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+          class="inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
           aria-label="Ouvrir le menu" aria-haspopup="dialog" aria-controls="mobile-menu" aria-expanded="false">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -61,19 +95,17 @@ const isActive = (href) => {
     </div>
   </div>
 
-  <!-- MOBILE DRAWER: plein écran + slide horizontal -->
+  <!-- MOBILE DRAWER -->
   <div id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title"
        aria-hidden="true" class="hidden fixed inset-0 z-[60]">
     <!-- Backdrop -->
     <div id="menu-backdrop"
          class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 ease-out"></div>
 
-    <!-- Panneau PLEIN ÉCRAN -->
+    <!-- Panel -->
     <section id="menu-panel"
-      class="absolute inset-0 h-[100dvh] w-screen
-             bg-white dark:bg-neutral-900 shadow-2xl ring-1 ring-black/5 dark:ring-white/10
-             flex flex-col transform-gpu translate-x-full
-             transition-transform duration-300 ease-out overscroll-contain">
+      class="absolute inset-0 h-[100dvh] w-screen bg-white dark:bg-neutral-900 shadow-2xl ring-1 ring-black/5 dark:ring-white/10
+             flex flex-col transform-gpu translate-x-full transition-transform duration-300 ease-out overscroll-contain">
       <!-- Barre titre -->
       <div class="h-14 w-full px-4 flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800">
         <span id="mobile-menu-title" class="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{t.menu}</span>
@@ -84,7 +116,33 @@ const isActive = (href) => {
         </button>
       </div>
 
-      <!-- Liste scrollable -->
+      <!-- Search (mobile) -->
+      <div class="px-4 pt-3">
+        <div class="relative">
+          <input
+            id="search-mobile"
+            type="search"
+            placeholder={t.search}
+            class="w-full rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 px-9 py-3 text-[15px] outline-none focus:ring-2 ring-blue-500/40"
+            autocomplete="off"
+            aria-label={t.search}
+            data-index-url={`${BASE}search.json`}
+            data-lang={lang}
+          />
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 opacity-60" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+            <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+
+          <div id="search-mobile-results"
+               class="hidden absolute z-50 mt-2 w-full left-0 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-xl overflow-hidden">
+            <div class="px-3 py-2 text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{t.results}</div>
+            <ul class="max-h-80 overflow-auto" role="listbox" aria-label={t.results}></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Liste liens -->
       <nav class="px-4 py-3 grow overflow-y-auto" aria-label="Mobile">
         <ul class="space-y-1">
           {items.map((it) => (
@@ -99,55 +157,121 @@ const isActive = (href) => {
           ))}
         </ul>
       </nav>
-
     </section>
   </div>
 
-  <!-- JS pur : slide horizontal, pas d’ESC -->
+  <!-- Script: drawer + search (vanilla, sans TS) -->
   <script is:inline>
     (function () {
-      const root = document.getElementById('mobile-menu');
-      const openBtn = document.getElementById('menu-open');
-      const closeBtn = document.getElementById('menu-close');
-      const backdrop = document.getElementById('menu-backdrop');
-      const panel = document.getElementById('menu-panel');
-      if (!root || !openBtn || !closeBtn || !backdrop || !panel) return;
-
-      function open() {
-        root.classList.remove('hidden');
-        root.setAttribute('aria-hidden', 'false');
-        openBtn.setAttribute('aria-expanded', 'true');
-        document.documentElement.classList.add('overflow-hidden');
-
-        // Assure la transition (Safari/iOS) : reflow + RAF
-        panel.getBoundingClientRect();
-        requestAnimationFrame(() => {
-          backdrop.classList.add('opacity-100');       // fade-in backdrop
-          panel.classList.remove('translate-x-full');  // slide-in
-        });
-
-        // Fermer au clic d’un lien
-        panel.querySelectorAll('a[href]').forEach(a => a.addEventListener('click', close, { once: true }));
+      // ============ Drawer ============
+      var root = document.getElementById('mobile-menu');
+      var openBtn = document.getElementById('menu-open');
+      var closeBtn = document.getElementById('menu-close');
+      var backdrop = document.getElementById('menu-backdrop');
+      var panel = document.getElementById('menu-panel');
+      if (root && openBtn && closeBtn && backdrop && panel) {
+        function open() {
+          root.classList.remove('hidden');
+          root.setAttribute('aria-hidden', 'false');
+          openBtn.setAttribute('aria-expanded', 'true');
+          document.documentElement.classList.add('overflow-hidden');
+          panel.getBoundingClientRect();
+          requestAnimationFrame(function () {
+            backdrop.classList.add('opacity-100');
+            panel.classList.remove('translate-x-full');
+          });
+          panel.querySelectorAll('a[href]').forEach(function (a) { a.addEventListener('click', close, { once: true }); });
+        }
+        function close() {
+          backdrop.classList.remove('opacity-100');
+          panel.classList.add('translate-x-full');
+          openBtn.setAttribute('aria-expanded', 'false');
+          document.documentElement.classList.remove('overflow-hidden');
+          var done = function () {
+            root.classList.add('hidden');
+            root.setAttribute('aria-hidden', 'true');
+            panel.removeEventListener('transitionend', done);
+            if (openBtn.focus) openBtn.focus();
+          };
+          panel.addEventListener('transitionend', done, { once: true });
+        }
+        openBtn.addEventListener('click', open);
+        closeBtn.addEventListener('click', close);
+        backdrop.addEventListener('click', close);
       }
 
-      function close() {
-        backdrop.classList.remove('opacity-100');      // fade-out
-        panel.classList.add('translate-x-full');       // slide-out
-        openBtn.setAttribute('aria-expanded', 'false');
-        document.documentElement.classList.remove('overflow-hidden');
+      // ============ Search ============
+      var cache = null; // { items: [...] }
+      var controller = null;
 
-        const done = () => {
-          root.classList.add('hidden');
-          root.setAttribute('aria-hidden', 'true');
-          panel.removeEventListener('transitionend', done);
-          if (openBtn.focus) openBtn.focus();
-        };
-        panel.addEventListener('transitionend', done, { once: true });
+      function norm(s){ return (s || '').toString().toLowerCase()
+        .normalize ? s.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') : s.toString().toLowerCase(); }
+
+      function setupSearch(inputId, resultsBoxId) {
+        var input = document.getElementById(inputId);
+        var box = document.getElementById(resultsBoxId);
+        if (!input || !box) return;
+        var list = box.querySelector('ul');
+        var lang = input.dataset.lang || 'fr';
+        var indexUrl = input.dataset.indexUrl || '/search.json';
+
+        function render(items) {
+          list.innerHTML = '';
+          if (!items.length) {
+            var li = document.createElement('li');
+            li.className = 'px-3 py-3 text-sm text-neutral-500 dark:text-neutral-400';
+            li.textContent = inputId.includes('desktop') ? 'Aucun résultat' : 'Aucun résultat';
+            list.appendChild(li);
+            return;
+          }
+          items.forEach(function (it) {
+            var li = document.createElement('li');
+            li.innerHTML =
+              '<a href="'+ it.url +'" class="block px-3 py-2 hover:bg-neutral-50 dark:hover:bg-neutral-800">' +
+                '<div class="text-sm font-medium text-neutral-900 dark:text-neutral-100">' + it.title + '</div>' +
+                '<div class="text-xs text-neutral-600 dark:text-neutral-400 line-clamp-2">' + (it.description || '') + '</div>' +
+              '</a>';
+            list.appendChild(li);
+          });
+        }
+
+        var debTimer = null;
+        function onInput(){
+          var q = input.value.trim();
+          if (debTimer) window.clearTimeout(debTimer);
+          if (!q){ box.classList.add('hidden'); return; }
+          debTimer = window.setTimeout(function(){
+            ensureIndex(indexUrl).then(function(data){
+              var n = norm(q);
+              var res = (data.items || [])
+                .filter(function (it) { return it.lang === lang; })
+                .filter(function (it) {
+                  var hay = norm(it.title + ' ' + (it.description || ''));
+                  return hay.indexOf(n) !== -1;
+                })
+                .slice(0, 7);
+              render(res);
+              box.classList.remove('hidden');
+            }).catch(function(){
+              render([]); box.classList.remove('hidden');
+            });
+          }, 120);
+        }
+
+        input.addEventListener('input', onInput);
+        input.addEventListener('focus', function(){ if (input.value.trim()) box.classList.remove('hidden'); });
+        input.addEventListener('blur', function(){ setTimeout(function(){ box.classList.add('hidden'); }, 120); });
       }
 
-      openBtn.addEventListener('click', open);
-      closeBtn.addEventListener('click', close);
-      backdrop.addEventListener('click', close);
+      function ensureIndex(url){
+        if (cache) return Promise.resolve(cache);
+        if (controller) controller.abort();
+        controller = new AbortController();
+        return fetch(url, { signal: controller.signal }).then(function(r){ return r.json(); }).then(function(j){ cache = j; return j; });
+      }
+
+      setupSearch('search-desktop', 'search-desktop-results');
+      setupSearch('search-mobile', 'search-mobile-results');
     })();
   </script>
 </header>
