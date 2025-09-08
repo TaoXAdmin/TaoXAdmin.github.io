@@ -3,10 +3,18 @@ const SUPPORTED = ['fr', 'en', 'de', 'pt'] as const;
 type Lang = typeof SUPPORTED[number];
 
 interface Props {
-  current?: Lang;
-  path?: string; // e.g. Astro.url.pathname
+  current?: Lang;      // prop principale
+  currentLang?: Lang;  // alias pour compatibilité (Header utilise cette prop)
+  path?: string;       // e.g. Astro.url.pathname
 }
-const { current = 'fr', path = Astro.url.pathname } = Astro.props as Props;
+
+const {
+  current: currentProp,
+  currentLang: currentLangProp,
+  path = Astro.url.pathname,
+} = Astro.props as Props;
+
+const current: Lang = (currentProp ?? currentLangProp ?? 'fr') as Lang;
 
 function switchPath(lang: Lang): string {
   const parts = path.split('/');
@@ -20,7 +28,9 @@ function switchPath(lang: Lang): string {
     <a
       href={switchPath(l)}
       aria-current={l === current ? 'page' : undefined}
-      class={`px-2 py-1 rounded ${l === current ? 'bg-blue-600 text-white' : 'hover:bg-neutral-100 dark:hover:bg-neutral-800'}`}
+      class={`px-2 py-1 rounded ${
+        l === current ? 'bg-blue-600 text-white' : 'hover:bg-neutral-100 dark:hover:bg-neutral-800'
+      }`}
     >
       {l.toUpperCase()}
     </a>
