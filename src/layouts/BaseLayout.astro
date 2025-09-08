@@ -71,6 +71,14 @@ const structuredData = [
 
     <link rel="icon" type="image/svg+xml" href={`${BASE}images/favicon.svg`} />
 
+    <!-- Google Fonts: Inter (UI) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <script type="application/ld+json" is:inline set:html={JSON.stringify(structuredData)}></script>
 
     <script
@@ -85,7 +93,7 @@ const structuredData = [
       :root{
         --page-trans-dur: .28s;
         --page-trans-ease: cubic-bezier(.22,1,.36,1);
-        --page-trans-shift: 10px; /* ajuste l’amplitude du slide */
+        --page-trans-shift: 10px;
       }
       @media (prefers-reduced-motion: reduce){
         .animate-page-in,.animate-page-out{ animation: none !important; }
@@ -102,24 +110,22 @@ const structuredData = [
       .animate-page-out { animation: page-out var(--page-trans-dur) var(--page-trans-ease) both; }
     </style>
   </head>
-  <body class="min-h-screen bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 flex flex-col">
+  <body class="min-h-screen bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 flex flex-col font-sans">
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-blue-600 text-white px-3 py-2 rounded z-50">
       Aller au contenu
     </a>
 
     <Header lang={lang} />
 
-    <!-- Ajout des classes/attributs de transition -->
     <main id="main" data-page-trans class="container mx-auto px-4 py-8 flex-1 animate-page-in">
       <slot />
     </main>
 
     <Footer lang={lang} />
 
-    <!-- JS très court pour jouer la transition de sortie avant navigation -->
     <script is:inline>
       (function () {
-        var DURATION = 280; // doit matcher --page-trans-dur
+        var DURATION = 280;
         var main = document.querySelector('main[data-page-trans]');
         if (!main) return;
 
@@ -129,7 +135,6 @@ const structuredData = [
             return u.origin === window.location.origin;
           } catch { return false; }
         }
-
         function findAnchor(el){
           while (el && el !== document.body){
             if (el.tagName && el.tagName.toLowerCase() === 'a') return el;
@@ -137,12 +142,9 @@ const structuredData = [
           }
           return null;
         }
-
         document.addEventListener('click', function (e) {
           var a = findAnchor(e.target);
           if (!a) return;
-
-          // Ne pas intercepter : nouvelles fenêtres, téléchargements, ancres, mailto/tel, externes, opt-out
           var href = a.getAttribute('href') || '';
           if (a.target === '_blank' || a.hasAttribute('download') || a.dataset.noTransition === 'true') return;
           if (!href || href[0] === '#' || href.startsWith('mailto:') || href.startsWith('tel:')) return;
@@ -160,7 +162,6 @@ const structuredData = [
           }, DURATION);
         }, true);
 
-        // Retour via bfcache (Safari/Firefox) : rejouer l'enter
         window.addEventListener('pageshow', function(){
           document.body.classList.remove('page-exiting');
           main.classList.remove('animate-page-out');

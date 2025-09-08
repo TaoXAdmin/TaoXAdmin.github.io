@@ -1,10 +1,9 @@
 /**
- * Tailwind CSS configuration for the portfolio.  The content paths
- * include Astro components, pages and markdown content.  Dark mode
- * is toggled via the `class` strategy so visitors can choose light
- * or dark themes.  Additional plugins enable rich typography and
- * accessible form styles.  The container is centered with sensible
- * padding by default.
+ * Tailwind CSS configuration for the portfolio.
+ * - Dark mode via `class`
+ * - Container centré
+ * - Typography + Forms
+ * - Police par défaut : Inter (Google Fonts)
  */
 const colors = require('tailwindcss/colors');
 
@@ -22,6 +21,22 @@ module.exports = {
       },
       colors: {
         neutral: colors.neutral,
+      },
+      fontFamily: {
+        // Police UI par défaut
+        sans: [
+          'Inter',
+          'ui-sans-serif',
+          'system-ui',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          'Noto Sans',
+          'Apple Color Emoji',
+          'Segoe UI Emoji',
+          'Segoe UI Symbol',
+        ],
       },
     },
   },
