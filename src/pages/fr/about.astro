@@ -1,51 +1,96 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
 const lang = 'fr';
 const pageTitle = 'À propos - Alexis Fiska';
 const pageDescription =
-  'Découvrez le parcours d’Alexis Fiska, expert en automatisation QA et GenAI, et comment il peut vous accompagner.';
+  'Parcours d’Alexis Fiska, expert en automatisation QA et GenAI. Pipelines de tests, CI/CD, performance et transfert de savoir-faire.';
+const BASE = import.meta.env.BASE_URL ?? '/';
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
-  <h1 class="text-3xl font-bold mb-6 text-center">À propos</h1>
-  <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-8">
-    <img
-      src="/images/profile.jpg"
-      alt="Portrait d’Alexis Fiska"
-      class="w-40 h-40 rounded-full object-cover shadow-md mb-4 md:mb-0"
-      loading="lazy"
-    />
-    <div>
-      <p class="mb-4 text-neutral-700 dark:text-neutral-300">
-        Passionné par la qualité logicielle depuis plus de dix ans, je m’appelle Alexis Fiska et j’accompagne
-        les entreprises dans la conception de pipelines QA performants. De développeur à lead QA en
-        passant par consultant, j’ai exploré diverses industries (éducation, fintech, e‑commerce) et
-        découvert que l’automatisation bien pensée et l’observabilité sont des accélérateurs de croissance.
-      </p>
-      <p class="mb-4 text-neutral-700 dark:text-neutral-300">
-        Je suis convaincu que l’intégration de modèles génératifs dans les processus de test peut
-        démultiplier la productivité tout en améliorant la confiance dans vos releases. J’aime partager
-        mes connaissances lors de conférences et ateliers, et voir les équipes gagner en autonomie.
-      </p>
-      <p class="mb-4 text-neutral-700 dark:text-neutral-300">
-        En dehors du travail, je me passionne pour la photographie et le voyage, ce qui alimente ma
-        créativité et ma curiosité.
-      </p>
-      <div class="flex space-x-6 mt-4">
-        <a
-          href="https://www.linkedin.com/in/alexis-fiska"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-blue-600 dark:text-blue-400 hover:underline"
-          >LinkedIn</a
-        >
-        <a
-          href="https://github.com/alexis-fiska"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-blue-600 dark:text-blue-400 hover:underline"
-          >GitHub</a
-        >
+  <section class="max-w-5xl mx-auto">
+    <h1 class="text-3xl font-bold mb-2 text-center">À propos</h1>
+    <p class="text-center text-neutral-600 dark:text-neutral-300 mb-8">
+      Disponible en <strong>France / Remote</strong> — accompagnement sur mesure en <strong>QA Automation</strong>, <strong>CI/CD</strong> et <strong>GenAI</strong>.
+    </p>
+
+    <div class="grid gap-8 md:grid-cols-[auto,1fr] items-start">
+      <img
+        src={`${BASE}images/profile.jpg`}
+        alt="Portrait d’Alexis Fiska"
+        class="w-40 h-40 rounded-full object-cover shadow-md mx-auto md:mx-0"
+        loading="lazy"
+      />
+
+      <div>
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+          <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
+            Lead QA Automation
+          </span>
+          <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300">
+            GenAI
+          </span>
+          <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-300">
+            CI/CD
+          </span>
+        </div>
+
+        <p class="mb-4 text-neutral-700 dark:text-neutral-300">
+          Passionné par la <strong>qualité logicielle</strong>, j’accompagne les équipes pour concevoir des
+          pipelines de tests <strong>fiables et rapides</strong>. De développeur à lead QA en passant par consultant,
+          j’ai travaillé dans l’<strong>éducation</strong>, la <strong>fintech</strong> et l’<strong>e-commerce</strong>.
+          Ma conviction : une <strong>automatisation bien pensée</strong> et une <strong>observabilité claire</strong>
+          sont des leviers majeurs de performance.
+        </p>
+
+        <p class="mb-4 text-neutral-700 dark:text-neutral-300">
+          Je crois aussi à l’apport des <strong>modèles génératifs</strong> pour la QA : génération de données,
+          triage de logs, suggestion de scénarios… L’objectif n’est pas de remplacer, mais
+          <strong>d’augmenter la productivité</strong> et la <strong>confiance</strong> dans chaque release.
+        </p>
+
+        <ul class="grid sm:grid-cols-2 gap-3 text-neutral-700 dark:text-neutral-300 mb-6">
+          <li class="p-3 rounded-xl border border-neutral-200 dark:border-neutral-800">
+            <span class="font-semibold">Ce que j’aime livrer :</span> frameworks BDD maintenables, pipelines CI/CD
+            <em>rapides</em>, reporting actionnable.
+          </li>
+          <li class="p-3 rounded-xl border border-neutral-200 dark:border-neutral-800">
+            <span class="font-semibold">Approche :</span> pragmatisme, <strong>pairing</strong>, pédagogie et
+            transfert de compétences.
+          </li>
+        </ul>
+
+        <div class="flex items-center gap-6">
+          <a
+            href="https://www.linkedin.com/in/alexis-fiska"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-blue-600 dark:text-blue-400 hover:underline"
+            aria-label="Profil LinkedIn d’Alexis Fiska"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="https://github.com/alexis-fiska"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-blue-600 dark:text-blue-400 hover:underline"
+            aria-label="GitHub d’Alexis Fiska"
+          >
+            GitHub
+          </a>
+          <span class="text-neutral-500 dark:text-neutral-400 text-sm">•</span>
+          <a
+            href={`/${lang}/services`}
+            class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700"
+          >
+            Découvrir les services
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 17l10-10M17 7H9M17 7v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 </BaseLayout>
