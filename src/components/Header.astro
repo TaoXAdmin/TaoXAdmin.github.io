@@ -56,50 +56,54 @@ const isActive = (href: string) => {
     </div>
   </div>
 
-  <!-- Drawer mobile (slide horizontal + backdrop opaque) -->
+  <!-- Drawer mobile (plein écran, slide droite -> gauche) -->
   <div id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title"
-       aria-hidden="true" class="hidden fixed inset-0 z-[60] pointer-events-none">
+       aria-hidden="true" class="hidden fixed inset-0 z-[60]">
     <!-- Backdrop -->
     <div id="menu-backdrop"
-         class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 ease-out will-change-[opacity]"></div>
+         class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 ease-out"></div>
 
     <!-- Panneau -->
-    <aside id="menu-panel"
-      class="absolute right-0 top-0 h-full w-[min(92vw,420px)]
+    <section id="menu-panel"
+      class="absolute right-0 top-0 h-[100dvh] w-[min(92vw,420px)]
              bg-white dark:bg-neutral-900 shadow-2xl ring-1 ring-black/5 dark:ring-white/10
-             px-5 pt-16 pb-6 overflow-y-auto
-             transform-gpu translate-x-full opacity-0
-             transition-[transform,opacity] duration-300 ease-out
-             will-change-[transform,opacity]">
-      <div class="absolute right-3 top-3">
-        <button id="menu-close"
-          class="inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-          aria-label="Fermer le menu">
+             flex flex-col
+             translate-x-full opacity-0
+             transition-transform duration-300 ease-out">
+      <!-- Barre titre -->
+      <div class="h-14 w-full px-4 flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800">
+        <span id="mobile-menu-title" class="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{t.menu}</span>
+        <button id="menu-close" class="inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800" aria-label="Fermer le menu">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M6 6l12 12M18 6l-12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </button>
       </div>
 
-      <h2 id="mobile-menu-title" class="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400 mb-4">{t.menu}</h2>
-
-      <nav class="flex flex-col gap-1" aria-label="Mobile">
-        {items.map((it) => (
-          <a href={it.href}
-             class={`block rounded-xl px-3 py-3 text-[16px] font-medium
-                     hover:bg-neutral-100 dark:hover:bg-neutral-800
-                     ${isActive(it.href) ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-200' : 'text-neutral-900 dark:text-neutral-100'}`}>
-            {it.label}
-          </a>
-        ))}
+      <!-- Liste scrollable -->
+      <nav class="px-4 py-3 grow overflow-y-auto" aria-label="Mobile">
+        <ul class="space-y-1">
+          {items.map((it) => (
+            <li>
+              <a href={it.href}
+                 class={`block rounded-xl px-3 py-3 text-[16px] font-medium
+                         hover:bg-neutral-100 dark:hover:bg-neutral-800
+                         ${isActive(it.href) ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-200' : 'text-neutral-900 dark:text-neutral-100'}`}>
+                {it.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </nav>
 
-      <div class="mt-5 pt-4 border-t border-neutral-200 dark:border-neutral-800">
+      <!-- Footer fixé bas + safe-area -->
+      <div class="px-4 py-4 border-t border-neutral-200 dark:border-neutral-800 pb-[calc(env(safe-area-inset-bottom)+1rem)]">
         <LangSwitcher currentLang={lang} />
       </div>
-    </aside>
+    </section>
   </div>
 
+  <!-- JS minimal et fiable -->
   <script is:inline>
     (function () {
       const root = document.getElementById('mobile-menu');
@@ -107,40 +111,33 @@ const isActive = (href: string) => {
       const closeBtn = document.getElementById('menu-close');
       const backdrop = document.getElementById('menu-backdrop');
       const panel = document.getElementById('menu-panel');
-
       if (!root || !openBtn || !closeBtn || !backdrop || !panel) return;
 
       function open() {
         root.classList.remove('hidden');
-        root.classList.add('pointer-events-auto');
         root.setAttribute('aria-hidden', 'false');
         openBtn.setAttribute('aria-expanded', 'true');
-        document.body.classList.add('overflow-hidden');
-
-        // start states already set (opacity-0 + translate-x-full). Animate next frame:
+        document.documentElement.classList.add('overflow-hidden'); // bloque le scroll iOS aussi
+        // anim (prochaine frame)
         requestAnimationFrame(() => {
-          backdrop.classList.add('opacity-100');           // fade in backdrop
-          panel.classList.remove('translate-x-full');      // slide in
-          panel.classList.remove('opacity-0');             // fade in panel
+          backdrop.classList.add('opacity-100');
+          panel.classList.remove('translate-x-full','opacity-0');
           panel.classList.add('opacity-100');
         });
-
-        // close when clicking any link
+        // fermer au clic d’un lien
         panel.querySelectorAll('a[href]').forEach(a => a.addEventListener('click', close, { once: true }));
         document.addEventListener('keydown', onKeyDown);
       }
 
       function close() {
-        backdrop.classList.remove('opacity-100');          // fade out
-        panel.classList.add('translate-x-full');           // slide out
-        panel.classList.remove('opacity-100');             // fade out panel
+        backdrop.classList.remove('opacity-100');
+        panel.classList.add('translate-x-full');
+        panel.classList.remove('opacity-100');
         panel.classList.add('opacity-0');
-
         openBtn.setAttribute('aria-expanded', 'false');
-        document.body.classList.remove('overflow-hidden');
+        document.documentElement.classList.remove('overflow-hidden');
 
         const done = () => {
-          root.classList.remove('pointer-events-auto');
           root.classList.add('hidden');
           root.setAttribute('aria-hidden', 'true');
           panel.removeEventListener('transitionend', done);
@@ -151,7 +148,6 @@ const isActive = (href: string) => {
       }
 
       function onKeyDown(e) { if (e.key === 'Escape') close(); }
-
       openBtn.addEventListener('click', open);
       closeBtn.addEventListener('click', close);
       backdrop.addEventListener('click', close);
