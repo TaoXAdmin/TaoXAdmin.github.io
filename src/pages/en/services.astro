@@ -90,9 +90,7 @@ const serviceSchema = {
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
   <Fragment slot="head">
-    <script type="application/ld+json">
-      {JSON.stringify(serviceSchema)}
-    </script>
+<script type="application/ld+json" is:inline set:html={JSON.stringify(serviceSchema)}></script>
   </Fragment>
   <h1 class="text-3xl font-bold mb-4 text-center">Services</h1>
   <p class="max-w-3xl mx-auto mb-8 text-neutral-700 dark:text-neutral-300 text-center">

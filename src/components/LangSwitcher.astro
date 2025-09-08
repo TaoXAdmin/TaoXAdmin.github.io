@@ -1,36 +1,28 @@
 ---
-const { currentLang } = Astro.props;
+const SUPPORTED = ['fr', 'en', 'de', 'pt'] as const;
+type Lang = typeof SUPPORTED[number];
 
-// List of supported locales.  The labels are displayed in uppercase for
-// clarity.  When switching languages the path of the current page
-// preserves all segments after the locale; if the current path has no
-// locale segment, it redirects to the root of the chosen language.
-const locales = ['fr', 'en', 'de', 'pt'];
+interface Props {
+  current?: Lang;
+  path?: string; // e.g. Astro.url.pathname
+}
+const { current = 'fr', path = Astro.url.pathname } = Astro.props as Props;
 
-function switchPath(lang) {
-  const path = Astro.url.pathname || '/';
-  const segments = path.split('/').filter(Boolean);
-  if (segments.length === 0) {
-    return `/${lang}`;
-  }
-  // Replace the first segment which corresponds to the locale
-  segments[0] = lang;
-  return '/' + segments.join('/');
+function switchPath(lang: Lang): string {
+  const parts = path.split('/');
+  parts[1] = lang; // /fr/... -> /en/...
+  const candidate = parts.join('/');
+  return candidate.startsWith('/') ? candidate : `/${candidate}`;
 }
 ---
-<nav aria-label="Language selector" class="flex items-center space-x-2">
-  {locales.map((lang) => (
+<nav aria-label="Language switcher" class="flex gap-2 text-sm">
+  {SUPPORTED.map((l) => (
     <a
-      href={switchPath(lang)}
-      hreflang={lang}
-      class={
-        'uppercase text-sm px-2 py-1 rounded ' +
-        (lang === currentLang
-          ? 'bg-blue-600 text-white'
-          : 'text-blue-600 hover:bg-blue-50 dark:hover:bg-neutral-800')
-      }
+      href={switchPath(l)}
+      aria-current={l === current ? 'page' : undefined}
+      class={`px-2 py-1 rounded ${l === current ? 'bg-blue-600 text-white' : 'hover:bg-neutral-100 dark:hover:bg-neutral-800'}`}
     >
-      {lang}
+      {l.toUpperCase()}
     </a>
   ))}
 </nav>
