@@ -9,7 +9,7 @@ export async function getStaticPaths() {
     'blog',
     (entry) => entry.slug.endsWith('.fr') && !entry.data.draft
   );
-  return posts.map((post: BlogEntry) => ({
+  return posts.map((post) => ({
     params: { slug: post.slug.replace(/\.(fr|en|de|pt)$/, '') },
     props: { post },
   }));
@@ -20,10 +20,80 @@ const { Content } = await post.render();
 
 const lang = 'fr';
 const pageTitle = `${post.data.title} - Alexis Fiska`;
-const pageDescription = post.data.description;
+const pageDescription = post.data.description ?? '';
+
+const locale = 'fr-FR';
+const fmtDate = (d: Date) =>
+  new Date(d).toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' });
+
+const pathname = Astro.url?.pathname ?? '/';
+const canonical = new URL(pathname, Astro.site).toString();
+
+const tags: string[] = Array.isArray(post.data.tags) ? post.data.tags : [];
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
-  <article class="prose dark:prose-invert max-w-none">
-    <Content />
-  </article>
+  <header class="max-w-3xl mx-auto mt-6 mb-8 text-center">
+    {tags.length > 0 && (
+      <ul class="mb-3 flex flex-wrap justify-center gap-2">
+        {tags.map((t) => (
+          <li class="text-xs px-2 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border border-blue-100 dark:border-blue-800">
+            {t}
+          </li>
+        ))}
+      </ul>
+    )}
+    <h1 class="text-3xl md:text-4xl font-bold leading-tight">{post.data.title}</h1>
+    {pageDescription && (
+      <p class="mt-3 text-neutral-600 dark:text-neutral-300">{pageDescription}</p>
+    )}
+    <p class="mt-3 text-sm text-neutral-500 dark:text-neutral-400">
+      Publié le <time datetime={post.data.date.toISOString()}>{fmtDate(post.data.date)}</time>
+    </p>
+  </header>
+
+  <div class="max-w-3xl mx-auto mb-10">
+    <div class="h-px w-full bg-gradient-to-r from-transparent via-neutral-200 dark:via-neutral-700 to-transparent mb-8"></div>
+    <article class="prose dark:prose-invert max-w-none">
+      <Content />
+    </article>
+
+    <footer class="mt-10 space-y-6">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+        <a
+          href={`/fr/blog`}
+          class="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 12H4M10 6l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" />
+          </svg>
+          Retour au blog
+        </a>
+        <div class="flex items-center gap-2 text-sm">
+          <span class="text-neutral-600 dark:text-neutral-300">Partager</span>
+          <a
+            class="px-2 py-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800"
+            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(canonical)}&text=${encodeURIComponent(post.data.title)}`}
+            target="_blank" rel="noopener"
+            aria-label="Partager sur X/Twitter"
+          >X</a>
+          <a
+            class="px-2 py-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800"
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonical)}`}
+            target="_blank" rel="noopener"
+            aria-label="Partager sur LinkedIn"
+          >LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="rounded-2xl border border-neutral-200 dark:border-neutral-800 p-5 bg-white dark:bg-neutral-900">
+        <div class="flex items-center gap-4">
+          <img src="/images/profile.jpg" alt="Portrait d’Alexis Fiska" class="w-12 h-12 rounded-full object-cover" loading="lazy" />
+          <div>
+            <p class="font-semibold">Alexis Fiska</p>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">Lead QA Automation & GenAI — missions en France/remote.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
 </BaseLayout>
