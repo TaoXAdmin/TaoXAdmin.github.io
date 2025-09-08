@@ -5,11 +5,11 @@ const { lang = 'fr' } = Astro.props;
 
 const t =
   {
-    fr:{home:'Accueil',services:'Services',cases:'Cas',about:'À propos',blog:'Blog',contact:'Contact',menu:'Menu'},
-    en:{home:'Home',services:'Services',cases:'Cases',about:'About',blog:'Blog',contact:'Contact',menu:'Menu'},
-    de:{home:'Startseite',services:'Dienstleistungen',cases:'Referenzen',about:'Über mich',blog:'Blog',contact:'Kontakt',menu:'Menü'},
-    pt:{home:'Início',services:'Serviços',cases:'Projetos',about:'Sobre',blog:'Blog',contact:'Contato',menu:'Menu'},
-  }[lang] ?? {home:'Accueil',services:'Services',cases:'Cas',about:'À propos',blog:'Blog',contact:'Contact',menu:'Menu'};
+    fr:{home:'Accueil',services:'Services',cases:'Cas',about:'À propos',blog:'Blog',contact:'Contact',menu:'ALEXIS FISKA'},
+    en:{home:'Home',services:'Services',cases:'Cases',about:'About',blog:'Blog',contact:'Contact',menu:'ALEXIS FISKA'},
+    de:{home:'Startseite',services:'Dienstleistungen',cases:'Referenzen',about:'Über mich',blog:'Blog',contact:'Kontakt',menu:'ALEXIS FISKA'},
+    pt:{home:'Início',services:'Serviços',cases:'Projetos',about:'Sobre',blog:'Blog',contact:'Contato',menu:'ALEXIS FISKA'},
+  }[lang] ?? {home:'Accueil',services:'Services',cases:'Cas',about:'À propos',blog:'Blog',contact:'Contact',menu:'ALEXIS FISKA'};
 
 const items = [
   { href: `/${lang}`, label: t.home },
