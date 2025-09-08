@@ -1,0 +1,119 @@
+---
+const { selector = 'img[data-lightbox]' } = Astro.props;
+---
+<div
+  id="af-lightbox"
+  class="fixed inset-0 z-[2000] hidden"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  data-selector={selector}
+>
+  <!-- Backdrop -->
+  <button
+    id="af-lb-backdrop"
+    class="absolute inset-0 bg-black/70 backdrop-blur-md opacity-0 transition-opacity duration-200 ease-out"
+    aria-label="Fermer l’aperçu"
+  ></button>
+
+  <!-- Panel -->
+  <figure
+    id="af-lb-panel"
+    class="relative mx-auto opacity-0 scale-[0.98] transition-all duration-200 ease-out
+           w-[min(96vw,1200px)] max-h-[90vh] pointer-events-auto"
+    style="top:50%;transform:translateY(-50%) scale(0.98);"
+  >
+    <img
+      id="af-lb-image"
+      alt=""
+      class="w-full h-auto max-h-[90vh] object-contain rounded-xl ring-1 ring-white/10 shadow-2xl"
+    />
+    <button
+      id="af-lb-close"
+      class="absolute -top-3 -right-3 inline-flex items-center justify-center h-9 w-9 rounded-full
+             bg-black/70 text-white ring-1 ring-white/20 hover:bg-black/80 focus:outline-none
+             focus-visible:ring-2 focus-visible:ring-white/40"
+      aria-label="Fermer"
+      title="Fermer"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 6l12 12M18 6l-12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <span class="pointer-events-none absolute inset-0 rounded-xl" style="border:1px solid rgba(214,179,106,.45)"></span>
+  </figure>
+</div>
+
+<style is:inline>
+  :root { --gold:#D6B36A; }
+  img[data-lightbox]{ cursor: zoom-in; pointer-events:auto; }
+  @media (prefers-reduced-motion: reduce){
+    #af-lb-backdrop,#af-lb-panel{ transition:none!important; }
+  }
+  #af-lightbox[data-open="true"] #af-lb-backdrop{ opacity:1; }
+  #af-lightbox[data-open="true"] #af-lb-panel{ opacity:1; transform:translateY(-50%) scale(1); }
+</style>
+
+<script is:inline>
+(function(){
+  var lb     = document.getElementById('af-lightbox');
+  if(!lb) return;
+  var SEL    = lb.dataset.selector || 'img[data-lightbox]';
+  var panel  = document.getElementById('af-lb-panel');
+  var imgEl  = document.getElementById('af-lb-image');
+  var closeBt= document.getElementById('af-lb-close');
+  var back   = document.getElementById('af-lb-backdrop');
+  var lastTrigger = null;
+
+  function lockScroll(on){ document.documentElement.classList.toggle('overflow-hidden', on); }
+  function srcFor(el){ return el.getAttribute('data-lightbox-src') || el.getAttribute('src'); }
+  function altFor(el){ return el.getAttribute('alt') || ''; }
+
+  function openLightbox(src, alt, trigger){
+    if(!src) return;
+    lastTrigger = trigger || null;
+    imgEl.src = src; imgEl.alt = alt || '';
+    lb.classList.remove('hidden');
+    lb.setAttribute('aria-hidden','false');
+    // force reflow pour activer la transition
+    lb.getBoundingClientRect();
+    lb.dataset.open = 'true';
+    lockScroll(true);
+    setTimeout(function(){ try{ closeBt.focus(); }catch(_){} }, 40);
+  }
+  function closeLightbox(){
+    lb.dataset.open = 'false';
+    lockScroll(false);
+    var onEnd = function(){
+      lb.classList.add('hidden');
+      lb.setAttribute('aria-hidden','true');
+      lb.removeEventListener('transitionend', onEnd);
+      if (lastTrigger && lastTrigger.focus){ try{ lastTrigger.focus(); }catch(_){} }
+    };
+    lb.addEventListener('transitionend', onEnd, { once:true });
+  }
+
+  // Délégation : clique sur n’importe quel élément correspondant
+  document.addEventListener('click', function(e){
+    var target = e.target.closest(SEL + ', [data-lightbox-src]');
+    if(!target) return;
+    e.preventDefault();
+    openLightbox(srcFor(target), altFor(target), target);
+  }, true);
+
+  // Accessibilité : Entrée/Espace pour ouvrir, Échap pour fermer
+  document.addEventListener('keydown', function(e){
+    var active = document.activeElement;
+    if (active && active.matches && active.matches(SEL + ', [data-lightbox-src]')) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(srcFor(active), altFor(active), active); }
+    }
+    if (lb.getAttribute('aria-hidden') === 'false' && (e.key === 'Escape' || e.key === 'Esc')) {
+      e.preventDefault(); closeLightbox();
+    }
+  });
+
+  back.addEventListener('click', closeLightbox);
+  closeBt.addEventListener('click', closeLightbox);
+  lb.addEventListener('click', function(e){ if(!panel.contains(e.target)) closeLightbox(); });
+})();
+</script>

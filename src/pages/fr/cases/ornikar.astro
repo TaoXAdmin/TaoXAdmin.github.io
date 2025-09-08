@@ -7,49 +7,71 @@ const pageDescription =
 const BASE = import.meta.env.BASE_URL ?? '/';
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
-  <article class="prose dark:prose-invert max-w-none">
+  <article
+    class="prose dark:prose-invert max-w-none prose-headings:tracking-tight prose-h1:mb-2 prose-h1:text-[2rem] md:prose-h1:text-[2.25rem]
+           prose-h2:mt-8 prose-h2:mb-3 prose-p:text-white prose-a:no-underline prose-a:decoration-[#D6B36A]/50
+           prose-a:underline-offset-4 hover:prose-a:decoration-[#D6B36A] prose-strong:text-white
+           prose-code:text-[#D6B36A] prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+           prose-blockquote:border-l-0 prose-blockquote:text-white/80">
 
+    <!-- HERO encadré or -->
     <p class="not-prose">
-      <img
-        src={`${BASE}images/cases/ornikar/i18n/fr/hero.svg`}
-        alt="Ornikar — QA Automation & intégration de comparateurs d’assurances"
-        loading="lazy"
-        class="w-full rounded-2xl shadow"
-      />
+      <span class="block rounded-2xl p-[1px]
+                   bg-[linear-gradient(135deg,rgba(214,179,106,.65),rgba(255,255,255,.08))]
+                   shadow-xl shadow-black/30">
+        <span class="block rounded-[1rem] overflow-hidden relative ring-1 ring-white/10">
+          <img
+            src={`${BASE}images/cases/ornikar/i18n/fr/hero.svg`}
+            alt="Ornikar — QA Automation & intégration de comparateurs d’assurances"
+            loading="lazy"
+            class="w-full block"
+          />
+          <!-- voile luxe -->
+          <span aria-hidden="true"
+                class="pointer-events-none absolute inset-0
+                       [background:radial-gradient(120%_100%_at_70%_-10%,rgba(255,255,255,.08),transparent_60%)]"></span>
+        </span>
+      </span>
     </p>
 
-    <h1>Ornikar — Assurance auto : QA Automation, comparateurs & paiement</h1>
+    <!-- Titre principal avec gradient blanc→doré -->
+    <h1 class="bg-clip-text text-transparent bg-gradient-to-r from-white to-[#D6B36A] mt-8">
+      Ornikar — Assurance auto : QA Automation, comparateurs &amp; paiement
+    </h1>
 
-    <h2>Contexte & parcours critiques</h2>
-    <ul>
-      <li>Produit : site d’assurance auto (création de compte, <strong>générateur de devis</strong> couvrant 44 M de véhicules, 3 offres, paiement, signature).</li>
+    <!-- fin ruban doré -->
+    <div class="not-prose h-px w-full my-4 bg-gradient-to-r from-transparent via-[#D6B36A] to-transparent opacity-70"></div>
+
+    <h2>Contexte &amp; parcours critiques</h2>
+    <ul class="marker:text-[#D6B36A]">
+      <li>Produit : site d’assurance auto (création de compte, <strong>générateur de devis</strong> couvrant 44&nbsp;M de véhicules, 3 offres, paiement, signature).</li>
       <li>Intégrations : 3 comparateurs (<em>LesFurets</em>, <em>MeilleureAssurance</em>, <em>LeLynx</em>) aux questionnaires/hypothèses différents.</li>
-      <li>Parcours à sécuriser : arrivée directe ou via comparateur, profil nouveau/standard, malus/bonus, historique assurance, options & franchises, paiement, signature contrat, validation coordonnées.</li>
+      <li>Parcours à sécuriser : arrivée directe ou via comparateur, profil nouveau/standard, malus/bonus, historique assurance, options &amp; franchises, paiement, signature contrat, validation coordonnées.</li>
     </ul>
 
-    <h2>Période & cadence</h2>
-    <ul>
+    <h2>Période &amp; cadence</h2>
+    <ul class="marker:text-[#D6B36A]">
       <li>Mission ~6 mois, sprints de 3 semaines, <strong>releases hebdomadaires</strong>.</li>
     </ul>
 
-    <h2>Organisation & rôle</h2>
-    <ul>
+    <h2>Organisation &amp; rôle</h2>
+    <ul class="marker:text-[#D6B36A]">
       <li>2 squads majeures (dont <strong>Growth</strong>). ~7 devs dans ma squad. 6 QA au total + Head of QA.</li>
       <li>Rôle : <strong>QA Automaticien</strong> de Growth + validation de tous les tickets de la squad.</li>
       <li>Acteur clé de la recette bout-en-bout avec le PM, y compris vérification tarif côté comparateurs.</li>
     </ul>
 
     <h2>État initial (M0)</h2>
-    <ul>
+    <ul class="marker:text-[#D6B36A]">
       <li>E2E cassé, quelques NR auto mais fragiles (cassent à chaque release), 4 mois sans QA dédié dans la squad.</li>
-      <li>Comparateurs : <strong>pas d’environnements dédiés</strong> → recette manuelle lourde (~200 tests de 5–10 min chacun).</li>
+      <li>Comparateurs : <strong>pas d’environnements dédiés</strong> → recette manuelle lourde (~200 tests de 5–10&nbsp;min chacun).</li>
       <li>Environnements qualif/pré-prod souvent contraints par le back-end (mises à niveau, blocages).</li>
       <li>CI/CD : exécutions sur <strong>Jenkins + Kubernetes</strong>. Reporting existant (Xray) mais peu diffusé, alertes partagées au besoin.</li>
       <li>Incidents réguliers sur la comparaison de devis (impact CA potentiel).</li>
     </ul>
 
-    <h2>Stack & outils</h2>
-    <ul class="columns-2">
+    <h2>Stack &amp; outils</h2>
+    <ul class="columns-2 marker:text-[#D6B36A]">
       <li>Front : React/TypeScript (framework maison)</li>
       <li>UI : Selenium/WebDriver, Playwright</li>
       <li>Mobile : Appium</li>
@@ -62,59 +84,65 @@ const BASE = import.meta.env.BASE_URL ?? '/';
       <li>Contrats de test : génération par Grafana (faciliter la recette)</li>
     </ul>
 
-    <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
-      <figure class="border rounded-xl p-3 dark:border-neutral-700">
-        <img
-          src={`${BASE}images/cases/ornikar/i18n/fr/pipeline-before.svg`}
-          alt="Avant : E2E cassé, forte charge manuelle sur les comparateurs, env. contraints"
-          loading="lazy"
-          class="w-full rounded-lg"
-        />
-        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Avant : E2E fragile, comparateurs en manuel, env. bloquants, incidents récurrents.</figcaption>
+    <!-- Before / After encadrés or -->
+    <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+      <figure class="rounded-2xl p-[1px] bg-[linear-gradient(135deg,rgba(214,179,106,.55),rgba(255,255,255,.08))]">
+        <div class="rounded-[1rem] p-3 bg-neutral-950 ring-1 ring-white/10">
+          <img
+            src={`${BASE}images/cases/ornikar/i18n/fr/pipeline-before.svg`}
+            alt="Avant : E2E cassé, forte charge manuelle sur les comparateurs, env. contraints"
+            loading="lazy"
+            class="w-full rounded-lg ring-1 ring-white/10"
+          />
+          <figcaption class="mt-2 text-xs text-white/60">Avant : E2E fragile, comparateurs en manuel, env. bloquants, incidents récurrents.</figcaption>
+        </div>
       </figure>
-      <figure class="border rounded-xl p-3 dark:border-neutral-700">
-        <img
-          src={`${BASE}images/cases/ornikar/i18n/fr/pipeline-after.svg`}
-          alt="Après : Jenkins + K8s, E2E robustes, 2 runs/jour, PR checks, artefacts, notifications"
-          loading="lazy"
-          class="w-full rounded-lg"
-        />
-        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Après : pipeline stabilisé, E2E 25 min/run, 10 profils, 2 exécutions/jour, diffusion Xray/Slack.</figcaption>
+
+      <figure class="rounded-2xl p-[1px] bg-[linear-gradient(135deg,rgba(214,179,106,.55),rgba(255,255,255,.08))]">
+        <div class="rounded-[1rem] p-3 bg-neutral-950 ring-1 ring-white/10">
+          <img
+            src={`${BASE}images/cases/ornikar/i18n/fr/pipeline-after.svg`}
+            alt="Après : Jenkins + K8s, E2E robustes, 2 runs/jour, PR checks, artefacts, notifications"
+            loading="lazy"
+            class="w-full rounded-lg ring-1 ring-white/10"
+          />
+          <figcaption class="mt-2 text-xs text-white/60">Après : pipeline stabilisé, E2E 25&nbsp;min/run, 10 profils, 2 exécutions/jour, diffusion Xray/Slack.</figcaption>
+        </div>
       </figure>
     </div>
 
     <h2>Stratégie d’automatisation</h2>
-    <ul>
+    <ul class="marker:text-[#D6B36A]">
       <li><strong>Robustification</strong> plutôt que remise à zéro : nouveaux sélecteurs stables (PO), fixtures, test-data builders.</li>
       <li>BDD : formation Gherkin (équipe produit) + rituel <strong>3 Amigos</strong> systématisé → meilleure testabilité.</li>
       <li>E2E intensifiés : <strong>2 runs/jour</strong>, <strong>10 profils clients</strong> (A/B-tests tolérés, retries bornés, waits progressifs).</li>
-      <li>Hiérarchie : smoke / sanity / critique / NR selon risque & ROI.</li>
+      <li>Hiérarchie : smoke / sanity / critique / NR selon risque &amp; ROI.</li>
       <li>Données <strong>100% randomisées et contrôlées</strong> (RGPD) ; seeds et isolation quand possible.</li>
     </ul>
 
-    <h2>CI/CD, exécution & reporting</h2>
-    <ul>
+    <h2>CI/CD, exécution &amp; reporting</h2>
+    <ul class="marker:text-[#D6B36A]">
       <li>Exécutions auto (Jenkins/K8s) + <strong>checks à chaque PR</strong> ; E2E inter-squads avec Issuance pour un parcours complet.</li>
       <li>Artefacts : screenshots UI, logs API, <strong>rapport HTML</strong> par run, Xray alimenté.</li>
       <li>Notifications : Slack (Assurance, Growth, QA) + e-mail au Head of QA.</li>
     </ul>
 
-    <h2>Manuel & UAT</h2>
-    <ul>
+    <h2>Manuel &amp; UAT</h2>
+    <ul class="marker:text-[#D6B36A]">
       <li>Automatisé : quasi tout le périmètre Ornikar (hors contraintes comparateurs).</li>
       <li>Reste en manuel : validation tickets, recette comparateurs (pas d’environnements dédiés), <strong>smoke en prod</strong> post-release.</li>
     </ul>
 
-    <h2>Formation & transfert</h2>
-    <ul>
+    <h2>Formation &amp; transfert</h2>
+    <ul class="marker:text-[#D6B36A]">
       <li>Docs “getting started” par parcours, guides Gherkin, usage Grafana pour générer un contrat.</li>
       <li>Mentoring des QA manuels (2h/semaine), pairing régulier (Head of QA, Lead QA auto-école).</li>
       <li>Intégration d’outils (Quakr.io pour devices, DocuSign pour contrats), démos sprint (toutes les 3 semaines).</li>
     </ul>
 
-    <h2>KPIs & résultats</h2>
-    <ul>
-      <li><strong>25 min/run</strong> E2E (10 profils) ; <strong>2 runs/jour</strong>.</li>
+    <h2>KPIs &amp; résultats</h2>
+    <ul class="marker:text-[#D6B36A]">
+      <li><strong>25&nbsp;min/run</strong> E2E (10 profils) ; <strong>2 runs/jour</strong>.</li>
       <li><strong>100% des parcours critiques en M1</strong> ; couverture étendue ensuite au fil des releases.</li>
       <li>~<strong>50–60 bugs</strong> interceptés ; <strong>300+ runs</strong> exécutés ; <strong>150–200 tickets</strong> validés.</li>
       <li>Comparateurs : ~<strong>300 tests manuels</strong> réalisés (contraintes externes).</li>
@@ -122,20 +150,63 @@ const BASE = import.meta.env.BASE_URL ?? '/';
     </ul>
 
     <h2>Cartographie des parcours couverts</h2>
-    <figure class="not-prose my-6 border rounded-xl p-3 dark:border-neutral-700">
-      <img
-        src={`${BASE}images/cases/ornikar/i18n/fr/gen-paths.svg`}
-        alt="Cartographie : provenance client (site/comparateurs), véhicule & historique, identité, permis & antécédents, historique assurance, conducteur secondaire, infos générales, pack (tiers/intermédiaire/tous risques), options/franchises, paiement, signature, validation coordonnées"
-        loading="lazy"
-        class="w-full rounded-lg"
-      />
-      <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">
-        Vue macro des étapes clés du devis → paiement → signature, y compris les entrées comparateurs.
-      </figcaption>
+    <figure class="not-prose my-6 rounded-2xl p-[1px] bg-[linear-gradient(135deg,rgba(214,179,106,.55),rgba(255,255,255,.08))]">
+      <div class="rounded-[1rem] p-3 bg-neutral-950 ring-1 ring-white/10">
+        <img
+          src={`${BASE}images/cases/ornikar/i18n/fr/gen-paths.svg`}
+          alt="Cartographie : provenance client (site/comparateurs), véhicule & historique, identité, permis & antécédents, historique assurance, conducteur secondaire, infos générales, pack (tiers/intermédiaire/tous risques), options/franchises, paiement, signature, validation coordonnées"
+          loading="lazy"
+          class="w-full rounded-lg ring-1 ring-white/10"
+        />
+        <figcaption class="mt-2 text-xs text-white/60">
+          Vue macro des étapes clés du devis → paiement → signature, y compris les entrées comparateurs.
+        </figcaption>
+      </div>
     </figure>
 
-    <blockquote>
-      <strong>Disclaimer</strong> — Informations non sensibles et représentatives ; aucune citation nominative de collaborateurs.
+    <blockquote class="not-prose">
+      <div class="rounded-xl p-[1px] bg-[linear-gradient(135deg,rgba(214,179,106,.6),rgba(255,255,255,.06))]">
+        <div class="rounded-[0.75rem] p-4 bg-neutral-950/80 ring-1 ring-white/10">
+          <p class="m-0 text-white/80">
+            <strong class="text-white">Disclaimer</strong> — Informations non sensibles et représentatives ; aucune citation nominative de collaborateurs.
+          </p>
+        </div>
+      </div>
     </blockquote>
   </article>
+
+  <!-- Styles luxe locaux à la page -->
+  <style is:inline>
+    :root { --gold:#D6B36A; }
+    /* Accent vertical doré sur h2 + couleurs lisibles */
+    .prose :where(h2){
+      position: relative;
+      padding-left: .6rem;
+      color: white;
+    }
+    .prose :where(h2)::before{
+      content:"";
+      position:absolute; left:0; top:.35em; bottom:.35em;
+      width:3px; border-radius:2px;
+      background: linear-gradient(180deg,var(--gold),rgba(255,255,255,.35));
+      opacity:.9;
+    }
+    /* Forcer la lisibilité générale en mode sombre luxe */
+    .prose :where(p, li){ color: white; }
+    .prose :where(em){ color: color-mix(in oklab, white 92%, black 8%); }
+    /* Marqueurs dorés */
+    .prose :where(ul)>li::marker{ color: var(--gold); }
+    /* Blockquote fallback si utilisé sans wrapper */
+    .prose blockquote{
+      border-left: 3px solid color-mix(in oklab, var(--gold) 65%, white 35%);
+      background: color-mix(in oklab, black 88%, var(--gold) 12%);
+      border-radius: .75rem; padding: .85rem 1rem; margin: 1rem 0;
+    }
+    /* Séparateurs doux */
+    .prose hr{
+      border:0; height:1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity:.7;
+    }
+  </style>
 </BaseLayout>

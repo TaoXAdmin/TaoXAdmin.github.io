@@ -2,14 +2,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true">
   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
     <!-- Étapes (build → test → deploy) -->
-    <circle cx="6"  cy="12" r="2" stroke="#2563eb" stroke-width="2"/>
-    <circle cx="12" cy="12" r="2" stroke="#2563eb" stroke-width="2"/>
-    <circle cx="18" cy="12" r="2" stroke="#2563eb" stroke-width="2"/>
+    <circle cx="6"  cy="12" r="2" stroke="#D6B36A" stroke-width="2"/>
+    <circle cx="12" cy="12" r="2" stroke="#D6B36A" stroke-width="2"/>
+    <circle cx="18" cy="12" r="2" stroke="#D6B36A" stroke-width="2"/>
 
     <!-- Connexions de pipeline -->
-    <path d="M8 12h2 M14 12h2" stroke="#7c3aed" stroke-width="2"/>
+    <path d="M8 12h2 M14 12h2" stroke="#000" stroke-width="2"/>
 
     <!-- Validation finale -->
-    <path d="M17 12.6l0.9 0.9 1.7-1.7" stroke="#0ea5e9" stroke-width="2"/>
+    <path d="M17 12.6l0.9 0.9 1.7-1.7" stroke="transparent" stroke-width="2"/>
   </g>
 </svg>

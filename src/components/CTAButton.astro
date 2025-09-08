@@ -7,10 +7,13 @@ interface Props {
 const { href = '#', variant = 'primary', ariaLabel } = Astro.props as Props;
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium focus:outline-none focus-visible:ring';
+  'inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40';
+
 const variants = {
-  primary: `${base} bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-blue-400`,
-  ghost: `${base} bg-transparent text-blue-700 hover:bg-blue-50 dark:text-blue-300 dark:hover:bg-blue-900/20 focus-visible:ring-blue-400`,
+  // Plein blanc (idéal sur fond noir)
+  primary: `${base} bg-white text-black hover:bg-white/90 active:bg-white/80`,
+  // Fantôme monochrome
+  ghost: `${base} bg-transparent text-white hover:bg-white/10 active:bg-white/15`,
 } as const;
 ---
 <a href={href} aria-label={ariaLabel} class={variants[variant]}>

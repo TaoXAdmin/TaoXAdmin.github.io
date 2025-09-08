@@ -1,10 +1,6 @@
 ---
 /**
- * SocialIcons.astro
- * Petits boutons ronds avec les logos officiels (SVG inline) LinkedIn & GitHub.
- * - Accessible (aria-label + focus visible)
- * - Thémable (dark mode OK)
- * - Aucun texte visible, juste des icônes
+ * SocialIcons.astro — monochrome
  */
 const { lang = 'fr' } = Astro.props;
 
@@ -24,14 +20,17 @@ const t = {
     rel="noopener noreferrer"
     aria-label={t.li}
     class="group inline-flex h-11 w-11 items-center justify-center rounded-full
-           bg-white text-[#0A66C2] ring-1 ring-neutral-200
-           hover:ring-[#0A66C2]/40 hover:shadow-sm
-           dark:bg-neutral-900 dark:text-[#0A66C2] dark:ring-neutral-800
-           focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A66C2]
+           bg-white/5 text-white/80 ring-1 ring-white/10
+           hover:bg-white/10 hover:text-white
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black
            transition"
   >
-    <!-- Simple Icons LinkedIn (monochrome), teinté via currentColor -->
-	<svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 93 93" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M11.185,0.08C5.004,0.08,0.001,5.092,0,11.259c0,6.173,5.003,11.184,11.186,11.184c6.166,0,11.176-5.011,11.176-11.184 C22.362,5.091,17.351,0.08,11.185,0.08z"></path> <rect x="1.538" y="30.926" width="19.287" height="62.054"></rect> <path d="M69.925,29.383c-9.382,0-15.673,5.144-18.248,10.022h-0.258v-8.479H32.921H32.92v62.053h19.27V62.281 c0-8.093,1.541-15.932,11.575-15.932c9.89,0,10.022,9.256,10.022,16.451v30.178H93.06V58.942 C93.06,42.235,89.455,29.383,69.925,29.383z"></path> </g> </g> </g></svg>
+    <!-- Monochrome via currentColor -->
+    <svg viewBox="0 0 93 93" class="h-5 w-5" role="img" aria-hidden="true" focusable="false" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M11.185,0.08C5.004,0.08,0.001,5.092,0,11.259c0,6.173,5.003,11.184,11.186,11.184c6.166,0,11.176-5.011,11.176-11.184 C22.362,5.091,17.351,0.08,11.185,0.08z"></path>
+      <rect x="1.538" y="30.926" width="19.287" height="62.054"></rect>
+      <path d="M69.925,29.383c-9.382,0-15.673,5.144-18.248,10.022h-0.258v-8.479H32.92v62.053h19.27V62.281 c0-8.093,1.541-15.932,11.575-15.932c9.89,0,10.022,9.256,10.022,16.451v30.178H93.06V58.942 C93.06,42.235,89.455,29.383,69.925,29.383z"></path>
+    </svg>
   </a>
 
   <!-- GitHub -->
@@ -41,15 +40,12 @@ const t = {
     rel="noopener noreferrer"
     aria-label={t.gh}
     class="group inline-flex h-11 w-11 items-center justify-center rounded-full
-           bg-white text-neutral-900 ring-1 ring-neutral-200
-           hover:ring-neutral-400 hover:shadow-sm
-           dark:bg-neutral-900 dark:text-white dark:ring-neutral-800
-           focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-neutral-500
+           bg-white/5 text-white/80 ring-1 ring-white/10
+           hover:bg-white/10 hover:text-white
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black
            transition"
   >
-    <!-- Simple Icons GitHub (monochrome), teinté via currentColor -->
-    <svg role="img" viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
-      <title>GitHub</title>
+    <svg viewBox="0 0 24 24" class="h-5 w-5" role="img" aria-hidden="true" focusable="false">
       <path fill="currentColor"
         d="M12 .297C5.37.297 0 5.67 0 12.297c0 5.302 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577
            0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.758-1.333-1.758
@@ -62,25 +58,22 @@ const t = {
            24 5.67 18.627.297 12 .297z"/>
     </svg>
   </a>
-  
-    <!-- X -->
+
+  <!-- X -->
   <a
     href="https://x.com/FiskaAlexis"
     target="_blank"
     rel="noopener noreferrer"
     aria-label={t.x}
     class="group inline-flex h-11 w-11 items-center justify-center rounded-full
-           bg-white text-neutral-900 ring-1 ring-neutral-200
-           hover:ring-neutral-400 hover:shadow-sm
-           dark:bg-neutral-900 dark:text-white dark:ring-neutral-800
-           focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-neutral-500
+           bg-white/5 text-white/80 ring-1 ring-white/10
+           hover:bg-white/10 hover:text-white
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black
            transition"
   >
-    <!-- Simple Icons X (monochrome), teinté via currentColor -->
-     <svg role="img" viewBox="0 0 300 271" class="h-5 w-5" aria-hidden="true">
-      <title>X</title>
+    <svg viewBox="0 0 300 271" class="h-5 w-5" role="img" aria-hidden="true" focusable="false">
       <path fill="currentColor"
-      d="m236 0h46l-101 115 118 156h-92.6l-72.5-94.8-83 94.8h-46l107-123-113-148h94.9l65.5 86.6zm-16.1 244h25.5l-165-218h-27.4z"/>
-  </svg>
+        d="m236 0h46l-101 115 118 156h-92.6l-72.5-94.8-83 94.8h-46l107-123-113-148h94.9l65.5 86.6zm-16.1 244h25.5l-165-218h-27.4z"/>
+    </svg>
   </a>
 </div>

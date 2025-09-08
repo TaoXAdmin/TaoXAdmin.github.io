@@ -9,72 +9,117 @@ const pageDescription =
 const BASE = import.meta.env.BASE_URL ?? '/';
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <!-- SECTION ENTIÈRE DANS UN CADRE LUXE (bordure dégradée or + fond sombre texturé) -->
   <section class="max-w-5xl mx-auto">
-    <h1 class="text-3xl font-bold mb-2 text-center">À propos</h1>
-    <p class="text-center text-neutral-600 dark:text-neutral-300 mb-8">
-      Disponible en <strong>France / Remote</strong> — accompagnement sur mesure en <strong>QA Automation</strong>, <strong>CI/CD</strong> et <strong>GenAI</strong>.
-    </p>
+    <div
+      class="rounded-2xl p-[1px]
+             bg-[linear-gradient(135deg,rgba(214,179,106,.65),rgba(255,255,255,.08))]
+             shadow-xl shadow-black/30"
+    >
+      <div
+        class="relative rounded-[1rem] ring-1 ring-white/10 bg-neutral-950 overflow-hidden
+               px-6 py-8 md:px-10 md:py-10"
+      >
+        <!-- Voile luxe couvrant toute la section -->
+        <span
+          aria-hidden="true"
+          class="pointer-events-none absolute inset-0
+                 [background:radial-gradient(120%_100%_at_70%_-10%,rgba(255,255,255,.06),transparent_60%),linear-gradient(120deg,transparent,rgba(214,179,106,.08),transparent)]"
+        ></span>
 
-    <div class="grid gap-8 md:grid-cols-[auto,1fr] items-start">
-      <img
-        src={`${BASE}images/profile.jpg`}
-        alt="Portrait d’Alexis Fiska"
-        class="w-40 h-40 rounded-full object-cover shadow-md mx-auto md:mx-0"
-        loading="lazy"
-      />
+        <!-- CONTENU -->
+        <div class="relative">
+          <!-- Titre + sous-titre -->
+          <h1 class="text-3xl md:text-4xl font-bold text-center">
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-white to-[#D6B36A]">
+              À propos
+            </span>
+          </h1>
 
-      <div>
-        <div class="flex flex-wrap items-center gap-2 mb-4">
-          <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
-            Lead QA Automation
-          </span>
-          <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300">
-            GenAI
-          </span>
-          <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-300">
-            CI/CD
-          </span>
-        </div>
+          <div class="h-px w-full mx-auto max-w-3xl my-4 bg-gradient-to-r from-transparent via-[#D6B36A] to-transparent opacity-70"></div>
 
-        <p class="mb-4 text-neutral-700 dark:text-neutral-300">
-          Passionné par la <strong>qualité logicielle</strong>, j’accompagne les équipes pour concevoir des
-          pipelines de tests <strong>fiables et rapides</strong>. De développeur à lead QA en passant par consultant,
-          j’ai travaillé dans l’<strong>éducation</strong>, la <strong>fintech</strong> et l’<strong>e-commerce</strong>.
-          Ma conviction : une <strong>automatisation bien pensée</strong> et une <strong>observabilité claire</strong>
-          sont des leviers majeurs de performance.
-        </p>
+          <p class="text-center text-white/70 mb-8">
+            Disponible en <strong class="text-white">France / Remote</strong> — accompagnement sur mesure en
+            <strong class="text-white">QA Automation</strong>, <strong class="text-white">CI/CD</strong> et
+            <strong class="text-white">GenAI</strong>.
+          </p>
 
-        <p class="mb-4 text-neutral-700 dark:text-neutral-300">
-          Je crois aussi à l’apport des <strong>modèles génératifs</strong> pour la QA : génération de données,
-          triage de logs, suggestion de scénarios… L’objectif n’est pas de remplacer, mais
-          <strong>d’augmenter la productivité</strong> et la <strong>confiance</strong> dans chaque release.
-        </p>
+          <!-- Corps (portrait + contenu) -->
+          <div class="grid gap-8 md:grid-cols-[auto,1fr] items-start">
+            <img
+              src={`${BASE}images/profile.jpg`}
+              alt="Portrait d’Alexis Fiska"
+              class="w-44 h-44 rounded-full object-cover mx-auto md:mx-0
+                     shadow-xl shadow-black/40 ring-1 ring-[#D6B36A66]"
+              loading="lazy"
+            />
 
-        <ul class="grid sm:grid-cols-2 gap-3 text-neutral-700 dark:text-neutral-300 mb-6">
-          <li class="p-3 rounded-xl border border-neutral-200 dark:border-neutral-800">
-            <span class="font-semibold">Ce que j’aime livrer :</span> frameworks BDD maintenables, pipelines CI/CD
-            <em>rapides</em>, reporting actionnable.
-          </li>
-          <li class="p-3 rounded-xl border border-neutral-200 dark:border-neutral-800">
-            <span class="font-semibold">Approche :</span> pragmatisme, <strong>pairing</strong>, pédagogie et
-            transfert de compétences.
-          </li>
-        </ul>
+            <div>
+              <!-- Chips -->
+              <div class="flex flex-wrap items-center gap-2 mb-4">
+                <span class="px-2.5 py-1 text-xs font-medium rounded-full border border-white/10 bg-white/5 text-white/80">
+                  Lead QA Automation
+                </span>
+                <span class="px-2.5 py-1 text-xs font-medium rounded-full border border-white/10 bg-white/5 text-white/80">
+                  GenAI
+                </span>
+                <span class="px-2.5 py-1 text-xs font-medium rounded-full border border-white/10 bg-white/5 text-white/80">
+                  CI/CD
+                </span>
+              </div>
 
-        <div class="flex items-center gap-6">
-          <div class="">
-			  <SocialIcons lang={lang} />
-		  </div>
-          <span class="text-neutral-500 dark:text-neutral-400 text-sm">•</span>
-          <a
-            href={`/${lang}/services`}
-            class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700"
-          >
-            Découvrir les services
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M7 17l10-10M17 7H9M17 7v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </a>
+              <p class="mb-4 text-white/80">
+                Passionné par la <strong class="text-white">qualité logicielle</strong>, j’accompagne les équipes pour concevoir des
+                pipelines de tests <strong class="text-white">fiables et rapides</strong>. De développeur à lead QA en passant par consultant,
+                j’ai travaillé dans l’<strong class="text-white">éducation</strong>, la <strong class="text-white">fintech</strong> et l’<strong class="text-white">e-commerce</strong>.
+                Ma conviction : une <strong class="text-white">automatisation bien pensée</strong> et une <strong class="text-white">observabilité claire</strong>
+                sont des leviers majeurs de performance.
+              </p>
+
+              <p class="mb-6 text-white/80">
+                Je crois aussi à l’apport des <strong class="text-white">modèles génératifs</strong> pour la QA : génération de données,
+                triage de logs, suggestion de scénarios… L’objectif n’est pas de remplacer, mais
+                <strong class="text-white">d’augmenter la productivité</strong> et la <strong class="text-white">confiance</strong> dans chaque release.
+              </p>
+
+              <!-- Cartes points forts : bordure or -->
+              <ul class="grid sm:grid-cols-2 gap-3 text-white/80 mb-6">
+                <li class="rounded-xl p-[1px] bg-[linear-gradient(135deg,rgba(214,179,106,.35),rgba(255,255,255,.06))]">
+                  <div class="rounded-[0.7rem] p-3 bg-white/[.03] ring-1 ring-white/10">
+                    <span class="font-semibold text-white">Ce que j’aime livrer :</span> frameworks BDD maintenables,
+                    pipelines CI/CD <em class="text-white/90">rapides</em>, reporting actionnable.
+                  </div>
+                </li>
+                <li class="rounded-xl p-[1px] bg-[linear-gradient(135deg,rgba(214,179,106,.35),rgba(255,255,255,.06))]">
+                  <div class="rounded-[0.7rem] p-3 bg-white/[.03] ring-1 ring-white/10">
+                    <span class="font-semibold text-white">Approche :</span> pragmatisme, <strong class="text-white">pairing</strong>,
+                    pédagogie et transfert de compétences.
+                  </div>
+                </li>
+              </ul>
+
+              <!-- CTA + Socials -->
+              <div class="flex items-center gap-6">
+                <div>
+                  <SocialIcons lang={lang} />
+                </div>
+                <span class="text-[#D6B36A80] text-sm">•</span>
+                <a
+                  href={`/${lang}/services`}
+                  class="inline-flex items-center gap-2 px-3 py-2 rounded-xl font-medium
+                         border border-[#D6B36A80] text-white bg-transparent
+                         hover:bg-[#D6B36A14] active:bg-[#D6B36A20]
+                         focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 transition-colors"
+                >
+                  Découvrir les services
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="shrink-0">
+                    <path d="M7 17l10-10M17 7H9M17 7v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- /Corps -->
         </div>
       </div>
     </div>

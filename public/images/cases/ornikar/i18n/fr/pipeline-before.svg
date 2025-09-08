@@ -1,36 +1,139 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
-  <rect width="1200" height="520" fill="#ffffff"/>
-  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" fill="#0f172a">
-    <text x="600" y="56" font-size="26" font-weight="700" text-anchor="middle">Avant : E2E fragile, comparateurs manuels, incidents devis</text>
+<!-- public/images/cases/ornikar/pipeline-before.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" role="img" width="1200" height="520" viewBox="0 0 1200 520">
+  <title>Ornikar — Avant : E2E fragile, comparateurs manuels, incidents devis</title>
+  <desc>Trois cartes premium sombres, puces dorées reliées par une ligne blanche. Fond charbon avec grille dorée subtile et grain fin.</desc>
+
+  <defs>
+    <!-- Fond linéaire charbon -->
+    <linearGradient id="bgLinear" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"  stop-color="#0A0A0A"/>
+      <stop offset="1"  stop-color="#121212"/>
+    </linearGradient>
+
+    <!-- Grille dorée très subtile -->
+    <pattern id="goldGrid" width="80" height="80" patternUnits="userSpaceOnUse" patternTransform="rotate(14)">
+      <path d="M0 0H80" stroke="#D6B36A" stroke-opacity=".06" stroke-width="1"/>
+      <path d="M0 0V80" stroke="#D6B36A" stroke-opacity=".06" stroke-width="1"/>
+    </pattern>
+
+    <!-- Grain fin (ultra léger) -->
+    <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="13" result="noise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.06"/></feComponentTransfer>
+    </filter>
+
+    <!-- Glow blanc doux (ligne des puces) -->
+    <filter id="softWhite" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+
+    <!-- Liseré dégradé or -->
+    <linearGradient id="goldStroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#D6B36A" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity=".08"/>
+    </linearGradient>
+
+    <!-- Titre blanc → or -->
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D6B36A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Arrière-plan -->
+  <rect width="1200" height="520" fill="url(#bgLinear)"/>
+  <rect width="1200" height="520" fill="url(#goldGrid)"/>
+  <rect width="1200" height="520" fill="#000" filter="url(#grain)"/>
+
+  <!-- Cadre subtil -->
+  <rect x="24" y="24" width="1152" height="472" rx="20" fill="none" stroke="#FFFFFF20"/>
+
+  <!-- Titre -->
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" text-rendering="geometricPrecision">
+    <text x="600" y="66" font-size="28" font-weight="800" text-anchor="middle" fill="url(#titleGrad)">
+      Avant : E2E fragile, comparateurs manuels, incidents devis
+    </text>
   </g>
-  <g transform="translate(70,110)">
-    <rect x="0" y="0" width="340" height="310" rx="16" fill="#f8fafc" stroke="#e5e7eb"/>
-    <text x="170" y="36" text-anchor="middle" font-size="18" font-weight="600">Automatisation</text>
-    <g fill="#334155" font-size="14">
-      <text x="24" y="76">• E2E existant cassé, NR peu fiables</text>
-      <text x="24" y="106">• Sélecteurs fragiles, data non maîtrisée</text>
-      <text x="24" y="136">• Peu de partage de reporting</text>
-      <text x="24" y="166">• Jenkins/K8s présents mais peu exploités</text>
+
+  <!-- Mesures communes des cartes -->
+  <!-- w=340, h=320 ; colonnes à x=50 / 430 / 810 ; y=110 -->
+
+  <!-- ===== Carte 1 : Automatisation ===== -->
+  <g transform="translate(50,110)" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial">
+    <!-- Bordure dégradée or -->
+    <rect x="0" y="0" width="340" height="320" rx="16" fill="none" stroke="url(#goldStroke)" stroke-width="1.2"/>
+    <!-- Corps -->
+    <rect x="1" y="1" width="338" height="318" rx="15" fill="#0B0B0B" stroke="#FFFFFF18"/>
+    <!-- Titre -->
+    <text x="170" y="44" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">Automatisation</text>
+
+    <!-- Ligne verticale + glow -->
+    <path d="M44 100 L44 224" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" opacity=".95"/>
+    <path d="M44 100 L44 224" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" opacity=".22" filter="url(#softWhite)"/>
+
+    <!-- Puces dorées -->
+    <g fill="#D6B36A">
+      <circle cx="44" cy="104" r="6.5"/>
+      <circle cx="44" cy="140" r="6.5"/>
+      <circle cx="44" cy="176" r="6.5"/>
+      <circle cx="44" cy="212" r="6.5"/>
+    </g>
+
+    <!-- Texte (retours à la ligne minimisés) -->
+    <g font-size="16" fill="#FFFFFFE6">
+      <text x="66" y="108">E2E cassé, NR peu fiables</text>
+      <text x="66" y="144">Sélecteurs fragiles, data non maîtrisée</text>
+      <text x="66" y="180">Reporting peu partagé</text>
+      <text x="66" y="216">Jenkins/K8s peu exploités</text>
     </g>
   </g>
-  <g transform="translate(430,110)">
-    <rect x="0" y="0" width="340" height="310" rx="16" fill="#f8fafc" stroke="#e5e7eb"/>
-    <text x="170" y="36" text-anchor="middle" font-size="18" font-weight="600">Comparateurs</text>
-    <g fill="#334155" font-size="14">
-      <text x="24" y="76">• Pas d’environnements dédiés</text>
-      <text x="24" y="106">• Recette 100% manuelle (200+ cas)</text>
-      <text x="24" y="136">• Divergences de questions/données</text>
-      <text x="24" y="166">• Incidents fréquents sur comparaisons</text>
+
+  <!-- ===== Carte 2 : Comparateurs ===== -->
+  <g transform="translate(430,110)" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial">
+    <rect x="0" y="0" width="340" height="320" rx="16" fill="none" stroke="url(#goldStroke)" stroke-width="1.2"/>
+    <rect x="1" y="1" width="338" height="318" rx="15" fill="#0B0B0B" stroke="#FFFFFF18"/>
+    <text x="170" y="44" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">Comparateurs</text>
+
+    <path d="M44 100 L44 224" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" opacity=".95"/>
+    <path d="M44 100 L44 224" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" opacity=".22" filter="url(#softWhite)"/>
+
+    <g fill="#D6B36A">
+      <circle cx="44" cy="104" r="6.5"/>
+      <circle cx="44" cy="140" r="6.5"/>
+      <circle cx="44" cy="176" r="6.5"/>
+      <circle cx="44" cy="212" r="6.5"/>
+    </g>
+
+    <g font-size="16" fill="#FFFFFFE6">
+      <text x="66" y="108">Pas d’environnements dédiés</text>
+      <text x="66" y="144">Recette 100% manuelle (200+ cas)</text>
+      <text x="66" y="180">Divergences questions/données</text>
+      <text x="66" y="216">Incidents fréquents (comparaisons)</text>
     </g>
   </g>
-  <g transform="translate(790,110)">
-    <rect x="0" y="0" width="340" height="310" rx="16" fill="#f8fafc" stroke="#e5e7eb"/>
-    <text x="170" y="36" text-anchor="middle" font-size="18" font-weight="600">Environnements &amp; CI</text>
-    <g fill="#334155" font-size="14">
-      <text x="24" y="76">• Qualif/Pré-prod dépendantes du BE</text>
-      <text x="24" y="106">• Mises à niveau bloquantes</text>
-      <text x="24" y="136">• Observabilité limitée</text>
-      <text x="24" y="166">• Xray présent, usage variable</text>
+
+  <!-- ===== Carte 3 : Environnements & CI ===== -->
+  <g transform="translate(810,110)" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial">
+    <rect x="0" y="0" width="340" height="320" rx="16" fill="none" stroke="url(#goldStroke)" stroke-width="1.2"/>
+    <rect x="1" y="1" width="338" height="318" rx="15" fill="#0B0B0B" stroke="#FFFFFF18"/>
+    <text x="170" y="44" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">Environnements &amp; CI</text>
+
+    <path d="M44 100 L44 224" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" opacity=".95"/>
+    <path d="M44 100 L44 224" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" opacity=".22" filter="url(#softWhite)"/>
+
+    <g fill="#D6B36A">
+      <circle cx="44" cy="104" r="6.5"/>
+      <circle cx="44" cy="140" r="6.5"/>
+      <circle cx="44" cy="176" r="6.5"/>
+      <circle cx="44" cy="212" r="6.5"/>
+    </g>
+
+    <g font-size="16" fill="#FFFFFFE6">
+      <text x="66" y="108">Qualif/Pré-prod dépend. du BE</text>
+      <text x="66" y="144">Mises à niveau bloquantes</text>
+      <text x="66" y="180">Observabilité limitée</text>
+      <text x="66" y="216">Xray présent, usage variable</text>
     </g>
   </g>
 </svg>

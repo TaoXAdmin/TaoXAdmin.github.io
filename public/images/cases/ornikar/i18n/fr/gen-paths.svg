@@ -1,39 +1,168 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
-  <rect width="1200" height="620" fill="#ffffff"/>
-  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" fill="#0f172a">
-    <text x="600" y="56" font-size="26" font-weight="700" text-anchor="middle">Cartographie des parcours critiques</text>
+<!-- public/images/cases/ornikar/gen-paths.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" role="img" width="1200" height="620" viewBox="0 0 1200 620">
+  <title>Ornikar — Cartographie des parcours critiques</title>
+  <desc>Cartographie premium sombre : cartes noires liseré or, lignes blanches lumineuses, accents dorés. Alignements et espacements symétriques.</desc>
+
+  <defs>
+    <!-- Fond sombre doux -->
+    <radialGradient id="bgSoft" cx="50%" cy="48%" r="80%">
+      <stop offset="0"   stop-color="#121212"/>
+      <stop offset="0.7" stop-color="#0D0D0D"/>
+      <stop offset="1"   stop-color="#080808"/>
+    </radialGradient>
+    <!-- Lueurs dorées d’angle (différent de Xpollens pour varier subtilement) -->
+    <radialGradient id="cornerGoldTL" cx="0" cy="0" r="1">
+      <stop offset="0" stop-color="#D6B36A" stop-opacity=".20"/>
+      <stop offset=".55" stop-color="#D6B36A" stop-opacity=".07"/>
+      <stop offset="1" stop-color="#D6B36A" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cornerGoldBR" cx="1" cy="1" r="1">
+      <stop offset="0" stop-color="#D6B36A" stop-opacity=".16"/>
+      <stop offset=".6" stop-color="#D6B36A" stop-opacity=".05"/>
+      <stop offset="1" stop-color="#D6B36A" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Liseré doré des cartes -->
+    <linearGradient id="goldStroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#D6B36A" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity=".08"/>
+    </linearGradient>
+
+    <!-- Ombre douce cartes -->
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000" flood-opacity=".35"/>
+    </filter>
+
+    <!-- Glow léger blanc (lignes) -->
+    <filter id="glowWhite" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2" result="b1"/>
+      <feMerge><feMergeNode in="b1"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Titre blanc → or -->
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D6B36A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fond + cadre -->
+  <rect width="1200" height="620" fill="url(#bgSoft)"/>
+  <rect width="1200" height="620" fill="url(#cornerGoldTL)"/>
+  <rect width="1200" height="620" fill="url(#cornerGoldBR)"/>
+  <rect x="24" y="24" width="1152" height="572" rx="22" fill="none" stroke="#FFFFFF20"/>
+
+  <!-- Titre -->
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial">
+    <text x="600" y="70" font-size="28" font-weight="800" text-anchor="middle" fill="url(#titleGrad)">
+      Cartographie des parcours critiques
+    </text>
   </g>
-  <g transform="translate(80,110)" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial">
-    <!-- Ligne 1 -->
-    <g>
-      <rect x="0" y="0" width="250" height="68" rx="12" fill="#f1f5f9" stroke="#e2e8f0"/><text x="125" y="42" text-anchor="middle" font-size="15" font-weight="600">Arrivée (Site / Comparateurs)</text>
-      <rect x="300" y="0" width="250" height="68" rx="12" fill="#f1f5f9" stroke="#e2e8f0"/><text x="425" y="42" text-anchor="middle" font-size="15" font-weight="600">Véhicule &amp; historique</text>
-      <rect x="600" y="0" width="250" height="68" rx="12" fill="#f1f5f9" stroke="#e2e8f0"/><text x="725" y="42" text-anchor="middle" font-size="15" font-weight="600">Identité</text>
-      <rect x="900" y="0" width="250" height="68" rx="12" fill="#f1f5f9" stroke="#e2e8f0"/><text x="1025" y="42" text-anchor="middle" font-size="15" font-weight="600">Permis &amp; historique</text>
+
+  <!-- Grille (centrée verticalement) -->
+  <!-- Zone utile: 1040 x ~448 ; translate Y=130 pour équilibrer les marges -->
+  <g transform="translate(80,130)" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial">
+    <!-- Dimensions & positions calculées pour éviter les retours à la ligne et garder la symétrie -->
+    <!-- Row 1: 4 cartes (w=230) -> x: 20, 276, 532, 788 -->
+    <!-- Row 2: 3 cartes (w=260) -> x: 60, 390, 720 -->
+    <!-- Row 3: 4 cartes (w=230) -> x: 20, 276, 532, 788 -->
+    <!-- Row 4: 1 carte (w=340) centrée -> x: (1040-340)/2 = 350 -->
+
+    <!-- Liaisons blanches (avec glow) -->
+    <g stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#glowWhite)">
+      <!-- Row1 horizontales (entre cartes) -->
+      <path d="M250,34 H276"/>
+      <path d="M506,34 H532"/>
+      <path d="M762,34 H788"/>
+      <!-- Row1 -> Row2 (courbes) -->
+      <path d="M135,68 C135,102 190,102 190,130"/>
+      <path d="M391,68 C391,102 520,102 520,130"/>
+      <path d="M647,68 C647,102 850,102 850,130"/>
+      <!-- Row2 -> Row3 (courbes) -->
+      <path d="M190,198 C190,232 135,232 135,260"/>
+      <path d="M520,198 C520,232 391,232 391,260"/>
+      <path d="M850,198 C850,232 647,232 647,260"/>
+      <!-- Row3 -> Row4 (courbes depuis Paiement + Signature) -->
+      <path d="M647,328 C647,362 520,362 520,380"/>
+      <path d="M903,328 C903,362 520,362 520,380"/>
     </g>
-    <!-- Ligne 2 -->
-    <g transform="translate(0,120)">
-      <rect x="150" y="0" width="250" height="68" rx="12" fill="#f1f5f9" stroke="#e2e8f0"/><text x="275" y="42" text-anchor="middle" font-size="15" font-weight="600">Ancienne assurance &amp; malus</text>
-      <rect x="450" y="0" width="250" height="68" rx="12" fill="#f1f5f9" stroke="#e2e8f0"/><text x="575" y="42" text-anchor="middle" font-size="15" font-weight="600">Conducteur secondaire</text>
-      <rect x="750" y="0" width="250" height="68" rx="12" fill="#f1f5f9" stroke="#e2e8f0"/><text x="875" y="42" text-anchor="middle" font-size="15" font-weight="600">Infos générales</text>
+
+    <!-- Points dorés aux jonctions -->
+    <g fill="#D6B36A">
+      <!-- Row1 horizontales -->
+      <circle cx="250" cy="34" r="5.5"/><circle cx="276" cy="34" r="5.5"/>
+      <circle cx="506" cy="34" r="5.5"/><circle cx="532" cy="34" r="5.5"/>
+      <circle cx="762" cy="34" r="5.5"/><circle cx="788" cy="34" r="5.5"/>
+      <!-- Row1 -> Row2 -->
+      <circle cx="135" cy="68" r="5.5"/><circle cx="190" cy="130" r="5.5"/>
+      <circle cx="391" cy="68" r="5.5"/><circle cx="520" cy="130" r="5.5"/>
+      <circle cx="647" cy="68" r="5.5"/><circle cx="850" cy="130" r="5.5"/>
+      <!-- Row2 -> Row3 -->
+      <circle cx="190" cy="198" r="5.5"/><circle cx="135" cy="260" r="5.5"/>
+      <circle cx="520" cy="198" r="5.5"/><circle cx="391" cy="260" r="5.5"/>
+      <circle cx="850" cy="198" r="5.5"/><circle cx="647" cy="260" r="5.5"/>
+      <!-- Row3 -> Row4 -->
+      <circle cx="647" cy="328" r="5.5"/><circle cx="520" cy="380" r="5.5"/>
+      <circle cx="903" cy="328" r="5.5"/><circle cx="520" cy="380" r="5.5"/>
     </g>
-    <!-- Ligne 3 -->
-    <g transform="translate(0,240)">
-      <rect x="0" y="0" width="250" height="68" rx="12" fill="#ecfeff" stroke="#e2e8f0"/><text x="125" y="42" text-anchor="middle" font-size="15" font-weight="700">Pack (Tiers/Interm./Tous risques)</text>
-      <rect x="300" y="0" width="250" height="68" rx="12" fill="#ecfeff" stroke="#e2e8f0"/><text x="425" y="42" text-anchor="middle" font-size="15" font-weight="700">Options &amp; franchises</text>
-      <rect x="600" y="0" width="250" height="68" rx="12" fill="#dcfce7" stroke="#e2e8f0"/><text x="725" y="42" text-anchor="middle" font-size="15" font-weight="700">Paiement</text>
-      <rect x="900" y="0" width="250" height="68" rx="12" fill="#dcfce7" stroke="#e2e8f0"/><text x="1025" y="42" text-anchor="middle" font-size="15" font-weight="700">Signature contrat</text>
-    </g>
-    <!-- Ligne 4 -->
-    <g transform="translate(0,360)">
-      <rect x="450" y="0" width="300" height="68" rx="12" fill="#f1f5f9" stroke="#e2e8f0"/><text x="600" y="42" text-anchor="middle" font-size="15" font-weight="600">Validation coordonnées</text>
-    </g>
-    <!-- Liens -->
-    <g stroke="#cbd5e1" stroke-width="3" fill="none" stroke-linecap="round">
-      <path d="M250,34 H300"/><path d="M550,34 H600"/><path d="M850,34 H900"/>
-      <path d="M425,68 C425,100 275,100 275,120"/><path d="M725,68 C725,100 575,100 575,120"/><path d="M1025,68 C1025,100 875,100 875,120"/>
-      <path d="M275,188 C275,220 125,220 125,240"/><path d="M575,188 C575,220 425,220 425,240"/><path d="M875,188 C875,220 725,220 725,240"/>
-      <path d="M725,308 C725,340 600,340 600,360"/><path d="M1025,308 C1025,340 600,340 600,360"/>
+
+    <!-- Cartes -->
+    <g font-weight="600" font-size="17" fill="#FFFFFF">
+      <!-- Row 1 -->
+      <g filter="url(#cardShadow)">
+        <rect x="20"  y="0" width="230" height="68" rx="12" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+        <text x="135" y="44" text-anchor="middle">Arrivée (Site / Comparateurs)</text>
+      </g>
+      <g filter="url(#cardShadow)">
+        <rect x="276" y="0" width="230" height="68" rx="12" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+        <text x="391" y="44" text-anchor="middle">Véhicule &amp; historique</text>
+      </g>
+      <g filter="url(#cardShadow)">
+        <rect x="532" y="0" width="230" height="68" rx="12" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+        <text x="647" y="44" text-anchor="middle">Identité</text>
+      </g>
+      <g filter="url(#cardShadow)">
+        <rect x="788" y="0" width="230" height="68" rx="12" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+        <text x="903" y="44" text-anchor="middle">Permis &amp; historique</text>
+      </g>
+
+      <!-- Row 2 -->
+      <g filter="url(#cardShadow)">
+        <rect x="60"  y="130" width="260" height="68" rx="12" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+        <text x="190" y="174" text-anchor="middle">Ancienne assurance &amp; malus</text>
+      </g>
+      <g filter="url(#cardShadow)">
+        <rect x="390" y="130" width="260" height="68" rx="12" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+        <text x="520" y="174" text-anchor="middle">Conducteur secondaire</text>
+      </g>
+      <g filter="url(#cardShadow)">
+        <rect x="720" y="130" width="260" height="68" rx="12" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+        <text x="850" y="174" text-anchor="middle">Infos générales</text>
+      </g>
+
+      <!-- Row 3 -->
+      <g filter="url(#cardShadow)">
+        <rect x="20"  y="260" width="230" height="68" rx="12" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+        <text x="135" y="304" text-anchor="middle">Tiers/Interm./Tous risques</text>
+      </g>
+      <g filter="url(#cardShadow)">
+        <rect x="276" y="260" width="230" height="68" rx="12" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+        <text x="391" y="304" text-anchor="middle">Options &amp; franchises</text>
+      </g>
+      <g filter="url(#cardShadow)">
+        <rect x="532" y="260" width="230" height="68" rx="12" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+        <text x="647" y="304" text-anchor="middle">Paiement</text>
+      </g>
+      <g filter="url(#cardShadow)">
+        <rect x="788" y="260" width="230" height="68" rx="12" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+        <text x="903" y="304" text-anchor="middle">Signature contrat</text>
+      </g>
+
+      <!-- Row 4 -->
+      <g filter="url(#cardShadow)">
+        <rect x="350" y="380" width="340" height="68" rx="12" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+        <text x="520" y="424" text-anchor="middle">Validation coordonnées</text>
+      </g>
     </g>
   </g>
 </svg>

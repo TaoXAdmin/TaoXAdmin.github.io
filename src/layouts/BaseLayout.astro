@@ -59,6 +59,8 @@ const structuredData = [
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={canonicalUrl} />
 
+    <meta name="theme-color" content="#000000" />
+
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Alexis Fiska Portfolio" />
     <meta property="og:url" content={canonicalUrl} />
@@ -88,7 +90,7 @@ const structuredData = [
       src="https://plausible.io/js/script.js"
     ></script>
 
-    <!-- Styles de transition page (léger, accessible) -->
+    <!-- Styles page transitions (monochrome) -->
     <style is:inline>
       :root{
         --page-trans-dur: .28s;
@@ -108,10 +110,37 @@ const structuredData = [
       }
       .animate-page-in  { animation: page-in var(--page-trans-dur) var(--page-trans-ease) both; }
       .animate-page-out { animation: page-out var(--page-trans-dur) var(--page-trans-ease) both; }
+		
+		/* Fine grain overlay (site-wide) */
+  .grain::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;                 /* au-dessus des fonds, sous tes éléments high z-index */
+    opacity: .09;              /* intensité du grain */
+    mix-blend-mode: soft-light; /* rendu luxe sur fond sombre */
+    background-repeat: repeat;
+    background-size: 160px 160px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+  }
+  /* Retina/4K : grain un poil plus fin */
+  @media (min-resolution: 2dppx){
+    .grain::before{
+      background-size: 220px 220px;
+      opacity: .04;
+    }
+  }
+      /* Sélection de texte subtile en blanc translucide sur fond noir */
+      ::selection { background: rgba(255,255,255,.16); color: #fff; }
     </style>
   </head>
-  <body class="min-h-screen bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 flex flex-col font-sans">
-    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-blue-600 text-white px-3 py-2 rounded z-50">
+  <body class="grain min-h-screen bg-black text-white flex flex-col font-sans">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2
+             bg-white text-black px-3 py-2 rounded z-50 focus:ring-2 ring-white/60"
+    >
       Aller au contenu
     </a>
 

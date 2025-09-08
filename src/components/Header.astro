@@ -32,42 +32,43 @@ const BASE = import.meta.env.BASE_URL ?? '/';
 <header
   id="site-header"
   data-nores={t.nores}
-  class="sticky top-0 z-[200] isolate border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-950/80 backdrop-blur transition-shadow"
+  class="sticky top-0 z-[200] isolate border-b border-white/10 bg-black/90 backdrop-blur transition-shadow"
 >
   <div class="container mx-auto px-4">
     <div class="h-16 flex items-center gap-3">
-      <!-- Brand -->
-      <!-- Brand (replace the existing <a> … </a>) -->
+<!-- Brand (noir & blanc, ultra luxe) -->
 <a
   href={`/${lang}`}
-  aria-label="Accueil"
+  aria-label={t.home}
   class="group relative inline-flex items-center gap-2 rounded-lg px-2 py-1
-         focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
+         focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
 >
+  <span class="relative inline-block leading-none pb-2">
+    <span
+      class="text-white uppercase font-semibold md:font-bold tracking-[0.08em]
+             text-[1rem] md:text-[1.75rem]"
+      style="font-feature-settings:'kern','liga','calt';"
+    >
+      ɅLEXIS&nbsp;FISKɅ
+    </span>
 
-
-  <!-- Word-mark -->
-  <span
-    class="text-[1.45rem] md:text-[1.75rem] font-bold tracking-tight
-           bg-clip-text text-transparent
-           bg-gradient-to-r from-neutral-900 to-neutral-600
-           dark:from-white dark:to-neutral-300"
-  >
-    Alexis&nbsp;Fiska
-  </span>
 </a>
+
+
+</style>
+
 
       <!-- Desktop NAV -->
       <nav class="hidden md:flex items-center gap-2 ml-6" aria-label="Primary">
         {items.map((it) => (
           <a
             href={it.href}
-            class={`relative rounded-lg px-3 py-2 text-sm font-medium transition
-              hover:bg-neutral-100/70 dark:hover:bg-neutral-800/70
-              ${isActive(it.href) ? 'text-blue-700 dark:text-blue-300' : 'text-neutral-700 dark:text-neutral-200'}`}
+            class={`relative rounded-lg px-3 py-2 text-sm font-medium transition-colors
+                    hover:text-[#D6B36A] hover:bg-white/5
+                    ${isActive(it.href) ? 'text-white' : 'text-white/80'}`}
           >
             {it.label}
-            {isActive(it.href) && <span class="absolute left-3 right-3 -bottom-[2px] h-[2px] rounded bg-blue-600/70 dark:bg-blue-400/70"></span>}
+            {isActive(it.href) && <span class="absolute left-3 right-3 -bottom-[2px] h-[2px] rounded bg-[#fff]"></span>}
           </a>
         ))}
       </nav>
@@ -81,38 +82,40 @@ const BASE = import.meta.env.BASE_URL ?? '/';
             id="search-desktop"
             type="search"
             placeholder={t.search}
-            class="w-64 focus:w-80 transition-all rounded-full bg-neutral-50/10 dark:bg-neutral-900/10
-                   border border-neutral-200 dark:border-neutral-800 pl-9 pr-4 py-2 text-sm outline-none
-                   focus:ring-2 ring-blue-500/30 shadow-sm"
+            class="w-64 focus:w-80 transition-all rounded-full bg-white/5
+                   border border-white/15 pl-9 pr-4 py-2 text-sm text-white placeholder-white/50 outline-none
+                   focus:ring-2 ring-[#fff] shadow-sm"
             autocomplete="off"
             aria-label={t.search}
             data-index-url={`${BASE}search.json`}
             data-lang={lang}
           />
-          <svg class="absolute left-3 top-1/2 -translate-y-1/2 opacity-95" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 opacity-90 text-white/80" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
             <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </div>
 
-        <!-- Résultats desktop : fixed + anim -->
+        <!-- Résultats desktop -->
         <div
           id="search-desktop-results"
-          class="hidden fixed z-[1000] rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-2xl overflow-hidden
+          class="hidden fixed z-[1000] rounded-xl border border-white/10 bg-neutral-950 shadow-2xl overflow-hidden
                  opacity-0 scale-95 translate-y-1 pointer-events-none
                  transition duration-150 ease-out [transition-property:opacity,transform]"
           style="left:0;top:0;width:24rem"
         >
-          <div class="px-4 py-2 text-[11px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">{t.results}</div>
-          <ul class="max-h-96 overflow-auto divide-y divide-neutral-100 dark:divide-neutral-800" role="listbox" aria-label={t.results}></ul>
-          <div class="px-4 py-2 text-[11px] text-neutral-500 dark:text-neutral-400 bg-neutral-50/60 dark:bg-neutral-900/60">
+          <div class="px-4 py-2 text-[11px] uppercase tracking-wider text-white/80">{t.results}</div>
+          <ul class="max-h-96 overflow-auto divide-y divide-white/10" role="listbox" aria-label={t.results}></ul>
+          <div class="px-4 py-2 text-[11px] text-white/60 bg-black/30">
             ↵ pour ouvrir — Échap pour fermer
           </div>
         </div>
 
         <LangSwitcher currentLang={lang} />
         <button class="hidden md:inline-flex pointer-events-none opacity-0 p-2">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" class="text-white/80" fill="none" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
         </button>
       </div>
 
@@ -121,7 +124,7 @@ const BASE = import.meta.env.BASE_URL ?? '/';
         <LangSwitcher currentLang={lang} />
         <button
           id="menu-open"
-          class="inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+          class="inline-flex items-center justify-center rounded-lg p-2 hover:bg-white/10 text-white"
           aria-label="Ouvrir le menu" aria-haspopup="dialog" aria-controls="mobile-menu" aria-expanded="false">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -136,12 +139,13 @@ const BASE = import.meta.env.BASE_URL ?? '/';
        aria-hidden="true" class="hidden fixed inset-0 z-[60]">
     <div id="menu-backdrop" class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 ease-out"></div>
     <section id="menu-panel"
-      class="absolute inset-0 h-[100dvh] w-screen bg-white dark:bg-neutral-900 shadow-2xl ring-1 ring-black/5 dark:ring-white/10
-             flex flex-col transform-gpu translate-x-full transition-transform duration-300 ease-out overscroll-contain">
+      class="absolute inset-0 h-[100dvh] w-screen bg-neutral-950 shadow-2xl ring-1 ring-white/10
+             flex flex-col transform-gpu translate-x-full transition-transform duration-300 ease-out overscroll-contain text-white"
+    >
       <!-- Top bar -->
-      <div class="h-14 w-full px-4 flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800">
-        <span id="mobile-menu-title" class="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{t.menu}</span>
-        <button id="menu-close" class="inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800" aria-label="Fermer le menu">
+      <div class="h-14 w-full px-4 flex items-center justify-between border-b border-white/10">
+        <span id="mobile-menu-title" class="text-xs uppercase tracking-wide text-white/60">{t.menu}</span>
+        <button id="menu-close" class="inline-flex items-center justify-center rounded-lg p-2 hover:bg-white/10" aria-label="Fermer le menu">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6l-12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </button>
       </div>
@@ -153,21 +157,21 @@ const BASE = import.meta.env.BASE_URL ?? '/';
             id="search-mobile"
             type="search"
             placeholder={t.search}
-            class="w-full rounded-full bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 pl-9 pr-4 py-3 text-[15px] outline-none focus:ring-2 ring-blue-500/30 shadow-sm"
+            class="w-full rounded-full bg-white/5 border border-white/10 pl-9 pr-4 py-3 text-[15px] text-white placeholder-white/50 outline-none focus:ring-2 ring-[#D6B36A40] shadow-sm"
             autocomplete="off"
             aria-label={t.search}
             data-index-url={`${BASE}search.json`}
             data-lang={lang}
           />
-          <svg class="absolute left-3 top-1/2 -translate-y-1/2 opacity-60" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 opacity-70 text-white/80" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
             <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
 
           <div id="search-mobile-results"
-               class="hidden absolute z-[300] mt-2 w-full left-0 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-2xl overflow-hidden">
-            <div class="px-4 py-2 text-[11px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">{t.results}</div>
-            <ul class="max-h-96 overflow-auto divide-y divide-neutral-100 dark:divide-neutral-800" role="listbox" aria-label={t.results}></ul>
+               class="hidden absolute z-[300] mt-2 w-full left-0 rounded-xl border border-white/10 bg-neutral-950 shadow-2xl overflow-hidden">
+            <div class="px-4 py-2 text-[11px] uppercase tracking-wider text-white/70">{t.results}</div>
+            <ul class="max-h-96 overflow-auto divide-y divide-white/10" role="listbox" aria-label={t.results}></ul>
           </div>
         </div>
       </div>
@@ -179,8 +183,8 @@ const BASE = import.meta.env.BASE_URL ?? '/';
             <li>
               <a href={it.href}
                 class={`block rounded-xl px-3 py-3 text-[16px] font-medium
-                        hover:bg-neutral-100 dark:hover:bg-neutral-800
-                        ${isActive(it.href) ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-200' : 'text-neutral-900 dark:text-neutral-100'}`}>
+                        hover:bg-white/5 hover:text-[#D6B36A]
+                        ${isActive(it.href) ? 'bg-white/10 text-white' : 'text-white/90'}`}>
                 {it.label}
               </a>
             </li>
@@ -188,13 +192,13 @@ const BASE = import.meta.env.BASE_URL ?? '/';
         </ul>
       </nav>
 
-      <!-- Bottom action card (uses the remaining space elegantly) -->
-      <div class="mt-auto p-4 border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50/70 dark:bg-neutral-900/60 backdrop-blur-sm">
+      <!-- Bottom action card -->
+      <div class="mt-auto p-4 border-t border-white/10 bg-white/[.03] backdrop-blur-sm">
         <a
           href={`/${lang}/contact#audit`}
           class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3
-                 bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600
-                 font-medium transition-colors"
+                 border border-[#D6B36A80] bg-transparent hover:bg-[#D6B36A14]
+                 text-white font-medium transition-colors"
         >
           {t.ctaAudit}
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -203,22 +207,26 @@ const BASE = import.meta.env.BASE_URL ?? '/';
         </a>
 
         <div class="mt-3 flex items-center justify-between">
-          <!-- Lang chooser duplicated here for convenience -->
           <LangSwitcher currentLang={lang} />
-          <!-- Socials -->
           <div class="flex items-center gap-3">
-            <a href="mailto:alexissfiska@gmail.com" class="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800" aria-label="Email">
+            <a href="mailto:alexissfiska@gmail.com" class="p-2 rounded-lg hover:bg-white/10" aria-label="Email">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
               </svg>
             </a>
-            <a href="https://www.linkedin.com/in/alexis-fiska" target="_blank" rel="noopener" class="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800" aria-label="LinkedIn">
-              <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 93 93" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M11.185,0.08C5.004,0.08,0.001,5.092,0,11.259c0,6.173,5.003,11.184,11.186,11.184c6.166,0,11.176-5.011,11.176-11.184 C22.362,5.091,17.351,0.08,11.185,0.08z"></path> <rect x="1.538" y="30.926" width="19.287" height="62.054"></rect> <path d="M69.925,29.383c-9.382,0-15.673,5.144-18.248,10.022h-0.258v-8.479H32.921H32.92v62.053h19.27V62.281 c0-8.093,1.541-15.932,11.575-15.932c9.89,0,10.022,9.256,10.022,16.451v30.178H93.06V58.942 C93.06,42.235,89.455,29.383,69.925,29.383z"></path> </g> </g> </g></svg>
+            <a href="https://www.linkedin.com/in/alexis-fiska" target="_blank" rel="noopener" class="p-2 rounded-lg hover:bg-white/10" aria-label="LinkedIn">
+              <svg class="block" viewBox="0 0 93 93" width="18" height="18" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <g><g>
+                  <path d="M11.185,0.08C5.004,0.08,0.001,5.092,0,11.259c0,6.173,5.003,11.184,11.186,11.184c6.166,0,11.176-5.011,11.176-11.184 C22.362,5.091,17.351,0.08,11.185,0.08z"></path>
+                  <rect x="1.538" y="30.926" width="19.287" height="62.054"></rect>
+                  <path d="M69.925,29.383c-9.382,0-15.673,5.144-18.248,10.022h-0.258v-8.479H32.921v62.053h19.27V62.281 c0-8.093,1.541-15.932,11.575-15.932c9.89,0,10.022,9.256,10.022,16.451v30.178H93.06V58.942 C93.06,42.235,89.455,29.383,69.925,29.383z"></path>
+                </g></g>
+              </svg>
             </a>
-			<a href="https://x.com/FiskaAlexis" target="_blank" rel="noopener" class="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800" aria-label="X">
-              <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg">
- <path d="m236 0h46l-101 115 118 156h-92.6l-72.5-94.8-83 94.8h-46l107-123-113-148h94.9l65.5 86.6zm-16.1 244h25.5l-165-218h-27.4z"/>
-</svg>
+            <a href="https://x.com/FiskaAlexis" target="_blank" rel="noopener" class="p-2 rounded-lg hover:bg-white/10" aria-label="X">
+              <svg width="18" height="18" viewBox="0 0 300 300" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <path d="m236 0h46l-101 115 118 156h-92.6l-72.5-94.8-83 94.8h-46l107-123-113-148h94.9l65.5 86.6zm-16.1 244h25.5l-165-218h-27.4z"/>
+              </svg>
             </a>
           </div>
         </div>
@@ -227,9 +235,9 @@ const BASE = import.meta.env.BASE_URL ?? '/';
   </div>
 
   <style is:inline>
-    .search-mark{ background:rgba(234,179,8,.35); padding:0 .15rem; border-radius:.25rem }
+    .search-mark{ background:rgba(214,179,106,.25); padding:0 .15rem; border-radius:.25rem }
     @media (prefers-reduced-motion:no-preference){
-      #site-header.is-scrolled{ box-shadow:0 6px 24px rgba(2,6,23,.06) }
+      #site-header.is-scrolled{ box-shadow:0 6px 24px rgba(0,0,0,.35) }
     }
   </style>
 
@@ -285,17 +293,13 @@ const BASE = import.meta.env.BASE_URL ?? '/';
 
       // ===== Search (desktop + mobile) =====
       var cache = null, controller = null;
-      function norm(s){ return (s||'').toString().toLowerCase()
-        .normalize ? s.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'') : s.toString().toLowerCase(); }
       function escHtml(s){ return (s||'').toString().replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
-      function escRx(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
+      function escRx(s){ return s.replace(/[.*+?^${}()|[\\]\\]/g,'\\$&'); }
       function highlight(text, q){
         var t = escHtml(text||'');
         if(!q) return t;
-        try{
-          var rx = new RegExp('('+escRx(q)+')','ig');
-          return t.replace(rx,'<mark class="search-mark">$1</mark>');
-        }catch(_){ return t; }
+        try{ var rx = new RegExp('('+escRx(q)+')','ig'); return t.replace(rx,'<mark class="search-mark">$1</mark>'); }
+        catch(_){ return t; }
       }
 
       function setupSearch(inputId, resultsBoxId, emptyLabel){
@@ -305,51 +309,41 @@ const BASE = import.meta.env.BASE_URL ?? '/';
         var list = box.querySelector('ul');
         var lang = input.dataset.lang || 'fr';
         var indexUrl = input.dataset.indexUrl || '/search.json';
-        var debTimer = null;
-        var opened = false;
+        var debTimer = null, opened = false;
 
         function positionBox(){
           var r = input.getBoundingClientRect();
-          var gap = 8;
-          var minW = Math.max(320, r.width);
-          var maxW = Math.min(512, window.innerWidth - 16);
+          var gap = 8, minW = Math.max(320, r.width), maxW = Math.min(512, window.innerWidth - 16);
           var w = Math.max(Math.min(maxW, minW), 320);
-          var left = Math.min(r.left, window.innerWidth - w - 8);
-          var top  = r.bottom + gap;
-          box.style.width = w + 'px';
-          box.style.left  = left + 'px';
-          box.style.top   = top  + 'px';
+          var left = Math.min(r.left, window.innerWidth - w - 8), top  = r.bottom + gap;
+          box.style.width = w + 'px'; box.style.left  = left + 'px'; box.style.top   = top  + 'px';
         }
 
         function render(items, q){
           list.innerHTML = '';
           if(!items.length){
             var li = document.createElement('li');
-            li.className = 'px-4 py-4 text-sm text-neutral-500 dark:text-neutral-400';
-            li.textContent = emptyLabel;
-            list.appendChild(li);
-            return;
+            li.className = 'px-4 py-4 text-sm text-white/60';
+            li.textContent = emptyLabel; list.appendChild(li); return;
           }
           items.forEach(function (it){
-            var badgeCls = it.type === 'blog'
-              ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200'
-              : 'bg-sky-100 text-sky-800 dark:bg-sky-900/40 dark:text-sky-200';
+            var badgeCls = 'inline-flex items-center text-[10px] px-2 py-[2px] rounded-full border border-white/10 bg-white/5 text-white/70';
             var li = document.createElement('li');
             li.innerHTML =
-              '<a href="'+ it.url +'" class="flex gap-3 items-start px-4 py-3 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">' +
-                '<div class="mt-[2px]">' +
+              '<a href="'+ it.url +'" class="flex gap-3 items-start px-4 py-3 hover:bg-white/5 transition">' +
+                '<div class="mt-[2px] text-white/80">' +
                   (it.type==='blog'
                     ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 5h14v14H5z" stroke="currentColor" stroke-width="2"/><path d="M8 9h8M8 13h8M8 17h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
                     : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 3h10l4 4v14H7z" stroke="currentColor" stroke-width="2"/><path d="M7 3v18H3V7l4-4z" stroke="currentColor" stroke-width="2"/></svg>') +
                 '</div>' +
                 '<div class="min-w-0">' +
                   '<div class="flex items-center gap-2">' +
-                    '<div class="text-sm font-semibold text-neutral-900 dark:text-neutral-100">' + highlight(it.title, q) + '</div>' +
-                    '<span class="text-[10px] px-2 py-[2px] rounded-full ' + badgeCls + '">'+ (it.type==='blog' ? 'Blog' : 'Page') +'</span>' +
+                    '<div class="text-sm font-semibold text-white">' + highlight(it.title, q) + '</div>' +
+                    '<span class="'+ badgeCls +'">'+ (it.type==='blog' ? 'Blog' : 'Page') +'</span>' +
                   '</div>' +
-                  '<div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1 overflow-hidden">' + highlight(it.description||'', q) + '</div>' +
+                  '<div class="text-xs text-white/70 mt-1 overflow-hidden">' + highlight(it.description||'', q) + '</div>' +
                 '</div>' +
-                '<div class="ml-auto opacity-50"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+                '<div class="ml-auto opacity-60 text-white/80"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
               '</a>';
             list.appendChild(li);
           });
@@ -363,29 +357,20 @@ const BASE = import.meta.env.BASE_URL ?? '/';
         }
 
         function showBox(){
-          positionBox();
-          box.classList.remove('hidden');
-          box.getBoundingClientRect();
+          positionBox(); box.classList.remove('hidden'); box.getBoundingClientRect();
           box.classList.remove('opacity-0','scale-95','translate-y-1','pointer-events-none');
-          box.classList.add('opacity-100','scale-100','translate-y-0','pointer-events-auto');
-          opened = true;
+          box.classList.add('opacity-100','scale-100','translate-y-0','pointer-events-auto'); opened = true;
         }
 
         function hideBox(){
           box.classList.add('opacity-0','scale-95','translate-y-1','pointer-events-none');
           box.classList.remove('opacity-100','scale-100','translate-y-0','pointer-events-auto');
-          var done = function(){
-            box.classList.add('hidden');
-            box.removeEventListener('transitionend', done);
-          };
-          box.addEventListener('transitionend', done, { once:true });
-          opened = false;
+          var done = function(){ box.classList.add('hidden'); box.setAttribute('aria-hidden','true'); box.removeEventListener('transitionend', done); };
+          box.addEventListener('transitionend', done, { once:true }); opened = false;
         }
 
-        function onInput(){
-          var q = input.value.trim();
-          if (debTimer) window.clearTimeout(debTimer);
-          if (!q){ if (opened) hideBox(); return; }
+        input.addEventListener('input', function(){
+          var q = input.value.trim(); if (debTimer) window.clearTimeout(debTimer); if (!q){ if (opened) hideBox(); return; }
           debTimer = window.setTimeout(function(){
             ensureIndex(indexUrl).then(function(data){
               var n = (q||'').toLowerCase();
@@ -394,18 +379,11 @@ const BASE = import.meta.env.BASE_URL ?? '/';
                 .filter(function (it) {
                   var hay = (it.title + ' ' + (it.description || '')).toLowerCase();
                   return hay.indexOf(n) !== -1;
-                })
-                .slice(0, 8);
-              render(res, q);
-              showBox();
-            }).catch(function(){
-              render([], q);
-              showBox();
-            });
+                }).slice(0, 8);
+              render(res, q); showBox();
+            }).catch(function(){ render([], q); showBox(); });
           }, 120);
-        }
-
-        input.addEventListener('input', onInput);
+        });
         input.addEventListener('keydown', function(e){ if(e.key === 'Escape' && opened) hideBox(); });
         input.addEventListener('focus', function(){ if (input.value.trim()) showBox(); });
         input.addEventListener('blur', function(){ setTimeout(function(){ if(opened) hideBox(); }, 120); });

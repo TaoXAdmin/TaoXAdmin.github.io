@@ -3,9 +3,9 @@ const SUPPORTED = ['fr', 'en', 'de', 'pt'] as const;
 type Lang = typeof SUPPORTED[number];
 
 interface Props {
-  current?: Lang;      // prop principale
-  currentLang?: Lang;  // alias pour compatibilité (Header utilise cette prop)
-  path?: string;       // e.g. Astro.url.pathname
+  current?: Lang;
+  currentLang?: Lang;
+  path?: string;
 }
 
 const {
@@ -23,14 +23,17 @@ function switchPath(lang: Lang): string {
   return candidate.startsWith('/') ? candidate : `/${candidate}`;
 }
 ---
-<nav aria-label="Language switcher" class="flex gap-2 text-sm">
+<nav aria-label="Language switcher" class="flex gap-2 text-sm text-white">
   {SUPPORTED.map((l) => (
     <a
       href={switchPath(l)}
       aria-current={l === current ? 'page' : undefined}
-      class={`px-2 py-1 rounded ${
-        l === current ? 'bg-blue-600 text-white' : 'hover:bg-neutral-100 dark:hover:bg-neutral-800'
-      }`}
+      class={`inline-flex items-center justify-center rounded-lg px-2.5 py-1
+              font-medium border transition
+              focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D6B36A40]
+              ${l === current
+                ? 'text-white border-[#D6B36A80] bg-[#D6B36A14] shadow-[inset_0_0_0_1px_rgba(214,179,106,.25)]'
+                : 'text-white/80 border-white/10 hover:text-[#D6B36A] hover:border-[#D6B36A66] hover:bg-white/5 active:bg-white/10'}`}
     >
       {l.toUpperCase()}
     </a>
