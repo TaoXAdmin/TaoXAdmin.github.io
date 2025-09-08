@@ -3,15 +3,13 @@ import LangSwitcher from './LangSwitcher.astro';
 
 const { lang = 'fr' } = Astro.props;
 
-// i18n
-const t = {
-  fr: { home:'Accueil', services:'Services', cases:'Cas', about:'À propos', blog:'Blog', contact:'Contact', menu:'Menu' },
-  en: { home:'Home', services:'Services', cases:'Cases', about:'About', blog:'Blog', contact:'Contact', menu:'Menu' },
-  de: { home:'Startseite', services:'Dienstleistungen', cases:'Referenzen', about:'Über mich', blog:'Blog', contact:'Kontakt', menu:'Menü' },
-  pt: { home:'Início', services:'Serviços', cases:'Projetos', about:'Sobre', blog:'Blog', contact:'Contato', menu:'Menu' },
-}[lang] ?? {
-  home:'Accueil', services:'Services', cases:'Cas', about:'À propos', blog:'Blog', contact:'Contact', menu:'Menu'
-};
+const t =
+  {
+    fr: { home:'Accueil', services:'Services', cases:'Cas', about:'À propos', blog:'Blog', contact:'Contact', menu:'Menu' },
+    en: { home:'Home', services:'Services', cases:'Cases', about:'About', blog:'Blog', contact:'Contact', menu:'Menu' },
+    de: { home:'Startseite', services:'Dienstleistungen', cases:'Referenzen', about:'Über mich', blog:'Blog', contact:'Kontakt', menu:'Menü' },
+    pt: { home:'Início', services:'Serviços', cases:'Projetos', about:'Sobre', blog:'Blog', contact:'Contato', menu:'Menu' },
+  }[lang] ?? { home:'Accueil', services:'Services', cases:'Cas', about:'À propos', blog:'Blog', contact:'Contact', menu:'Menu' };
 
 const items = [
   { href: `/${lang}`, label: t.home },
@@ -29,7 +27,7 @@ const isActive = (href: string) => {
   return current.startsWith(h);
 };
 ---
-<header class="sticky top-0 z-50 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
+<header class="sticky top-0 z-50 border-b border-neutral-200 dark:border-neutral-800 bg-white/90 dark:bg-neutral-950/90 backdrop-blur">
   <div class="container mx-auto px-4">
     <div class="h-14 flex items-center justify-between">
       <a href={`/${lang}`} class="text-xl font-semibold tracking-tight text-blue-600 dark:text-blue-400">Alexis Fiska</a>
@@ -37,18 +35,22 @@ const isActive = (href: string) => {
       <!-- Desktop -->
       <nav class="hidden md:flex items-center gap-6" aria-label="Primary">
         {items.map((it) => (
-          <a href={it.href}
-             class={`text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400
-                     ${isActive(it.href) ? 'text-blue-700 dark:text-blue-300' : 'text-neutral-700 dark:text-neutral-200'}`}>
+          <a
+            href={it.href}
+            class={`text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 ${
+              isActive(it.href) ? 'text-blue-700 dark:text-blue-300' : 'text-neutral-700 dark:text-neutral-200'
+            }`}
+          >
             {it.label}
           </a>
         ))}
       </nav>
 
-      <!-- Lang + burger (mobile) -->
+      <!-- Lang + burger -->
       <div class="flex items-center gap-2">
         <LangSwitcher currentLang={lang} />
-        <button id="menu-open"
+        <button
+          id="menu-open"
           class="md:hidden inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
           aria-label="Ouvrir le menu" aria-haspopup="dialog" aria-controls="mobile-menu" aria-expanded="false">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -59,19 +61,18 @@ const isActive = (href: string) => {
     </div>
   </div>
 
-  <!-- MENU MOBILE : plein écran, simple, propre -->
+  <!-- Drawer mobile (slide droite -> gauche) -->
   <div id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title"
-       aria-hidden="true"
-       class="hidden fixed inset-0 z-[60]">
+       aria-hidden="true" class="hidden fixed inset-0 z-[60]">
     <!-- Backdrop -->
-    <div id="menu-backdrop" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-200 ease-out"></div>
+    <div id="menu-backdrop" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-250 ease-out"></div>
 
-    <!-- Feuille plein écran -->
-    <section id="menu-sheet"
-      class="absolute inset-0 bg-white dark:bg-neutral-950 flex flex-col
-             opacity-0 translate-y-2 transition-all duration-200 ease-out">
-      <div class="h-14 px-4 flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800">
-        <span id="mobile-menu-title" class="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{t.menu}</span>
+    <!-- Panneau -->
+    <aside id="menu-panel"
+      class="absolute right-0 top-0 h-full w-[min(92vw,420px)] bg-white dark:bg-neutral-900 shadow-2xl
+             ring-1 ring-black/5 dark:ring-white/10 p-5 pt-16 transform-gpu translate-x-full
+             transition-transform duration-250 ease-out">
+      <div class="absolute right-3 top-3">
         <button id="menu-close" class="inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800" aria-label="Fermer le menu">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M6 6l12 12M18 6l-12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -79,37 +80,37 @@ const isActive = (href: string) => {
         </button>
       </div>
 
-      <nav class="px-3 py-2 grow overflow-y-auto" aria-label="Mobile">
-        <ul class="space-y-1">
-          {items.map((it) => (
-            <li>
-              <a href={it.href}
-                 class={`block rounded-xl px-3 py-3 text-[16px] font-medium
-                         hover:bg-neutral-100 dark:hover:bg-neutral-800
-                         ${isActive(it.href) ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-200' : 'text-neutral-900 dark:text-neutral-100'}`}>
-                {it.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+      <h2 id="mobile-menu-title" class="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400 mb-4">{t.menu}</h2>
+
+      <nav class="flex flex-col gap-1" aria-label="Mobile">
+        {items.map((it) => (
+          <a
+            href={it.href}
+            class={`block rounded-xl px-3 py-3 text-[16px] font-medium hover:bg-neutral-100 dark:hover:bg-neutral-800 ${
+              isActive(it.href) ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-200' : 'text-neutral-900 dark:text-neutral-100'
+            }`}
+          >
+            {it.label}
+          </a>
+        ))}
       </nav>
 
-      <div class="px-3 py-3 border-t border-neutral-200 dark:border-neutral-800">
+      <div class="mt-5 pt-4 border-t border-neutral-200 dark:border-neutral-800">
         <LangSwitcher currentLang={lang} />
       </div>
-    </section>
+    </aside>
   </div>
 
-  <!-- JS simple (sans TS) -->
+  <!-- JS minimal (slide horizontal only) -->
   <script is:inline>
     (function () {
       const root = document.getElementById('mobile-menu');
       const openBtn = document.getElementById('menu-open');
       const closeBtn = document.getElementById('menu-close');
       const backdrop = document.getElementById('menu-backdrop');
-      const sheet = document.getElementById('menu-sheet');
+      const panel = document.getElementById('menu-panel');
 
-      if (!root || !openBtn || !closeBtn || !backdrop || !sheet) return;
+      if (!root || !openBtn || !closeBtn || !backdrop || !panel) return;
 
       function open() {
         root.classList.remove('hidden');
@@ -118,30 +119,29 @@ const isActive = (href: string) => {
         document.body.classList.add('overflow-hidden');
 
         requestAnimationFrame(() => {
-          backdrop.classList.add('opacity-100');
-          sheet.classList.remove('opacity-0','translate-y-2');
-          sheet.classList.add('opacity-100','translate-y-0');
+          backdrop.classList.add('opacity-100');      // fade in
+          panel.classList.remove('translate-x-full'); // slide in from right
         });
 
-        // Fermer au clic d’un lien
-        sheet.querySelectorAll('a[href]').forEach(a => a.addEventListener('click', close, { once: true }));
+        // fermer quand on clique un lien
+        panel.querySelectorAll('a[href]').forEach(a => a.addEventListener('click', close, { once: true }));
         document.addEventListener('keydown', onKeyDown);
       }
 
       function close() {
-        backdrop.classList.remove('opacity-100');
-        sheet.classList.add('opacity-0','translate-y-2');
+        backdrop.classList.remove('opacity-100');     // fade out
+        panel.classList.add('translate-x-full');      // slide out to right
         openBtn.setAttribute('aria-expanded', 'false');
         document.body.classList.remove('overflow-hidden');
 
         const done = () => {
           root.classList.add('hidden');
           root.setAttribute('aria-hidden', 'true');
-          sheet.removeEventListener('transitionend', done);
-          if (openBtn.focus) openBtn.focus();
+          panel.removeEventListener('transitionend', done);
           document.removeEventListener('keydown', onKeyDown);
+          if (openBtn.focus) openBtn.focus();
         };
-        sheet.addEventListener('transitionend', done, { once: true });
+        panel.addEventListener('transitionend', done, { once: true });
       }
 
       function onKeyDown(e) { if (e.key === 'Escape') close(); }
@@ -152,3 +152,4 @@ const isActive = (href: string) => {
     })();
   </script>
 </header>
+
