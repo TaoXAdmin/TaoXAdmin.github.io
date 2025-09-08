@@ -29,7 +29,7 @@ const isActive = (href) => {
 
 const BASE = import.meta.env.BASE_URL ?? '/';
 ---
-<header id="site-header" class="sticky top-0 z-50 border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-950/80 backdrop-blur transition-shadow">
+<header id="site-header" class="sticky top-0 z-[200] isolate border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-950/80 backdrop-blur transition-shadow">
   <div class="container mx-auto px-4">
     <div class="h-16 flex items-center gap-3">
       <!-- Brand -->
@@ -57,12 +57,12 @@ const BASE = import.meta.env.BASE_URL ?? '/';
 
       <!-- Desktop SEARCH + Lang -->
       <div class="hidden md:flex items-center gap-3">
-        <div class="relative group">
+        <div class="relative">
           <input
             id="search-desktop"
             type="search"
             placeholder={t.search}
-            class="w-64 focus:w-80 transition-all rounded-full bg-neutral-50/99 dark:bg-neutral-900/99
+            class="w-64 focus:w-80 transition-all rounded-full bg-neutral-50/10 dark:bg-neutral-900/10
                    border border-neutral-200 dark:border-neutral-800 pl-9 pr-4 py-2 text-sm outline-none
                    focus:ring-2 ring-blue-500/30 shadow-sm"
             autocomplete="off"
@@ -75,22 +75,26 @@ const BASE = import.meta.env.BASE_URL ?? '/';
             <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
             <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
+        </div>
 
-          <!-- résultats -->
-          <div id="search-desktop-results"
-               class="hidden absolute right-0 mt-2 w-[32rem] max-w-[90vw] z-50 rounded-xl border border-neutral-200 dark:border-neutral-800
-                      bg-white/99 dark:bg-neutral-900/99 shadow-2xl overflow-hidden backdrop-blur-sm">
-            <div class="px-4 py-2 text-[11px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">{t.results}</div>
-            <ul class="max-h-96 overflow-auto divide-y divide-neutral-100 dark:divide-neutral-800" role="listbox" aria-label={t.results}></ul>
-            <div class="px-4 py-2 text-[11px] text-neutral-500 dark:text-neutral-400 bg-neutral-50/60 dark:bg-neutral-900/60">
-              ↵ pour ouvrir — Échap pour fermer
-            </div>
+        <!-- Panneau résultats desktop (FIXED + animé) -->
+        <div
+          id="search-desktop-results"
+          class="hidden fixed z-[1000] rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-2xl overflow-hidden
+                 opacity-0 scale-95 translate-y-1 pointer-events-none
+                 transition duration-150 ease-out [transition-property:opacity,transform]"
+          style="left:0;top:0;width:24rem"
+        >
+          <div class="px-4 py-2 text-[11px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">{t.results}</div>
+          <ul class="max-h-96 overflow-auto divide-y divide-neutral-100 dark:divide-neutral-800" role="listbox" aria-label={t.results}></ul>
+          <div class="px-4 py-2 text-[11px] text-neutral-500 dark:text-neutral-400 bg-neutral-50/60 dark:bg-neutral-900/60">
+            ↵ pour ouvrir — Échap pour fermer
           </div>
         </div>
 
         <LangSwitcher currentLang={lang} />
 
-        <!-- Burger mobile trigger hidden on desktop, but keeps spacing aligned -->
+        <!-- Faux burger pour l’alignement desktop -->
         <button class="hidden md:inline-flex pointer-events-none opacity-0 p-2">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </button>
@@ -111,7 +115,7 @@ const BASE = import.meta.env.BASE_URL ?? '/';
     </div>
   </div>
 
-  <!-- MOBILE DRAWER (inchangé fonctionnellement) -->
+  <!-- MOBILE DRAWER -->
   <div id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title"
        aria-hidden="true" class="hidden fixed inset-0 z-[60]">
     <div id="menu-backdrop" class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 ease-out"></div>
@@ -146,7 +150,7 @@ const BASE = import.meta.env.BASE_URL ?? '/';
           </svg>
 
           <div id="search-mobile-results"
-               class="hidden absolute z-50 mt-2 w-full left-0 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-2xl overflow-hidden">
+               class="hidden absolute z-[300] mt-2 w-full left-0 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-2xl overflow-hidden">
             <div class="px-4 py-2 text-[11px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">{t.results}</div>
             <ul class="max-h-96 overflow-auto divide-y divide-neutral-100 dark:divide-neutral-800" role="listbox" aria-label={t.results}></ul>
           </div>
@@ -179,10 +183,10 @@ const BASE = import.meta.env.BASE_URL ?? '/';
     }
   </style>
 
-  <!-- Script : header shadow on scroll + drawer + search UI -->
+  <!-- Script : header shadow + drawer + search (position fixe + animation) -->
   <script is:inline>
     (function () {
-      // ===== Header shadow on scroll (desktop polish) =====
+      // ===== Header shadow on scroll =====
       var sh = document.getElementById('site-header');
       var last = 0;
       function onScroll(){
@@ -244,6 +248,7 @@ const BASE = import.meta.env.BASE_URL ?? '/';
           return t.replace(rx,'<mark class="search-mark">$1</mark>');
         }catch(_){ return t; }
       }
+
       function setupSearch(inputId, resultsBoxId, emptyLabel){
         var input = document.getElementById(inputId);
         var box = document.getElementById(resultsBoxId);
@@ -252,6 +257,20 @@ const BASE = import.meta.env.BASE_URL ?? '/';
         var lang = input.dataset.lang || 'fr';
         var indexUrl = input.dataset.indexUrl || '/search.json';
         var debTimer = null;
+        var opened = false;
+
+        function positionBox(){
+          var r = input.getBoundingClientRect();
+          var gap = 8;
+          var minW = Math.max(320, r.width);
+          var maxW = Math.min(512, window.innerWidth - 16);
+          var w = Math.max(Math.min(maxW, minW), 320);
+          var left = Math.min(r.left, window.innerWidth - w - 8);
+          var top  = r.bottom + gap;
+          box.style.width = w + 'px';
+          box.style.left  = left + 'px';
+          box.style.top   = top  + 'px';
+        }
 
         function render(items, q){
           list.innerHTML = '';
@@ -294,10 +313,31 @@ const BASE = import.meta.env.BASE_URL ?? '/';
           return fetch(url, { signal: controller.signal }).then(function(r){ return r.json(); }).then(function(j){ cache = j; return j; });
         }
 
+        function showBox(){
+          positionBox();
+          box.classList.remove('hidden');
+          // lancement de l’anim (fade+scale)
+          box.getBoundingClientRect();
+          box.classList.remove('opacity-0','scale-95','translate-y-1','pointer-events-none');
+          box.classList.add('opacity-100','scale-100','translate-y-0','pointer-events-auto');
+          opened = true;
+        }
+
+        function hideBox(){
+          box.classList.add('opacity-0','scale-95','translate-y-1','pointer-events-none');
+          box.classList.remove('opacity-100','scale-100','translate-y-0','pointer-events-auto');
+          var done = function(){
+            box.classList.add('hidden');
+            box.removeEventListener('transitionend', done);
+          };
+          box.addEventListener('transitionend', done, { once:true });
+          opened = false;
+        }
+
         function onInput(){
           var q = input.value.trim();
           if (debTimer) window.clearTimeout(debTimer);
-          if (!q){ box.classList.add('hidden'); return; }
+          if (!q){ if (opened) hideBox(); return; }
           debTimer = window.setTimeout(function(){
             ensureIndex(indexUrl).then(function(data){
               var n = norm(q);
@@ -309,22 +349,26 @@ const BASE = import.meta.env.BASE_URL ?? '/';
                 })
                 .slice(0, 8);
               render(res, q);
-              box.classList.remove('hidden');
+              showBox();
             }).catch(function(){
               render([], q);
-              box.classList.remove('hidden');
+              showBox();
             });
           }, 120);
         }
 
         input.addEventListener('input', onInput);
-        input.addEventListener('keydown', function(e){ if(e.key === 'Escape') box.classList.add('hidden'); });
-        input.addEventListener('focus', function(){ if (input.value.trim()) box.classList.remove('hidden'); });
-        input.addEventListener('blur', function(){ setTimeout(function(){ box.classList.add('hidden'); }, 120); });
+        input.addEventListener('keydown', function(e){ if(e.key === 'Escape' && opened) hideBox(); });
+        input.addEventListener('focus', function(){ if (input.value.trim()) showBox(); });
+        input.addEventListener('blur', function(){ setTimeout(function(){ if(opened) hideBox(); }, 120); });
+        window.addEventListener('resize', function(){ if(opened) positionBox(); });
+        window.addEventListener('scroll', function(){ if(opened) positionBox(); }, { passive:true });
       }
 
-      setupSearch('search-desktop', 'search-desktop-results', '{{t.nores}}'.replace('{{t.nores}}','{t.nores}'));
-      setupSearch('search-mobile', 'search-mobile-results', '{{t.nores}}'.replace('{{t.nores}}','{t.nores}'));
+      // libellé vide localisé
+      var EMPTY = {JSON.stringify(t.nores)};
+      setupSearch('search-desktop', 'search-desktop-results', EMPTY);
+      setupSearch('search-mobile', 'search-mobile-results', EMPTY);
     })();
   </script>
 </header>
