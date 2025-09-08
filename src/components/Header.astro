@@ -35,12 +35,8 @@ const isActive = (href: string) => {
       <!-- Desktop -->
       <nav class="hidden md:flex items-center gap-6" aria-label="Primary">
         {items.map((it) => (
-          <a
-            href={it.href}
-            class={`text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 ${
-              isActive(it.href) ? 'text-blue-700 dark:text-blue-300' : 'text-neutral-700 dark:text-neutral-200'
-            }`}
-          >
+          <a href={it.href}
+             class={`text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 ${isActive(it.href) ? 'text-blue-700 dark:text-blue-300' : 'text-neutral-700 dark:text-neutral-200'}`}>
             {it.label}
           </a>
         ))}
@@ -49,8 +45,7 @@ const isActive = (href: string) => {
       <!-- Lang + burger -->
       <div class="flex items-center gap-2">
         <LangSwitcher currentLang={lang} />
-        <button
-          id="menu-open"
+        <button id="menu-open"
           class="md:hidden inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
           aria-label="Ouvrir le menu" aria-haspopup="dialog" aria-controls="mobile-menu" aria-expanded="false">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -61,19 +56,25 @@ const isActive = (href: string) => {
     </div>
   </div>
 
-  <!-- Drawer mobile (slide droite -> gauche) -->
+  <!-- Drawer mobile (slide horizontal + backdrop opaque) -->
   <div id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title"
-       aria-hidden="true" class="hidden fixed inset-0 z-[60]">
+       aria-hidden="true" class="hidden fixed inset-0 z-[60] pointer-events-none">
     <!-- Backdrop -->
-    <div id="menu-backdrop" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-250 ease-out"></div>
+    <div id="menu-backdrop"
+         class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 ease-out will-change-[opacity]"></div>
 
     <!-- Panneau -->
     <aside id="menu-panel"
-      class="absolute right-0 top-0 h-full w-[min(92vw,420px)] bg-white dark:bg-neutral-900 shadow-2xl
-             ring-1 ring-black/5 dark:ring-white/10 p-5 pt-16 transform-gpu translate-x-full
-             transition-transform duration-250 ease-out">
+      class="absolute right-0 top-0 h-full w-[min(92vw,420px)]
+             bg-white dark:bg-neutral-900 shadow-2xl ring-1 ring-black/5 dark:ring-white/10
+             px-5 pt-16 pb-6 overflow-y-auto
+             transform-gpu translate-x-full opacity-0
+             transition-[transform,opacity] duration-300 ease-out
+             will-change-[transform,opacity]">
       <div class="absolute right-3 top-3">
-        <button id="menu-close" class="inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800" aria-label="Fermer le menu">
+        <button id="menu-close"
+          class="inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+          aria-label="Fermer le menu">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M6 6l12 12M18 6l-12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
@@ -84,12 +85,10 @@ const isActive = (href: string) => {
 
       <nav class="flex flex-col gap-1" aria-label="Mobile">
         {items.map((it) => (
-          <a
-            href={it.href}
-            class={`block rounded-xl px-3 py-3 text-[16px] font-medium hover:bg-neutral-100 dark:hover:bg-neutral-800 ${
-              isActive(it.href) ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-200' : 'text-neutral-900 dark:text-neutral-100'
-            }`}
-          >
+          <a href={it.href}
+             class={`block rounded-xl px-3 py-3 text-[16px] font-medium
+                     hover:bg-neutral-100 dark:hover:bg-neutral-800
+                     ${isActive(it.href) ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-200' : 'text-neutral-900 dark:text-neutral-100'}`}>
             {it.label}
           </a>
         ))}
@@ -101,7 +100,6 @@ const isActive = (href: string) => {
     </aside>
   </div>
 
-  <!-- JS minimal (slide horizontal only) -->
   <script is:inline>
     (function () {
       const root = document.getElementById('mobile-menu');
@@ -114,27 +112,35 @@ const isActive = (href: string) => {
 
       function open() {
         root.classList.remove('hidden');
+        root.classList.add('pointer-events-auto');
         root.setAttribute('aria-hidden', 'false');
         openBtn.setAttribute('aria-expanded', 'true');
         document.body.classList.add('overflow-hidden');
 
+        // start states already set (opacity-0 + translate-x-full). Animate next frame:
         requestAnimationFrame(() => {
-          backdrop.classList.add('opacity-100');      // fade in
-          panel.classList.remove('translate-x-full'); // slide in from right
+          backdrop.classList.add('opacity-100');           // fade in backdrop
+          panel.classList.remove('translate-x-full');      // slide in
+          panel.classList.remove('opacity-0');             // fade in panel
+          panel.classList.add('opacity-100');
         });
 
-        // fermer quand on clique un lien
+        // close when clicking any link
         panel.querySelectorAll('a[href]').forEach(a => a.addEventListener('click', close, { once: true }));
         document.addEventListener('keydown', onKeyDown);
       }
 
       function close() {
-        backdrop.classList.remove('opacity-100');     // fade out
-        panel.classList.add('translate-x-full');      // slide out to right
+        backdrop.classList.remove('opacity-100');          // fade out
+        panel.classList.add('translate-x-full');           // slide out
+        panel.classList.remove('opacity-100');             // fade out panel
+        panel.classList.add('opacity-0');
+
         openBtn.setAttribute('aria-expanded', 'false');
         document.body.classList.remove('overflow-hidden');
 
         const done = () => {
+          root.classList.remove('pointer-events-auto');
           root.classList.add('hidden');
           root.setAttribute('aria-hidden', 'true');
           panel.removeEventListener('transitionend', done);
@@ -152,4 +158,3 @@ const isActive = (href: string) => {
     })();
   </script>
 </header>
-
