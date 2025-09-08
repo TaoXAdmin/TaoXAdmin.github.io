@@ -100,10 +100,80 @@ const isActive = (href) => {
         </ul>
       </nav>
 
-      <!-- Footer bas + safe-area -->
-      <div class="px-4 py-4 border-t border-neutral-200 dark:border-neutral-800 pb-[calc(env(safe-area-inset-bottom)+1rem)]">
-        <LangSwitcher currentLang={lang} />
-      </div>
+<!-- Footer bas + safe-area (mobile-only language flags) -->
+<div class="px-4 py-4 border-t border-neutral-200 dark:border-neutral-800 pb-[calc(env(safe-area-inset-bottom)+1rem)]">
+  <div id="lang-flags" data-current-lang={lang} class="grid grid-cols-4 gap-3 justify-items-center">
+    <!-- FR -->
+    <a data-lang="fr" aria-label="Français" class="rounded-lg p-1 bg-white/70 dark:bg-neutral-800/70 hover:ring-2 hover:ring-blue-500 focus:ring-2 focus:ring-blue-500">
+      <svg width="36" height="36" viewBox="0 0 24 24" aria-hidden="true">
+        <rect width="24" height="24" rx="4" fill="#fff"/>
+        <rect x="0" y="0" width="8" height="24" rx="4" fill="#1e40af"/>
+        <rect x="16" y="0" width="8" height="24" rx="4" fill="#dc2626"/>
+      </svg>
+      <span class="sr-only">FR</span>
+    </a>
+
+    <!-- EN (UK flag stylised) -->
+    <a data-lang="en" aria-label="English" class="rounded-lg p-1 bg-white/70 dark:bg-neutral-800/70 hover:ring-2 hover:ring-blue-500 focus:ring-2 focus:ring-blue-500">
+      <svg width="36" height="36" viewBox="0 0 24 24" aria-hidden="true">
+        <rect width="24" height="24" rx="4" fill="#1e3a8a"/>
+        <path d="M0 8h24M0 16h24" stroke="#fff" stroke-width="4"/>
+        <path d="M8 0v24M16 0v24" stroke="#fff" stroke-width="4"/>
+        <path d="M0 6h24M0 18h24M6 0v24M18 0v24" stroke="#dc2626" stroke-width="2"/>
+      </svg>
+      <span class="sr-only">EN</span>
+    </a>
+
+    <!-- DE -->
+    <a data-lang="de" aria-label="Deutsch" class="rounded-lg p-1 bg-white/70 dark:bg-neutral-800/70 hover:ring-2 hover:ring-blue-500 focus:ring-2 focus:ring-blue-500">
+      <svg width="36" height="36" viewBox="0 0 24 24" aria-hidden="true">
+        <rect width="24" height="24" rx="4" fill="#000"/>
+        <rect y="8" width="24" height="8" fill="#dc2626"/>
+        <rect y="16" width="24" height="8" rx="4" fill="#fbbf24"/>
+      </svg>
+      <span class="sr-only">DE</span>
+    </a>
+
+    <!-- PT -->
+    <a data-lang="pt" aria-label="Português" class="rounded-lg p-1 bg-white/70 dark:bg-neutral-800/70 hover:ring-2 hover:ring-blue-500 focus:ring-2 focus:ring-blue-500">
+      <svg width="36" height="36" viewBox="0 0 24 24" aria-hidden="true">
+        <rect width="24" height="24" rx="4" fill="#dc2626"/>
+        <rect width="10" height="24" rx="4" fill="#15803d"/>
+        <circle cx="10" cy="12" r="3.5" fill="#fbbf24" stroke="#fff" stroke-width="1"/>
+      </svg>
+      <span class="sr-only">PT</span>
+    </a>
+  </div>
+
+  <!-- build the correct target URLs on the fly (same path, different lang prefix) -->
+  <script is:inline>
+    (function () {
+      const root = document.getElementById('lang-flags');
+      if (!root) return;
+      const current = root.dataset.currentLang;
+      const supported = ['fr','en','de','pt'];
+
+      function switchPath(lang) {
+        try {
+          const parts = location.pathname.split('/');
+          // path is like /fr/...; if not prefixed, insert at index 1
+          if (supported.includes(parts[1])) parts[1] = lang;
+          else parts.splice(1, 0, lang);
+          // normalise double slashes
+          return parts.join('/').replace(/\/{2,}/g, '/');
+        } catch (_) {
+          return '/' + lang;
+        }
+      }
+
+      root.querySelectorAll('a[data-lang]').forEach(a => {
+        const lang = a.getAttribute('data-lang');
+        a.setAttribute('href', switchPath(lang));
+        if (lang === current) a.classList.add('ring-2','ring-blue-500');
+      });
+    })();
+  </script>
+</div>
     </section>
   </div>
 
