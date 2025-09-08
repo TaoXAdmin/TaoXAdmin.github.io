@@ -6,22 +6,17 @@ interface Props {
   title?: string;
   description?: string;
   lang?: 'fr' | 'en' | 'de' | 'pt';
-  canonical?: string; // optionnel : forcer un canonique
+  canonical?: string;
 }
 const { title = 'Alexis Fiska', description = '', lang = 'fr', canonical } = Astro.props as Props;
 
-// Domaine du site (cohérent avec GitHub Pages)
 const SITE_FALLBACK = 'https://taoxadmin.github.io';
-
-// Canonical basé sur la config + requête courante
 const siteOrigin = (Astro.site?.origin ?? SITE_FALLBACK);
 const currentPath = Astro.url?.pathname ?? '/';
 const canonicalUrl = canonical ?? new URL(currentPath, siteOrigin).toString();
 
-// Base URL pour assets publics (gère les sous-chemins éventuels)
 const BASE = import.meta.env.BASE_URL ?? '/';
 
-// JSON-LD Person + Service (avec minPrice 450 EUR et priceRange "€€€")
 const structuredData = [
   {
     '@context': 'https://schema.org',
@@ -35,12 +30,8 @@ const structuredData = [
     priceRange: '€€€',
     offers: {
       '@type': 'Offer',
-      priceCurrency: 'EUR',
-      priceSpecification: {
-        '@type': 'PriceSpecification',
-        minPrice: 450,
-        priceCurrency: 'EUR'
-      }
+      'priceCurrency': 'EUR',
+      priceSpecification: { '@type': 'PriceSpecification', minPrice: 450, priceCurrency: 'EUR' }
     }
   },
   {
@@ -52,12 +43,8 @@ const structuredData = [
     priceRange: '€€€',
     offers: {
       '@type': 'Offer',
-      priceCurrency: 'EUR',
-      priceSpecification: {
-        '@type': 'PriceSpecification',
-        minPrice: 450,
-        priceCurrency: 'EUR'
-      }
+      'priceCurrency': 'EUR',
+      priceSpecification: { '@type': 'PriceSpecification', minPrice: 450, priceCurrency: 'EUR' }
     }
   }
 ];
@@ -72,7 +59,6 @@ const structuredData = [
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={canonicalUrl} />
 
-    {/* Open Graph / Twitter */}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Alexis Fiska Portfolio" />
     <meta property="og:url" content={canonicalUrl} />
@@ -83,33 +69,104 @@ const structuredData = [
     <meta name="twitter:title" content={title} />
     {description && <meta name="twitter:description" content={description} />}
 
-    {/* Favicon */}
     <link rel="icon" type="image/svg+xml" href={`${BASE}images/favicon.svg`} />
 
-    {/* JSON-LD (silence les hints via is:inline) */}
     <script type="application/ld+json" is:inline set:html={JSON.stringify(structuredData)}></script>
 
-    {/* Plausible (domaine = taoxadmin.github.io) */}
     <script
       is:inline
       defer
       data-domain="taoxadmin.github.io"
       src="https://plausible.io/js/script.js"
     ></script>
+
+    <!-- Styles de transition page (léger, accessible) -->
+    <style is:inline>
+      :root{
+        --page-trans-dur: .28s;
+        --page-trans-ease: cubic-bezier(.22,1,.36,1);
+        --page-trans-shift: 10px; /* ajuste l’amplitude du slide */
+      }
+      @media (prefers-reduced-motion: reduce){
+        .animate-page-in,.animate-page-out{ animation: none !important; }
+      }
+      @keyframes page-in {
+        from { opacity: 0; transform: translateY(var(--page-trans-shift)); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes page-out {
+        from { opacity: 1; transform: translateY(0); }
+        to   { opacity: 0; transform: translateY(var(--page-trans-shift)); }
+      }
+      .animate-page-in  { animation: page-in var(--page-trans-dur) var(--page-trans-ease) both; }
+      .animate-page-out { animation: page-out var(--page-trans-dur) var(--page-trans-ease) both; }
+    </style>
   </head>
   <body class="min-h-screen bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 flex flex-col">
-    {/* Accessibilité : lien d’évitement */}
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-blue-600 text-white px-3 py-2 rounded z-50">
       Aller au contenu
     </a>
 
-    {/* Header + Footer réintégrés */}
     <Header lang={lang} />
 
-    <main id="main" class="container mx-auto px-4 py-8 flex-1">
+    <!-- Ajout des classes/attributs de transition -->
+    <main id="main" data-page-trans class="container mx-auto px-4 py-8 flex-1 animate-page-in">
       <slot />
     </main>
 
     <Footer lang={lang} />
+
+    <!-- JS très court pour jouer la transition de sortie avant navigation -->
+    <script is:inline>
+      (function () {
+        var DURATION = 280; // doit matcher --page-trans-dur
+        var main = document.querySelector('main[data-page-trans]');
+        if (!main) return;
+
+        function isInternal(href) {
+          try {
+            var u = new URL(href, window.location.href);
+            return u.origin === window.location.origin;
+          } catch { return false; }
+        }
+
+        function findAnchor(el){
+          while (el && el !== document.body){
+            if (el.tagName && el.tagName.toLowerCase() === 'a') return el;
+            el = el.parentElement;
+          }
+          return null;
+        }
+
+        document.addEventListener('click', function (e) {
+          var a = findAnchor(e.target);
+          if (!a) return;
+
+          // Ne pas intercepter : nouvelles fenêtres, téléchargements, ancres, mailto/tel, externes, opt-out
+          var href = a.getAttribute('href') || '';
+          if (a.target === '_blank' || a.hasAttribute('download') || a.dataset.noTransition === 'true') return;
+          if (!href || href[0] === '#' || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+          if (!isInternal(href)) return;
+
+          e.preventDefault();
+          if (document.body.classList.contains('page-exiting')) return;
+
+          document.body.classList.add('page-exiting');
+          main.classList.remove('animate-page-in');
+          main.classList.add('animate-page-out');
+
+          window.setTimeout(function(){
+            window.location.href = a.href;
+          }, DURATION);
+        }, true);
+
+        // Retour via bfcache (Safari/Firefox) : rejouer l'enter
+        window.addEventListener('pageshow', function(){
+          document.body.classList.remove('page-exiting');
+          main.classList.remove('animate-page-out');
+          main.classList.add('animate-page-in');
+        });
+      })();
+    </script>
   </body>
 </html>
