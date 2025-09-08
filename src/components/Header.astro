@@ -29,33 +29,42 @@ const isActive = (href) => {
 
 const BASE = import.meta.env.BASE_URL ?? '/';
 ---
-<header class="sticky top-0 z-50 border-b border-neutral-200 dark:border-neutral-800 bg-white/90 dark:bg-neutral-950/90 backdrop-blur">
+<header id="site-header" class="sticky top-0 z-50 border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-950/80 backdrop-blur transition-shadow">
   <div class="container mx-auto px-4">
-    <div class="h-14 flex items-center justify-between gap-3">
-      <a href={`/${lang}`} class="text-xl font-semibold tracking-tight text-blue-600 dark:text-blue-400">Alexis Fiska</a>
+    <div class="h-16 flex items-center gap-3">
+      <!-- Brand -->
+      <a href={`/${lang}`} class="text-xl font-semibold tracking-tight text-blue-600 dark:text-blue-400">
+        Alexis Fiska
+      </a>
 
-      <!-- Desktop NAV + SEARCH -->
-      <div class="hidden md:flex items-center gap-6 flex-1 justify-end">
-        <nav class="flex items-center gap-6" aria-label="Primary">
-          {items.map((it) => (
-            <a
-              href={it.href}
-              class={`text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 ${
-                isActive(it.href) ? 'text-blue-700 dark:text-blue-300' : 'text-neutral-700 dark:text-neutral-200'
-              }`}
-            >
-              {it.label}
-            </a>
-          ))}
-        </nav>
+      <!-- Desktop NAV -->
+      <nav class="hidden md:flex items-center gap-2 ml-6" aria-label="Primary">
+        {items.map((it) => (
+          <a
+            href={it.href}
+            class={`relative rounded-lg px-3 py-2 text-sm font-medium transition
+              hover:bg-neutral-100/70 dark:hover:bg-neutral-800/70
+              ${isActive(it.href) ? 'text-blue-700 dark:text-blue-300' : 'text-neutral-700 dark:text-neutral-200'}`}
+          >
+            {it.label}
+            {isActive(it.href) && <span class="absolute left-3 right-3 -bottom-[2px] h-[2px] rounded bg-blue-600/70 dark:bg-blue-400/70"></span>}
+          </a>
+        ))}
+      </nav>
 
-        <!-- Search (desktop) -->
-        <div class="relative w-64">
+      <!-- Spacer -->
+      <div class="hidden md:block flex-1"></div>
+
+      <!-- Desktop SEARCH + Lang -->
+      <div class="hidden md:flex items-center gap-3">
+        <div class="relative group">
           <input
             id="search-desktop"
             type="search"
             placeholder={t.search}
-            class="w-full rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 px-9 py-2 text-sm outline-none focus:ring-2 ring-blue-500/40"
+            class="w-64 focus:w-80 transition-all rounded-full bg-neutral-50/90 dark:bg-neutral-900/90
+                   border border-neutral-200 dark:border-neutral-800 pl-9 pr-4 py-2 text-sm outline-none
+                   focus:ring-2 ring-blue-500/30 shadow-sm"
             autocomplete="off"
             aria-label={t.search}
             data-index-url={`${BASE}search.json`}
@@ -66,22 +75,29 @@ const BASE = import.meta.env.BASE_URL ?? '/';
             <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
             <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
+
           <!-- résultats -->
           <div id="search-desktop-results"
-               class="hidden absolute z-50 mt-2 w-[min(28rem,90vw)] right-0 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-xl overflow-hidden">
-            <div class="px-3 py-2 text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{t.results}</div>
-            <ul class="max-h-80 overflow-auto" role="listbox" aria-label={t.results}></ul>
-            <div class="px-3 py-2 text-xs text-neutral-500 dark:text-neutral-400 border-t border-neutral-200 dark:border-neutral-800">
+               class="hidden absolute right-0 mt-2 w-[32rem] max-w-[90vw] z-50 rounded-xl border border-neutral-200 dark:border-neutral-800
+                      bg-white/95 dark:bg-neutral-900/95 shadow-2xl overflow-hidden backdrop-blur-sm">
+            <div class="px-4 py-2 text-[11px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">{t.results}</div>
+            <ul class="max-h-96 overflow-auto divide-y divide-neutral-100 dark:divide-neutral-800" role="listbox" aria-label={t.results}></ul>
+            <div class="px-4 py-2 text-[11px] text-neutral-500 dark:text-neutral-400 bg-neutral-50/60 dark:bg-neutral-900/60">
               ↵ pour ouvrir — Échap pour fermer
             </div>
           </div>
         </div>
 
         <LangSwitcher currentLang={lang} />
+
+        <!-- Burger mobile trigger hidden on desktop, but keeps spacing aligned -->
+        <button class="hidden md:inline-flex pointer-events-none opacity-0 p-2">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
       </div>
 
-      <!-- Mobile: Lang + burger -->
-      <div class="md:hidden flex items-center gap-2">
+      <!-- Mobile: Right side -->
+      <div class="md:hidden ml-auto flex items-center gap-2">
         <LangSwitcher currentLang={lang} />
         <button
           id="menu-open"
@@ -95,18 +111,13 @@ const BASE = import.meta.env.BASE_URL ?? '/';
     </div>
   </div>
 
-  <!-- MOBILE DRAWER -->
+  <!-- MOBILE DRAWER (inchangé fonctionnellement) -->
   <div id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title"
        aria-hidden="true" class="hidden fixed inset-0 z-[60]">
-    <!-- Backdrop -->
-    <div id="menu-backdrop"
-         class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 ease-out"></div>
-
-    <!-- Panel -->
+    <div id="menu-backdrop" class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 ease-out"></div>
     <section id="menu-panel"
       class="absolute inset-0 h-[100dvh] w-screen bg-white dark:bg-neutral-900 shadow-2xl ring-1 ring-black/5 dark:ring-white/10
              flex flex-col transform-gpu translate-x-full transition-transform duration-300 ease-out overscroll-contain">
-      <!-- Barre titre -->
       <div class="h-14 w-full px-4 flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800">
         <span id="mobile-menu-title" class="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{t.menu}</span>
         <button id="menu-close" class="inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800" aria-label="Fermer le menu">
@@ -116,14 +127,14 @@ const BASE = import.meta.env.BASE_URL ?? '/';
         </button>
       </div>
 
-      <!-- Search (mobile) -->
+      <!-- Mobile search -->
       <div class="px-4 pt-3">
         <div class="relative">
           <input
             id="search-mobile"
             type="search"
             placeholder={t.search}
-            class="w-full rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 px-9 py-3 text-[15px] outline-none focus:ring-2 ring-blue-500/40"
+            class="w-full rounded-full bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 pl-9 pr-4 py-3 text-[15px] outline-none focus:ring-2 ring-blue-500/30 shadow-sm"
             autocomplete="off"
             aria-label={t.search}
             data-index-url={`${BASE}search.json`}
@@ -135,14 +146,14 @@ const BASE = import.meta.env.BASE_URL ?? '/';
           </svg>
 
           <div id="search-mobile-results"
-               class="hidden absolute z-50 mt-2 w-full left-0 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-xl overflow-hidden">
-            <div class="px-3 py-2 text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{t.results}</div>
-            <ul class="max-h-80 overflow-auto" role="listbox" aria-label={t.results}></ul>
+               class="hidden absolute z-50 mt-2 w-full left-0 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-2xl overflow-hidden">
+            <div class="px-4 py-2 text-[11px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">{t.results}</div>
+            <ul class="max-h-96 overflow-auto divide-y divide-neutral-100 dark:divide-neutral-800" role="listbox" aria-label={t.results}></ul>
           </div>
         </div>
       </div>
 
-      <!-- Liste liens -->
+      <!-- Links -->
       <nav class="px-4 py-3 grow overflow-y-auto" aria-label="Mobile">
         <ul class="space-y-1">
           {items.map((it) => (
@@ -160,10 +171,29 @@ const BASE = import.meta.env.BASE_URL ?? '/';
     </section>
   </div>
 
-  <!-- Script: drawer + search (vanilla, sans TS) -->
+  <!-- Styles mineurs pour <mark> -->
+  <style is:inline>
+    .search-mark{ background:rgba(234,179,8,.35); padding:0 .15rem; border-radius:.25rem }
+    @media (prefers-reduced-motion:no-preference){
+      #site-header.is-scrolled{ box-shadow:0 6px 24px rgba(2,6,23,.06) }
+    }
+  </style>
+
+  <!-- Script : header shadow on scroll + drawer + search UI -->
   <script is:inline>
     (function () {
-      // ============ Drawer ============
+      // ===== Header shadow on scroll (desktop polish) =====
+      var sh = document.getElementById('site-header');
+      var last = 0;
+      function onScroll(){
+        var y = window.scrollY || document.documentElement.scrollTop || 0;
+        if ((y>2) !== (last>2)) sh && sh.classList.toggle('is-scrolled', y>2);
+        last = y;
+      }
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // ===== Drawer (mobile) =====
       var root = document.getElementById('mobile-menu');
       var openBtn = document.getElementById('menu-open');
       var closeBtn = document.getElementById('menu-close');
@@ -175,7 +205,7 @@ const BASE = import.meta.env.BASE_URL ?? '/';
           root.setAttribute('aria-hidden', 'false');
           openBtn.setAttribute('aria-expanded', 'true');
           document.documentElement.classList.add('overflow-hidden');
-          panel.getBoundingClientRect();
+          panel.getBoundingClientRect(); // reflow
           requestAnimationFrame(function () {
             backdrop.classList.add('opacity-100');
             panel.classList.remove('translate-x-full');
@@ -200,42 +230,70 @@ const BASE = import.meta.env.BASE_URL ?? '/';
         backdrop.addEventListener('click', close);
       }
 
-      // ============ Search ============
-      var cache = null; // { items: [...] }
-      var controller = null;
-
-      function norm(s){ return (s || '').toString().toLowerCase()
-        .normalize ? s.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') : s.toString().toLowerCase(); }
-
-      function setupSearch(inputId, resultsBoxId) {
+      // ===== Search (desktop + mobile) =====
+      var cache = null, controller = null;
+      function norm(s){ return (s||'').toString().toLowerCase()
+        .normalize ? s.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'') : s.toString().toLowerCase(); }
+      function escHtml(s){ return (s||'').toString().replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+      function escRx(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
+      function highlight(text, q){
+        var t = escHtml(text||'');
+        if(!q) return t;
+        try{
+          var rx = new RegExp('('+escRx(q)+')','ig');
+          return t.replace(rx,'<mark class="search-mark">$1</mark>');
+        }catch(_){ return t; }
+      }
+      function setupSearch(inputId, resultsBoxId, emptyLabel){
         var input = document.getElementById(inputId);
         var box = document.getElementById(resultsBoxId);
-        if (!input || !box) return;
+        if(!input || !box) return;
         var list = box.querySelector('ul');
         var lang = input.dataset.lang || 'fr';
         var indexUrl = input.dataset.indexUrl || '/search.json';
+        var debTimer = null;
 
-        function render(items) {
+        function render(items, q){
           list.innerHTML = '';
-          if (!items.length) {
+          if(!items.length){
             var li = document.createElement('li');
-            li.className = 'px-3 py-3 text-sm text-neutral-500 dark:text-neutral-400';
-            li.textContent = inputId.includes('desktop') ? 'Aucun résultat' : 'Aucun résultat';
+            li.className = 'px-4 py-4 text-sm text-neutral-500 dark:text-neutral-400';
+            li.textContent = emptyLabel;
             list.appendChild(li);
             return;
           }
-          items.forEach(function (it) {
+          items.forEach(function (it){
+            var badgeCls = it.type === 'blog'
+              ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200'
+              : 'bg-sky-100 text-sky-800 dark:bg-sky-900/40 dark:text-sky-200';
             var li = document.createElement('li');
             li.innerHTML =
-              '<a href="'+ it.url +'" class="block px-3 py-2 hover:bg-neutral-50 dark:hover:bg-neutral-800">' +
-                '<div class="text-sm font-medium text-neutral-900 dark:text-neutral-100">' + it.title + '</div>' +
-                '<div class="text-xs text-neutral-600 dark:text-neutral-400 line-clamp-2">' + (it.description || '') + '</div>' +
+              '<a href="'+ it.url +'" class="flex gap-3 items-start px-4 py-3 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">' +
+                '<div class="mt-[2px]">' +
+                  (it.type==='blog'
+                    ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 5h14v14H5z" stroke="currentColor" stroke-width="2"/><path d="M8 9h8M8 13h8M8 17h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
+                    : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 3h10l4 4v14H7z" stroke="currentColor" stroke-width="2"/><path d="M7 3v18H3V7l4-4z" stroke="currentColor" stroke-width="2"/></svg>') +
+                '</div>' +
+                '<div class="min-w-0">' +
+                  '<div class="flex items-center gap-2">' +
+                    '<div class="text-sm font-semibold text-neutral-900 dark:text-neutral-100">' + highlight(it.title, q) + '</div>' +
+                    '<span class="text-[10px] px-2 py-[2px] rounded-full ' + badgeCls + '">'+ (it.type==='blog' ? 'Blog' : 'Page') +'</span>' +
+                  '</div>' +
+                  '<div class="text-xs text-neutral-600 dark:text-neutral-400 mt-1 overflow-hidden">' + highlight(it.description||'', q) + '</div>' +
+                '</div>' +
+                '<div class="ml-auto opacity-50"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
               '</a>';
             list.appendChild(li);
           });
         }
 
-        var debTimer = null;
+        function ensureIndex(url){
+          if (cache) return Promise.resolve(cache);
+          if (controller) controller.abort();
+          controller = new AbortController();
+          return fetch(url, { signal: controller.signal }).then(function(r){ return r.json(); }).then(function(j){ cache = j; return j; });
+        }
+
         function onInput(){
           var q = input.value.trim();
           if (debTimer) window.clearTimeout(debTimer);
@@ -249,29 +307,24 @@ const BASE = import.meta.env.BASE_URL ?? '/';
                   var hay = norm(it.title + ' ' + (it.description || ''));
                   return hay.indexOf(n) !== -1;
                 })
-                .slice(0, 7);
-              render(res);
+                .slice(0, 8);
+              render(res, q);
               box.classList.remove('hidden');
             }).catch(function(){
-              render([]); box.classList.remove('hidden');
+              render([], q);
+              box.classList.remove('hidden');
             });
           }, 120);
         }
 
         input.addEventListener('input', onInput);
+        input.addEventListener('keydown', function(e){ if(e.key === 'Escape') box.classList.add('hidden'); });
         input.addEventListener('focus', function(){ if (input.value.trim()) box.classList.remove('hidden'); });
         input.addEventListener('blur', function(){ setTimeout(function(){ box.classList.add('hidden'); }, 120); });
       }
 
-      function ensureIndex(url){
-        if (cache) return Promise.resolve(cache);
-        if (controller) controller.abort();
-        controller = new AbortController();
-        return fetch(url, { signal: controller.signal }).then(function(r){ return r.json(); }).then(function(j){ cache = j; return j; });
-      }
-
-      setupSearch('search-desktop', 'search-desktop-results');
-      setupSearch('search-mobile', 'search-mobile-results');
+      setupSearch('search-desktop', 'search-desktop-results', '{{t.nores}}'.replace('{{t.nores}}','{t.nores}'));
+      setupSearch('search-mobile', 'search-mobile-results', '{{t.nores}}'.replace('{{t.nores}}','{t.nores}'));
     })();
   </script>
 </header>
