@@ -5,73 +5,89 @@ import ServiceCard from '../../components/ServiceCard.astro';
 const lang = 'fr';
 const pageTitle = 'Services - Alexis Fiska';
 const pageDescription =
-  'Découvrez mes offres de conseil en automatisation des tests, CI/CD, performance k6, GenAI et coaching.';
+  'Conseil en automatisation QA, CI/CD, performance k6, GenAI et coaching. Conçus pour accélérer vos releases et réduire les régressions.';
+
+const BASE = import.meta.env.BASE_URL ?? '/';
 
 const services = [
   {
     title: 'Audit E2E Express',
     description:
-      'Analyse rapide de votre pipeline E2E pour identifier les goulots d’étranglement et prioriser les actions.',
+      'Analyse ciblée de votre pipeline de tests pour débusquer les goulots, flakiness et angles morts. Priorisation des quick wins.',
     bullets: [
-      'Rapport détaillé des faiblesses',
-      'Roadmap priorisée',
-      'Présentation orale aux équipes',
+      'Rapport priorisé & roadmap 30/60/90 j',
+      'Métriques (stabilité, temps, couverture)',
+      'Restitution claire aux équipes',
     ],
+    icon: '/images/services/audit.svg',
+    href: `/${lang}/contact`,
+    ctaLabel: "Planifier l'audit",
   },
   {
     title: 'Framework QA From Scratch',
     description:
-      'Conception et implémentation d’un framework BDD modulaire avec Playwright/SpecFlow, adapté à votre stack.',
+      'Mise en place d’un framework BDD modulaire (Playwright/SpecFlow) adapté à votre stack, maintenable et documenté.',
     bullets: [
-      'Architecture scalable',
-      'Mises à jour automatisées',
-      'Documentation exhaustive',
+      'Architecture POM + fixtures + data-builders',
+      'Sélecteurs stables (data-testid)',
+      'Doc & exemples reproductibles',
     ],
+    icon: '/images/services/framework.svg',
+    href: `/${lang}/cases`,
+    ctaLabel: 'Voir des cas',
   },
   {
     title: 'Accélération CI/CD',
     description:
-      'Optimisation de votre pipeline CI/CD pour réduire drastiquement le temps d’exécution des tests.',
+      'Rationalisez vos pipelines : parallélisation, sharding, stratégies de smoke/sanity pour des feedbacks ultra rapides.',
     bullets: [
-      'Parallélisation des tests',
-      'Stratégies de sharding et partitionnement',
-      'Intégration avec reporting',
+      'Partitionnement intelligent des suites',
+      'Gestion d’environnements & artefacts',
+      'Reporting actionnable',
     ],
+    icon: '/images/services/cicd.svg',
+    href: `/${lang}/contact`,
+    ctaLabel: 'Optimiser mon pipeline',
   },
   {
     title: 'Perf k6 & Observabilité',
     description:
-      'Mise en place de tests de charge k6 et observabilité pour surveiller la performance applicative.',
+      'Charge k6 basée sur vos usages et tableaux de bord ciblés pour prévenir la dérive de performance.',
     bullets: [
-      'Scripts k6 basés sur vos usages',
-      'Alertes et dashboards Grafana',
-      'Analyse des goulets',
+      'Scénarios réalistes (RPS/pacing users)',
+      'Dashboards Grafana & alertes',
+      'Analyse des goulots & recommandations',
     ],
+    icon: '/images/services/perf.svg',
   },
   {
     title: 'GenAI pour la QA',
     description:
-      'Exploration des usages de modèles génératifs pour augmenter la productivité QA.',
+      'Accélérez la QA avec des assistants : génération de jeux de données, triage de logs, suggestions de tests.',
     bullets: [
-      'Génération de jeux de données',
-      'Analyse automatique de logs',
-      'Assistants de rédaction de tests',
+      'Jeux de données synthétiques',
+      'Analyse et résumé de logs',
+      'Outillage promptable pour QA',
     ],
+    icon: '/images/services/genai.svg',
+    href: `/${lang}/cases`,
+    ctaLabel: 'Exemples d’usage',
   },
   {
     title: 'Transfert & Coaching',
     description:
-      'Formation et accompagnement de vos équipes pour adopter le framework et les bonnes pratiques.',
+      'Formation pragmatique et katas pour que vos équipes deviennent autonomes et gardent le cap qualité.',
     bullets: [
-      'Sessions de coaching',
-      'Katas et exercices',
-      'Support continu',
+      'Sessions hands-on & pair testing',
+      'Katas ciblés (UI/API/CI)',
+      'Support & revues de PR',
     ],
+    icon: '/images/services/coaching.svg',
+    href: `/${lang}/contact`,
+    ctaLabel: 'Former mon équipe',
   },
 ];
 
-// Structured data for the Service page.  This describes the generic consulting
-// offering with a minimum price but without fixed upper bound.
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
@@ -82,26 +98,34 @@ const serviceSchema = {
   offers: {
     '@type': 'Offer',
     priceCurrency: 'EUR',
-    priceSpecification: {
-      '@type': 'PriceSpecification',
-      minPrice: 450,
-      priceCurrency: 'EUR',
-    },
+    priceSpecification: { '@type': 'PriceSpecification', minPrice: 450, priceCurrency: 'EUR' },
   },
 };
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
   <Fragment slot="head">
-<script type="application/ld+json" is:inline set:html={JSON.stringify(serviceSchema)}></script>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(serviceSchema)}></script>
   </Fragment>
-  <h1 class="text-3xl font-bold mb-4 text-center">Services</h1>
-  <p class="max-w-3xl mx-auto mb-8 text-neutral-700 dark:text-neutral-300 text-center">
-    Je propose un ensemble de prestations pour accélérer votre chaîne de livraison et améliorer la qualité de
-    vos logiciels. Choisissez l’accompagnement qui correspond à vos besoins.
-  </p>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-    {services.map((service) => (
-      <ServiceCard {...service} />
-    ))}
+
+  <section class="text-center mb-8">
+    <h1 class="text-3xl font-bold mb-3">Services</h1>
+    <p class="max-w-3xl mx-auto text-neutral-700 dark:text-neutral-300">
+      Des offres pensées pour <strong>accélérer vos releases</strong>, <strong>réduire les régressions</strong>
+      et rendre la qualité <strong>prévisible</strong>.
+    </p>
+  </section>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+    {services.map((s) => <ServiceCard {...s} />)}
   </div>
+
+  <section class="mt-10 text-center">
+    <a href={`/${lang}/contact`} class="inline-flex items-center gap-2 rounded-xl px-4 py-3
+       bg-blue-600 text-white hover:bg-blue-700 font-medium">
+      Discuter de votre besoin
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M7 17l10-10M17 7H9M17 7v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </section>
 </BaseLayout>

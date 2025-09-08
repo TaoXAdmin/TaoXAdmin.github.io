@@ -3,70 +3,62 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 
 const lang = 'de';
-const pageTitle = 'Dienstleistungen - Alexis Fiska';
+const pageTitle = 'Leistungen - Alexis Fiska';
 const pageDescription =
-  'Entdecken Sie meine Angebote für Testautomatisierung, CI/CD‑Beschleunigung, k6‑Performance, GenAI und Coaching.';
+  'Beratung für QA-Automatisierung, CI/CD, k6-Performance, GenAI und Coaching – für schnellere Releases ohne Regressionen.';
 
 const services = [
   {
-    title: 'Express E2E Audit',
+    title: 'Express-E2E-Audit',
     description:
-      'Schnelle Analyse Ihrer End‑to‑End‑Pipeline, um Engpässe zu identifizieren und Maßnahmen zu priorisieren.',
-    bullets: [
-      'Detaillierter Schwachstellenbericht',
-      'Priorisierte Roadmap',
-      'Präsentation für Teams',
-    ],
+      'Gezielte Analyse Ihrer Test-Pipeline: Engpässe, Flakiness, blinde Flecken. Konkrete Quick Wins.',
+    bullets: ['Priorisierte Roadmap (30/60/90 T)', 'Stabilität/Time/Coverage-Metriken', 'Klare Ergebnis-Präsentation'],
+    icon: '/images/services/audit.svg',
+    href: `/${lang}/contact`,
+    ctaLabel: 'Audit buchen',
   },
   {
-    title: 'QA‑Framework von Grund auf',
+    title: 'QA-Framework From Scratch',
     description:
-      'Design und Implementierung eines modularen BDD‑Frameworks mit Playwright/SpecFlow, angepasst an Ihren Stack.',
-    bullets: [
-      'Skalierbare Architektur',
-      'Automatisierte Updates',
-      'Umfassende Dokumentation',
-    ],
+      'Modulares BDD-Framework (Playwright/SpecFlow), auf Ihren Stack zugeschnitten – wartbar und dokumentiert.',
+    bullets: ['POM + Fixtures + Data-Builder', 'Stabile Selektoren (data-testid)', 'Dokumentation & Beispiele'],
+    icon: '/images/services/framework.svg',
+    href: `/${lang}/cases`,
+    ctaLabel: 'Referenzen ansehen',
   },
   {
-    title: 'CI/CD‑Beschleunigung',
+    title: 'CI/CD-Beschleunigung',
     description:
-      'Optimierung Ihrer CI/CD‑Pipeline, um die Testlaufzeiten drastisch zu reduzieren.',
-    bullets: [
-      'Testparallelisierung',
-      'Sharding‑ und Partitionierungsstrategien',
-      'Integration mit Reporting',
-    ],
+      'Schnellere Pipelines durch Parallelisierung, Sharding und fokussierte Smoke/Sanity-Strategien.',
+    bullets: ['Intelligentes Suite-Sharding', 'Umgebungen & Artefakte', 'Actionables Reporting'],
+    icon: '/images/services/cicd.svg',
+    href: `/${lang}/contact`,
+    ctaLabel: 'Pipeline optimieren',
   },
   {
-    title: 'k6‑Performance & Observability',
+    title: 'k6-Performance & Observability',
     description:
-      'Einrichtung von k6‑Lasttests und Observability zur Überwachung der Anwendungsperformance.',
-    bullets: [
-      'k6‑Skripte basierend auf Ihren Nutzungsfällen',
-      'Alarme und Grafana‑Dashboards',
-      'Engpassanalyse',
-    ],
+      'Nutzungsbasierte Lasttests mit zielgerichteten Dashboards – gegen Performance-Drift.',
+    bullets: ['Realistische Szenarien (RPS/Users)', 'Grafana-Dashboards & Alerts', 'Bottleneck-Analyse'],
+    icon: '/images/services/perf.svg',
   },
   {
-    title: 'GenAI für die QA',
+    title: 'GenAI für QA',
     description:
-      'Erforschung generativer Modelle zur Steigerung der QA‑Produktivität.',
-    bullets: [
-      'Datensatzgenerierung',
-      'Automatische Log‑Analyse',
-      'Testschreibassistenten',
-    ],
+      'Produktivitäts-Booster: synthetische Testdaten, Log-Triage, Test-Vorschläge.',
+    bullets: ['Synthetische Datensätze', 'Loganalyse & Zusammenfassungen', 'Prompt-fähige QA-Tools'],
+    icon: '/images/services/genai.svg',
+    href: `/${lang}/cases`,
+    ctaLabel: 'Beispiele ansehen',
   },
   {
     title: 'Transfer & Coaching',
     description:
-      'Schulung und Unterstützung Ihrer Teams bei der Einführung des Frameworks und der Best Practices.',
-    bullets: [
-      'Coaching‑Sitzungen',
-      'Katas und Übungen',
-      'Kontinuierlicher Support',
-    ],
+      'Pragmatisches Training und Katas – Teams werden autonom und halten Qualitätskurs.',
+    bullets: ['Hands-on Sessions & Pair Testing', 'Katas (UI/API/CI)', 'Support & PR-Reviews'],
+    icon: '/images/services/coaching.svg',
+    href: `/${lang}/contact`,
+    ctaLabel: 'Team schulen',
   },
 ];
 
@@ -77,29 +69,34 @@ const serviceSchema = {
   provider: { '@type': 'Person', name: 'Alexis Fiska' },
   areaServed: 'France/Remote',
   priceRange: '€€€',
-  offers: {
-    '@type': 'Offer',
-    priceCurrency: 'EUR',
-    priceSpecification: {
-      '@type': 'PriceSpecification',
-      minPrice: 450,
-      priceCurrency: 'EUR',
-    },
-  },
+  offers: { '@type': 'Offer', priceCurrency: 'EUR',
+    priceSpecification: { '@type': 'PriceSpecification', minPrice: 450, priceCurrency: 'EUR' } },
 };
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
   <Fragment slot="head">
-<script type="application/ld+json" is:inline set:html={JSON.stringify(serviceSchema)}></script>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(serviceSchema)}></script>
   </Fragment>
-  <h1 class="text-3xl font-bold mb-4 text-center">Dienstleistungen</h1>
-  <p class="max-w-3xl mx-auto mb-8 text-neutral-700 dark:text-neutral-300 text-center">
-    Ich biete verschiedene Leistungen, um Ihre Lieferkette zu beschleunigen und die Softwarequalität zu
-    verbessern. Wählen Sie das passende Angebot für Ihre Bedürfnisse.
-  </p>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-    {services.map((service) => (
-      <ServiceCard {...service} />
-    ))}
+
+  <section class="text-center mb-8">
+    <h1 class="text-3xl font-bold mb-3">Leistungen</h1>
+    <p class="max-w-3xl mx-auto text-neutral-700 dark:text-neutral-300">
+      Angebote, die <strong>Releases beschleunigen</strong>, <strong>Regressionen senken</strong> und Qualität
+      <strong>vorhersagbar</strong> machen.
+    </p>
+  </section>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+    {services.map((s) => <ServiceCard {...s} />)}
   </div>
+
+  <section class="mt-10 text-center">
+    <a href={`/${lang}/contact`} class="inline-flex items-center gap-2 rounded-xl px-4 py-3
+       bg-blue-600 text-white hover:bg-blue-700 font-medium">
+      Bedarf besprechen
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M7 17l10-10M17 7H9M17 7v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </section>
 </BaseLayout>

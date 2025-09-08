@@ -5,68 +5,60 @@ import ServiceCard from '../../components/ServiceCard.astro';
 const lang = 'pt';
 const pageTitle = 'Serviços - Alexis Fiska';
 const pageDescription =
-  'Conheça minhas ofertas de consultoria em automação de testes, aceleração de CI/CD, performance k6, GenAI e coaching.';
+  'Consultoria em automação de QA, CI/CD, performance k6, GenAI e coaching para acelerar releases e reduzir regressões.';
 
 const services = [
   {
-    title: 'Auditoria E2E Expressa',
+    title: 'Auditoria E2E Express',
     description:
-      'Análise rápida do seu pipeline E2E para identificar gargalos e priorizar ações.',
-    bullets: [
-      'Relatório detalhado de pontos fracos',
-      'Roadmap priorizada',
-      'Apresentação às equipes',
-    ],
+      'Revisão direcionada do pipeline de testes: gargalos, flakiness e lacunas de cobertura. Quick wins acionáveis.',
+    bullets: ['Roadmap priorizada (30/60/90d)', 'Métricas de estabilidade/tempo/cobertura', 'Apresentação executiva'],
+    icon: '/images/services/audit.svg',
+    href: `/${lang}/contact`,
+    ctaLabel: 'Agendar auditoria',
   },
   {
-    title: 'Framework QA Do Zero',
+    title: 'Framework de QA do Zero',
     description:
-      'Concepção e implementação de um framework BDD modular com Playwright/SpecFlow adaptado à sua stack.',
-    bullets: [
-      'Arquitetura escalável',
-      'Atualizações automatizadas',
-      'Documentação abrangente',
-    ],
+      'Framework BDD modular (Playwright/SpecFlow) adaptado ao seu stack, mantível e bem documentado.',
+    bullets: ['POM + fixtures + data-builders', 'Selecionadores estáveis (data-testid)', 'Docs e exemplos'],
+    icon: '/images/services/framework.svg',
+    href: `/${lang}/cases`,
+    ctaLabel: 'Ver estudos de caso',
   },
   {
-    title: 'Aceleração CI/CD',
+    title: 'Aceleração de CI/CD',
     description:
-      'Otimização do seu pipeline CI/CD para reduzir drasticamente o tempo de execução dos testes.',
-    bullets: [
-      'Paralelização dos testes',
-      'Estratégias de sharding e particionamento',
-      'Integração com relatórios',
-    ],
+      'Deixe as pipelines ágeis: paralelização, sharding e smoke/sanity focados para feedback rápido.',
+    bullets: ['Particionamento inteligente', 'Gestão de ambientes & artefatos', 'Relatórios acionáveis'],
+    icon: '/images/services/cicd.svg',
+    href: `/${lang}/contact`,
+    ctaLabel: 'Otimizar pipeline',
   },
   {
-    title: 'Performance k6 & Observabilidade',
+    title: 'k6 Performance & Observabilidade',
     description:
-      'Implementação de testes de carga k6 e observabilidade para monitorar a performance da aplicação.',
-    bullets: [
-      'Scripts k6 baseados no seu uso',
-      'Alertas e dashboards Grafana',
-      'Análise de gargalos',
-    ],
+      'Testes de carga baseados em uso e dashboards focados para evitar deriva de performance.',
+    bullets: ['Cenários realistas (RPS/usuários)', 'Dashboards Grafana & alertas', 'Análise de gargalos'],
+    icon: '/images/services/perf.svg',
   },
   {
-    title: 'GenAI para a QA',
+    title: 'GenAI para QA',
     description:
-      'Exploração de modelos generativos para aumentar a produtividade da QA.',
-    bullets: [
-      'Geração de conjuntos de dados',
-      'Análise automática de logs',
-      'Assistentes de escrita de testes',
-    ],
+      'Aumente a produtividade: dados sintéticos, triagem de logs e sugestões de testes.',
+    bullets: ['Conjuntos de dados sintéticos', 'Análise e resumo de logs', 'Ferramentas “promptáveis” para QA'],
+    icon: '/images/services/genai.svg',
+    href: `/${lang}/cases`,
+    ctaLabel: 'Ver exemplos',
   },
   {
     title: 'Transferência & Coaching',
     description:
-      'Formação e acompanhamento das suas equipes para adotar o framework e as melhores práticas.',
-    bullets: [
-      'Sessões de coaching',
-      'Katas e exercícios',
-      'Suporte contínuo',
-    ],
+      'Treinamento prático e katas para sua equipe se tornar autônoma e manter a qualidade.',
+    bullets: ['Sessions hands-on & pair testing', 'Katas (UI/API/CI)', 'Suporte & revisão de PR'],
+    icon: '/images/services/coaching.svg',
+    href: `/${lang}/contact`,
+    ctaLabel: 'Treinar minha equipe',
   },
 ];
 
@@ -77,29 +69,34 @@ const serviceSchema = {
   provider: { '@type': 'Person', name: 'Alexis Fiska' },
   areaServed: 'France/Remote',
   priceRange: '€€€',
-  offers: {
-    '@type': 'Offer',
-    priceCurrency: 'EUR',
-    priceSpecification: {
-      '@type': 'PriceSpecification',
-      minPrice: 450,
-      priceCurrency: 'EUR',
-    },
-  },
+  offers: { '@type': 'Offer', priceCurrency: 'EUR',
+    priceSpecification: { '@type': 'PriceSpecification', minPrice: 450, priceCurrency: 'EUR' } },
 };
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
   <Fragment slot="head">
-<script type="application/ld+json" is:inline set:html={JSON.stringify(serviceSchema)}></script>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(serviceSchema)}></script>
   </Fragment>
-  <h1 class="text-3xl font-bold mb-4 text-center">Serviços</h1>
-  <p class="max-w-3xl mx-auto mb-8 text-neutral-700 dark:text-neutral-300 text-center">
-    Ofereço um conjunto de serviços para acelerar sua cadeia de entrega e melhorar a qualidade do
-    software. Escolha o acompanhamento que melhor se adapta às suas necessidades.
-  </p>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-    {services.map((service) => (
-      <ServiceCard {...service} />
-    ))}
+
+  <section class="text-center mb-8">
+    <h1 class="text-3xl font-bold mb-3">Serviços</h1>
+    <p class="max-w-3xl mx-auto text-neutral-700 dark:text-neutral-300">
+      Ofertas para <strong>acelerar releases</strong>, <strong>reduzir regressões</strong> e tornar a qualidade
+      <strong>previsível</strong>.
+    </p>
+  </section>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+    {services.map((s) => <ServiceCard {...s} />)}
   </div>
+
+  <section class="mt-10 text-center">
+    <a href={`/${lang}/contact`} class="inline-flex items-center gap-2 rounded-xl px-4 py-3
+       bg-blue-600 text-white hover:bg-blue-700 font-medium">
+      Falar sobre sua necessidade
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M7 17l10-10M17 7H9M17 7v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </section>
 </BaseLayout>
