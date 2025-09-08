@@ -21,7 +21,7 @@ const items = [
 ];
 
 const current = (Astro.url?.pathname ?? '/').replace(/\/$/, '');
-const isActive = (href) => {
+const isActive = (href: string) => {
   const h = href.replace(/\/$/, '');
   if (h === `/${lang}`) return current === h;
   return current.startsWith(h);
@@ -29,7 +29,11 @@ const isActive = (href) => {
 
 const BASE = import.meta.env.BASE_URL ?? '/';
 ---
-<header id="site-header" class="sticky top-0 z-[200] isolate border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-950/80 backdrop-blur transition-shadow">
+<header
+  id="site-header"
+  data-nores={t.nores}
+  class="sticky top-0 z-[200] isolate border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-950/80 backdrop-blur transition-shadow"
+>
   <div class="container mx-auto px-4">
     <div class="h-16 flex items-center gap-3">
       <!-- Brand -->
@@ -52,7 +56,6 @@ const BASE = import.meta.env.BASE_URL ?? '/';
         ))}
       </nav>
 
-      <!-- Spacer -->
       <div class="hidden md:block flex-1"></div>
 
       <!-- Desktop SEARCH + Lang -->
@@ -77,7 +80,7 @@ const BASE = import.meta.env.BASE_URL ?? '/';
           </svg>
         </div>
 
-        <!-- Panneau résultats desktop (FIXED + animé) -->
+        <!-- Résultats desktop : fixed + anim -->
         <div
           id="search-desktop-results"
           class="hidden fixed z-[1000] rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-2xl overflow-hidden
@@ -85,7 +88,7 @@ const BASE = import.meta.env.BASE_URL ?? '/';
                  transition duration-150 ease-out [transition-property:opacity,transform]"
           style="left:0;top:0;width:24rem"
         >
-          <div class="px-4 py-2 text-[11px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">{t.results}</div>
+          <div class="px-4 py-2 text-[11px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">{$t.results}</div>
           <ul class="max-h-96 overflow-auto divide-y divide-neutral-100 dark:divide-neutral-800" role="listbox" aria-label={t.results}></ul>
           <div class="px-4 py-2 text-[11px] text-neutral-500 dark:text-neutral-400 bg-neutral-50/60 dark:bg-neutral-900/60">
             ↵ pour ouvrir — Échap pour fermer
@@ -93,14 +96,12 @@ const BASE = import.meta.env.BASE_URL ?? '/';
         </div>
 
         <LangSwitcher currentLang={lang} />
-
-        <!-- Faux burger pour l’alignement desktop -->
         <button class="hidden md:inline-flex pointer-events-none opacity-0 p-2">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </button>
       </div>
 
-      <!-- Mobile: Right side -->
+      <!-- Mobile right -->
       <div class="md:hidden ml-auto flex items-center gap-2">
         <LangSwitcher currentLang={lang} />
         <button
@@ -175,7 +176,6 @@ const BASE = import.meta.env.BASE_URL ?? '/';
     </section>
   </div>
 
-  <!-- Styles mineurs pour <mark> -->
   <style is:inline>
     .search-mark{ background:rgba(234,179,8,.35); padding:0 .15rem; border-radius:.25rem }
     @media (prefers-reduced-motion:no-preference){
@@ -183,7 +183,6 @@ const BASE = import.meta.env.BASE_URL ?? '/';
     }
   </style>
 
-  <!-- Script : header shadow + drawer + search (position fixe + animation) -->
   <script is:inline>
     (function () {
       // ===== Header shadow on scroll =====
@@ -209,7 +208,7 @@ const BASE = import.meta.env.BASE_URL ?? '/';
           root.setAttribute('aria-hidden', 'false');
           openBtn.setAttribute('aria-expanded', 'true');
           document.documentElement.classList.add('overflow-hidden');
-          panel.getBoundingClientRect(); // reflow
+          panel.getBoundingClientRect();
           requestAnimationFrame(function () {
             backdrop.classList.add('opacity-100');
             panel.classList.remove('translate-x-full');
@@ -316,7 +315,6 @@ const BASE = import.meta.env.BASE_URL ?? '/';
         function showBox(){
           positionBox();
           box.classList.remove('hidden');
-          // lancement de l’anim (fade+scale)
           box.getBoundingClientRect();
           box.classList.remove('opacity-0','scale-95','translate-y-1','pointer-events-none');
           box.classList.add('opacity-100','scale-100','translate-y-0','pointer-events-auto');
@@ -365,8 +363,8 @@ const BASE = import.meta.env.BASE_URL ?? '/';
         window.addEventListener('scroll', function(){ if(opened) positionBox(); }, { passive:true });
       }
 
-      // libellé vide localisé
-      var EMPTY = {JSON.stringify(t.nores)};
+      // Libellé “aucun résultat” injecté via data-attribute
+      var EMPTY = (document.getElementById('site-header')?.dataset?.nores) || 'Aucun résultat';
       setupSearch('search-desktop', 'search-desktop-results', EMPTY);
       setupSearch('search-mobile', 'search-mobile-results', EMPTY);
     })();
