@@ -1,6 +1,4 @@
 ---
-import SocialIcons from 'SocialIcons.astro';
-
 const { lang = 'fr' } = Astro.props;
 const year = new Date().getFullYear();
 
@@ -43,9 +41,20 @@ const t = messages[lang] ?? messages.fr;
   <div class="container py-8 text-sm">
     <p class="mb-4">{t.rights}</p>
     <nav class="flex space-x-6 mb-4" aria-label="Footer">
-<div class="">
-  <SocialIcons lang={lang} />
-</div>
+      <a
+        href="https://www.linkedin.com/in/alexis-fiska"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:underline text-blue-600 dark:text-blue-400"
+        >{t.linkedin}</a
+      >
+      <a
+        href="https://github.com/TaoXAdmin"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:underline text-blue-600 dark:text-blue-400"
+        >{t.github}</a
+      >
       <a
         href="mailto:alexissfiska@gmail.com"
         class="hover:underline text-blue-600 dark:text-blue-400"
