@@ -5,11 +5,11 @@ const { lang = 'fr' } = Astro.props;
 
 const t =
   {
-    fr: { home:'Accueil', services:'Services', cases:'Cas', about:'À propos', blog:'Blog', contact:'Contact', menu:'Menu' },
-    en: { home:'Home', services:'Services', cases:'Cases', about:'About', blog:'Blog', contact:'Contact', menu:'Menu' },
-    de: { home:'Startseite', services:'Dienstleistungen', cases:'Referenzen', about:'Über mich', blog:'Blog', contact:'Kontakt', menu:'Menü' },
-    pt: { home:'Início', services:'Serviços', cases:'Projetos', about:'Sobre', blog:'Blog', contact:'Contato', menu:'Menu' },
-  }[lang] ?? { home:'Accueil', services:'Services', cases:'Cas', about:'À propos', blog:'Blog', contact:'Contact', menu:'Menu' };
+    fr:{home:'Accueil',services:'Services',cases:'Cas',about:'À propos',blog:'Blog',contact:'Contact',menu:'Menu'},
+    en:{home:'Home',services:'Services',cases:'Cases',about:'About',blog:'Blog',contact:'Contact',menu:'Menu'},
+    de:{home:'Startseite',services:'Dienstleistungen',cases:'Referenzen',about:'Über mich',blog:'Blog',contact:'Kontakt',menu:'Menü'},
+    pt:{home:'Início',services:'Serviços',cases:'Projetos',about:'Sobre',blog:'Blog',contact:'Contato',menu:'Menu'},
+  }[lang] ?? {home:'Accueil',services:'Services',cases:'Cas',about:'À propos',blog:'Blog',contact:'Contact',menu:'Menu'};
 
 const items = [
   { href: `/${lang}`, label: t.home },
@@ -21,7 +21,7 @@ const items = [
 ];
 
 const current = (Astro.url?.pathname ?? '/').replace(/\/$/, '');
-const isActive = (href: string) => {
+const isActive = (href) => {
   const h = href.replace(/\/$/, '');
   if (h === `/${lang}`) return current === h;
   return current.startsWith(h);
@@ -35,8 +35,12 @@ const isActive = (href: string) => {
       <!-- Desktop -->
       <nav class="hidden md:flex items-center gap-6" aria-label="Primary">
         {items.map((it) => (
-          <a href={it.href}
-             class={`text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 ${isActive(it.href) ? 'text-blue-700 dark:text-blue-300' : 'text-neutral-700 dark:text-neutral-200'}`}>
+          <a
+            href={it.href}
+            class={`text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 ${
+              isActive(it.href) ? 'text-blue-700 dark:text-blue-300' : 'text-neutral-700 dark:text-neutral-200'
+            }`}
+          >
             {it.label}
           </a>
         ))}
@@ -45,7 +49,8 @@ const isActive = (href: string) => {
       <!-- Lang + burger -->
       <div class="flex items-center gap-2">
         <LangSwitcher currentLang={lang} />
-        <button id="menu-open"
+        <button
+          id="menu-open"
           class="md:hidden inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
           aria-label="Ouvrir le menu" aria-haspopup="dialog" aria-controls="mobile-menu" aria-expanded="false">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -56,20 +61,19 @@ const isActive = (href: string) => {
     </div>
   </div>
 
-  <!-- Drawer mobile (plein écran, slide droite -> gauche) -->
+  <!-- MOBILE DRAWER: plein écran + slide horizontal -->
   <div id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title"
        aria-hidden="true" class="hidden fixed inset-0 z-[60]">
     <!-- Backdrop -->
     <div id="menu-backdrop"
          class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 ease-out"></div>
 
-    <!-- Panneau -->
+    <!-- Panneau PLEIN ÉCRAN -->
     <section id="menu-panel"
-      class="absolute right-0 top-0 h-[100dvh] w-[min(92vw,420px)]
+      class="absolute inset-0 h-[100dvh] w-screen
              bg-white dark:bg-neutral-900 shadow-2xl ring-1 ring-black/5 dark:ring-white/10
-             flex flex-col
-             translate-x-full opacity-0
-             transition-transform duration-300 ease-out">
+             flex flex-col transform-gpu translate-x-full
+             transition-transform duration-300 ease-out overscroll-contain">
       <!-- Barre titre -->
       <div class="h-14 w-full px-4 flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800">
         <span id="mobile-menu-title" class="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{t.menu}</span>
@@ -86,9 +90,9 @@ const isActive = (href: string) => {
           {items.map((it) => (
             <li>
               <a href={it.href}
-                 class={`block rounded-xl px-3 py-3 text-[16px] font-medium
-                         hover:bg-neutral-100 dark:hover:bg-neutral-800
-                         ${isActive(it.href) ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-200' : 'text-neutral-900 dark:text-neutral-100'}`}>
+                class={`block rounded-xl px-3 py-3 text-[16px] font-medium
+                        hover:bg-neutral-100 dark:hover:bg-neutral-800
+                        ${isActive(it.href) ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-200' : 'text-neutral-900 dark:text-neutral-100'}`}>
                 {it.label}
               </a>
             </li>
@@ -96,14 +100,14 @@ const isActive = (href: string) => {
         </ul>
       </nav>
 
-      <!-- Footer fixé bas + safe-area -->
+      <!-- Footer bas + safe-area -->
       <div class="px-4 py-4 border-t border-neutral-200 dark:border-neutral-800 pb-[calc(env(safe-area-inset-bottom)+1rem)]">
         <LangSwitcher currentLang={lang} />
       </div>
     </section>
   </div>
 
-  <!-- JS minimal et fiable -->
+  <!-- JS pur : slide horizontal, pas d’ESC -->
   <script is:inline>
     (function () {
       const root = document.getElementById('mobile-menu');
@@ -117,23 +121,22 @@ const isActive = (href: string) => {
         root.classList.remove('hidden');
         root.setAttribute('aria-hidden', 'false');
         openBtn.setAttribute('aria-expanded', 'true');
-        document.documentElement.classList.add('overflow-hidden'); // bloque le scroll iOS aussi
-        // anim (prochaine frame)
+        document.documentElement.classList.add('overflow-hidden');
+
+        // Assure la transition (Safari/iOS) : reflow + RAF
+        panel.getBoundingClientRect();
         requestAnimationFrame(() => {
-          backdrop.classList.add('opacity-100');
-          panel.classList.remove('translate-x-full','opacity-0');
-          panel.classList.add('opacity-100');
+          backdrop.classList.add('opacity-100');       // fade-in backdrop
+          panel.classList.remove('translate-x-full');  // slide-in
         });
-        // fermer au clic d’un lien
+
+        // Fermer au clic d’un lien
         panel.querySelectorAll('a[href]').forEach(a => a.addEventListener('click', close, { once: true }));
-        document.addEventListener('keydown', onKeyDown);
       }
 
       function close() {
-        backdrop.classList.remove('opacity-100');
-        panel.classList.add('translate-x-full');
-        panel.classList.remove('opacity-100');
-        panel.classList.add('opacity-0');
+        backdrop.classList.remove('opacity-100');      // fade-out
+        panel.classList.add('translate-x-full');       // slide-out
         openBtn.setAttribute('aria-expanded', 'false');
         document.documentElement.classList.remove('overflow-hidden');
 
@@ -141,13 +144,11 @@ const isActive = (href: string) => {
           root.classList.add('hidden');
           root.setAttribute('aria-hidden', 'true');
           panel.removeEventListener('transitionend', done);
-          document.removeEventListener('keydown', onKeyDown);
           if (openBtn.focus) openBtn.focus();
         };
         panel.addEventListener('transitionend', done, { once: true });
       }
 
-      function onKeyDown(e) { if (e.key === 'Escape') close(); }
       openBtn.addEventListener('click', open);
       closeBtn.addEventListener('click', close);
       backdrop.addEventListener('click', close);
