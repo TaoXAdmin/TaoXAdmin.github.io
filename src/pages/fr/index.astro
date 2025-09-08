@@ -6,62 +6,96 @@ const lang = 'fr';
 const pageTitle = 'Accueil - Alexis Fiska';
 const pageDescription =
   'QA Automation & GenAI pour des releases plus rapides, sans régressions. Framework BDD, Playwright/SpecFlow, CI/CD, performance k6 & observabilité.';
+const BASE = import.meta.env.BASE_URL ?? '/';
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
-  <section class="text-center py-16">
-    <h1 class="text-3xl md:text-5xl font-bold mb-4">
-      QA Automation &amp; GenAI pour des releases plus rapides, sans régressions.
-    </h1>
-    <p class="max-w-2xl mx-auto mb-8 text-lg text-neutral-700 dark:text-neutral-300">
-      Framework BDD, Playwright/SpecFlow, CI/CD, perf k6 &amp; observabilité. Temps de run court, zéro bug
-      critique en prod.
-    </p>
-    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-      <CTAButton href="/fr/contact#audit" variant="primary">Réserver un audit gratuit de 30 min</CTAButton>
-      <CTAButton href="/fr/contact#quote" variant="ghost">Demander un devis</CTAButton>
+  <!-- HERO -->
+  <section class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50 to-violet-50 dark:from-neutral-800 dark:to-neutral-900 border border-neutral-200 dark:border-neutral-800 px-6 py-14 md:py-16">
+    <div class="mx-auto max-w-5xl text-center">
+      <div class="mb-3 flex items-center justify-center gap-2">
+        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-white/70 dark:bg-neutral-800/70 border border-neutral-200 dark:border-neutral-700 text-blue-700 dark:text-blue-300">QA Automation</span>
+        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-white/70 dark:bg-neutral-800/70 border border-neutral-200 dark:border-neutral-700 text-violet-700 dark:text-violet-300">GenAI</span>
+        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-white/70 dark:bg-neutral-800/70 border border-neutral-200 dark:border-neutral-700 text-sky-700 dark:text-sky-300">CI/CD</span>
+      </div>
+
+      <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">
+        QA Automation &amp; GenAI pour des releases plus rapides, <span class="whitespace-nowrap">sans régressions.</span>
+      </h1>
+      <p class="max-w-2xl mx-auto mb-8 text-lg text-neutral-700 dark:text-neutral-300">
+        Framework BDD, Playwright/SpecFlow, CI/CD, perf k6 &amp; observabilité. <strong>Temps de run court</strong>, <strong>zéro bug critique</strong> en prod.
+      </p>
+
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-3">
+        <CTAButton href="/fr/contact#audit" variant="primary">Réserver un audit gratuit de 30&nbsp;min</CTAButton>
+        <CTAButton href="/fr/contact#quote" variant="ghost">Demander un devis</CTAButton>
+      </div>
     </div>
   </section>
 
-  <section class="py-12" id="why">
-    <h2 class="text-2xl font-semibold mb-4 text-center">Pourquoi moi ?</h2>
-    <p class="max-w-3xl mx-auto text-neutral-700 dark:text-neutral-300 mb-6">
-      Avec plus de cinq ans d’expérience en automatisation des tests et un intérêt précoce pour les modèles
-      génératifs, je vous aide à accélérer vos releases tout en éliminant les régressions. J’ai conçu des
-      frameworks BDD maintenables, déployé des pipelines CI/CD matures et accompagné des équipes de
-      développement à maîtriser Playwright et SpecFlow. Mon approche pragmatique combine rigueur
-      technique et innovation continue.
+  <!-- HIGHLIGHTS -->
+  <section class="py-10">
+    <div class="mx-auto grid max-w-5xl grid-cols-1 md:grid-cols-3 gap-4">
+      <article class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 bg-white dark:bg-neutral-900">
+        <div class="mb-3">
+          <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="font-semibold mb-1">Framework BDD</h3>
+        <p class="text-sm text-neutral-600 dark:text-neutral-300">POM, fixtures, data-builders &amp; <strong>sélecteurs stables</strong> pour une automatisation durable.</p>
+      </article>
+      <article class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 bg-white dark:bg-neutral-900">
+        <div class="mb-3">
+          <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v4H4zM4 14h16v4H4z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="font-semibold mb-1">CI/CD rapide</h3>
+        <p class="text-sm text-neutral-600 dark:text-neutral-300">Parallélisation, sharding, <strong>feedback &lt; 30&nbsp;min</strong> et reporting actionnable.</p>
+      </article>
+      <article class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 bg-white dark:bg-neutral-900">
+        <div class="mb-3">
+          <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="17" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 12h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="font-semibold mb-1">Perf &amp; Observabilité</h3>
+        <p class="text-sm text-neutral-600 dark:text-neutral-300">k6, dashboards Grafana, <strong>alertes</strong> et suivi continu des goulots.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="py-10" id="why">
+    <h2 class="text-2xl font-semibold mb-4 text-center">Pourquoi moi&nbsp;?</h2>
+    <p class="max-w-3xl mx-auto text-neutral-700 dark:text-neutral-300 mb-6 text-center">
+      +5 ans d’<strong>automatisation</strong> et une adoption précoce de la <strong>GenAI</strong> appliquée à la QA.
+      J’apporte des <strong>frameworks maintenables</strong>, des pipelines <strong>fiables</strong> et une montée
+      en compétences des équipes.
     </p>
   </section>
 
-  <section class="py-12 bg-neutral-50 dark:bg-neutral-800" id="deliver">
-    <h2 class="text-2xl font-semibold mb-4 text-center">Ce que je livre</h2>
-    <ul class="max-w-3xl mx-auto space-y-4 text-neutral-700 dark:text-neutral-300 list-disc pl-5">
-      <li>Un framework BDD modulaire et scalable adapté à votre stack.</li>
-      <li>Des tests E2E Playwright fiables avec une exécution sous 30 minutes.</li>
-      <li>Une intégration continue avec parallélisation et reporting détaillé.</li>
-      <li>Des scripts k6 pour surveiller la performance et l’observabilité applicative.</li>
-      <li>Une montée en compétence via coaching et documentation exhaustive.</li>
+  <!-- DELIVER -->
+  <section class="py-12 bg-neutral-50 dark:bg-neutral-800/60" id="deliver">
+    <h2 class="text-2xl font-semibold mb-6 text-center">Ce que je livre</h2>
+    <ul class="mx-auto max-w-3xl space-y-3 text-neutral-700 dark:text-neutral-300">
+      <li class="flex gap-3"><span class="mt-1 text-blue-600 dark:text-blue-400">✔</span><span>Un framework BDD <strong>modulaire</strong> adapté à votre stack.</span></li>
+      <li class="flex gap-3"><span class="mt-1 text-blue-600 dark:text-blue-400">✔</span><span>Des tests E2E Playwright <strong>fiables</strong> &lt; 30&nbsp;min.</span></li>
+      <li class="flex gap-3"><span class="mt-1 text-blue-600 dark:text-blue-400">✔</span><span>CI/CD avec parallélisation et <strong>reporting</strong> clair.</span></li>
+      <li class="flex gap-3"><span class="mt-1 text-blue-600 dark:text-blue-400">✔</span><span>Scénarios k6 + <strong>observabilité</strong> orientée usages.</span></li>
+      <li class="flex gap-3"><span class="mt-1 text-blue-600 dark:text-blue-400">✔</span><span>Coaching, katas et <strong>documentation</strong> pour l’autonomie.</span></li>
     </ul>
   </section>
 
+  <!-- HOW -->
   <section class="py-12" id="how">
-    <h2 class="text-2xl font-semibold mb-4 text-center">Comment on démarre ?</h2>
-    <ol class="max-w-3xl mx-auto space-y-4 text-neutral-700 dark:text-neutral-300 list-decimal pl-5">
-      <li>
-        <strong>Audit express :</strong> un état des lieux de votre pipeline QA en 30 minutes pour identifier les leviers
-        d’amélioration.
+    <h2 class="text-2xl font-semibold mb-6 text-center">Comment on démarre&nbsp;?</h2>
+    <ol class="mx-auto max-w-3xl grid gap-4 sm:grid-cols-2">
+      <li class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-4">
+        <strong>Audit express.</strong> 30&nbsp;min pour identifier les leviers d’amélioration.
       </li>
-      <li>
-        <strong>Plan d’action personnalisé :</strong> nous co‑construisons une roadmap priorisée adaptée à vos
-        contraintes et objectifs business.
+      <li class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-4">
+        <strong>Plan d’action.</strong> Roadmap priorisée alignée business.
       </li>
-      <li>
-        <strong>Mise en œuvre agile :</strong> implémentation incrémentale avec feedback continu et adaptation
-        selon vos retours.
+      <li class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-4">
+        <strong>Mise en œuvre.</strong> Incrémental, feedback continu.
       </li>
-      <li>
-        <strong>Suivi et support :</strong> transfert de compétences, documentation et assistance pour garantir la
-        pérennité de la solution.
+      <li class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-4">
+        <strong>Suivi &amp; transfert.</strong> Docs, coaching, pérennité.
       </li>
     </ol>
   </section>

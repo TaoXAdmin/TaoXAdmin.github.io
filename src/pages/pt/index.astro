@@ -5,64 +5,77 @@ import CTAButton from '../../components/CTAButton.astro';
 const lang = 'pt';
 const pageTitle = 'Início - Alexis Fiska';
 const pageDescription =
-  'QA Automation & GenAI para releases mais rápidas, sem regressões. Framework BDD, Playwright/SpecFlow, CI/CD, performance k6 & observabilidade.';
+  'QA Automation & GenAI para releases mais rápidas e sem regressões. Framework BDD, Playwright/SpecFlow, CI/CD, k6 e observabilidade.';
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
-  <section class="text-center py-16">
-    <h1 class="text-3xl md:text-5xl font-bold mb-4">
-      QA Automation &amp; GenAI para releases mais rápidas, sem regressões.
-    </h1>
-    <p class="max-w-2xl mx-auto mb-8 text-lg text-neutral-700 dark:text-neutral-300">
-      Framework BDD, Playwright/SpecFlow, CI/CD, performance k6 &amp; observabilidade. Execuções curtas,
-      zero bugs críticos em produção.
-    </p>
-    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-      <CTAButton href="/pt/contact#audit" variant="primary">Agendar uma auditoria gratuita de 30 min</CTAButton>
-      <CTAButton href="/pt/contact#quote" variant="ghost">Pedir um orçamento</CTAButton>
+  <section class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50 to-violet-50 dark:from-neutral-800 dark:to-neutral-900 border border-neutral-200 dark:border-neutral-800 px-6 py-14 md:py-16">
+    <div class="mx-auto max-w-5xl text-center">
+      <div class="mb-3 flex items-center justify-center gap-2">
+        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-white/70 dark:bg-neutral-800/70 border border-neutral-200 dark:border-neutral-700 text-blue-700 dark:text-blue-300">QA Automation</span>
+        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-white/70 dark:bg-neutral-800/70 border border-neutral-200 dark:border-neutral-700 text-violet-700 dark:text-violet-300">GenAI</span>
+        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-white/70 dark:bg-neutral-800/70 border border-neutral-200 dark:border-neutral-700 text-sky-700 dark:text-sky-300">CI/CD</span>
+      </div>
+
+      <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">
+        QA Automation &amp; GenAI para releases mais rápidas, <span class="whitespace-nowrap">sem regressões.</span>
+      </h1>
+      <p class="max-w-2xl mx-auto mb-8 text-lg text-neutral-700 dark:text-neutral-300">
+        Framework BDD, Playwright/SpecFlow, CI/CD, k6 &amp; observabilidade. <strong>Execução curta</strong>, <strong>zero bugs críticos</strong> em produção.
+      </p>
+
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-3">
+        <CTAButton href="/pt/contact#audit" variant="primary">Agendar auditoria grátis (30&nbsp;min)</CTAButton>
+        <CTAButton href="/pt/contact#quote" variant="ghost">Solicitar orçamento</CTAButton>
+      </div>
     </div>
   </section>
 
-  <section class="py-12" id="why">
-    <h2 class="text-2xl font-semibold mb-4 text-center">Por que trabalhar comigo?</h2>
-    <p class="max-w-3xl mx-auto text-neutral-700 dark:text-neutral-300 mb-6">
-      Com mais de cinco anos de experiência em testes automatizados e um olhar pioneiro sobre modelos
-      generativos, ajudo você a acelerar releases enquanto elimina regressões. Construí frameworks BDD
-      sustentáveis, implantei pipelines CI/CD maduros e treinei equipes de desenvolvimento para
-      dominar Playwright e SpecFlow. Minha abordagem pragmática combina rigor técnico e inovação
-      contínua.
+  <section class="py-10">
+    <div class="mx-auto grid max-w-5xl grid-cols-1 md:grid-cols-3 gap-4">
+      <article class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 bg-white dark:bg-neutral-900">
+        <div class="mb-3"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <h3 class="font-semibold mb-1">Framework BDD</h3>
+        <p class="text-sm text-neutral-600 dark:text-neutral-300">POM, fixtures, data-builders e <strong>seletores estáveis</strong> para automação sustentável.</p>
+      </article>
+      <article class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 bg-white dark:bg-neutral-900">
+        <div class="mb-3"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M4 6h16v4H4zM4 14h16v4H4z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg></div>
+        <h3 class="font-semibold mb-1">CI/CD rápido</h3>
+        <p class="text-sm text-neutral-600 dark:text-neutral-300">Paralelização, sharding e <strong>feedback &lt; 30&nbsp;min</strong> com reporting claro.</p>
+      </article>
+      <article class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 bg-white dark:bg-neutral-900">
+        <div class="mb-3"><svg width="28" height="28" viewBox="0 0 24 24"><circle cx="7" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="17" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 12h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <h3 class="font-semibold mb-1">Performance &amp; Observabilidade</h3>
+        <p class="text-sm text-neutral-600 dark:text-neutral-300">k6, dashboards Grafana e <strong>alertas</strong> para evitar deriva de performance.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="py-10" id="why">
+    <h2 class="text-2xl font-semibold mb-4 text-center">Por que eu?</h2>
+    <p class="max-w-3xl mx-auto text-neutral-700 dark:text-neutral-300 mb-6 text-center">
+      +5 anos em <strong>automação</strong> e adoção precoce de <strong>GenAI</strong> para QA.
+      Entrego <strong>frameworks mantíveis</strong>, <strong>pipelines confiáveis</strong> e capacitação do time.
     </p>
   </section>
 
-  <section class="py-12 bg-neutral-50 dark:bg-neutral-800" id="deliver">
-    <h2 class="text-2xl font-semibold mb-4 text-center">O que eu entrego</h2>
-    <ul class="max-w-3xl mx-auto space-y-4 text-neutral-700 dark:text-neutral-300 list-disc pl-5">
-      <li>Um framework BDD modular e escalável adaptado à sua stack.</li>
-      <li>Testes E2E Playwright confiáveis com execução inferior a 30 minutos.</li>
-      <li>Um pipeline de CI otimizado com paralelização e relatórios detalhados.</li>
-      <li>Scripts k6 para monitorar performance e observabilidade da aplicação.</li>
-      <li>Transferência de conhecimento por meio de coaching e documentação completa.</li>
+  <section class="py-12 bg-neutral-50 dark:bg-neutral-800/60" id="deliver">
+    <h2 class="text-2xl font-semibold mb-6 text-center">O que entrego</h2>
+    <ul class="mx-auto max-w-3xl space-y-3 text-neutral-700 dark:text-neutral-300">
+      <li class="flex gap-3"><span class="mt-1 text-blue-600 dark:text-blue-400">✔</span><span>Framework BDD <strong>modular</strong> para sua stack.</span></li>
+      <li class="flex gap-3"><span class="mt-1 text-blue-600 dark:text-blue-400">✔</span><span>E2E Playwright <strong>&lt; 30 min</strong> confiáveis.</span></li>
+      <li class="flex gap-3"><span class="mt-1 text-blue-600 dark:text-blue-400">✔</span><span>CI/CD paralelo com <strong>reporting</strong> claro.</span></li>
+      <li class="flex gap-3"><span class="mt-1 text-blue-600 dark:text-blue-400">✔</span><span>Cenários k6 + <strong>observabilidade</strong> orientada a uso.</span></li>
+      <li class="flex gap-3"><span class="mt-1 text-blue-600 dark:text-blue-400">✔</span><span>Coaching, katas e <strong>documentação</strong>.</span></li>
     </ul>
   </section>
 
   <section class="py-12" id="how">
-    <h2 class="text-2xl font-semibold mb-4 text-center">Como começamos?</h2>
-    <ol class="max-w-3xl mx-auto space-y-4 text-neutral-700 dark:text-neutral-300 list-decimal pl-5">
-      <li>
-        <strong>Auditoria expressa:</strong> uma revisão de 30 minutos do seu pipeline de QA para
-        identificar alavancas de melhoria.
-      </li>
-      <li>
-        <strong>Plano de ação personalizado:</strong> co‑construímos um roadmap priorizado adaptado às
-        suas restrições e objetivos de negócio.
-      </li>
-      <li>
-        <strong>Implementação ágil:</strong> entrega incremental com feedback contínuo e adaptação
-        conforme suas contribuições.
-      </li>
-      <li>
-        <strong>Acompanhamento e suporte:</strong> transferência de conhecimento, documentação e
-        assistência para garantir a sustentabilidade.
-      </li>
+    <h2 class="text-2xl font-semibold mb-6 text-center">Como começamos</h2>
+    <ol class="mx-auto max-w-3xl grid gap-4 sm:grid-cols-2">
+      <li class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-4"><strong>Auditoria express.</strong> 30 min para mapear alavancas.</li>
+      <li class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-4"><strong>Plano de ação.</strong> Roadmap priorizado alinhado ao negócio.</li>
+      <li class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-4"><strong>Entrega.</strong> Incremental, feedback contínuo.</li>
+      <li class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-4"><strong>Acompanhamento.</strong> Docs, coaching, sustentabilidade.</li>
     </ol>
   </section>
 </BaseLayout>
