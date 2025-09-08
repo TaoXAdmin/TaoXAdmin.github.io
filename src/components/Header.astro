@@ -3,17 +3,17 @@ import LangSwitcher from './LangSwitcher.astro';
 
 const { lang = 'fr' } = Astro.props;
 
-// libellés
-const labels = {
-  fr: { home: 'Accueil', services: 'Services', cases: 'Cas', about: 'À propos', blog: 'Blog', contact: 'Contact', menu: 'Menu' },
-  en: { home: 'Home', services: 'Services', cases: 'Cases', about: 'About', blog: 'Blog', contact: 'Contact', menu: 'Menu' },
-  de: { home: 'Startseite', services: 'Dienstleistungen', cases: 'Referenzen', about: 'Über mich', blog: 'Blog', contact: 'Kontakt', menu: 'Menü' },
-  pt: { home: 'Início', services: 'Serviços', cases: 'Projetos', about: 'Sobre', blog: 'Blog', contact: 'Contato', menu: 'Menu' },
-} as const;
-const t = labels[lang] ?? labels.fr;
+// i18n
+const t = {
+  fr: { home:'Accueil', services:'Services', cases:'Cas', about:'À propos', blog:'Blog', contact:'Contact', menu:'Menu' },
+  en: { home:'Home', services:'Services', cases:'Cases', about:'About', blog:'Blog', contact:'Contact', menu:'Menu' },
+  de: { home:'Startseite', services:'Dienstleistungen', cases:'Referenzen', about:'Über mich', blog:'Blog', contact:'Kontakt', menu:'Menü' },
+  pt: { home:'Início', services:'Serviços', cases:'Projetos', about:'Sobre', blog:'Blog', contact:'Contato', menu:'Menu' },
+}[lang] ?? {
+  home:'Accueil', services:'Services', cases:'Cas', about:'À propos', blog:'Blog', contact:'Contact', menu:'Menu'
+};
 
-// items nav (contact inclus UNE fois)
-const navItems = [
+const items = [
   { href: `/${lang}`, label: t.home },
   { href: `/${lang}/services`, label: t.services },
   { href: `/${lang}/cases`, label: t.cases },
@@ -22,45 +22,35 @@ const navItems = [
   { href: `/${lang}/contact`, label: t.contact },
 ];
 
-// route active
-const currentPath = (Astro.url?.pathname ?? '/').replace(/\/$/, '');
+const current = (Astro.url?.pathname ?? '/').replace(/\/$/, '');
 const isActive = (href: string) => {
   const h = href.replace(/\/$/, '');
-  if (h === `/${lang}`) return currentPath === h;
-  return currentPath.startsWith(h);
+  if (h === `/${lang}`) return current === h;
+  return current.startsWith(h);
 };
 ---
-<header class="sticky top-0 z-50 border-b border-neutral-200/80 dark:border-neutral-800/80 bg-white/90 dark:bg-neutral-950/80 backdrop-blur">
+<header class="sticky top-0 z-50 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
   <div class="container mx-auto px-4">
-    <div class="h-14 flex items-center justify-between gap-3">
+    <div class="h-14 flex items-center justify-between">
       <a href={`/${lang}`} class="text-xl font-semibold tracking-tight text-blue-600 dark:text-blue-400">Alexis Fiska</a>
 
       <!-- Desktop -->
       <nav class="hidden md:flex items-center gap-6" aria-label="Primary">
-        {navItems.slice(0, -1).map((item) => (
-          <a href={item.href}
+        {items.map((it) => (
+          <a href={it.href}
              class={`text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400
-                     ${isActive(item.href) ? 'text-blue-700 dark:text-blue-300' : 'text-neutral-700 dark:text-neutral-200'}`}>
-            {item.label}
+                     ${isActive(it.href) ? 'text-blue-700 dark:text-blue-300' : 'text-neutral-700 dark:text-neutral-200'}`}>
+            {it.label}
           </a>
         ))}
-        <!-- Contact en bouton -->
-        <a href={navItems[navItems.length-1].href}
-           class="inline-flex items-center rounded-lg px-3 py-1.5 bg-blue-600 text-white hover:bg-blue-700 text-sm font-semibold">
-          {navItems[navItems.length-1].label}
-        </a>
       </nav>
 
       <!-- Lang + burger (mobile) -->
       <div class="flex items-center gap-2">
         <LangSwitcher currentLang={lang} />
-        <button
-          id="menu-open"
+        <button id="menu-open"
           class="md:hidden inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-          aria-label="Ouvrir le menu"
-          aria-haspopup="dialog"
-          aria-controls="mobile-menu"
-          aria-expanded="false">
+          aria-label="Ouvrir le menu" aria-haspopup="dialog" aria-controls="mobile-menu" aria-expanded="false">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
@@ -69,17 +59,19 @@ const isActive = (href: string) => {
     </div>
   </div>
 
-  <!-- Drawer mobile -->
+  <!-- MENU MOBILE : plein écran, simple, propre -->
   <div id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title"
-       aria-hidden="true" class="hidden fixed inset-0 z-[60]">
+       aria-hidden="true"
+       class="hidden fixed inset-0 z-[60]">
     <!-- Backdrop -->
     <div id="menu-backdrop" class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-200 ease-out"></div>
 
-    <!-- Panel (slide depuis la droite) -->
-    <aside id="menu-panel"
-           class="absolute right-0 top-0 h-full w-[min(88vw,380px)] bg-white dark:bg-neutral-900 shadow-2xl
-                  ring-1 ring-black/5 dark:ring-white/10 p-5 pt-16 translate-x-full transition-transform duration-200 ease-out">
-      <div class="absolute right-3 top-3">
+    <!-- Feuille plein écran -->
+    <section id="menu-sheet"
+      class="absolute inset-0 bg-white dark:bg-neutral-950 flex flex-col
+             opacity-0 translate-y-2 transition-all duration-200 ease-out">
+      <div class="h-14 px-4 flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800">
+        <span id="mobile-menu-title" class="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{t.menu}</span>
         <button id="menu-close" class="inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800" aria-label="Fermer le menu">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M6 6l12 12M18 6l-12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -87,60 +79,37 @@ const isActive = (href: string) => {
         </button>
       </div>
 
-      <h2 id="mobile-menu-title" class="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400 mb-4">{t.menu}</h2>
-
-      <nav class="flex flex-col divide-y divide-neutral-200/80 dark:divide-neutral-800/80 rounded-xl overflow-hidden" aria-label="Mobile primary">
-        {navItems.map((item) => (
-          <a href={item.href}
-             class={`group flex items-center justify-between px-3 py-3 text-[16px] font-medium
-                     hover:bg-neutral-100 dark:hover:bg-neutral-800
-                     ${isActive(item.href) ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-200' : 'text-neutral-900 dark:text-neutral-100'}`}>
-            <span>{item.label}</span>
-            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"
-                 class="opacity-0 group-hover:opacity-100 transition-opacity duration-150">
-              <path d="M9 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-            </svg>
-          </a>
-        ))}
+      <nav class="px-3 py-2 grow overflow-y-auto" aria-label="Mobile">
+        <ul class="space-y-1">
+          {items.map((it) => (
+            <li>
+              <a href={it.href}
+                 class={`block rounded-xl px-3 py-3 text-[16px] font-medium
+                         hover:bg-neutral-100 dark:hover:bg-neutral-800
+                         ${isActive(it.href) ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-200' : 'text-neutral-900 dark:text-neutral-100'}`}>
+                {it.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </nav>
 
-      <div class="mt-5">
+      <div class="px-3 py-3 border-t border-neutral-200 dark:border-neutral-800">
         <LangSwitcher currentLang={lang} />
       </div>
-
-      <div class="pb-[env(safe-area-inset-bottom)]"></div>
-    </aside>
+    </section>
   </div>
 
-  <!-- JS (pur) -->
+  <!-- JS simple (sans TS) -->
   <script is:inline>
     (function () {
       const root = document.getElementById('mobile-menu');
       const openBtn = document.getElementById('menu-open');
       const closeBtn = document.getElementById('menu-close');
       const backdrop = document.getElementById('menu-backdrop');
-      const panel = document.getElementById('menu-panel');
+      const sheet = document.getElementById('menu-sheet');
 
-      if (!root || !openBtn || !closeBtn || !backdrop || !panel) return;
-
-      const focusable = [
-        'a[href]','button:not([disabled])','textarea','input[type="text"]',
-        'input[type="radio"]','input[type="checkbox"]','select'
-      ].join(',');
-
-      function trapFocus(e) {
-        if (e.key !== 'Tab') return;
-        const nodes = Array.from(panel.querySelectorAll(focusable));
-        if (!nodes.length) return;
-        const first = nodes[0], last = nodes[nodes.length - 1];
-        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-      }
-
-      function onKeyDown(e) {
-        if (e.key === 'Escape') close();
-        trapFocus(e);
-      }
+      if (!root || !openBtn || !closeBtn || !backdrop || !sheet) return;
 
       function open() {
         root.classList.remove('hidden');
@@ -148,37 +117,34 @@ const isActive = (href: string) => {
         openBtn.setAttribute('aria-expanded', 'true');
         document.body.classList.add('overflow-hidden');
 
-        // lance l’anim
         requestAnimationFrame(() => {
           backdrop.classList.add('opacity-100');
-          panel.classList.remove('translate-x-full');
+          sheet.classList.remove('opacity-0','translate-y-2');
+          sheet.classList.add('opacity-100','translate-y-0');
         });
 
-        // focus premier élément
-        const f = panel.querySelector(focusable); if (f && f.focus) f.focus();
-
-        // fermer quand on clique un lien
-        panel.querySelectorAll('a[href]').forEach(a => a.addEventListener('click', close, { once: true }));
-
+        // Fermer au clic d’un lien
+        sheet.querySelectorAll('a[href]').forEach(a => a.addEventListener('click', close, { once: true }));
         document.addEventListener('keydown', onKeyDown);
       }
 
       function close() {
         backdrop.classList.remove('opacity-100');
-        panel.classList.add('translate-x-full');
+        sheet.classList.add('opacity-0','translate-y-2');
         openBtn.setAttribute('aria-expanded', 'false');
         document.body.classList.remove('overflow-hidden');
 
-        // à la fin de la transition, on cache vraiment
         const done = () => {
           root.classList.add('hidden');
           root.setAttribute('aria-hidden', 'true');
-          panel.removeEventListener('transitionend', done);
+          sheet.removeEventListener('transitionend', done);
           if (openBtn.focus) openBtn.focus();
           document.removeEventListener('keydown', onKeyDown);
         };
-        panel.addEventListener('transitionend', done, { once: true });
+        sheet.addEventListener('transitionend', done, { once: true });
       }
+
+      function onKeyDown(e) { if (e.key === 'Escape') close(); }
 
       openBtn.addEventListener('click', open);
       closeBtn.addEventListener('click', close);
