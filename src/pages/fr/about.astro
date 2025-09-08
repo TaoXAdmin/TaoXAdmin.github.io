@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SocialIcons from '../../components/SocialIcons.astro';
 
 const lang = 'fr';
 const pageTitle = 'À propos - Alexis Fiska';
@@ -61,24 +62,9 @@ const BASE = import.meta.env.BASE_URL ?? '/';
         </ul>
 
         <div class="flex items-center gap-6">
-          <a
-            href="https://www.linkedin.com/in/alexis-fiska"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-blue-600 dark:text-blue-400 hover:underline"
-            aria-label="Profil LinkedIn d’Alexis Fiska"
-          >
-            LinkedIn
-          </a>
-          <a
-            href="https://github.com/alexis-fiska"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-blue-600 dark:text-blue-400 hover:underline"
-            aria-label="GitHub d’Alexis Fiska"
-          >
-            GitHub
-          </a>
+          <div class="mt-4">
+			  <SocialIcons lang={lang} />
+		  </div>
           <span class="text-neutral-500 dark:text-neutral-400 text-sm">•</span>
           <a
             href={`/${lang}/services`}
