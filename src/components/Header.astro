@@ -104,58 +104,64 @@ const navItems: NavItem[] = [
 
   <!-- JS d’ouverture/fermeture, inline pour éviter les hints -->
   <script is:inline>
-    (function () {
-      const root = document.getElementById('mobile-menu');
-      const openBtn = document.getElementById('menu-open');
-      const closeBtn = document.getElementById('menu-close');
-      const backdrop = document.getElementById('menu-backdrop');
+  (function () {
+    const root = document.getElementById('mobile-menu');
+    const openBtn = document.getElementById('menu-open');
+    const closeBtn = document.getElementById('menu-close');
+    const backdrop = document.getElementById('menu-backdrop');
 
-      if (!root || !openBtn || !closeBtn || !backdrop) return;
+    if (!root || !openBtn || !closeBtn || !backdrop) return;
 
-      const focusableSelectors = [
-        'a[href]', 'button:not([disabled])', 'textarea', 'input[type="text"]',
-        'input[type="radio"]', 'input[type="checkbox"]', 'select'
-      ].join(',');
+    const focusableSelectors = [
+      'a[href]',
+      'button:not([disabled])',
+      'textarea',
+      'input[type="text"]',
+      'input[type="radio"]',
+      'input[type="checkbox"]',
+      'select'
+    ].join(',');
 
-      function open() {
-        root.classList.remove('hidden');
-        openBtn.setAttribute('aria-expanded', 'true');
-        document.body.classList.add('overflow-hidden');
+    function open() {
+      root.classList.remove('hidden');
+      openBtn.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('overflow-hidden');
 
-        // focus premier élément
-        const f = root.querySelector(focusableSelectors);
-        if (f) (f as HTMLElement).focus();
-        document.addEventListener('keydown', onKeyDown);
+      const f = root.querySelector(focusableSelectors);
+      if (f && typeof f.focus === 'function') f.focus();
+
+      document.addEventListener('keydown', onKeyDown);
+    }
+
+    function close() {
+      root.classList.add('hidden');
+      openBtn.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('overflow-hidden');
+      if (typeof openBtn.focus === 'function') openBtn.focus();
+      document.removeEventListener('keydown', onKeyDown);
+    }
+
+    function onKeyDown(e) {
+      if (e.key === 'Escape') {
+        close();
+        return;
       }
-
-      function close() {
-        root.classList.add('hidden');
-        openBtn.setAttribute('aria-expanded', 'false');
-        document.body.classList.remove('overflow-hidden');
-        openBtn.focus();
-        document.removeEventListener('keydown', onKeyDown);
-      }
-
-      function onKeyDown(e: KeyboardEvent) {
-        if (e.key === 'Escape') return close();
-
-        // petit focus trap
-        if (e.key === 'Tab') {
-          const nodes = Array.from(root.querySelectorAll(focusableSelectors)) as HTMLElement[];
-          if (!nodes.length) return;
-          const first = nodes[0];
-          const last = nodes[nodes.length - 1];
-          if (e.shiftKey && document.activeElement === first) {
-            e.preventDefault(); last.focus();
-          } else if (!e.shiftKey && document.activeElement === last) {
-            e.preventDefault(); first.focus();
-          }
+      if (e.key === 'Tab') {
+        const nodes = Array.from(root.querySelectorAll(focusableSelectors));
+        if (!nodes.length) return;
+        const first = nodes[0];
+        const last = nodes[nodes.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus();
         }
       }
+    }
 
-      openBtn.addEventListener('click', open);
-      closeBtn.addEventListener('click', close);
-      backdrop.addEventListener('click', close);
-    })();
-  </script>
+    openBtn.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    backdrop.addEventListener('click', close);
+  })();
+</script>
 </header>
