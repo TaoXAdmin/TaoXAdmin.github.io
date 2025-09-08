@@ -1,47 +1,21 @@
 ---
 import LangSwitcher from './LangSwitcher.astro';
 
-const { lang = 'fr' } = Astro.props;
+interface Props {
+  lang?: 'fr' | 'en' | 'de' | 'pt';
+}
+const { lang = 'fr' } = Astro.props as Props;
 
-// Translation dictionary for navigation labels.  If a locale is
-// missing, French fallbacks are used.
 const labels = {
-  fr: {
-    home: 'Accueil',
-    services: 'Services',
-    cases: 'Cas',
-    about: 'À propos',
-    blog: 'Blog',
-    contact: 'Contact',
-  },
-  en: {
-    home: 'Home',
-    services: 'Services',
-    cases: 'Cases',
-    about: 'About',
-    blog: 'Blog',
-    contact: 'Contact',
-  },
-  de: {
-    home: 'Startseite',
-    services: 'Dienstleistungen',
-    cases: 'Referenzen',
-    about: 'Über mich',
-    blog: 'Blog',
-    contact: 'Kontakt',
-  },
-  pt: {
-    home: 'Início',
-    services: 'Serviços',
-    cases: 'Projetos',
-    about: 'Sobre',
-    blog: 'Blog',
-    contact: 'Contato',
-  },
-};
+  fr: { home: 'Accueil', services: 'Services', cases: 'Cas', about: 'À propos', blog: 'Blog', contact: 'Contact' },
+  en: { home: 'Home', services: 'Services', cases: 'Cases', about: 'About', blog: 'Blog', contact: 'Contact' },
+  de: { home: 'Startseite', services: 'Dienstleistungen', cases: 'Referenzen', about: 'Über mich', blog: 'Blog', contact: 'Kontakt' },
+  pt: { home: 'Início', services: 'Serviços', cases: 'Projetos', about: 'Sobre', blog: 'Blog', contact: 'Contato' },
+} as const;
+const t = labels[lang];
 
-const t = labels[lang] ?? labels.fr;
-const navItems = [
+type NavItem = { href: string; label: string };
+const navItems: NavItem[] = [
   { href: `/${lang}`, label: t.home },
   { href: `/${lang}/services`, label: t.services },
   { href: `/${lang}/cases`, label: t.cases },
@@ -50,30 +24,138 @@ const navItems = [
   { href: `/${lang}/contact`, label: t.contact },
 ];
 ---
-<header class="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800">
-  <div class="container flex items-center justify-between py-4 gap-3">
-    <a href={`/${lang}`} class="text-xl font-semibold text-blue-600 dark:text-blue-400">
-      Alexis Fiska
-    </a>
+<header class="sticky top-0 z-50 bg-white/90 dark:bg-neutral-950/80 backdrop-blur border-b border-neutral-200 dark:border-neutral-800">
+  <div class="container mx-auto px-4">
+    <!-- Bandeau -->
+    <div class="h-14 flex items-center justify-between gap-3">
+      <a href={`/${lang}`} class="text-xl font-semibold text-blue-600 dark:text-blue-400">Alexis Fiska</a>
 
-    <!-- ✅ Nav toujours visible, scrollable en mobile -->
-    <nav
-      class="flex max-w-full overflow-x-auto gap-6 px-1"
-      aria-label="Primary"
-    >
-      {navItems.map((item) => (
-        <a
-          href={item.href}
-          class="shrink-0 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-blue-600 dark:hover:text-blue-400"
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-6" aria-label="Primary">
+        {navItems.map((item: NavItem) => (
+          <a href={item.href} class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-blue-600 dark:hover:text-blue-400">
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Lang + Burger -->
+      <div class="flex items-center gap-2">
+        <LangSwitcher currentLang={lang} path={Astro.url.pathname} />
+        <button
+          id="menu-open"
+          class="md:hidden inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+          aria-label="Ouvrir le menu"
+          aria-haspopup="dialog"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
         >
-          {item.label}
-        </a>
-      ))}
-    </nav>
-
-    <div class="flex items-center">
-      <LangSwitcher currentLang={lang} />
-      {/* Future mobile menu toggle could go here */}
+          <!-- icône burger -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
+
+  <!-- Modal mobile -->
+  <div id="mobile-menu" class="hidden" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
+    <!-- Backdrop -->
+    <div id="menu-backdrop" class="fixed inset-0 bg-black/40"></div>
+
+    <!-- Sheet -->
+    <div class="fixed inset-x-0 top-0 rounded-b-2xl bg-white dark:bg-neutral-900 shadow-lg p-4 pt-14">
+      <div class="container mx-auto px-2">
+        <div class="absolute right-3 top-3">
+          <button
+            id="menu-close"
+            class="inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+            aria-label="Fermer le menu"
+          >
+            <!-- icône close -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 6l12 12M18 6l-12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <h2 id="mobile-menu-title" class="text-sm font-semibold text-neutral-500 dark:text-neutral-400 mb-3">
+          Menu
+        </h2>
+
+        <nav class="flex flex-col gap-3 text-lg" aria-label="Mobile primary">
+          {navItems.map((item: NavItem) => (
+            <a
+              href={item.href}
+              class="px-2 py-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <div class="mt-4 border-t border-neutral-200 dark:border-neutral-800 pt-3">
+          <LangSwitcher currentLang={lang} path={Astro.url.pathname} />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS d’ouverture/fermeture, inline pour éviter les hints -->
+  <script is:inline>
+    (function () {
+      const root = document.getElementById('mobile-menu');
+      const openBtn = document.getElementById('menu-open');
+      const closeBtn = document.getElementById('menu-close');
+      const backdrop = document.getElementById('menu-backdrop');
+
+      if (!root || !openBtn || !closeBtn || !backdrop) return;
+
+      const focusableSelectors = [
+        'a[href]', 'button:not([disabled])', 'textarea', 'input[type="text"]',
+        'input[type="radio"]', 'input[type="checkbox"]', 'select'
+      ].join(',');
+
+      function open() {
+        root.classList.remove('hidden');
+        openBtn.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('overflow-hidden');
+
+        // focus premier élément
+        const f = root.querySelector(focusableSelectors);
+        if (f) (f as HTMLElement).focus();
+        document.addEventListener('keydown', onKeyDown);
+      }
+
+      function close() {
+        root.classList.add('hidden');
+        openBtn.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('overflow-hidden');
+        openBtn.focus();
+        document.removeEventListener('keydown', onKeyDown);
+      }
+
+      function onKeyDown(e: KeyboardEvent) {
+        if (e.key === 'Escape') return close();
+
+        // petit focus trap
+        if (e.key === 'Tab') {
+          const nodes = Array.from(root.querySelectorAll(focusableSelectors)) as HTMLElement[];
+          if (!nodes.length) return;
+          const first = nodes[0];
+          const last = nodes[nodes.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault(); last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault(); first.focus();
+          }
+        }
+      }
+
+      openBtn.addEventListener('click', open);
+      closeBtn.addEventListener('click', close);
+      backdrop.addEventListener('click', close);
+    })();
+  </script>
 </header>
