@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" fill="#0f172a">
+    <text x="600" y="56" font-size="26" font-weight="700" text-anchor="middle">Vorher: brüchiges E2E, manuelle Vergleicher, Tarif-Incidents</text>
+  </g>
+  <g transform="translate(70,110)">
+    <rect x="0" y="0" width="340" height="310" rx="16" fill="#f8fafc" stroke="#e5e7eb"/>
+    <text x="170" y="36" text-anchor="middle" font-size="18" font-weight="600">Automatisierung</text>
+    <g fill="#334155" font-size="14">
+      <text x="24" y="76">• Vorhandenes E2E defekt, flakey NR</text>
+      <text x="24" y="106">• Fragile Selektoren, unklare Testdaten</text>
+      <text x="24" y="136">• Reporting selten geteilt</text>
+      <text x="24" y="166">• Jenkins/K8s untergenutzt</text>
+    </g>
+  </g>
+  <g transform="translate(430,110)">
+    <rect x="0" y="0" width="340" height="310" rx="16" fill="#f8fafc" stroke="#e5e7eb"/>
+    <text x="170" y="36" text-anchor="middle" font-size="18" font-weight="600">Vergleicher</text>
+    <g fill="#334155" font-size="14">
+      <text x="24" y="76">• Keine dedizierten Umgebungen</text>
+      <text x="24" y="106">• 100% manuell (200+ Fälle)</text>
+      <text x="24" y="136">• Abweichende Fragen/Datenmodelle</text>
+      <text x="24" y="166">• Häufige Incidents bei Vergleichen</text>
+    </g>
+  </g>
+  <g transform="translate(790,110)">
+    <rect x="0" y="0" width="340" height="310" rx="16" fill="#f8fafc" stroke="#e5e7eb"/>
+    <text x="170" y="36" text-anchor="middle" font-size="18" font-weight="600">Umgebungen &amp; CI</text>
+    <g fill="#334155" font-size="14">
+      <text x="24" y="76">• Qual/Preprod abhängig vom BE</text>
+      <text x="24" y="106">• Blockierende Upgrades</text>
+      <text x="24" y="136">• Geringe Observability</text>
+      <text x="24" y="166">• Xray vorhanden, Nutzung uneinheitlich</text>
+    </g>
+  </g>
+</svg>

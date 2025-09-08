@@ -2,93 +2,97 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const lang = 'pt';
-const pageTitle = 'Estudos de caso - Alexis Fiska';
+const pageTitle = 'Estudos de caso – Alexis Fiska';
 const pageDescription =
-  "QA & GenAI: Xpollens (BaaS BPCE) — automação do zero, Azure CI/CD, confiabilidade de fluxos críticos. Mais em breve.";
+  'Estudos de QA: Xpollens (BPCE BaaS) — automação do zero, Azure CI/CD, jornadas críticas estáveis; Ornikar Seguro — E2E robusto, integrações com comparadores, execuções em PR e diárias.';
 const BASE = import.meta.env.BASE_URL ?? '/';
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
   <h1 class="text-3xl font-bold mb-6 text-center">Estudos de caso</h1>
   <p class="max-w-3xl mx-auto mb-10 text-neutral-700 dark:text-neutral-300 text-center">
-    Cada projeto é único. Veja como ajudei uma fintech BaaS (Grupo BPCE) a construir automação de testes eficaz e sustentável.
-    Números exatos são omitidos ou anonimizados sob NDA.
+    Resumos “light” antes da leitura completa. Números exatos são generalizados por NDA.
   </p>
 
   <!-- Xpollens -->
   <article class="mb-12">
     <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Xpollens (Grupo BPCE)</h2>
-
     <figure class="mb-4">
       <img
-        src={`${BASE}images/cases/xpollens/i18n/pt/hero.svg`}
-        alt="Xpollens — pipeline de CI/CD e fluxos bancários críticos"
+        src={`${BASE}images/cases/xpollens/hero.svg`}
+        alt="Xpollens — pipeline CI/CD e jornadas bancárias críticas"
         loading="lazy"
         class="w-full rounded-2xl shadow-sm"
       />
       <figcaption class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
-        Automação do zero: E2E/API, Azure CI/CD, relatórios via Teams/E-mail.
+        Do zero: automação E2E/API, Azure CI/CD, relatórios via Teams/Email.
       </figcaption>
     </figure>
 
     <h3 class="text-xl font-medium mt-4 mb-1">Contexto</h3>
     <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Fintech BaaS com produtos críticos (Izly, Bimpli, Money Walkie, marketplace Leroy Merlin/Adeo, Autodoc SEPA, Nirio/FDJ...).
-      Inicialmente: 0 automação, 7 squads com QA manual, regressões longas, incidentes periódicos, forte regulação (RGPD/KYC/AML-CFT).
+      Fintech BaaS com produtos críticos (Izly, Bimpli, Money Walkie, marketplace Leroy Merlin, Autodoc SEPA, Nirio/FDJ…).
+      No início: nenhuma automação, 7 squads com QA manual, NR longas, incidentes periódicos, forte regulação.
     </p>
 
     <h3 class="text-xl font-medium mt-4 mb-1">Objetivos</h3>
     <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
-      <li>Iniciar automação E2E/API e proteger fluxos críticos de dinheiro & contas.</li>
-      <li>Industrializar uma pipeline <strong>Azure DevOps</strong> (build/test/report) em qualificação/integração/produção (smoke).</li>
-      <li>Reduzir pela metade a receita manual; estruturar NR/triagem/observabilidade.</li>
+      <li>Iniciar automação E2E/API e proteger fluxos monetários &amp; de conta.</li>
+      <li>Industrializar <strong>Azure DevOps</strong> (build/test/report) incluindo smoke em produção.</li>
+      <li>Reduzir NR manual; estruturar triagem/observabilidade.</li>
     </ul>
 
-    <h3 class="text-xl font-medium mt-4 mb-1">Abordagem</h3>
+    <h3 class="text-xl font-medium mt-4 mb-1">Abordagem & resultados</h3>
     <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Framework em C# próprio: <strong>SpecFlow + Gherkin</strong> (BDD), <strong>Selenium</strong> (UI), <strong>RestSharp</strong> (API),
-      Page Objects robustos (<code>data-testid</code>), conjuntos CSV anonimizados, retries limitados (≤3), anti-flake.
-      Azure CI: 2 execuções/dia, relatórios no Teams + e-mail para a squad, screenshots/traces.
-    </p>
-
-    <h3 class="text-xl font-medium mt-4 mb-1">Resultados</h3>
-    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
-      <li>~60% de cobertura crítica em M2, ≈100% em M6; tempo de receita ÷2; −23% de incidentes em produção (ano 1).</li>
-      <li>Adoção de BDD nas squads, 43 sprints cobertos, 1.826 execuções E2E, centenas de bugs interceptados em ~3 anos, 5 QAs formados, estabilidade claramente maior.</li>
-    </ul>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
-      <figure class="border rounded-xl p-3 dark:border-neutral-700">
-        <img
-          src={`${BASE}images/cases/xpollens/i18n/pt/pipeline-before.svg`}
-          alt="Antes: regressões manuais, instabilidade, 0 automação"
-          loading="lazy"
-          class="w-full rounded-lg"
-        />
-        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Antes: apenas manual, instabilidade periódica.</figcaption>
-      </figure>
-      <figure class="border rounded-xl p-3 dark:border-neutral-700">
-        <img
-          src={`${BASE}images/cases/xpollens/i18n/pt/pipeline-after.svg`}
-          alt="Depois: Azure CI/CD, E2E 2×/dia, relatórios centralizados, smoke em produção"
-          loading="lazy"
-          class="w-full rounded-lg"
-        />
-        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Depois: Azure CI/CD, E2E 2×/dia, relatórios &amp; smoke em produção.</figcaption>
-      </figure>
-    </div>
-
-    <h3 class="text-xl font-medium mt-4 mb-1">Stack</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      C#, SpecFlow (Gherkin), Selenium, RestSharp, Azure DevOps, Microsoft Teams.
-    </p>
-
-    <p class="text-sm italic text-neutral-600 dark:text-neutral-400">
-      NDA: alguns detalhes anonimizados/generalizados.
+      Framework C# (SpecFlow/Selenium/RestSharp), seletores estáveis &amp; dados anonimizados, retries limitados.
+      2 execuções/dia, Teams+email, screenshots/logs. ≈100% de cobertura crítica até M6, esforço manual ÷2,
+      −23% de incidentes em produção no primeiro ano.
     </p>
 
     <p class="mt-4">
       <a href={`${BASE}pt/cases/xpollens`} class="inline-block px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
-        Ler o estudo completo
+        Ler estudo completo
+      </a>
+    </p>
+  </article>
+
+  <!-- Ornikar -->
+  <article class="mb-12">
+    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Seguro Ornikar</h2>
+    <figure class="mb-4">
+      <img
+        src={`${BASE}images/cases/ornikar/i18n/pt/hero.svg`}
+        alt="Seguro Ornikar — Automação de QA & CI/CD, cotações, pagamento, comparadores integrados"
+        loading="lazy"
+        class="w-full rounded-2xl shadow-sm"
+      />
+      <figcaption class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+        E2E robusto (10 perfis), execuções de PR e diárias, comparadores (LesFurets, LeLynx, MeilleureAssurance).
+      </figcaption>
+    </figure>
+
+    <h3 class="text-xl font-medium mt-4 mb-1">Contexto</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Testes ponta-a-ponta da plataforma de Seguro Auto: criação de conta, cotação (44 M veículos, 3 planos), pagamento.
+      Validação de integração de três comparadores externos com diferentes restrições e modelos de dados.
+    </p>
+
+    <h3 class="text-xl font-medium mt-4 mb-1">Objetivos</h3>
+    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
+      <li>Estabilizar o E2E existente e proteger jornadas críticas.</li>
+      <li>Automatizar ao máximo mesmo sem ambientes dedicados dos comparadores.</li>
+      <li>Acelerar releases via execuções em PR + diárias.</li>
+    </ul>
+
+    <h3 class="text-xl font-medium mt-4 mb-1">Abordagem & resultados</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      TS/React, Selenium/Playwright, Appium, Jenkins+K8s, Xray. Page Objects, builders de dados, randomização controlada,
+      retries limitados & waits progressivos. 2 runs/dia (~25 min), execuções em PR, screenshots/logs de API, avisos Slack/E-mail.
+      100% das jornadas críticas em M1, estabilidade maior; testes manuais focados para comparadores.
+    </p>
+
+    <p class="mt-4">
+      <a href={`${BASE}pt/cases/ornikar`} class="inline-block px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+        Ler estudo completo
       </a>
     </p>
   </article>

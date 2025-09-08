@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" fill="#0f172a">
+    <text x="600" y="56" font-size="26" font-weight="700" text-anchor="middle">Avant : E2E fragile, comparateurs manuels, incidents devis</text>
+  </g>
+  <g transform="translate(70,110)">
+    <rect x="0" y="0" width="340" height="310" rx="16" fill="#f8fafc" stroke="#e5e7eb"/>
+    <text x="170" y="36" text-anchor="middle" font-size="18" font-weight="600">Automatisation</text>
+    <g fill="#334155" font-size="14">
+      <text x="24" y="76">• E2E existant cassé, NR peu fiables</text>
+      <text x="24" y="106">• Sélecteurs fragiles, data non maîtrisée</text>
+      <text x="24" y="136">• Peu de partage de reporting</text>
+      <text x="24" y="166">• Jenkins/K8s présents mais peu exploités</text>
+    </g>
+  </g>
+  <g transform="translate(430,110)">
+    <rect x="0" y="0" width="340" height="310" rx="16" fill="#f8fafc" stroke="#e5e7eb"/>
+    <text x="170" y="36" text-anchor="middle" font-size="18" font-weight="600">Comparateurs</text>
+    <g fill="#334155" font-size="14">
+      <text x="24" y="76">• Pas d’environnements dédiés</text>
+      <text x="24" y="106">• Recette 100% manuelle (200+ cas)</text>
+      <text x="24" y="136">• Divergences de questions/données</text>
+      <text x="24" y="166">• Incidents fréquents sur comparaisons</text>
+    </g>
+  </g>
+  <g transform="translate(790,110)">
+    <rect x="0" y="0" width="340" height="310" rx="16" fill="#f8fafc" stroke="#e5e7eb"/>
+    <text x="170" y="36" text-anchor="middle" font-size="18" font-weight="600">Environnements &amp; CI</text>
+    <g fill="#334155" font-size="14">
+      <text x="24" y="76">• Qualif/Pré-prod dépendantes du BE</text>
+      <text x="24" y="106">• Mises à niveau bloquantes</text>
+      <text x="24" y="136">• Observabilité limitée</text>
+      <text x="24" y="166">• Xray présent, usage variable</text>
+    </g>
+  </g>
+</svg>

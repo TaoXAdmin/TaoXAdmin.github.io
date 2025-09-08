@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+const lang = 'en';
+const pageTitle = "Ornikar — Auto insurance: QA Automation, aggregators & payment";
+const pageDescription =
+  "Stabilised E2E (Selenium/WebDriver, Playwright), 3 aggregators integration, CI Jenkins+Kubernetes, Xray, DataDog. 25 min/run, 2 runs/day, 100% critical paths by M1.";
+const BASE = import.meta.env.BASE_URL ?? '/';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <article class="prose dark:prose-invert max-w-none">
+    <p class="not-prose">
+      <img
+        src={`${BASE}images/cases/ornikar/i18n/en/hero.svg`}
+        alt="Ornikar — QA Automation & insurance aggregators integration"
+        loading="lazy"
+        class="w-full rounded-2xl shadow"
+      />
+    </p>
+
+    <h1>Ornikar — Auto insurance: QA Automation, aggregators & payment</h1>
+
+    <h2>Context & critical journeys</h2>
+    <ul>
+      <li>Product: auto-insurance website (account creation, <strong>quote engine</strong> for 44M vehicles, 3 plans, payment, signature).</li>
+      <li>Integrations: 3 aggregators (<em>LesFurets</em>, <em>MeilleureAssurance</em>, <em>LeLynx</em>) with different questionnaires & data models.</li>
+      <li>Secured journeys: direct arrival or via aggregator, new/standard risk, bonus-malus, insurance history, options & deductibles, payment, contract signature, contact validation.</li>
+    </ul>
+
+    <h2>Timeline & cadence</h2>
+    <ul><li>~6 months, 3-week sprints, <strong>weekly releases</strong>.</li></ul>
+
+    <h2>Organisation & role</h2>
+    <ul>
+      <li>2 major squads (including <strong>Growth</strong>), ~7 devs in squad, total 6 QAs + Head of QA.</li>
+      <li>Role: <strong>QA Automation engineer</strong> for Growth + ticket validation for the squad.</li>
+      <li>Key actor for end-to-end validation with PM, including correct pricing on aggregator platforms.</li>
+    </ul>
+
+    <h2>Initial state (M0)</h2>
+    <ul>
+      <li>Broken E2E, few automated NRs but brittle (fail every release), ~4 months without a dedicated squad QA.</li>
+      <li>Aggregators: <strong>no dedicated environments</strong> → heavy manual testing (~200 tests, 5–10 min each).</li>
+      <li>Qual/pre-prod environments constrained by backend upgrades/locks.</li>
+      <li>CI/CD: executions on <strong>Jenkins + Kubernetes</strong>. Reporting existed (Xray) but rarely broadcast; alerts on demand.</li>
+      <li>Recurring incidents on quote comparison (potential revenue impact).</li>
+    </ul>
+
+    <h2>Stack & tooling</h2>
+    <ul class="columns-2">
+      <li>Front: React/TypeScript</li>
+      <li>UI: Selenium/WebDriver, Playwright</li>
+      <li>Mobile: Appium</li>
+      <li>API: Axios</li>
+      <li>Data: CSV + controlled randomisation</li>
+      <li>Load: JMeter → k6</li>
+      <li>Monitoring: DataDog</li>
+      <li>Test mgmt: Jira Xray</li>
+      <li>CI/CD: Jenkins + Kubernetes</li>
+      <li>Contract generation via Grafana (to support testing)</li>
+    </ul>
+
+    <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+      <figure class="border rounded-xl p-3 dark:border-neutral-700">
+        <img src={`${BASE}images/cases/ornikar/i18n/en/pipeline-before.svg`} alt="Before: brittle E2E, heavy manual checks on aggregators, constrained envs" loading="lazy" class="w-full rounded-lg" />
+        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Before: fragile E2E, manual on aggregators, blocked envs, recurring incidents.</figcaption>
+      </figure>
+      <figure class="border rounded-xl p-3 dark:border-neutral-700">
+        <img src={`${BASE}images/cases/ornikar/i18n/en/pipeline-after.svg`} alt="After: Jenkins + K8s, robust E2E, 2 runs/day, PR checks, artifacts, notifications" loading="lazy" class="w-full rounded-lg" />
+        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">After: stabilised pipeline, 25-min run, 10 personas, 2 runs/day, Xray/Slack broadcasting.</figcaption>
+      </figure>
+    </div>
+
+    <h2>Automation strategy</h2>
+    <ul>
+      <li><strong>Harden rather than rebuild</strong>: stable selectors (PO), fixtures, test-data builders.</li>
+      <li>BDD: Gherkin training (product team) + <strong>3 Amigos</strong> ritual → better testability.</li>
+      <li>E2E ramp-up: <strong>2 runs/day</strong>, <strong>10 customer personas</strong> (A/B tolerant, bounded retries, progressive waits).</li>
+      <li>Risk-based layers: smoke / sanity / critical / NR.</li>
+      <li><strong>Fully randomised controlled data</strong>; isolation/seeds when possible.</li>
+    </ul>
+
+    <h2>CI/CD, execution & reporting</h2>
+    <ul>
+      <li>Auto executions (Jenkins/K8s) + <strong>PR checks</strong>; cross-squad E2E with Issuance.</li>
+      <li>Artifacts: UI screenshots, API logs, <strong>HTML report</strong> per run; Xray fed.</li>
+      <li>Notifications: Slack (Assurance, Growth, QA) + email to Head of QA.</li>
+    </ul>
+
+    <h2>Manual & UAT</h2>
+    <ul>
+      <li>Automated: almost all Ornikar perimeter (except aggregator constraints).</li>
+      <li>Manual left: ticket validation, aggregator recipes, <strong>prod smoke</strong> after release.</li>
+    </ul>
+
+    <h2>Enablement & handover</h2>
+    <ul>
+      <li>“Getting started” docs per journey, Gherkin guides, Grafana contract generation how-to.</li>
+      <li>Mentoring (2h weekly), pairing with QA leaders; tool integrations (Quakr.io, DocuSign).</li>
+      <li>Sprint demos every 3 weeks.</li>
+    </ul>
+
+    <h2>KPIs & results</h2>
+    <ul>
+      <li><strong>25-min</strong> E2E run (10 personas); <strong>2 runs/day</strong>.</li>
+      <li><strong>100% critical coverage by M1</strong>; extended coverage over releases.</li>
+      <li>~<strong>50–60 defects</strong> intercepted; <strong>300+ runs</strong>; <strong>150–200 tickets</strong> validated.</li>
+      <li>Aggregators: ~<strong>300 manual tests</strong> executed due to external constraints.</li>
+      <li>Last 2 months: <strong>0 critical prod bug</strong> on the automated scope.</li>
+    </ul>
+
+    <h2>Covered flow map</h2>
+    <figure class="not-prose my-6 border rounded-xl p-3 dark:border-neutral-700">
+      <img
+        src={`${BASE}images/cases/ornikar/i18n/en/gen-paths.svg`}
+        alt="Map: entry (site/aggregators), vehicle & history, identity, licence & record, insurance history, second driver, general info, plan (third party/intermediate/all-risk), options/deductibles, payment, signature, contact validation"
+        loading="lazy"
+        class="w-full rounded-lg"
+      />
+    </figure>
+
+    <blockquote><strong>Disclaimer</strong> — Representative, non-sensitive information; no personal quotations.</blockquote>
+  </article>
+</BaseLayout>

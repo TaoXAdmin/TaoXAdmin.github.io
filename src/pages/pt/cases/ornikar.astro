@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+const lang = 'pt';
+const pageTitle = "Ornikar — Seguro auto: Automação de QA, comparadores & pagamento";
+const pageDescription =
+  "E2E estabilizado (Selenium/WebDriver, Playwright), 3 comparadores, CI Jenkins+Kubernetes, Xray, DataDog. 25 min/run, 2 execuções/dia, 100% caminhos críticos em M1.";
+const BASE = import.meta.env.BASE_URL ?? '/';
+---
+<BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
+  <article class="prose dark:prose-invert max-w-none">
+    <p class="not-prose">
+      <img
+        src={`${BASE}images/cases/ornikar/i18n/pt/hero.svg`}
+        alt="Ornikar — Automação de QA & integração de comparadores de seguros"
+        loading="lazy"
+        class="w-full rounded-2xl shadow"
+      />
+    </p>
+
+    <h1>Ornikar — Seguro auto: Automação de QA, comparadores & pagamento</h1>
+
+    <h2>Contexto & jornadas críticas</h2>
+    <ul>
+      <li>Produto: site de seguro auto (criação de conta, <strong>gerador de cotação</strong> para 44 M de veículos, 3 planos, pagamento, assinatura).</li>
+      <li>Integrações: 3 comparadores (<em>LesFurets</em>, <em>MeilleureAssurance</em>, <em>LeLynx</em>) com questionários/modelos diferentes.</li>
+      <li>Jornadas: entrada direta ou via comparador, risco novo/padrão, bônus-malus, histórico de seguro, opções & franquias, pagamento, assinatura, validação de contato.</li>
+    </ul>
+
+    <h2>Período & cadência</h2>
+    <ul><li>~6 meses, sprints de 3 semanas, <strong>releases semanais</strong>.</li></ul>
+
+    <h2>Organização & papel</h2>
+    <ul>
+      <li>2 squads principais (incluindo <strong>Growth</strong>), ~7 devs; 6 QAs no total + Head of QA.</li>
+      <li>Papel: <strong>QA de Automação</strong> da Growth + validação de tickets da squad.</li>
+      <li>Atriz chave de validação end-to-end com PM, incluindo tarifação correta nos comparadores.</li>
+    </ul>
+
+    <h2>Estado inicial (M0)</h2>
+    <ul>
+      <li>E2E quebrado, poucas NRs automatizadas porém frágeis (quebram a cada release), ~4 meses sem QA dedicado na squad.</li>
+      <li>Comparadores: <strong>sem ambientes dedicados</strong> → manual pesado (~200 testes de 5–10 min cada).</li>
+      <li>Qual/pre-prod frequentemente bloqueados por upgrades do backend.</li>
+      <li>CI/CD: execuções em <strong>Jenkins + Kubernetes</strong>. Reporting (Xray) existente, pouco difundido; alertas ad hoc.</li>
+      <li>Incidentes recorrentes na comparação de cotações (impacto potencial de receita).</li>
+    </ul>
+
+    <h2>Stack & ferramentas</h2>
+    <ul class="columns-2">
+      <li>Front: React/TypeScript</li>
+      <li>UI: Selenium/WebDriver, Playwright</li>
+      <li>Mobile: Appium</li>
+      <li>API: Axios</li>
+      <li>Dados: CSV + randomização controlada</li>
+      <li>Carga: JMeter → k6</li>
+      <li>Monitoring: DataDog</li>
+      <li>Gestão de testes: Jira Xray</li>
+      <li>CI/CD: Jenkins + Kubernetes</li>
+      <li>Geração de contrato via Grafana</li>
+    </ul>
+
+    <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+      <figure class="border rounded-xl p-3 dark:border-neutral-700">
+        <img src={`${BASE}images/cases/ornikar/i18n/pt/pipeline-before.svg`} alt="Antes: E2E frágil, checagens manuais nos comparadores, ambientes bloqueados" loading="lazy" class="w-full rounded-lg" />
+        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Antes: E2E frágil, comparadores manuais, ambientes bloqueados, incidentes.</figcaption>
+      </figure>
+      <figure class="border rounded-xl p-3 dark:border-neutral-700">
+        <img src={`${BASE}images/cases/ornikar/i18n/pt/pipeline-after.svg`} alt="Depois: Jenkins + K8s, E2E robusto, 2 execuções/dia, PR checks, artefatos, notificações" loading="lazy" class="w-full rounded-lg" />
+        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Depois: pipeline estável, 25 min/run, 10 personas, 2 execuções/dia, Xray/Slack.</figcaption>
+      </figure>
+    </div>
+
+    <h2>Estratégia de automação</h2>
+    <ul>
+      <li><strong>Reforçar em vez de refazer</strong>: seletores estáveis (PO), fixtures, test-data builders.</li>
+      <li>BDD: Gherkin para produto + <strong>3 Amigos</strong> → maior testabilidade.</li>
+      <li>E2E: <strong>2 execuções/dia</strong>, <strong>10 personas</strong> (tolerante a A/B, retries limitados, waits progressivos).</li>
+      <li>Camadas por risco: smoke / sanity / crítico / NR.</li>
+      <li><strong>Dados totalmente randomizados e controlados</strong>; isolamento/seeds quando possível.</li>
+    </ul>
+
+    <h2>CI/CD, execução & reporting</h2>
+    <ul>
+      <li>Execuções automáticas (Jenkins/K8s) + <strong>checks de PR</strong>; E2E entre squads com Issuance.</li>
+      <li>Artefatos: screenshots, logs de API, <strong>relatório HTML</strong>; Xray alimentado.</li>
+      <li>Notificações: Slack (Assurance, Growth, QA) + e-mail para Head of QA.</li>
+    </ul>
+
+    <h2>Manual & UAT</h2>
+    <ul>
+      <li>Automatizado: quase todo o perímetro Ornikar (exceto limitações de comparadores).</li>
+      <li>Manual: validação de tickets, comparadores, <strong>smoke em produção</strong> pós-release.</li>
+    </ul>
+
+    <h2>Enablement & handover</h2>
+    <ul>
+      <li>Docs por jornada, guias Gherkin, guia Grafana.</li>
+      <li>Mentoring (2h/semana), pairing com líderes de QA; integrações (Quakr.io, DocuSign).</li>
+      <li>Demos a cada 3 semanas.</li>
+    </ul>
+
+    <h2>KPIs & resultados</h2>
+    <ul>
+      <li><strong>25 min</strong> por run (10 personas); <strong>2 execuções/dia</strong>.</li>
+      <li><strong>100% dos críticos em M1</strong>; cobertura ampliada nas releases.</li>
+      <li>~<strong>50–60 bugs</strong> interceptados; <strong>300+ runs</strong>; <strong>150–200 tickets</strong> validados.</li>
+      <li>Comparadores: ~<strong>300 testes manuais</strong>.</li>
+      <li>Últimos 2 meses: <strong>0 bug crítico em produção</strong> no escopo automatizado.</li>
+    </ul>
+
+    <h2>Mapa de fluxos</h2>
+    <figure class="not-prose my-6 border rounded-xl p-3 dark:border-neutral-700">
+      <img
+        src={`${BASE}images/cases/ornikar/i18n/pt/gen-paths.svg`}
+        alt="Mapa: entrada (site/comparadores), veículo & histórico, identidade, carteira & histórico, histórico de seguro, segundo condutor, infos gerais, plano (terceiros/intermediário/total), opções/franquias, pagamento, assinatura, validação de contato"
+        loading="lazy"
+        class="w-full rounded-lg"
+      />
+    </figure>
+
+    <blockquote><strong>Aviso</strong> — Informações representativas e não sensíveis; sem citações pessoais.</blockquote>
+  </article>
+</BaseLayout>

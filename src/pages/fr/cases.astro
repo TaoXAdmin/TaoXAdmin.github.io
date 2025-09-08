@@ -4,21 +4,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const lang = 'fr';
 const pageTitle = 'Cas d’étude - Alexis Fiska';
 const pageDescription =
-  "Études de cas QA & GenAI : Xpollens (BaaS BPCE) – automatisation from scratch, CI/CD Azure, fiabilité des parcours critiques. D’autres cas arrivent.";
+  "Études de cas QA : Xpollens (BaaS BPCE) – automatisation from scratch, CI/CD Azure, fiabilité des parcours critiques ; Ornikar Assurance – E2E robuste, intégration comparateurs, exécutions PR Jenkins/K8s.";
 const BASE = import.meta.env.BASE_URL ?? '/';
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
   <h1 class="text-3xl font-bold mb-6 text-center">Cas d’étude</h1>
   <p class="max-w-3xl mx-auto mb-10 text-neutral-700 dark:text-neutral-300 text-center">
-    Chaque projet est unique. Voici comment j’ai accompagné une fintech BaaS (groupe BPCE) vers une
-    automatisation des tests efficace et durable. Les chiffres précis sont volontairement omis ou
-    anonymisés conformément aux accords de confidentialité (NDA).
+    Chaque projet est unique. Voici des résumés “light” avant la lecture des études détaillées. Les chiffres précis
+    sont volontairement anonymisés conformément aux accords de confidentialité (NDA).
   </p>
 
   <!-- Xpollens -->
   <article class="mb-12">
     <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Xpollens (Groupe BPCE)</h2>
-
     <figure class="mb-4">
       <img
         src={`${BASE}images/cases/xpollens/hero.svg`}
@@ -40,52 +38,16 @@ const BASE = import.meta.env.BASE_URL ?? '/';
 
     <h3 class="text-xl font-medium mt-4 mb-1">Objectifs</h3>
     <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
-      <li>Démarrer l’automatisation E2E/API et sécuriser les parcours critiques monétiques & comptes.</li>
-      <li>Industrialiser une pipeline <strong>Azure DevOps</strong> (build/test/report) sur qualif/intégration/prod (smoke).</li>
-      <li>Réduire de moitié la recette manuelle ; structurer NR/triage/observabilité.</li>
+      <li>Démarrer l’automatisation E2E/API et sécuriser les parcours monétiques &amp; comptes.</li>
+      <li>Industrialiser une pipeline <strong>Azure DevOps</strong> (build/test/report) qualif/intégration/prod (smoke).</li>
+      <li>Réduire la recette manuelle ; structurer NR/triage/observabilité.</li>
     </ul>
 
-    <h3 class="text-xl font-medium mt-4 mb-1">Approche</h3>
+    <h3 class="text-xl font-medium mt-4 mb-1">Approche & résultats</h3>
     <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      Framework C# maison : <strong>SpecFlow + Gherkin</strong> (BDD), <strong>Selenium</strong> (UI), <strong>RestSharp</strong> (API),
-      Page Objects robustes (<code>data-testid</code>), jeux de données CSV anonymisés, retries (≤3) bornés, anti-flakes.
-      CI Azure : 2 runs/jour, reporting Teams + mail à la squad, screenshots/traçabilité.
-    </p>
-
-    <h3 class="text-xl font-medium mt-4 mb-1">Résultats</h3>
-    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
-      <li>~60 % de couverture critique en M2, ≈100 % en M6 ; recette ÷2 ; −23 % d’incidents prod (année 1).</li>
-      <li>Adoption BDD dans les squads, 43 sprints couverts, 1826 runs E2E, centaines de bugs interceptés en 3 ans, 5 QA formés à automatiser leur périmètre,  stabilité accrue des plateformes.</li>
-    </ul>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
-      <figure class="border rounded-xl p-3 dark:border-neutral-700">
-        <img
-          src={`${BASE}images/cases/xpollens/pipeline-before.svg`}
-          alt="Avant : recettes manuelles longues, instabilité, 0 automatisation"
-          loading="lazy"
-          class="w-full rounded-lg"
-        />
-        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Avant : recettes manuelles, instabilité périodique.</figcaption>
-      </figure>
-      <figure class="border rounded-xl p-3 dark:border-neutral-700">
-        <img
-          src={`${BASE}images/cases/xpollens/pipeline-after.svg`}
-          alt="Après : CI/CD Azure, E2E 2×/jour, reporting centralisé, smoke prod"
-          loading="lazy"
-          class="w-full rounded-lg"
-        />
-        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Après : CI/CD Azure, E2E 2×/jour, reporting & smoke prod.</figcaption>
-      </figure>
-    </div>
-
-    <h3 class="text-xl font-medium mt-4 mb-1">Stack</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      C#, SpecFlow (Gherkin), Selenium, RestSharp, Azure DevOps, Microsoft Teams.
-    </p>
-
-    <p class="text-sm italic text-neutral-600 dark:text-neutral-400">
-      NDA : certaines informations sont anonymisées/généralisées.
+      Framework C# (SpecFlow/Selenium/RestSharp), Page Objects stables, données anonymisées, retries bornés, anti-flakes.
+      2 runs/jour, reporting Teams + email, screenshots &amp; journaux. Couverture critique &gt;≈100% en M6, recette ÷2,
+      −23% d’incidents l’année 1.
     </p>
 
     <p class="mt-4">
@@ -95,5 +57,45 @@ const BASE = import.meta.env.BASE_URL ?? '/';
     </p>
   </article>
 
-  <!-- Tu pourras ajouter ici Ornikar et Projets GenAI au même format -->
+  <!-- Ornikar -->
+  <article class="mb-12">
+    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Ornikar Assurance</h2>
+    <figure class="mb-4">
+      <img
+        src={`${BASE}images/cases/ornikar/i18n/fr/hero.svg`}
+        alt="Ornikar Assurance — QA Automation & CI/CD, devis auto, paiement, comparateurs intégrés"
+        loading="lazy"
+        class="w-full rounded-2xl shadow-sm"
+      />
+      <figcaption class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+        E2E robuste (10 profils), exécutions PR &amp; quotidiennes, intégration comparateurs (LesFurets, LeLynx, MeilleureAssurance).
+      </figcaption>
+    </figure>
+
+    <h3 class="text-xl font-medium mt-4 mb-1">Contexte</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      Tests bout-en-bout de la plateforme Assurance Auto : création compte, devis (44 M véhicules, 3 offres), paiement.
+      Vérification de l’intégration de 3 comparateurs aux contraintes différentes, avec collecte/gestion de données tarifaires.
+    </p>
+
+    <h3 class="text-xl font-medium mt-4 mb-1">Objectifs</h3>
+    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
+      <li>Stabiliser l’E2E existant &amp; fiabiliser les parcours critiques.</li>
+      <li>Automatiser au maximum malgré l’absence d’environnements comparateurs.</li>
+      <li>Accélérer la cadence de releases avec des runs PR + quotidiens.</li>
+    </ul>
+
+    <h3 class="text-xl font-medium mt-4 mb-1">Approche & résultats</h3>
+    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
+      TS/React, Selenium/Playwright, Appium, Jenkins+Kubernetes, Xray. Page Objects, test-data builders, randomisation
+      contrôlée, retries &amp; waits progressifs. 2 runs/jour (~25 min), exécutions PR, screenshots/logs/API, notifications Slack/Email.
+      100% des parcours critiques couverts (M1) puis maintien, stabilité accrue, recettes comparateurs gérées en manuel ciblé.
+    </p>
+
+    <p class="mt-4">
+      <a href={`${BASE}fr/cases/ornikar`} class="inline-block px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+        Lire l’étude détaillée
+      </a>
+    </p>
+  </article>
 </BaseLayout>
