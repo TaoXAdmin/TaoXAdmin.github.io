@@ -5,70 +5,103 @@ import ServiceCard from '../../components/ServiceCard.astro';
 const lang = 'pt';
 const pageTitle = 'Serviços - Alexis Fiska';
 const pageDescription =
-  'Consultoria em automação de QA, CI/CD, performance k6, GenAI e coaching para acelerar releases e reduzir regressões.';
+  'Consultoria em automação de QA, CI/CD, performance com k6, GenAI e coaching. Pensada para acelerar seus releases e reduzir regressões.';
+
+const BASE = import.meta.env.BASE_URL ?? '/';
 
 const services = [
   {
     title: 'Auditoria E2E Express',
     description:
-      'Revisão direcionada do pipeline de testes: gargalos, flakiness e lacunas de cobertura. Quick wins acionáveis.',
-    bullets: ['Roadmap priorizada (30/60/90d)', 'Métricas de estabilidade/tempo/cobertura', 'Apresentação executiva'],
+      'Análise focada do seu pipeline de testes para achar gargalos, flakiness e pontos cegos. Quick wins priorizados.',
+    bullets: [
+      'Relatório priorizado & roadmap 30/60/90 dias',
+      'Métricas (estabilidade, tempo, cobertura)',
+      'Apresentação clara para as equipes',
+    ],
     icon: '/images/services/audit.svg',
     href: `/${lang}/contact`,
-    ctaLabel: 'Agendar auditoria',
+    ctaLabel: 'Agendar a auditoria',
+    ctaVariant: 'outlineGold',
   },
   {
-    title: 'Framework de QA do Zero',
+    title: 'Framework de QA do zero',
     description:
-      'Framework BDD modular (Playwright/SpecFlow) adaptado ao seu stack, mantível e bem documentado.',
-    bullets: ['POM + fixtures + data-builders', 'Selecionadores estáveis (data-testid)', 'Docs e exemplos'],
+      'Implantação de um framework BDD modular (Playwright/SpecFlow) adaptado à sua stack — mantível e documentado.',
+    bullets: [
+      'Arquitetura POM + fixtures + data builders',
+      'Seletores estáveis (data-testid)',
+      'Docs & exemplos reprodutíveis',
+    ],
     icon: '/images/services/framework.svg',
     href: `/${lang}/cases`,
     ctaLabel: 'Ver estudos de caso',
+    ctaVariant: 'outlineGold',
   },
   {
     title: 'Aceleração de CI/CD',
     description:
-      'Deixe as pipelines ágeis: paralelização, sharding e smoke/sanity focados para feedback rápido.',
-    bullets: ['Particionamento inteligente', 'Gestão de ambientes & artefatos', 'Relatórios acionáveis'],
+      'Racionalize seus pipelines: paralelização, sharding, estratégias de smoke/sanity para feedback ultrarrápido.',
+    bullets: [
+      'Particionamento inteligente das suites',
+      'Gestão de ambientes & artefatos',
+      'Relatórios acionáveis',
+    ],
     icon: '/images/services/cicd.svg',
     href: `/${lang}/contact`,
-    ctaLabel: 'Otimizar pipeline',
+    ctaLabel: 'Otimizar meu pipeline',
+    ctaVariant: 'outlineGold',
   },
   {
-    title: 'k6 Performance & Observabilidade',
+    title: 'Performance k6 & Observabilidade',
     description:
-      'Testes de carga baseados em uso e dashboards focados para evitar deriva de performance.',
-    bullets: ['Cenários realistas (RPS/usuários)', 'Dashboards Grafana & alertas', 'Análise de gargalos'],
+      'Carga k6 baseada no uso real e dashboards focados para evitar deriva de performance.',
+    bullets: [
+      'Cenários realistas (RPS/pacing de usuários)',
+      'Dashboards no Grafana & alertas',
+      'Análise de gargalos & recomendações',
+    ],
     icon: '/images/services/perf.svg',
   },
   {
     title: 'GenAI para QA',
     description:
-      'Aumente a produtividade: dados sintéticos, triagem de logs e sugestões de testes.',
-    bullets: ['Conjuntos de dados sintéticos', 'Análise e resumo de logs', 'Ferramentas “promptáveis” para QA'],
+      'Acelere a QA com assistentes: geração de dados, triagem de logs e sugestões de testes.',
+    bullets: [
+      'Conjuntos de dados sintéticos',
+      'Análise & sumarização de logs',
+      'Ferramentas orientadas a prompt para QA',
+    ],
     icon: '/images/services/genai.svg',
   },
   {
-    title: 'Transferência & Coaching',
+    title: 'Transferência de conhecimento & Coaching',
     description:
-      'Treinamento prático e katas para sua equipe se tornar autônoma e manter a qualidade.',
-    bullets: ['Sessions hands-on & pair testing', 'Katas (UI/API/CI)', 'Suporte & revisão de PR'],
+      'Formação pragmática e katas para que a sua equipe se torne autônoma e mantenha o foco em qualidade.',
+    bullets: [
+      'Sessões hands-on & pair testing',
+      'Katas direcionados (UI/API/CI)',
+      'Suporte & revisões de PR',
+    ],
     icon: '/images/services/coaching.svg',
     href: `/${lang}/contact`,
     ctaLabel: 'Treinar minha equipe',
+    ctaVariant: 'outlineGold',
   },
 ];
 
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: 'QA Automation & GenAI consulting',
+  name: 'Consultoria em QA Automation & GenAI',
   provider: { '@type': 'Person', name: 'Alexis Fiska' },
   areaServed: 'France/Remote',
   priceRange: '€€€',
-  offers: { '@type': 'Offer', priceCurrency: 'EUR',
-    priceSpecification: { '@type': 'PriceSpecification', minPrice: 450, priceCurrency: 'EUR' } },
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'EUR',
+    priceSpecification: { '@type': 'PriceSpecification', minPrice: 450, priceCurrency: 'EUR' },
+  },
 };
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
@@ -76,12 +109,20 @@ const serviceSchema = {
     <script type="application/ld+json" is:inline set:html={JSON.stringify(serviceSchema)}></script>
   </Fragment>
 
-  <section class="text-center mb-8">
-    <h1 class="text-3xl font-bold mb-3">Serviços</h1>
-    <p class="max-w-3xl mx-auto text-neutral-700 dark:text-neutral-300">
-      Ofertas para <strong>acelerar releases</strong>, <strong>reduzir regressões</strong> e tornar a qualidade
-      <strong>previsível</strong>.
-    </p>
+  <!-- HERO section -->
+  <section class="text-center mb-8 relative overflow-hidden rounded-2xl bg-neutral-950 border border-white/10 px-6 py-10">
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0
+         [background:radial-gradient(80%_120%_at_50%_-20%,rgba(255,255,255,.06),transparent_70%),linear-gradient(120deg,transparent,rgba(214,179,106,.10),transparent)]"></div>
+
+    <div class="relative">
+      <h1 class="text-3xl font-bold mb-3 text-white">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-white to-[#D6B36A]">Serviços</span>
+      </h1>
+      <p class="max-w-3xl mx-auto text-white/70">
+        Ofertas pensadas para <strong>acelerar seus releases</strong>, <strong>reduzir regressões</strong>
+        e tornar a qualidade <strong>previsível</strong>.
+      </p>
+    </div>
   </section>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -89,10 +130,15 @@ const serviceSchema = {
   </div>
 
   <section class="mt-10 text-center">
-    <a href={`/${lang}/contact`} class="inline-flex items-center gap-2 rounded-xl px-4 py-3
-       bg-blue-600 text-white hover:bg-blue-700 font-medium">
+    <a
+      href={`/${lang}/contact`}
+      class="inline-flex items-center gap-2 rounded-xl px-4 py-3 font-medium
+             border border-[#D6B36A80] text-white bg-transparent
+             hover:bg-[#D6B36A14] active:bg-[#D6B36A20]
+             focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 transition-colors"
+    >
       Falar sobre sua necessidade
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="shrink-0">
         <path d="M7 17l10-10M17 7H9M17 7v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
     </a>

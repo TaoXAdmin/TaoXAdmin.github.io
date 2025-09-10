@@ -2,97 +2,141 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const lang = 'de';
-const pageTitle = 'Fallstudien – Alexis Fiska';
+const pageTitle = 'Fallstudien - Alexis Fiska';
 const pageDescription =
-  'QA-Fallstudien: Xpollens (BPCE BaaS) – Greenfield-Automatisierung, Azure CI/CD, stabile kritische Journeys; Ornikar Versicherung – robustes E2E, Vergleicher-Integrationen, PR- & Daily-Runs.';
+  "QA-Fallstudien: Xpollens (BPCE BaaS) – Automatisierung von Grund auf, Azure CI/CD, Zuverlässigkeit kritischer Prozesse; Ornikar Versicherung – robustes E2E, Integration von Vergleichsportalen, PR-Läufe auf Jenkins/K8s.";
 const BASE = import.meta.env.BASE_URL ?? '/';
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
-  <h1 class="text-3xl font-bold mb-6 text-center">Fallstudien</h1>
-  <p class="max-w-3xl mx-auto mb-10 text-neutral-700 dark:text-neutral-300 text-center">
-    Kurze “Light”-Zusammenfassungen vor den ausführlichen Berichten. Konkrete Zahlen sind aus NDA-Gründen verallgemeinert.
-  </p>
+  <!-- Header „Fallstudien“ mit Luxusrahmen + texturiertem Hintergrund -->
+  <div
+    class="max-w-5xl mx-auto mb-10 rounded-2xl p-[1px]
+           bg-[linear-gradient(135deg,rgba(214,179,106,.65),rgba(255,255,255,.08))]
+           shadow-xl shadow-black/30"
+  >
+    <div
+      class="relative rounded-[1rem] ring-1 ring-white/10 bg-neutral-950 overflow-hidden
+             px-6 py-8 md:px-10 md:py-10"
+    >
+      <!-- Luxus-Schleier -->
+      <span
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0
+               [background:radial-gradient(120%_100%_at_70%_-10%,rgba(255,255,255,.06),transparent_60%),linear-gradient(120deg,transparent,rgba(214,179,106,.08),transparent)]"
+      ></span>
+
+      <!-- Inhalt -->
+      <div class="relative">
+        <h1 class="text-3xl md:text-4xl font-bold mb-4 text-center text-white">
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-white to-[#D6B36A]">
+            Fallstudien
+          </span>
+        </h1>
+
+        <div class="h-px w-full max-w-3xl mx-auto mb-5 bg-gradient-to-r from-transparent via-[#D6B36A] to-transparent opacity-70"></div>
+
+        <p class="max-w-3xl mx-auto text-center text-white/70">
+          Jedes Projekt ist einzigartig. Hier sind kurze Zusammenfassungen vor den ausführlichen Studien.
+          Exakte Zahlen wurden gemäß NDA-Vereinbarungen bewusst anonymisiert.
+        </p>
+      </div>
+    </div>
+  </div>
 
   <!-- Xpollens -->
   <article class="mb-12">
-    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Xpollens (BPCE-Gruppe)</h2>
+    <h2 class="text-2xl font-semibold mb-2 text-white">Xpollens (BPCE-Gruppe)</h2>
     <figure class="mb-4">
       <img
-        src={`${BASE}images/cases/xpollens/i18n/de/hero.svg`}
-        alt="Xpollens — CI/CD-Pipeline und kritische Banking-Abläufe"
+        src={`${BASE}images/cases/xpollens/i18n/${lang}/hero.svg`}
+        alt="Xpollens — CI/CD-Pipeline und kritische Bankprozesse"
         loading="lazy"
-        class="w-full rounded-2xl shadow-sm"
+        class="w-full rounded-2xl shadow-lg shadow-black/30 ring-1 ring-white/10"
       />
-      <figcaption class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
-        Von Grund auf: E2E/API-Automatisierung, Azure CI/CD, Teams/E-Mail-Reporting.
+      <figcaption class="mt-2 text-sm text-white/60">
+        Automatisierung von Grund auf: E2E/API, Azure CI/CD, Teams/Email-Reporting.
       </figcaption>
     </figure>
 
-    <h3 class="text-xl font-semibold mt-4 mb-1">Kontext</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      BaaS-Fintech mit kritischen Produkten (Izly, Bimpli, Money Walkie, Leroy-Merlin-Marketplace, Autodoc SEPA, Nirio/FDJ…).
-      Zu Beginn: keine Automatisierung, 7 Squads mit manueller QA, lange NR-Checklisten, periodische Incidents, strenge Regulierung.
+    <h3 class="text-xl font-semibold mt-4 mb-1 text-white">Kontext</h3>
+    <p class="mb-3 text-white/70">
+      BaaS-Fintech mit kritischen Produkten (Izly, Bimpli, Money Walkie, Leroy-Merlin/Adeo-Marketplace,
+      Autodoc SEPA, Nirio/FDJ ...). Bei meinem Start: 0 Automatisierung, 7 Squads mit manueller QA, lange Abnahmen,
+      Vorfälle in Wellen, starke regulatorische Auflagen (DSGVO/KYC/AML/CFT).
     </p>
 
-    <h3 class="text-xl font-semibold mt-4 mb-1">Ziele</h3>
-    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
-      <li>Start von E2E/API-Automatisierung und Absicherung monetärer &amp; Konto-Flows.</li>
-      <li>Industrialisiertes <strong>Azure DevOps</strong> (Build/Test/Report) inkl. Prod-Smoke.</li>
-      <li>Manuelle NR verringern; Triage/Observability strukturieren.</li>
+    <h3 class="text-xl font-semibold mt-4 mb-1 text-white">Ziele</h3>
+    <ul class="list-disc pl-5 mb-3 space-y-1 text-white/70 marker:text-[#D6B36A99]">
+      <li>E2E/API-Automatisierung starten und Karten- &amp; Kontoprozesse absichern.</li>
+      <li><strong>Azure DevOps</strong>-Pipeline industrialisieren (Build/Test/Report) für QA/Integration/Prod (Smoke).</li>
+      <li>Manuelle Abnahme reduzieren; NR/Triage/Observability strukturieren.</li>
     </ul>
 
-    <h3 class="text-xl font-semibold mt-4 mb-1">Vorgehen & Resultate</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      C#-Framework (SpecFlow/Selenium/RestSharp), stabile Selektoren &amp; anonymisierte Daten, begrenzte Retries.
-      2 Läufe/Tag, Teams+E-Mail-Reports, Screenshots/Logs. ≈100 % kritische Abdeckung bis M6, manuelle Arbeit halbiert,
-      −23 % Prod-Incidents im Jahr 1.
+    <h3 class="text-xl font-semibold mt-4 mb-1 text-white">Vorgehen &amp; Ergebnisse</h3>
+    <p class="mb-3 text-white/70">
+      C#-Framework (SpecFlow/Selenium/RestSharp), stabile Page Objects, anonymisierte Daten, begrenzte Retries, Anti-Flakes.
+      2 Läufe/Tag, Teams + E-Mail-Reporting, Screenshots &amp; Logs. Kritische Abdeckung ≈100% bis M6,
+      manueller Testaufwand halbiert, −23% Vorfälle im ersten Jahr.
     </p>
 
     <p class="mt-4">
-      <a href={`${BASE}de/cases/xpollens`} class="inline-block px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
-        Zur Fallstudie
+      <a
+        href={`${BASE}${lang}/cases/xpollens`}
+        class="inline-block px-4 py-2 rounded-lg font-medium
+               border border-[#D6B36A80] text-white bg-transparent
+               hover:bg-[#D6B36A14] active:bg-[#D6B36A20]
+               focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 transition-colors"
+      >
+        Zur ausführlichen Fallstudie
       </a>
     </p>
   </article>
 
   <!-- Ornikar -->
   <article class="mb-12">
-    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Ornikar (Versicherung)</h2>
+    <h2 class="text-2xl font-semibold mb-2 text-white">Ornikar (Versicherung)</h2>
     <figure class="mb-4">
       <img
-        src={`${BASE}images/cases/ornikar/i18n/de/hero.svg`}
-        alt="Ornikar (Versicherung) — QA-Automatisierung & CI/CD, Tarife, Zahlung, integrierte Vergleicher"
+        src={`${BASE}images/cases/ornikar/i18n/${lang}/hero.svg`}
+        alt="Ornikar (Versicherung) — QA-Automatisierung & CI/CD, Kfz-Angebote, Zahlung, integrierte Vergleichsportale"
         loading="lazy"
-        class="w-full rounded-2xl shadow-sm"
+        class="w-full rounded-2xl shadow-lg shadow-black/30 ring-1 ring-white/10"
       />
-      <figcaption class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
-        Robustes E2E (10 Profile), PR- & Daily-Runs, Vergleicher (LesFurets, LeLynx, MeilleureAssurance).
+      <figcaption class="mt-2 text-sm text-white/60">
+        Robustes E2E (10 Profile), PR- &amp; tägliche Läufe, Integration von Vergleichsportalen (LesFurets, LeLynx, MeilleureAssurance).
       </figcaption>
     </figure>
 
-    <h3 class="text-xl font-semibold mt-4 mb-1">Kontext</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      E2E-Tests der Kfz-Versicherungsplattform: Kontoanlage, Tarif (44 M Fahrzeuge, 3 Tarife), Zahlung.
-      Validierung der Integration von drei externen Vergleichern mit unterschiedlichen Anforderungen und Datenmodellen.
+    <h3 class="text-xl font-semibold mt-4 mb-1 text-white">Kontext</h3>
+    <p class="mb-3 text-white/70">
+      End-to-End-Tests der Auto-Versicherungsplattform: Kontoanlage, Angebote (44 Mio. Fahrzeuge, 3 Tarife), Zahlung.
+      Prüfung der Integration von 3 Vergleichsportalen mit unterschiedlichen Randbedingungen sowie Erhebung/Verwaltung von Preisdaten.
     </p>
 
-    <h3 class="text-xl font-semibold mt-4 mb-1">Ziele</h3>
-    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
-      <li>Bestehendes E2E stabilisieren und kritische Journeys absichern.</li>
-      <li>Maximal automatisieren trotz fehlender dedizierter Umgebungen der Vergleicher.</li>
-      <li>Releases beschleunigen via PR- und tägliche Ausführungen.</li>
+    <h3 class="text-xl font-semibold mt-4 mb-1 text-white">Ziele</h3>
+    <ul class="list-disc pl-5 mb-3 space-y-1 text-white/70 marker:text-[#D6B36A99]">
+      <li>Bestehendes E2E stabilisieren &amp; kritische Pfade absichern.</li>
+      <li>Maximale Automatisierung trotz fehlender Vergleichsportals-Umgebungen.</li>
+      <li>Release-Takt mit PR- plus täglichen Läufen erhöhen.</li>
     </ul>
 
-    <h3 class="text-xl font-semibold mt-4 mb-1">Vorgehen & Resultate</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      TS/React, Selenium/Playwright, Appium, Jenkins+K8s, Xray. Page Objects, Data-Builder, kontrollierte Randomisierung,
-      begrenzte Retries & progressive Waits. 2 Läufe/Tag (~25 Min), PR-Runs, Screenshots/API-Logs, Slack/E-Mail-Benachrichtigungen.
-      100 % kritische Journeys ab M1, Stabilität deutlich erhöht; manuelle Tests gezielt für Vergleicher.
+    <h3 class="text-xl font-semibold mt-4 mb-1 text-white">Vorgehen &amp; Ergebnisse</h3>
+    <p class="mb-3 text-white/70">
+      TS/React, Selenium/Playwright, Appium, Jenkins+Kubernetes, Xray. Page Objects, Test-Data-Builder, kontrollierte
+      Randomisierung, Retries &amp; progressive Waits. 2 Läufe/Tag (~25 Min), PR-Ausführungen, Screenshots/Logs/API,
+      Slack/E-Mail-Benachrichtigungen. 100% der kritischen Pfade abgedeckt (M1) und gehalten, höhere Stabilität,
+      Vergleichsprüfungen gezielt manuell abgedeckt.
     </p>
 
     <p class="mt-4">
-      <a href={`${BASE}de/cases/ornikar`} class="inline-block px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
-        Zur Fallstudie
+      <a
+        href={`${BASE}${lang}/cases/ornikar`}
+        class="inline-block px-4 py-2 rounded-lg font-medium
+               border border-[#D6B36A80] text-white bg-transparent
+               hover:bg-[#D6B36A14] active:bg-[#D6B36A20]
+               focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 transition-colors"
+      >
+        Zur ausführlichen Fallstudie
       </a>
     </p>
   </article>

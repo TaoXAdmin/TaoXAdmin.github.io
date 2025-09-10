@@ -1,18 +1,113 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
-  <rect width="1200" height="520" fill="#ffffff"/>
-  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" fill="#0f172a">
-    <text x="600" y="60" font-size="26" font-weight="700" text-anchor="middle">Nachher: automatisierte Azure-DevOps-Pipeline</text>
+<!-- public/images/cases/xpollens/pipeline-after.de.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" role="img" width="1200" height="520" viewBox="0 0 1200 520">
+  <title>Xpollens — Nachher: automatisierte Azure DevOps-Pipeline</title>
+  <desc>Premium-dunkle Pipeline: schwarze Karten mit Goldrand, weiße Pfeile, schräge goldene Lichtbündel. Niedrigerer, größerer Tagline.</desc>
+
+  <defs>
+    <!-- Fond charbon -->
+    <radialGradient id="bgRad" cx="50%" cy="45%" r="80%">
+      <stop offset="0"   stop-color="#111111"/>
+      <stop offset="0.7" stop-color="#0C0C0C"/>
+      <stop offset="1"   stop-color="#080808"/>
+    </radialGradient>
+
+    <!-- Faisceaux dorés (différent du “before”) -->
+    <linearGradient id="beamA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#D6B36A" stop-opacity="0"/>
+      <stop offset="0.45" stop-color="#D6B36A" stop-opacity=".14"/>
+      <stop offset="0.55" stop-color="#D6B36A" stop-opacity=".16"/>
+      <stop offset="1"   stop-color="#D6B36A" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="beamB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#D6B36A" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#D6B36A" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#D6B36A" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Liseré doré des cartes -->
+    <linearGradient id="goldStroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#D6B36A" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity=".08"/>
+    </linearGradient>
+
+    <!-- Ombre douce cartes -->
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000" flood-opacity=".35"/>
+    </filter>
+
+    <!-- Glow léger blanc (flèches) -->
+    <filter id="glowWhite" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2" result="b1"/>
+      <feMerge><feMergeNode in="b1"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Titre blanc → or -->
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D6B36A"/>
+    </linearGradient>
+
+    <!-- Pointe de flèche blanche -->
+    <marker id="arrowHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#FFFFFF" />
+    </marker>
+  </defs>
+
+  <!-- Arrière-plan -->
+  <rect width="1200" height="520" fill="url(#bgRad)"/>
+  <rect x="-200" y="40"  width="1600" height="180" fill="url(#beamA)" transform="rotate(12 600 130)"  opacity=".9"/>
+  <rect x="-260" y="320" width="1600" height="140" fill="url(#beamB)" transform="rotate(-10 600 390)" opacity=".9"/>
+
+  <!-- Cadre subtil -->
+  <rect x="24" y="24" width="1152" height="472" rx="20" fill="none" stroke="#FFFFFF20"/>
+
+  <!-- Titre -->
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" text-rendering="geometricPrecision">
+    <text x="600" y="66" font-size="28" font-weight="800" text-anchor="middle" fill="url(#titleGrad)">
+      Nachher: automatisierte Azure DevOps-Pipeline
+    </text>
   </g>
+
+  <!-- Contenu pipeline -->
   <g transform="translate(80,180)" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial">
-    <rect x="0" y="0" width="180" height="90" rx="12" fill="#2563eb" opacity="0.9"/><text x="90" y="54" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">Code</text>
-    <rect x="220" y="0" width="180" height="90" rx="12" fill="#2563eb" opacity="0.9"/><text x="310" y="54" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">Build</text>
-    <rect x="440" y="-50" width="220" height="90" rx="12" fill="#22c55e" opacity="0.95"/><text x="550" y="-16" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">API-Tests (RestSharp)</text>
-    <rect x="440" y="60" width="220" height="90" rx="12" fill="#22c55e" opacity="0.95"/><text x="550" y="94" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">UI-Tests (Selenium)</text>
-    <rect x="700" y="0" width="180" height="90" rx="12" fill="#0ea5e9" opacity="0.9"/><text x="790" y="54" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">Report</text>
-    <rect x="920" y="0" width="180" height="90" rx="12" fill="#16a34a" opacity="0.95"/><text x="1010" y="54" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">Deployment</text>
-    <g stroke="#94a3b8" fill="none" stroke-width="3" stroke-linecap="round">
-      <path d="M180,45 H220"/><path d="M400,45 H440"/><path d="M660,45 H700"/><path d="M880,45 H920"/><path d="M550,-50 V-10"/><path d="M550,60 V0"/>
+    <!-- Cartes -->
+    <g filter="url(#cardShadow)">
+      <rect x="0"   y="0"   width="180" height="90" rx="14" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+      <text x="90"  y="56" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">Code</text>
     </g>
-    <text x="520" y="170" font-size="14" fill="#334155" text-anchor="middle">2 Läufe/Tag • Prod-Smoke • Teams- &amp; E-Mail-Benachrichtigungen • Artefakte &amp; Screenshots</text>
+    <g filter="url(#cardShadow)">
+      <rect x="220" y="0"   width="180" height="90" rx="14" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+      <text x="310" y="56" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">Build</text>
+    </g>
+    <g filter="url(#cardShadow)">
+      <rect x="440" y="-50" width="220" height="90" rx="14" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+      <text x="550" y="-16" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">API-Tests (RestSharp)</text>
+    </g>
+    <g filter="url(#cardShadow)">
+      <rect x="440" y="60" width="220" height="90" rx="14" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+      <text x="550" y="94" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">UI-Tests (Selenium)</text>
+    </g>
+    <g filter="url(#cardShadow)">
+      <rect x="700" y="0" width="180" height="90" rx="14" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+      <text x="790" y="56" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">Bericht</text>
+    </g>
+    <g filter="url(#cardShadow)">
+      <rect x="920" y="0" width="180" height="90" rx="14" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+      <text x="1010" y="56" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">Deployment</text>
+    </g>
+
+    <!-- Flèches -->
+    <g stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none" filter="url(#glowWhite)" marker-end="url(#arrowHead)">
+      <path d="M180,45 H220"/>
+      <path d="M400,45 H440"/>
+      <path d="M660,-5 H700"/>
+      <path d="M660,95 H700"/>
+      <path d="M880,45 H920"/>
+    </g>
+
+    <!-- Tagline -->
+    <text x="520" y="200" font-size="18" fill="#FFFFFFE6" text-anchor="middle">
+      2 Läufe/Tag • Smoke in Prod • Teams- &amp; E-Mail-Benachrichtigungen • Artefakte &amp; Screenshots
+    </text>
   </g>
 </svg>

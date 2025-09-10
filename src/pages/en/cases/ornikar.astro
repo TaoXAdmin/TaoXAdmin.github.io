@@ -1,123 +1,212 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 const lang = 'en';
-const pageTitle = "Ornikar — Auto insurance: QA Automation, aggregators & payment";
+const pageTitle = 'Ornikar — Car insurance: QA Automation, comparison sites & payments';
 const pageDescription =
-  "Stabilised E2E (Selenium/WebDriver, Playwright), 3 aggregators integration, CI Jenkins+Kubernetes, Xray, DataDog. 25 min/run, 2 runs/day, 100% critical paths by M1.";
+  'E2E stabilization (Selenium/WebDriver, Playwright), comparison sites integration (LesFurets/MeilleureAssurance/LeLynx), CI Jenkins+Kubernetes, Xray, Datadog. 25 min/run, 2 runs/day, 100% critical journeys by M1.';
 const BASE = import.meta.env.BASE_URL ?? '/';
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
-  <article class="prose dark:prose-invert max-w-none">
+  <article
+    class="prose dark:prose-invert max-w-none prose-headings:tracking-tight prose-h1:mb-2 prose-h1:text-[2rem] md:prose-h1:text-[2.25rem]
+           prose-h2:mt-8 prose-h2:mb-3 prose-p:text-white prose-a:no-underline prose-a:decoration-[#D6B36A]/50
+           prose-a:underline-offset-4 hover:prose-a:decoration-[#D6B36A] prose-strong:text-white
+           prose-code:text-[#D6B36A] prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+           prose-blockquote:border-l-0 prose-blockquote:text-white/80">
+
+    <!-- HERO gold frame -->
     <p class="not-prose">
-      <img
-        src={`${BASE}images/cases/ornikar/i18n/en/hero.svg`}
-        alt="Ornikar — QA Automation & insurance aggregators integration"
-        loading="lazy"
-        class="w-full rounded-2xl shadow"
-      />
+      <span class="block rounded-2xl p-[1px]
+                   bg-[linear-gradient(135deg,rgba(214,179,106,.65),rgba(255,255,255,.08))]
+                   shadow-xl shadow-black/30">
+        <span class="block rounded-[1rem] overflow-hidden relative ring-1 ring-white/10">
+          <img
+            src={`${BASE}images/cases/ornikar/i18n/${lang}/hero.svg`}
+            alt="Ornikar — QA Automation & integration with insurance comparison sites"
+            loading="lazy"
+            class="w-full block"
+          />
+          <!-- luxe veil -->
+          <span aria-hidden="true"
+                class="pointer-events-none absolute inset-0
+                       [background:radial-gradient(120%_100%_at_70%_-10%,rgba(255,255,255,.08),transparent_60%)]"></span>
+        </span>
+      </span>
     </p>
 
-    <h1>Ornikar — Auto insurance: QA Automation, aggregators & payment</h1>
+    <!-- Main title with white→gold gradient -->
+    <h1 class="bg-clip-text text-transparent bg-gradient-to-r from-white to-[#D6B36A] mt-8">
+      Ornikar — Car insurance: QA Automation, comparison sites &amp; payments
+    </h1>
 
-    <h2>Context & critical journeys</h2>
-    <ul>
-      <li>Product: auto-insurance website (account creation, <strong>quote engine</strong> for 44M vehicles, 3 plans, payment, signature).</li>
-      <li>Integrations: 3 aggregators (<em>LesFurets</em>, <em>MeilleureAssurance</em>, <em>LeLynx</em>) with different questionnaires & data models.</li>
-      <li>Secured journeys: direct arrival or via aggregator, new/standard risk, bonus-malus, insurance history, options & deductibles, payment, contract signature, contact validation.</li>
+    <!-- golden ribbon -->
+    <div class="not-prose h-px w-full my-4 bg-gradient-to-r from-transparent via-[#D6B36A] to-transparent opacity-70"></div>
+
+    <h2>Context &amp; critical journeys</h2>
+    <ul class="marker:text-[#D6B36A]">
+      <li>Product: car-insurance website (account creation, <strong>quote generator</strong> covering 44M vehicles, 3 offers, payment, signature).</li>
+      <li>Integrations: 3 comparison sites (<em>LesFurets</em>, <em>MeilleureAssurance</em>, <em>LeLynx</em>) with different questionnaires/assumptions.</li>
+      <li>Journeys to secure: direct arrival or via comparison site, new/standard profile, malus/bonus, insurance history, options &amp; deductibles, payment, contract signature, contact validation.</li>
     </ul>
 
-    <h2>Timeline & cadence</h2>
-    <ul><li>~6 months, 3-week sprints, <strong>weekly releases</strong>.</li></ul>
+    <h2>Timeline &amp; cadence</h2>
+    <ul class="marker:text-[#D6B36A]">
+      <li>~6-month engagement, 3-week sprints, <strong>weekly releases</strong>.</li>
+    </ul>
 
-    <h2>Organisation & role</h2>
-    <ul>
-      <li>2 major squads (including <strong>Growth</strong>), ~7 devs in squad, total 6 QAs + Head of QA.</li>
-      <li>Role: <strong>QA Automation engineer</strong> for Growth + ticket validation for the squad.</li>
-      <li>Key actor for end-to-end validation with PM, including correct pricing on aggregator platforms.</li>
+    <h2>Organisation &amp; role</h2>
+    <ul class="marker:text-[#D6B36A]">
+      <li>2 main squads (incl. <strong>Growth</strong>). ~7 devs in my squad. 6 QAs total + Head of QA.</li>
+      <li>Role: <strong>QA Automation Engineer</strong> for Growth + validation of all squad tickets.</li>
+      <li>Key actor for end-to-end UAT with the PM, including price verification on comparison sites.</li>
     </ul>
 
     <h2>Initial state (M0)</h2>
-    <ul>
-      <li>Broken E2E, few automated NRs but brittle (fail every release), ~4 months without a dedicated squad QA.</li>
-      <li>Aggregators: <strong>no dedicated environments</strong> → heavy manual testing (~200 tests, 5–10 min each).</li>
-      <li>Qual/pre-prod environments constrained by backend upgrades/locks.</li>
-      <li>CI/CD: executions on <strong>Jenkins + Kubernetes</strong>. Reporting existed (Xray) but rarely broadcast; alerts on demand.</li>
-      <li>Recurring incidents on quote comparison (potential revenue impact).</li>
+    <ul class="marker:text-[#D6B36A]">
+      <li>Broken E2E, a few NR tests but fragile (break every release), 4 months without a dedicated QA in the squad.</li>
+      <li>Comparison sites: <strong>no dedicated environments</strong> → heavy manual UAT (~200 tests of 5–10&nbsp;min each).</li>
+      <li>Staging/pre-prod often constrained by backend (upgrades, blocks).</li>
+      <li>CI/CD: executions on <strong>Jenkins + Kubernetes</strong>. Existing reporting (Xray) but low reach, alerts shared ad hoc.</li>
+      <li>Regular incidents on quote comparison (potential revenue impact).</li>
     </ul>
 
-    <h2>Stack & tooling</h2>
-    <ul class="columns-2">
-      <li>Front: React/TypeScript</li>
+    <h2>Stack &amp; tools</h2>
+    <ul class="columns-2 marker:text-[#D6B36A]">
+      <li>Front: React/TypeScript (in-house framework)</li>
       <li>UI: Selenium/WebDriver, Playwright</li>
       <li>Mobile: Appium</li>
       <li>API: Axios</li>
-      <li>Data: CSV + controlled randomisation</li>
+      <li>Data: CSV (datasets + controlled randomization)</li>
       <li>Load: JMeter → k6</li>
-      <li>Monitoring: DataDog</li>
-      <li>Test mgmt: Jira Xray</li>
+      <li>Monitoring: Datadog</li>
+      <li>Test mgmt: Jira Xray (dashboards)</li>
       <li>CI/CD: Jenkins + Kubernetes</li>
-      <li>Contract generation via Grafana (to support testing)</li>
+      <li>Test contracts: generated via Grafana (to ease UAT)</li>
     </ul>
 
-    <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
-      <figure class="border rounded-xl p-3 dark:border-neutral-700">
-        <img src={`${BASE}images/cases/ornikar/i18n/en/pipeline-before.svg`} alt="Before: brittle E2E, heavy manual checks on aggregators, constrained envs" loading="lazy" class="w-full rounded-lg" />
-        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Before: fragile E2E, manual on aggregators, blocked envs, recurring incidents.</figcaption>
+    <!-- Before / After gold frames -->
+    <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+      <figure class="rounded-2xl p-[1px] bg-[linear-gradient(135deg,rgba(214,179,106,.55),rgba(255,255,255,.08))]">
+        <div class="rounded-[1rem] p-3 bg-neutral-950 ring-1 ring-white/10">
+          <img
+            src={`${BASE}images/cases/ornikar/i18n/${lang}/pipeline-before.svg`}
+            alt="Before: broken E2E, heavy manual work on comparison sites, constrained envs"
+            loading="lazy"
+            class="w-full rounded-lg ring-1 ring-white/10"
+          />
+          <figcaption class="mt-2 text-xs text-white/60">Before: fragile E2E, manual comparison-site UAT, blocking envs, recurring incidents.</figcaption>
+        </div>
       </figure>
-      <figure class="border rounded-xl p-3 dark:border-neutral-700">
-        <img src={`${BASE}images/cases/ornikar/i18n/en/pipeline-after.svg`} alt="After: Jenkins + K8s, robust E2E, 2 runs/day, PR checks, artifacts, notifications" loading="lazy" class="w-full rounded-lg" />
-        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">After: stabilised pipeline, 25-min run, 10 personas, 2 runs/day, Xray/Slack broadcasting.</figcaption>
+
+      <figure class="rounded-2xl p-[1px] bg-[linear-gradient(135deg,rgba(214,179,106,.55),rgba(255,255,255,.08))]">
+        <div class="rounded-[1rem] p-3 bg-neutral-950 ring-1 ring-white/10">
+          <img
+            src={`${BASE}images/cases/ornikar/i18n/${lang}/pipeline-after.svg`}
+            alt="After: Jenkins + K8s, robust E2E, 2 runs/day, PR checks, artifacts, notifications"
+            loading="lazy"
+            class="w-full rounded-lg ring-1 ring-white/10"
+          />
+          <figcaption class="mt-2 text-xs text-white/60">After: stabilized pipeline, E2E 25&nbsp;min/run, 10 profiles, 2 runs/day, Xray/Slack distribution.</figcaption>
+        </div>
       </figure>
     </div>
 
     <h2>Automation strategy</h2>
-    <ul>
-      <li><strong>Harden rather than rebuild</strong>: stable selectors (PO), fixtures, test-data builders.</li>
-      <li>BDD: Gherkin training (product team) + <strong>3 Amigos</strong> ritual → better testability.</li>
-      <li>E2E ramp-up: <strong>2 runs/day</strong>, <strong>10 customer personas</strong> (A/B tolerant, bounded retries, progressive waits).</li>
-      <li>Risk-based layers: smoke / sanity / critical / NR.</li>
-      <li><strong>Fully randomised controlled data</strong>; isolation/seeds when possible.</li>
+    <ul class="marker:text-[#D6B36A]">
+      <li><strong>Hardening</strong> rather than rebuild: new stable selectors (PO), fixtures, test-data builders.</li>
+      <li>BDD: Gherkin training (product team) + systematic <strong>Three Amigos</strong> → better testability.</li>
+      <li>Strengthened E2E: <strong>2 runs/day</strong>, <strong>10 customer profiles</strong> (A/B tests tolerated, bounded retries, progressive waits).</li>
+      <li>Hierarchy: smoke / sanity / critical / NR based on risk &amp; ROI.</li>
+      <li><strong>100% randomized &amp; controlled</strong> data (GDPR); seeds and isolation when possible.</li>
     </ul>
 
-    <h2>CI/CD, execution & reporting</h2>
-    <ul>
-      <li>Auto executions (Jenkins/K8s) + <strong>PR checks</strong>; cross-squad E2E with Issuance.</li>
-      <li>Artifacts: UI screenshots, API logs, <strong>HTML report</strong> per run; Xray fed.</li>
-      <li>Notifications: Slack (Assurance, Growth, QA) + email to Head of QA.</li>
+    <h2>CI/CD, execution &amp; reporting</h2>
+    <ul class="marker:text-[#D6B36A]">
+      <li>Automated executions (Jenkins/K8s) + <strong>checks on every PR</strong>; inter-squad E2E with Issuance for a full journey.</li>
+      <li>Artifacts: UI screenshots, API logs, <strong>HTML report</strong> per run, Xray fed.</li>
+      <li>Notifications: Slack (Insurance, Growth, QA) + email to Head of QA.</li>
     </ul>
 
-    <h2>Manual & UAT</h2>
-    <ul>
-      <li>Automated: almost all Ornikar perimeter (except aggregator constraints).</li>
-      <li>Manual left: ticket validation, aggregator recipes, <strong>prod smoke</strong> after release.</li>
+    <h2>Manual &amp; UAT</h2>
+    <ul class="marker:text-[#D6B36A]">
+      <li>Automated: almost the entire Ornikar scope (except comparison-site constraints).</li>
+      <li>Still manual: ticket validation, comparison-site UAT (no dedicated envs), <strong>prod smoke</strong> post-release.</li>
     </ul>
 
-    <h2>Enablement & handover</h2>
-    <ul>
-      <li>“Getting started” docs per journey, Gherkin guides, Grafana contract generation how-to.</li>
-      <li>Mentoring (2h weekly), pairing with QA leaders; tool integrations (Quakr.io, DocuSign).</li>
-      <li>Sprint demos every 3 weeks.</li>
+    <h2>Training &amp; handover</h2>
+    <ul class="marker:text-[#D6B36A]">
+      <li>“Getting started” docs per journey, Gherkin guides, Grafana usage to generate a contract.</li>
+      <li>Mentoring manual QAs (2h/week), regular pairing (Head of QA, Driving-school Lead QA).</li>
+      <li>Tooling integrations (Quakr.io for devices, DocuSign for contracts), sprint demos (every 3 weeks).</li>
     </ul>
 
-    <h2>KPIs & results</h2>
-    <ul>
-      <li><strong>25-min</strong> E2E run (10 personas); <strong>2 runs/day</strong>.</li>
-      <li><strong>100% critical coverage by M1</strong>; extended coverage over releases.</li>
-      <li>~<strong>50–60 defects</strong> intercepted; <strong>300+ runs</strong>; <strong>150–200 tickets</strong> validated.</li>
-      <li>Aggregators: ~<strong>300 manual tests</strong> executed due to external constraints.</li>
-      <li>Last 2 months: <strong>0 critical prod bug</strong> on the automated scope.</li>
+    <h2>KPIs &amp; results</h2>
+    <ul class="marker:text-[#D6B36A]">
+      <li><strong>25&nbsp;min/run</strong> E2E (10 profiles); <strong>2 runs/day</strong>.</li>
+      <li><strong>100% of critical journeys by M1</strong>; broader coverage thereafter across releases.</li>
+      <li>~<strong>50–60 bugs</strong> caught; <strong>300+ runs</strong> executed; <strong>150–200 tickets</strong> validated.</li>
+      <li>Comparison sites: ~<strong>300 manual tests</strong> performed (external constraints).</li>
+      <li>Last 2 months: <strong>0 critical bug in prod</strong> within the automated scope.</li>
     </ul>
 
-    <h2>Covered flow map</h2>
-    <figure class="not-prose my-6 border rounded-xl p-3 dark:border-neutral-700">
-      <img
-        src={`${BASE}images/cases/ornikar/i18n/en/gen-paths.svg`}
-        alt="Map: entry (site/aggregators), vehicle & history, identity, licence & record, insurance history, second driver, general info, plan (third party/intermediate/all-risk), options/deductibles, payment, signature, contact validation"
-        loading="lazy"
-        class="w-full rounded-lg"
-      />
+    <h2>Coverage map</h2>
+    <figure class="not-prose my-6 rounded-2xl p-[1px] bg-[linear-gradient(135deg,rgba(214,179,106,.55),rgba(255,255,255,.08))]">
+      <div class="rounded-[1rem] p-3 bg-neutral-950 ring-1 ring-white/10">
+        <img
+          src={`${BASE}images/cases/ornikar/i18n/${lang}/gen-paths.svg`}
+          alt="Map: customer origin (site/comparison sites), vehicle & history, identity, licence & records, insurance history, secondary driver, general info, package (third-party/intermediate/comprehensive), options/deductibles, payment, signature, contact validation"
+          loading="lazy"
+          class="w-full rounded-lg ring-1 ring-white/10"
+        />
+        <figcaption class="mt-2 text-xs text-white/60">
+          Macro view of key steps from quote → payment → signature, including comparison-site entries.
+        </figcaption>
+      </div>
     </figure>
 
-    <blockquote><strong>Disclaimer</strong> — Representative, non-sensitive information; no personal quotations.</blockquote>
+    <blockquote class="not-prose">
+      <div class="rounded-2xl p-[1px] bg-[linear-gradient(135deg,rgba(214,179,106,.6),rgba(255,255,255,.06))]">
+        <div class="rounded-[0.75rem] p-4 bg-neutral-950/80 ring-1 ring-white/10">
+          <p class="m-0 text-white/80">
+            <strong class="text-white">Disclaimer</strong> — Non-sensitive, representative information; no named quotes from staff.
+          </p>
+        </div>
+      </div>
+    </blockquote>
   </article>
+
+  <!-- Page-local luxe styles -->
+  <style is:inline>
+    :root { --gold:#D6B36A; }
+    /* Gold vertical accent on h2 + readable colors */
+    .prose :where(h2){
+      position: relative;
+      padding-left: .6rem;
+      color: white;
+    }
+    .prose :where(h2)::before{
+      content:"";
+      position:absolute; left:0; top:.35em; bottom:.35em;
+      width:3px; border-radius:2px;
+      background: linear-gradient(180deg,var(--gold),rgba(255,255,255,.35));
+      opacity:.9;
+    }
+    /* Force general readability in luxe dark mode */
+    .prose :where(p, li){ color: white; }
+    .prose :where(em){ color: color-mix(in oklab, white 92%, black 8%); }
+    /* Golden markers */
+    .prose :where(ul)>li::marker{ color: var(--gold); }
+    /* Blockquote fallback */
+    .prose blockquote{
+      border-left: 3px solid color-mix(in oklab, var(--gold) 65%, white 35%);
+      background: color-mix(in oklab, black 88%, var(--gold) 12%);
+      border-radius: .75rem; padding: .85rem 1rem; margin: 1rem 0;
+    }
+    /* Soft separators */
+    .prose hr{
+      border:0; height:1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity:.7;
+    }
+  </style>
 </BaseLayout>

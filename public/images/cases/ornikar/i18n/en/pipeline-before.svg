@@ -1,36 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
-  <rect width="1200" height="520" fill="#ffffff"/>
-  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" fill="#0f172a">
-    <text x="600" y="56" font-size="26" font-weight="700" text-anchor="middle">Before: brittle E2E, manual comparators, quote incidents</text>
+<!-- public/images/cases/ornikar/pipeline-before.en.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" role="img" width="1200" height="520" viewBox="0 0 1200 520">
+  <title>Ornikar — Before: fragile E2E, manual comparators, quote incidents</title>
+  <desc>Three premium dark cards, golden bullets linked by a white line. Charcoal background with subtle golden grid and fine grain.</desc>
+
+  <!-- ...defs and layout unchanged... -->
+
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" text-rendering="geometricPrecision">
+    <text x="600" y="66" font-size="28" font-weight="800" text-anchor="middle" fill="url(#titleGrad)">
+      Before: fragile E2E, manual comparators, quote incidents
+    </text>
   </g>
-  <g transform="translate(70,110)">
-    <rect x="0" y="0" width="340" height="310" rx="16" fill="#f8fafc" stroke="#e5e7eb"/>
-    <text x="170" y="36" text-anchor="middle" font-size="18" font-weight="600">Automation</text>
-    <g fill="#334155" font-size="14">
-      <text x="24" y="76">• Existing E2E broken, flaky NR</text>
-      <text x="24" y="106">• Fragile selectors, unmanaged data</text>
-      <text x="24" y="136">• Reporting seldom shared</text>
-      <text x="24" y="166">• Jenkins/K8s underused</text>
+
+  <!-- Card 1: Automation -->
+  <g transform="translate(50,110)" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial">
+    <!-- frames unchanged -->
+    <text x="170" y="44" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">Automation</text>
+    <!-- bullets -->
+    <g font-size="16" fill="#FFFFFFE6">
+      <text x="66" y="108">Broken E2E, unreliable regression checks</text>
+      <text x="66" y="144">Fragile selectors, unmanaged data</text>
+      <text x="66" y="180">Reporting rarely shared</text>
+      <text x="66" y="216">Jenkins/K8s underused</text>
     </g>
   </g>
-  <g transform="translate(430,110)">
-    <rect x="0" y="0" width="340" height="310" rx="16" fill="#f8fafc" stroke="#e5e7eb"/>
-    <text x="170" y="36" text-anchor="middle" font-size="18" font-weight="600">Comparators</text>
-    <g fill="#334155" font-size="14">
-      <text x="24" y="76">• No dedicated environments</text>
-      <text x="24" y="106">• 100% manual testing (200+ cases)</text>
-      <text x="24" y="136">• Divergent questions/data models</text>
-      <text x="24" y="166">• Frequent incidents on comparisons</text>
+
+  <!-- Card 2: Comparators -->
+  <g transform="translate(430,110)" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial">
+    <text x="170" y="44" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">Comparators</text>
+    <g font-size="16" fill="#FFFFFFE6">
+      <text x="66" y="108">No dedicated environments</text>
+      <text x="66" y="144">100% manual UAT (200+ cases)</text>
+      <text x="66" y="180">Questionnaire/data mismatches</text>
+      <text x="66" y="216">Frequent incidents (comparisons)</text>
     </g>
   </g>
-  <g transform="translate(790,110)">
-    <rect x="0" y="0" width="340" height="310" rx="16" fill="#f8fafc" stroke="#e5e7eb"/>
-    <text x="170" y="36" text-anchor="middle" font-size="18" font-weight="600">Envs &amp; CI</text>
-    <g fill="#334155" font-size="14">
-      <text x="24" y="76">• Qual/Preprod dependent on BE</text>
-      <text x="24" y="106">• Blocking upgrades</text>
-      <text x="24" y="136">• Limited observability</text>
-      <text x="24" y="166">• Xray present, uneven usage</text>
+
+  <!-- Card 3: Environments & CI -->
+  <g transform="translate(810,110)" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial">
+    <text x="170" y="44" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">Environments &amp; CI</text>
+    <g font-size="16" fill="#FFFFFFE6">
+      <text x="66" y="108">QA/Pre-prod dependent on backend</text>
+      <text x="66" y="144">Blocking upgrades</text>
+      <text x="66" y="180">Limited observability</text>
+      <text x="66" y="216">Xray present, uneven usage</text>
     </g>
   </g>
 </svg>

@@ -1,20 +1,102 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2e8f0"/><stop offset="1" stop-color="#f8fafc"/></linearGradient><filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="40"/></filter></defs>
-  <rect width="1200" height="630" fill="url(#g)"/><circle cx="260" cy="150" r="120" fill="#93c5fd" filter="url(#soft)" opacity="0.45"/><circle cx="980" cy="520" r="160" fill="#a5b4fc" filter="url(#soft)" opacity="0.45"/>
-  <rect x="80" y="120" width="1040" height="390" rx="24" fill="#ffffff" stroke="#e5e7eb"/>
-  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" fill="#0f172a">
-    <text x="120" y="210" font-size="38" font-weight="700">Xpollens — QA-Automatisierung &amp; CI/CD</text>
-    <text x="120" y="254" font-size="20" fill="#334155">C#, SpecFlow (Gherkin), Selenium (UI), RestSharp (API), Azure DevOps</text>
-    <g transform="translate(120,320)">
-      <rect x="0" y="0" width="960" height="8" rx="4" fill="#e2e8f0"/>
-      <g text-anchor="middle" font-size="14" fill="#334155">
-        <g transform="translate(0,0)"><circle cx="0" cy="4" r="14" fill="#2563eb"/><text x="0" y="-18" font-weight="600" fill="#0f172a">Code</text></g>
-        <g transform="translate(240,0)"><circle cx="0" cy="4" r="14" fill="#2563eb"/><text x="0" y="-18" font-weight="600" fill="#0f172a">Build</text></g>
-        <g transform="translate(480,0)"><circle cx="0" cy="4" r="14" fill="#2563eb"/><text x="0" y="-18" font-weight="600" fill="#0f172a">UI/API-Tests</text></g>
-        <g transform="translate(720,0)"><circle cx="0" cy="4" r="14" fill="#2563eb"/><text x="0" y="-18" font-weight="600" fill="#0f172a">Report</text></g>
-        <g transform="translate(960,0)"><circle cx="0" cy="4" r="14" fill="#16a34a"/><text x="0" y="-18" font-weight="600" fill="#0f172a">Deployment</text></g>
-      </g>
-    </g>
-    <text x="120" y="410" font-size="16" fill="#475569">2 Läufe/Tag • Prod-Smoke • Teams- &amp; E-Mail-Benachrichtigungen</text>
+<!-- public/images/cases/xpollens/hero.de.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" role="img" width="1200" height="630" viewBox="0 0 1200 630">
+  <title>Xpollens — QA-Automatisierung &amp; CI/CD</title>
+  <desc>Premium-dunkler Hero mit Titeln, Untertiteln, einer Timeline verbunden durch eine weiße Linie und goldenen Punkten.</desc>
+
+  <defs>
+    <radialGradient id="bg-vignette" cx="50%" cy="40%" r="80%">
+      <stop offset="0" stop-color="#101010"/>
+      <stop offset="0.65" stop-color="#0C0C0C"/>
+      <stop offset="1" stop-color="#070707"/>
+    </radialGradient>
+
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#D6B36A" stop-opacity="0"/>
+      <stop offset="0.45" stop-color="#D6B36A" stop-opacity=".10"/>
+      <stop offset="0.55" stop-color="#D6B36A" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#D6B36A" stop-opacity="0"/>
+    </linearGradient>
+
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+
+    <filter id="softWhite" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D6B36A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Hintergrund -->
+  <rect width="1200" height="630" fill="url(#bg-vignette)"/>
+  <!-- goldener Schleier -->
+  <g opacity=".9" transform="translate(0,0)">
+    <rect x="-100" y="-80" width="1400" height="400" fill="url(#sheen)" transform="rotate(10 600 200)"/>
   </g>
+
+  <!-- Feiner Rahmen -->
+  <rect x="40" y="40" width="1120" height="550" rx="22" fill="none" stroke="#FFFFFF20"/>
+
+  <!-- Titel + Untertitel -->
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" letter-spacing=".2px">
+    <text x="100" y="150" font-size="42" font-weight="800" fill="url(#titleGrad)">Xpollens — QA-Automatisierung &amp; CI/CD</text>
+    <text x="100" y="192" font-size="20" fill="#EDEDEDCC">C#, SpecFlow, Selenium, RestSharp, Azure DevOps</text>
+
+    <!-- Trenner -->
+    <line x1="100" y1="210" x2="560" y2="210" stroke="#D6B36A" stroke-width="2" stroke-linecap="round" opacity=".65"/>
+
+    <!-- Kernaussagen -->
+    <text x="100" y="248" font-size="16" fill="#FFFFFFB3">• Stabile E2E &amp; API • POM • anonymisierte Daten</text>
+    <text x="100" y="274" font-size="16" fill="#FFFFFFB3">• 2 Läufe/Tag • Teams/E-Mail-Reporting • Screenshots &amp; Logs</text>
+  </g>
+
+  <!-- Timeline -->
+  <g id="timeline" transform="translate(0,0)">
+    <path d="M140 360 L1020 360"
+          stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" opacity=".9"/>
+    <path d="M140 360 L1020 360"
+          stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity=".25" filter="url(#softWhite)"/>
+
+    <!-- Knoten -->
+    <g transform="translate(140,360)">
+      <circle r="20" fill="#D6B36A"/>
+      <circle r="34" fill="#D6B36A" opacity=".25" filter="url(#soft)"/>
+      <text x="0" y="52" font-family="Inter, system-ui" font-size="14" fill="#FFFFFF" text-anchor="middle">Code</text>
+    </g>
+    <g transform="translate(360,360)">
+      <circle r="20" fill="#D6B36A"/>
+      <circle r="34" fill="#D6B36A" opacity=".25" filter="url(#soft)"/>
+      <text x="0" y="52" font-family="Inter, system-ui" font-size="14" fill="#FFFFFF" text-anchor="middle">Build</text>
+    </g>
+    <g transform="translate(580,360)">
+      <circle r="20" fill="#D6B36A"/>
+      <circle r="34" fill="#D6B36A" opacity=".25" filter="url(#soft)"/>
+      <text x="0" y="52" font-family="Inter, system-ui" font-size="14" fill="#FFFFFF" text-anchor="middle">UI/API-Tests</text>
+    </g>
+    <g transform="translate(800,360)">
+      <circle r="20" fill="#D6B36A"/>
+      <circle r="34" fill="#D6B36A" opacity=".25" filter="url(#soft)"/>
+      <text x="0" y="52" font-family="Inter, system-ui" font-size="14" fill="#FFFFFF" text-anchor="middle">Bericht</text>
+    </g>
+    <g transform="translate(1020,360)">
+      <circle r="20" fill="#D6B36A"/>
+      <circle r="34" fill="#D6B36A" opacity=".25" filter="url(#soft)"/>
+      <text x="0" y="52" font-family="Inter, system-ui" font-size="14" fill="#FFFFFF" text-anchor="middle">Deployment</text>
+    </g>
+  </g>
+
+  <!-- Fußzeile -->
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial">
+    <text x="100" y="460" font-size="16" fill="#FFFFFFB3">
+      2 E2E-Läufe/Tag · Smoke in Produktion · Teams + E-Mail Reporting
+    </text>
+  </g>
+
+  <!-- Goldene Akzente -->
+  <circle cx="1100" cy="120" r="110" fill="#D6B36A" opacity=".12" filter="url(#soft)"/>
+  <circle cx="220" cy="520" r="140" fill="#D6B36A" opacity=".10" filter="url(#soft)"/>
 </svg>

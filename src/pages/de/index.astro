@@ -5,77 +5,140 @@ import CTAButton from '../../components/CTAButton.astro';
 const lang = 'de';
 const pageTitle = 'Startseite - Alexis Fiska';
 const pageDescription =
-  'QA-Automatisierung & GenAI für schnellere Releases ohne Regressionen. BDD-Framework, Playwright/SpecFlow, CI/CD, k6 Performance & Observability.';
+  'QA-Automatisierung & GenAI für schnellere Releases ohne Regressionen. BDD-Framework, Playwright/SpecFlow, CI/CD, k6-Performance & Observability.';
+const BASE = import.meta.env.BASE_URL ?? '/';
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
-  <section class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50 to-violet-50 dark:from-neutral-800 dark:to-neutral-900 border border-neutral-200 dark:border-neutral-800 px-6 py-14 md:py-16">
-    <div class="mx-auto max-w-5xl text-center">
+  <!-- HERO -->
+  <section class="relative overflow-hidden rounded-2xl bg-neutral-950 border border-white/10 px-6 py-14 md:py-16">
+    <!-- Premium-Schleier (leichter Glow + goldene Note) -->
+    <div aria-hidden="true"
+         class="pointer-events-none absolute inset-0
+                [background:radial-gradient(80%_120%_at_50%_-20%,rgba(255,255,255,.06),transparent_70%),linear-gradient(120deg,transparent,rgba(214,179,106,.10),transparent)]"></div>
+
+    <div class="relative mx-auto max-w-5xl text-center">
       <div class="mb-3 flex items-center justify-center gap-2">
-        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-white/70 dark:bg-neutral-800/70 border border-neutral-200 dark:border-neutral-700 text-blue-700 dark:text-blue-300">QA-Automatisierung</span>
-        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-white/70 dark:bg-neutral-800/70 border border-neutral-200 dark:border-neutral-700 text-violet-700 dark:text-violet-300">GenAI</span>
-        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-white/70 dark:bg-neutral-800/70 border border-neutral-200 dark:border-neutral-700 text-sky-700 dark:text-sky-300">CI/CD</span>
+        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">
+          QA Automation
+        </span>
+        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">
+          GenAI
+        </span>
+        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">
+          CI/CD
+        </span>
       </div>
 
-      <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">
-        QA-Automatisierung &amp; GenAI für schnellere Releases, <span class="whitespace-nowrap">ohne Regressionen.</span>
+      <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-white">
+        QA-Automatisierung &amp; GenAI für schnellere Releases,
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-white to-[#D6B36A]">
+          ohne Regressionen.
+        </span>
       </h1>
-      <p class="max-w-2xl mx-auto mb-8 text-lg text-neutral-700 dark:text-neutral-300">
-        BDD-Framework, Playwright/SpecFlow, CI/CD, k6 &amp; Observability. <strong>Kurzere Laufzeiten</strong>, <strong>null kritische Bugs</strong> in Produktion.
+
+      <p class="max-w-2xl mx-auto mb-8 text-lg text-white/70">
+        BDD-Framework, Playwright/SpecFlow, CI/CD, k6-Performance &amp; Observability.
+        <strong>Kurze Laufzeit</strong>, <strong>null kritische Bugs</strong> in Produktion.
       </p>
 
       <div class="flex flex-col sm:flex-row justify-center items-center gap-3">
-        <CTAButton href="/de/contact#audit" variant="primary">Kostenloses 30-Min-Audit</CTAButton>
-        <CTAButton href="/de/contact#quote" variant="ghost">Angebot anfordern</CTAButton>
+        <CTAButton href={`/${lang}/contact#audit`} variant="primary">Kostenloses 30&nbsp;Min Audit buchen</CTAButton>
+        <CTAButton href={`/${lang}/contact#quote`} variant="ghost">Angebot anfragen</CTAButton>
       </div>
     </div>
   </section>
 
+  <!-- HIGHLIGHTS -->
   <section class="py-10">
     <div class="mx-auto grid max-w-5xl grid-cols-1 md:grid-cols-3 gap-4">
-      <article class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 bg-white dark:bg-neutral-900">
-        <div class="mb-3"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <h3 class="font-semibold mb-1">BDD-Framework</h3>
-        <p class="text-sm text-neutral-600 dark:text-neutral-300">POM, Fixtures, Data-Builder &amp; <strong>stabile Selektoren</strong> für nachhaltige Tests.</p>
+      <article class="rounded-xl border border-white/10 p-5 bg-neutral-950">
+        <div class="mb-3 text-[#D6B36A]">
+          <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="font-semibold mb-1 text-white">BDD-Framework</h3>
+        <p class="text-sm text-white/70">POM, Fixtures, Data-Builder &amp; <strong>stabile Selektoren</strong> für nachhaltige Automatisierung.</p>
       </article>
-      <article class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 bg-white dark:bg-neutral-900">
-        <div class="mb-3"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M4 6h16v4H4zM4 14h16v4H4z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg></div>
-        <h3 class="font-semibold mb-1">Schnelles CI/CD</h3>
-        <p class="text-sm text-neutral-600 dark:text-neutral-300">Parallelisierung, Sharding und <strong>&lt; 30-Min Feedback</strong> mit klarem Reporting.</p>
+
+      <article class="rounded-xl border border-white/10 p-5 bg-neutral-950">
+        <div class="mb-3 text-[#D6B36A]">
+          <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v4H4zM4 14h16v4H4z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="font-semibold mb-1 text-white">Schnelles CI/CD</h3>
+        <p class="text-sm text-white/70">Parallelisierung, Sharding, <strong>Feedback &lt; 30&nbsp;Min</strong> und umsetzbares Reporting.</p>
       </article>
-      <article class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 bg-white dark:bg-neutral-900">
-        <div class="mb-3"><svg width="28" height="28" viewBox="0 0 24 24"><circle cx="7" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="17" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 12h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <h3 class="font-semibold mb-1">Performance &amp; Observability</h3>
-        <p class="text-sm text-neutral-600 dark:text-neutral-300">k6, Grafana-Dashboards und <strong>Alerts</strong> gegen Performance-Drift.</p>
+
+      <article class="rounded-xl border border-white/10 p-5 bg-neutral-950">
+        <div class="mb-3 text-[#D6B36A]">
+          <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="17" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 12h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="font-semibold mb-1 text-white">Performance &amp; Observability</h3>
+        <p class="text-sm text-white/70">k6, Grafana-Dashboards, <strong>Alarme</strong> und kontinuierliche Engpassverfolgung.</p>
       </article>
     </div>
   </section>
 
+  <!-- WHY -->
   <section class="py-10" id="why">
-    <h2 class="text-2xl font-semibold mb-4 text-center">Warum ich?</h2>
-    <p class="max-w-3xl mx-auto text-neutral-700 dark:text-neutral-300 mb-6 text-center">
-      5+ Jahre <strong>Automatisierung</strong> und früher Einsatz von <strong>GenAI</strong> für QA.
-      Ich liefere <strong>wartbare Frameworks</strong>, <strong>zuverlässige Pipelines</strong> und Team-Enablement.
+    <h2 class="text-2xl font-semibold mb-4 text-center text-white">Warum ich?</h2>
+    <p class="max-w-3xl mx-auto text-white/70 mb-6 text-center">
+      Über 5 Jahre <strong>Automatisierung</strong> und frühe <strong>GenAI</strong>-Adoption in der QA.
+      Ich liefere <strong>wartbare Frameworks</strong>, <strong>zuverlässige</strong> Pipelines und Upskilling der Teams.
     </p>
   </section>
 
-  <section class="py-12 bg-neutral-50 dark:bg-neutral-800/60" id="deliver">
-    <h2 class="text-2xl font-semibold mb-6 text-center">Lieferumfang</h2>
-    <ul class="mx-auto max-w-3xl space-y-3 text-neutral-700 dark:text-neutral-300">
-      <li class="flex gap-3"><span class="mt-1 text-blue-600 dark:text-blue-400">✔</span><span><strong>Modulares</strong> BDD-Framework für Ihre Stack.</span></li>
-      <li class="flex gap-3"><span class="mt-1 text-blue-600 dark:text-blue-400">✔</span><span>Zuverlässige Playwright-E2E <strong>&lt; 30 Min</strong>.</span></li>
-      <li class="flex gap-3"><span class="mt-1 text-blue-600 dark:text-blue-400">✔</span><span>Paralleles CI/CD mit <strong>klarem Reporting</strong>.</span></li>
-      <li class="flex gap-3"><span class="mt-1 text-blue-600 dark:text-blue-400">✔</span><span>k6-Szenarien + <strong>nutzungsnahe</strong> Observability.</span></li>
-      <li class="flex gap-3"><span class="mt-1 text-blue-600 dark:text-blue-400">✔</span><span>Coaching, Katas &amp; <strong>Dokumentation</strong>.</span></li>
+  <!-- DELIVER -->
+  <section class="py-12 bg-white/[.03]" id="deliver">
+    <h2 class="text-2xl font-semibold mb-6 text-center text-white">Was ich liefere</h2>
+    <ul class="mx-auto max-w-3xl space-y-3 text-white/70">
+      <li class="flex gap-3 items-start">
+        <svg class="mt-1 h-4 w-4 text-[#D6B36A] shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Ein <strong>modulares</strong> BDD-Framework, angepasst an Ihren Stack.</span>
+      </li>
+      <li class="flex gap-3 items-start">
+        <svg class="mt-1 h-4 w-4 text-[#D6B36A] shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span><strong>Zuverlässige</strong> Playwright-E2E-Tests &lt; 30&nbsp;Min.</span>
+      </li>
+      <li class="flex gap-3 items-start">
+        <svg class="mt-1 h-4 w-4 text-[#D6B36A] shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>CI/CD mit Parallelisierung und <strong>klarem Reporting</strong>.</span>
+      </li>
+      <li class="flex gap-3 items-start">
+        <svg class="mt-1 h-4 w-4 text-[#D6B36A] shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>k6-Szenarien + <strong>nutzungsorientierte Observability</strong>.</span>
+      </li>
+      <li class="flex gap-3 items-start">
+        <svg class="mt-1 h-4 w-4 text-[#D6B36A] shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Coaching, Katas und <strong>Dokumentation</strong> für Autonomie.</span>
+      </li>
     </ul>
   </section>
 
+  <!-- HOW -->
   <section class="py-12" id="how">
-    <h2 class="text-2xl font-semibold mb-6 text-center">Ablauf</h2>
-    <ol class="mx-auto max-w-3xl grid gap-4 sm:grid-cols-2">
-      <li class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-4"><strong>Express-Audit.</strong> 30-Min Hebel identifizieren.</li>
-      <li class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-4"><strong>Aktionsplan.</strong> Priorisierte Roadmap, business-aligned.</li>
-      <li class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-4"><strong>Umsetzung.</strong> Inkremental, kontinuierliches Feedback.</li>
-      <li class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-4"><strong>Nachbetreuung.</strong> Doku, Coaching, Nachhaltigkeit.</li>
+    <h2 class="text-2xl font-semibold mb-6 text-center text-white">Wie starten wir?</h2>
+    <ol class="mx-auto max-w-3xl grid gap-4 sm:grid-cols-2 text-white/70">
+      <li class="rounded-xl border border-white/10 p-4 bg-neutral-950">
+        <strong class="text-white">Express-Audit.</strong> 30&nbsp;Min zur Identifikation der Hebel.
+      </li>
+      <li class="rounded-xl border border-white/10 p-4 bg-neutral-950">
+        <strong class="text-white">Aktionsplan.</strong> Priorisierte, geschäftsorientierte Roadmap.
+      </li>
+      <li class="rounded-xl border border-white/10 p-4 bg-neutral-950">
+        <strong class="text-white">Umsetzung.</strong> Inkremental, kontinuierliches Feedback.
+      </li>
+      <li class="rounded-xl border border-white/10 p-4 bg-neutral-950">
+        <strong class="text-white">Nachbetreuung &amp; Übergabe.</strong> Doku, Coaching, Nachhaltigkeit.
+      </li>
     </ol>
   </section>
 </BaseLayout>

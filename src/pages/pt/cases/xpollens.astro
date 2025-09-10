@@ -1,101 +1,180 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+
 const lang = 'pt';
-const pageTitle = "Xpollens — Escalonar QA: E2E, CI/CD e confiabilidade";
-const pageDescription = "Automação do zero (C#, SpecFlow, Selenium, RestSharp), pipeline no Azure DevOps, relatórios via Teams/E-mail, estabilidade reforçada.";
+const pageTitle = 'Xpollens — Escalonamento de QA: E2E, CI/CD e fiabilização';
+const pageDescription = 'Automação do zero (C#, SpecFlow, Selenium, RestSharp), pipeline no Azure DevOps, reporting via Teams/Email, estabilidade acrescida.';
 const BASE = import.meta.env.BASE_URL ?? '/';
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
-  <article class="prose dark:prose-invert max-w-none">
+  <article
+    class="prose dark:prose-invert max-w-none
+           prose-headings:tracking-tight
+           prose-h1:mb-2 prose-h1:text-[2rem] md:prose-h1:text-[2.25rem]
+           prose-h2:mt-8 prose-h2:mb-3
+           prose-h1:text-white prose-h2:text-white prose-h3:text-white prose-h4:text-white
+           prose-p:text-white/85 prose-li:text-white/85 prose-strong:text-white
+           prose-a:text-white prose-a:no-underline prose-a:decoration-[#D6B36A]/50 prose-a:underline-offset-4
+           hover:prose-a:text-[#D6B36A] hover:prose-a:decoration-[#D6B36A]
+           prose-code:text-[#D6B36A] prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+           prose-blockquote:border-l-0 prose-blockquote:text-white/85">
+
+    <!-- HERO moldura dourada -->
     <p class="not-prose">
-      <img
-        src={`${BASE}images/cases/xpollens/i18n/pt/hero.svg`}
-        alt="Xpollens — pipelines de CI/CD e automação de fluxos críticos de pagamento"
-        loading="lazy"
-        class="w-full rounded-2xl shadow"
-      />
+      <span class="block rounded-2xl p-[1px]
+                   bg-[linear-gradient(135deg,rgba(214,179,106,.65),rgba(255,255,255,.08))]
+                   shadow-xl shadow-black/30">
+        <span class="block rounded-[1rem] overflow-hidden relative ring-1 ring-white/10">
+          <img
+            src={`${BASE}images/cases/xpollens/i18n/${lang}/hero.svg`}
+            alt="Xpollens — pipelines de CI/CD e automação dos fluxos bancários críticos"
+            loading="lazy"
+            class="w-full block"
+          />
+          <!-- véu luxo -->
+          <span aria-hidden="true"
+                class="pointer-events-none absolute inset-0
+                       [background:radial-gradient(120%_100%_at_70%_-10%,rgba(255,255,255,.08),transparent_60%)]"></span>
+        </span>
+      </span>
     </p>
 
-    <h1>Xpollens (Grupo BPCE) — Escalonar QA: E2E, CI/CD e confiabilidade</h1>
+    <!-- Título principal com gradiente branco→dourado -->
+    <h1 class="bg-clip-text text-transparent bg-gradient-to-r from-white to-[#D6B36A] mt-8">
+      Xpollens (Grupo BPCE) — Escalonamento de QA: E2E, CI/CD e fiabilização
+    </h1>
 
-    <h2>Contexto & estado inicial (M0)</h2>
-    <ul>
-      <li>Fintech BaaS com produtos críticos: Izly, Bimpli, Money Walkie, marketplace Leroy Merlin/Adeo, Autodoc SEPA, Nirio (FDJ), France Pay, Be-Bunk…</li>
-      <li>No início: <strong>0 automação</strong>, 7 squads (QA manual), regressões longas, incidentes periódicos, forte regulação (RGPD/KYC/AML-CFT), migração para Azure em curso.</li>
+    <!-- fim da faixa dourada -->
+    <div class="not-prose h-px w-full my-4 bg-gradient-to-r from-transparent via-[#D6B36A] to-transparent opacity-70"></div>
+
+    <h2>Contexto & ponto de situação (M0)</h2>
+    <ul class="marker:text-[#D6B36A]">
+      <li>Fintech BaaS a operar ofertas críticas: Izly, Bimpli, Money Walkie, marketplace Leroy&nbsp;Merlin/Adeo, Autodoc SEPA, Nirio (FDJ), France&nbsp;Pay, Be-Bunk…</li>
+      <li>À chegada: <strong>0 automação</strong>, 7 squads (QA manual), homologações longas, incidentes periódicos, fortes exigências regulatórias (RGPD/KYC/AML/CFT), migração para Azure.</li>
     </ul>
 
-    <h2>Equipe & escopo</h2>
-    <ul>
-      <li><strong>Duo transversal “foundation”</strong>: eu (engenheiro de automação QA) + colega no Porto.</li>
-      <li>Objetivos: criar o framework de testes, <strong>industrializar Azure DevOps</strong>, converter NR, treinar QA/devs, fortalecer ambientes e triagem.</li>
-      <li>Ritmo: 5 dias/semana, demos ao fim de cada sprint, rituais ágeis, pair-programming/pair-testing diário.</li>
+    <h2>Equipa & âmbito</h2>
+    <ul class="marker:text-[#D6B36A]">
+      <li><strong>Dupla transversal “foundation”</strong>: eu (engenheiro de QA automation) + colega no Porto.</li>
+      <li>Objetivos: criar o framework de testes, <strong>industrializar o Azure DevOps</strong>, converter NR, formar QA/devs, tornar ambientes & triagem mais fiáveis.</li>
+      <li>Ritmo: 5 dias/sem, demos no fim de sprint, rituais ágeis, pair programming/pair testing diário.</li>
     </ul>
 
     <h2>Abordagem</h2>
-    <ul>
-      <li><strong>Stack C#</strong>: SpecFlow + Gherkin (BDD), <strong>Selenium</strong> (UI), <strong>RestSharp</strong> (API), Page Objects & fixtures.</li>
-      <li>Conjuntos de dados CSV anonimizados, randomização conforme RGPD, <strong>≤3 tentativas</strong>, waits/timeouts anti-flake.</li>
-      <li><strong>Azure DevOps</strong>: 2 execuções E2E/dia, smoke pós-deploy em produção, artefatos, <strong>relatórios Teams</strong> (QA + geral) + e-mails direcionados por squad.</li>
-      <li>Fluxos cobertos: cartões Visa, wallets &amp; pagamentos, débitos SEPA, onboarding/KYC, reembolsos, reconciliação de marketplace.</li>
+    <ul class="marker:text-[#D6B36A]">
+      <li><strong>Stack C#</strong>: SpecFlow + Gherkin (BDD), <strong>Selenium</strong> (UI), <strong>RestSharp</strong> (API), Page Objects e fixtures.</li>
+      <li>Conjuntos CSV anonimizados, randomização controlada RGPD, <strong>retries ≤ 3</strong> limitados, anti-flakes (timeouts/waits explícitos).</li>
+      <li><strong>Azure DevOps</strong>: 2 execuções E2E/dia, smoke em produção pós-deploy, artefactos, <strong>reporting no Teams</strong> (QA + geral) + emails direcionados por squad.</li>
+      <li>Fluxos cobertos: cartões Visa, wallets, débitos diretos SEPA, onboarding/KYC, reembolsos, reconciliação do marketplace.</li>
     </ul>
 
-    <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
-      <figure class="border rounded-xl p-3 dark:border-neutral-700">
-        <img src={`${BASE}images/cases/xpollens/i18n/pt/pipeline-before.svg`} alt="Antes: regressões manuais longas, instabilidade periódica" loading="lazy" class="w-full rounded-lg" />
-        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Antes: apenas manual, instabilidade periódica.</figcaption>
+    <!-- Before / After molduras douradas -->
+    <div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+      <figure class="rounded-2xl p-[1px] bg-[linear-gradient(135deg,rgba(214,179,106,.55),rgba(255,255,255,.08))]">
+        <div class="rounded-[1rem] p-3 bg-neutral-950 ring-1 ring-white/10">
+          <img
+            src={`${BASE}images/cases/xpollens/i18n/${lang}/pipeline-before.svg`}
+            alt="Antes: homologações manuais longas, instabilidade periódica"
+            loading="lazy"
+            class="w-full rounded-lg ring-1 ring-white/10"
+          />
+          <figcaption class="mt-2 text-xs text-white/60">Antes: homologações manuais, instabilidade periódica.</figcaption>
+        </div>
       </figure>
-      <figure class="border rounded-xl p-3 dark:border-neutral-700">
-        <img src={`${BASE}images/cases/xpollens/i18n/pt/pipeline-after.svg`} alt="Depois: Azure DevOps, E2E 2×/dia, relatórios centralizados, smoke em produção" loading="lazy" class="w-full rounded-lg" />
-        <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">Depois: Azure DevOps, E2E 2×/dia, relatórios &amp; smoke em produção.</figcaption>
+
+      <figure class="rounded-2xl p-[1px] bg-[linear-gradient(135deg,rgba(214,179,106,.55),rgba(255,255,255,.08))]">
+        <div class="rounded-[1rem] p-3 bg-neutral-950 ring-1 ring-white/10">
+          <img
+            src={`${BASE}images/cases/xpollens/i18n/${lang}/pipeline-after.svg`}
+            alt="Depois: Azure CI/CD, E2E duas vezes/dia, reporting centralizado, smoke em produção"
+            loading="lazy"
+            class="w-full rounded-lg ring-1 ring-white/10"
+          />
+          <figcaption class="mt-2 text-xs text-white/60">Depois: Azure CI/CD, E2E ×2/dia, reporting &amp; smoke em prod.</figcaption>
+        </div>
       </figure>
     </div>
 
-    <h2>Mapa de fluxos cobertos</h2>
-    <figure class="not-prose my-6 border rounded-xl p-3 dark:border-neutral-700">
-      <img
-        src={`${BASE}images/cases/xpollens/i18n/pt/gen-paths.svg`}
-        alt="Mapa de fluxos críticos cobertos: Cartões, SEPA, Wallets & Pagamentos, Onboarding/KYC, Reembolsos, Reconciliação, Marketplace"
-        loading="lazy"
-        class="w-full rounded-lg"
-      />
-      <figcaption class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">
-        Visão macro: Cartões Visa, Débitos SEPA, Wallets &amp; Pagamentos, Onboarding/KYC, Reembolsos, Reconciliação, Marketplace.
-      </figcaption>
+    <h2>Mapeamento dos fluxos cobertos</h2>
+    <figure class="not-prose my-6 rounded-2xl p-[1px] bg-[linear-gradient(135deg,rgba(214,179,106,.55),rgba(255,255,255,.08))]">
+      <div class="rounded-[1rem] p-3 bg-neutral-950 ring-1 ring-white/10">
+        <img
+          src={`${BASE}images/cases/xpollens/i18n/${lang}/gen-paths.svg`}
+          alt="Mapeamento dos fluxos críticos: Cartão, SEPA, Wallet, KYC, Reembolsos, Reconciliação, Marketplace"
+          loading="lazy"
+          class="w-full rounded-lg ring-1 ring-white/10"
+        />
+        <figcaption class="mt-2 text-xs text-white/60">
+          Vista macro dos fluxos testados: Cartões&nbsp;Visa, Débitos&nbsp;SEPA, Wallets &amp; pagamentos, Onboarding/KYC,
+          Reembolsos, Reconciliação, Marketplace.
+        </figcaption>
+      </div>
     </figure>
 
-    <h2>Testes manuais & UAT</h2>
-    <ul>
-      <li>Foco manual em <strong>exploratório/UAT</strong>; checklists de release mantidas.</li>
-      <li>Gherkin alinhado aos critérios de aceitação; <code>data-testid</code> para seletores estáveis.</li>
+    <h2>Testes manuais & homologação</h2>
+    <ul class="marker:text-[#D6B36A]">
+      <li>Homologação recentrada em <strong>exploratórios/UAT</strong>; checklists de release mantidas.</li>
+      <li>Alinhamento Gherkin ↔ critérios de aceitação; sugestões <code>data-testid</code> para seletores UI estáveis.</li>
     </ul>
 
-    <h2>CI/CD, observabilidade & desempenho</h2>
-    <ul>
-      <li>Paralelização/sharding progressivos, isolamento de ambientes, artefatos de logs.</li>
-      <li><strong>Screenshots do Selenium</strong> em falhas + logs de API detalhados (rota/payload/status); dashboard para Head of QA; triagem semanal de flakes.</li>
-      <li><strong>Cargas</strong> a cada 3 sprints para monitorar gargalos (não-regressão de performance).</li>
+    <h2>CI/CD, observabilidade & desempenho de execução</h2>
+    <ul class="marker:text-[#D6B36A]">
+      <li>Paralelização/sharding progressivos, isolamento de ambientes, artefactos de logs.</li>
+      <li><strong>Screenshots do Selenium</strong> em falha + logs de API detalhados (rota/payload/status); dashboard do Head of QA; triagem semanal de flakes.</li>
+      <li>Geração de <strong>fluxos de carga</strong> a cada 3 sprints para seguir gargalos (não-regressão de performance).</li>
     </ul>
 
     <h2>Resultados (por períodos)</h2>
-    <ul>
-      <li><strong>M1 → M2</strong>: primeiro run completo, ~60% de caminhos críticos; 2 execuções/dia confiáveis.</li>
-      <li><strong>M2 → M6</strong>: ≈100% E2E crítico; NR priorizada por risco; smoke em produção.</li>
-      <li><strong>Ano 1</strong>: −23% de incidentes em produção; tempo de receita ÷2; adoção de BDD.</li>
-      <li><strong>~3 anos</strong>: BDD nas squads, 43 sprints cobertos, 1.826 runs E2E, centenas de bugs interceptados, 5 QAs capacitados para automatizar seu escopo, estabilidade significativamente maior.</li>
+    <ul class="marker:text-[#D6B36A]">
+      <li><strong>M1 → M2</strong>: primeiro run completo, ~60&nbsp;% dos fluxos críticos cobertos; 2 execuções fiáveis/dia.</li>
+      <li><strong>M2 → M6</strong>: ≈100&nbsp;% dos fluxos E2E críticos; NR priorizadas por risco; smoke em produção.</li>
+      <li><strong>Ano 1</strong>: −23&nbsp;% de incidentes em produção; homologação ÷2; adoção de BDD.</li>
+      <li><strong>3 anos</strong>: BDD adotado nas squads, 43 sprints cobertos, 1.826 execuções E2E, centenas de bugs intercetados, 5 QA formados, estabilidade superior.</li>
     </ul>
 
     <h2>Stack</h2>
-    <ul class="columns-2">
+    <ul class="columns-2 marker:text-[#D6B36A]">
       <li>C#, SpecFlow (Gherkin)</li>
       <li>Selenium (UI)</li>
       <li>RestSharp (API)</li>
       <li>Azure DevOps</li>
-      <li>Microsoft Teams (relatórios)</li>
-      <li>Conjuntos CSV anonimizados</li>
+      <li>Microsoft Teams (reporting)</li>
+      <li>CSV anonimizados</li>
     </ul>
 
-    <blockquote>
-      <strong>Aviso de NDA</strong> — Detalhes sensíveis generalizados; números arredondados para nível não sensível.
+    <blockquote class="not-prose">
+      <div class="rounded-xl p-[1px] bg-[linear-gradient(135deg,rgba(214,179,106,.6),rgba(255,255,255,.06))]">
+        <div class="rounded-[0.75rem] p-4 bg-neutral-950/80 ring-1 ring-white/10">
+          <p class="m-0 text-white/85">
+            <strong class="text-white">Aviso de NDA</strong> — Detalhes sensíveis generalizados. Números arredondados a um nível não sensível.
+          </p>
+        </div>
+      </div>
     </blockquote>
   </article>
+
+  <!-- Estilos luxo locais -->
+  <style is:inline>
+    :root { --gold:#D6B36A; }
+    .prose :where(h1,h2,h3,h4){ color:#fff; }
+    .prose :where(p,li,dd){ color:rgba(255,255,255,.86); }
+    .prose :where(strong){ color:#fff; }
+    .prose :where(h2){ position: relative; padding-left: .6rem; }
+    .prose :where(h2)::before{
+      content:""; position:absolute; left:0; top:.35em; bottom:.35em;
+      width:3px; border-radius:2px;
+      background: linear-gradient(180deg,var(--gold),rgba(255,255,255,.35)); opacity:.9;
+    }
+    .prose :where(ul)>li::marker{ color: var(--gold); }
+    .prose blockquote{
+      border-left: 3px solid color-mix(in oklab, var(--gold) 65%, white 35%);
+      background: color-mix(in oklab, black 88%, var(--gold) 12%);
+      border-radius: .75rem; padding: .85rem 1rem; margin: 1rem 0;
+    }
+    .prose hr{
+      border:0; height:1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity:.7;
+    }
+  </style>
 </BaseLayout>

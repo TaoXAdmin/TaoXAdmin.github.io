@@ -2,97 +2,141 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const lang = 'en';
-const pageTitle = 'Case studies - Alexis Fiska';
+const pageTitle = 'Case Studies - Alexis Fiska';
 const pageDescription =
-  'QA case studies: Xpollens (BPCE BaaS) — greenfield automation, Azure CI/CD, stable critical journeys; Ornikar Insurance — robust E2E, comparator integrations, PR & daily runs.';
+  "QA case studies: Xpollens (BPCE BaaS) – automation from scratch, Azure CI/CD, reliability of critical flows; Ornikar Insurance – robust E2E, comparator integration, PR runs on Jenkins/K8s.";
 const BASE = import.meta.env.BASE_URL ?? '/';
 ---
 <BaseLayout lang={lang} title={pageTitle} description={pageDescription}>
-  <h1 class="text-3xl font-bold mb-6 text-center">Case studies</h1>
-  <p class="max-w-3xl mx-auto mb-10 text-neutral-700 dark:text-neutral-300 text-center">
-    Short “light” summaries before the full write-ups. Concrete figures are anonymised to respect NDA constraints.
-  </p>
+  <!-- Header "Case Studies" with luxe frame + textured background -->
+  <div
+    class="max-w-5xl mx-auto mb-10 rounded-2xl p-[1px]
+           bg-[linear-gradient(135deg,rgba(214,179,106,.65),rgba(255,255,255,.08))]
+           shadow-xl shadow-black/30"
+  >
+    <div
+      class="relative rounded-[1rem] ring-1 ring-white/10 bg-neutral-950 overflow-hidden
+             px-6 py-8 md:px-10 md:py-10"
+    >
+      <!-- Luxe veil -->
+      <span
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0
+               [background:radial-gradient(120%_100%_at_70%_-10%,rgba(255,255,255,.06),transparent_60%),linear-gradient(120deg,transparent,rgba(214,179,106,.08),transparent)]"
+      ></span>
+
+      <!-- Content -->
+      <div class="relative">
+        <h1 class="text-3xl md:text-4xl font-bold mb-4 text-center text-white">
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-white to-[#D6B36A]">
+            Case Studies
+          </span>
+        </h1>
+
+        <div class="h-px w-full max-w-3xl mx-auto mb-5 bg-gradient-to-r from-transparent via-[#D6B36A] to-transparent opacity-70"></div>
+
+        <p class="max-w-3xl mx-auto text-center text-white/70">
+          Every project is unique. Here are lightweight summaries before reading the full case studies.
+          Exact figures are intentionally anonymized in line with NDA agreements.
+        </p>
+      </div>
+    </div>
+  </div>
 
   <!-- Xpollens -->
   <article class="mb-12">
-    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Xpollens (BPCE Group)</h2>
+    <h2 class="text-2xl font-semibold mb-2 text-white">Xpollens (BPCE Group)</h2>
     <figure class="mb-4">
       <img
-        src={`${BASE}images/cases/xpollens/i18n/en/hero.svg`}
-        alt="Xpollens — CI/CD pipeline and critical banking journeys"
+        src={`${BASE}images/cases/xpollens/i18n/${lang}/hero.svg`}
+        alt="Xpollens — CI/CD pipeline and critical banking flows"
         loading="lazy"
-        class="w-full rounded-2xl shadow-sm"
+        class="w-full rounded-2xl shadow-lg shadow-black/30 ring-1 ring-white/10"
       />
-      <figcaption class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
-        From scratch: E2E/API automation, Azure CI/CD, Teams/Email reporting.
+      <figcaption class="mt-2 text-sm text-white/60">
+        Automation from scratch: E2E/API, Azure CI/CD, Teams/Email reporting.
       </figcaption>
     </figure>
 
-    <h3 class="text-xl font-semibold mt-4 mb-1">Context</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      BaaS fintech with critical products (Izly, Bimpli, Money Walkie, Leroy Merlin marketplace, Autodoc SEPA, Nirio/FDJ…).
-      At start: no automation, 7 squads with manual QA, long NR checklists, periodic incidents, strict regulation.
+    <h3 class="text-xl font-semibold mt-4 mb-1 text-white">Context</h3>
+    <p class="mb-3 text-white/70">
+      BaaS fintech operating critical products (Izly, Bimpli, Money Walkie, Leroy Merlin/Adeo marketplace,
+      Autodoc SEPA, Nirio/FDJ...). When I arrived: 0 automation, 7 squads with manual QA, long UAT cycles,
+      incidents in bursts, strong regulatory constraints (GDPR/KYC/AML/CFT).
     </p>
 
-    <h3 class="text-xl font-semibold mt-4 mb-1">Goals</h3>
-    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
-      <li>Kick-off E2E/API automation and secure money &amp; account flows.</li>
-      <li>Industrialise <strong>Azure DevOps</strong> (build/test/report) across envs incl. prod smoke.</li>
-      <li>Reduce manual NR, structure triage/observability.</li>
+    <h3 class="text-xl font-semibold mt-4 mb-1 text-white">Goals</h3>
+    <ul class="list-disc pl-5 mb-3 space-y-1 text-white/70 marker:text-[#D6B36A99]">
+      <li>Kick off E2E/API automation and secure card &amp; account flows.</li>
+      <li>Industrialize an <strong>Azure DevOps</strong> pipeline (build/test/report) for QA/integ/prod (smoke).</li>
+      <li>Reduce manual UAT; structure NR/triage/observability.</li>
     </ul>
 
-    <h3 class="text-xl font-semibold mt-4 mb-1">Approach & results</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      C# SpecFlow/Selenium/RestSharp framework, stable selectors &amp; anonymised data, bounded retries.
-      2 runs/day, Teams+email reporting, screenshots/logs. ≈100% critical coverage by M6, manual effort halved,
-      −23% prod incidents in year 1.
+    <h3 class="text-xl font-semibold mt-4 mb-1 text-white">Approach &amp; results</h3>
+    <p class="mb-3 text-white/70">
+      C# framework (SpecFlow/Selenium/RestSharp), stable Page Objects, anonymized data, bounded retries, anti-flakes.
+      2 runs/day, Teams + email reporting, screenshots &amp; logs. Critical coverage ≈100% by M6, manual testing halved,
+      −23% incidents in year 1.
     </p>
 
     <p class="mt-4">
-      <a href={`${BASE}en/cases/xpollens`} class="inline-block px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
-        Read full case study
+      <a
+        href={`${BASE}${lang}/cases/xpollens`}
+        class="inline-block px-4 py-2 rounded-lg font-medium
+               border border-[#D6B36A80] text-white bg-transparent
+               hover:bg-[#D6B36A14] active:bg-[#D6B36A20]
+               focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 transition-colors"
+      >
+        Read the full case study
       </a>
     </p>
   </article>
 
   <!-- Ornikar -->
   <article class="mb-12">
-    <h2 class="text-2xl font-semibold mb-2 text-blue-600 dark:text-blue-400">Ornikar (Insurance)</h2>
+    <h2 class="text-2xl font-semibold mb-2 text-white">Ornikar (Insurance)</h2>
     <figure class="mb-4">
       <img
-        src={`${BASE}images/cases/ornikar/i18n/en/hero.svg`}
-        alt="Ornikar (Insurance) — QA Automation & CI/CD, quotes, payment, integrated comparators"
+        src={`${BASE}images/cases/ornikar/i18n/${lang}/hero.svg`}
+        alt="Ornikar (Insurance) — QA Automation & CI/CD, car quotes, payment, integrated comparators"
         loading="lazy"
-        class="w-full rounded-2xl shadow-sm"
+        class="w-full rounded-2xl shadow-lg shadow-black/30 ring-1 ring-white/10"
       />
-      <figcaption class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
-        Robust E2E (10 profiles), PR & daily runs, comparators (LesFurets, LeLynx, MeilleureAssurance).
+      <figcaption class="mt-2 text-sm text-white/60">
+        Robust E2E (10 profiles), PR &amp; daily runs, comparator integration (LesFurets, LeLynx, MeilleureAssurance).
       </figcaption>
     </figure>
 
-    <h3 class="text-xl font-semibold mt-4 mb-1">Context</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      End-to-end testing of the Auto Insurance platform: account creation, quote (44M vehicles, 3 plans), payment.
-      Integration validation for three external comparators with different constraints and data models.
+    <h3 class="text-xl font-semibold mt-4 mb-1 text-white">Context</h3>
+    <p class="mb-3 text-white/70">
+      End-to-end tests of the Auto Insurance platform: account creation, quotes (44M vehicles, 3 offers), payment.
+      Verification of the integration of 3 comparison sites with different constraints, with pricing data collection/management.
     </p>
 
-    <h3 class="text-xl font-semibold mt-4 mb-1">Goals</h3>
-    <ul class="list-disc pl-5 mb-3 text-neutral-700 dark:text-neutral-300 space-y-1">
-      <li>Stabilise existing E2E and secure critical user journeys.</li>
-      <li>Automate as much as possible despite no dedicated comparator envs.</li>
-      <li>Speed up releases via PR + daily executions.</li>
+    <h3 class="text-xl font-semibold mt-4 mb-1 text-white">Goals</h3>
+    <ul class="list-disc pl-5 mb-3 space-y-1 text-white/70 marker:text-[#D6B36A99]">
+      <li>Stabilize existing E2E &amp; harden critical flows.</li>
+      <li>Automate as much as possible despite the absence of comparator environments.</li>
+      <li>Speed up release cadence with PR + daily runs.</li>
     </ul>
 
-    <h3 class="text-xl font-semibold mt-4 mb-1">Approach & results</h3>
-    <p class="mb-3 text-neutral-700 dark:text-neutral-300">
-      TS/React, Selenium/Playwright, Appium, Jenkins+K8s, Xray. Page Objects, data builders, controlled randomisation,
-      bounded retries & progressive waits. 2 runs/day (~25 min), PR executions, screenshots/API logs, Slack/Email notifications.
-      100% of critical journeys by M1 then maintained; stability increased; targeted manual testing for comparators.
+    <h3 class="text-xl font-semibold mt-4 mb-1 text-white">Approach &amp; results</h3>
+    <p class="mb-3 text-white/70">
+      TS/React, Selenium/Playwright, Appium, Jenkins+Kubernetes, Xray. Page Objects, test-data builders, controlled
+      randomization, retries &amp; progressive waits. 2 runs/day (~25 min), PR executions, screenshots/logs/API,
+      Slack/Email notifications. 100% of critical paths covered (M1) then maintained, higher stability, comparator
+      checks handled via targeted manual testing.
     </p>
 
     <p class="mt-4">
-      <a href={`${BASE}en/cases/ornikar`} class="inline-block px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
-        Read full case study
+      <a
+        href={`${BASE}${lang}/cases/ornikar`}
+        class="inline-block px-4 py-2 rounded-lg font-medium
+               border border-[#D6B36A80] text-white bg-transparent
+               hover:bg-[#D6B36A14] active:bg-[#D6B36A20]
+               focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 transition-colors"
+      >
+        Read the full case study
       </a>
     </p>
   </article>

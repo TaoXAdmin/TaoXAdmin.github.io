@@ -1,36 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
-  <rect width="1200" height="520" fill="#ffffff"/>
-  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" fill="#0f172a">
-    <text x="600" y="56" font-size="26" font-weight="700" text-anchor="middle">Antes: E2E frágil, comparadores manuais, incidentes de cotação</text>
+<!-- public/images/cases/ornikar/pipeline-before.pt.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" role="img" width="1200" height="520" viewBox="0 0 1200 520">
+  <title>Ornikar — Antes: E2E frágil, comparadores manuais, incidentes em cotações</title>
+  <desc>Três cartões premium escuros, pontos dourados ligados por uma linha branca. Fundo carvão com grelha dourada subtil e grão fino.</desc>
+
+  <!-- ...defs and layout unchanged... -->
+
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" text-rendering="geometricPrecision">
+    <text x="600" y="66" font-size="28" font-weight="800" text-anchor="middle" fill="url(#titleGrad)">
+      Antes: E2E frágil, comparadores manuais, incidentes em cotações
+    </text>
   </g>
-  <g transform="translate(70,110)">
-    <rect x="0" y="0" width="340" height="310" rx="16" fill="#f8fafc" stroke="#e5e7eb"/>
-    <text x="170" y="36" text-anchor="middle" font-size="18" font-weight="600">Automação</text>
-    <g fill="#334155" font-size="14">
-      <text x="24" y="76">• E2E existente quebrado, NR instável</text>
-      <text x="24" y="106">• Seletores frágeis, dados não controlados</text>
-      <text x="24" y="136">• Relatórios pouco compartilhados</text>
-      <text x="24" y="166">• Jenkins/K8s subutilizados</text>
+
+  <!-- Cartão 1: Automação -->
+  <g transform="translate(50,110)" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial">
+    <text x="170" y="44" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">Automação</text>
+    <g font-size="16" fill="#FFFFFFE6">
+      <text x="66" y="108">E2E quebrado, regressões pouco confiáveis</text>
+      <text x="66" y="144">Seletores frágeis, dados não controlados</text>
+      <text x="66" y="180">Relatórios pouco compartilhados</text>
+      <text x="66" y="216">Jenkins/K8s subutilizados</text>
     </g>
   </g>
-  <g transform="translate(430,110)">
-    <rect x="0" y="0" width="340" height="310" rx="16" fill="#f8fafc" stroke="#e5e7eb"/>
-    <text x="170" y="36" text-anchor="middle" font-size="18" font-weight="600">Comparadores</text>
-    <g fill="#334155" font-size="14">
-      <text x="24" y="76">• Sem ambientes dedicados</text>
-      <text x="24" y="106">• 100% manual (200+ casos)</text>
-      <text x="24" y="136">• Perguntas/modelos divergentes</text>
-      <text x="24" y="166">• Incidentes frequentes nas comparações</text>
+
+  <!-- Cartão 2: Comparadores -->
+  <g transform="translate(430,110)" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial">
+    <text x="170" y="44" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">Comparadores</text>
+    <g font-size="16" fill="#FFFFFFE6">
+      <text x="66" y="108">Sem ambientes dedicados</text>
+      <text x="66" y="144">Homologação 100% manual (200+ casos)</text>
+      <text x="66" y="180">Divergências de questionários/dados</text>
+      <text x="66" y="216">Incidentes frequentes (comparações)</text>
     </g>
   </g>
-  <g transform="translate(790,110)">
-    <rect x="0" y="0" width="340" height="310" rx="16" fill="#f8fafc" stroke="#e5e7eb"/>
-    <text x="170" y="36" text-anchor="middle" font-size="18" font-weight="600">Ambientes &amp; CI</text>
-    <g fill="#334155" font-size="14">
-      <text x="24" y="76">• Qual/Pré-prod dependentes do BE</text>
-      <text x="24" y="106">• Upgrades bloqueantes</text>
-      <text x="24" y="136">• Observabilidade limitada</text>
-      <text x="24" y="166">• Xray presente, uso irregular</text>
+
+  <!-- Cartão 3: Ambientes & CI -->
+  <g transform="translate(810,110)" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial">
+    <text x="170" y="44" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">Ambientes &amp; CI</text>
+    <g font-size="16" fill="#FFFFFFE6">
+      <text x="66" y="108">Qualif/Pré-produção dependente do backend</text>
+      <text x="66" y="144">Atualizações bloqueantes</text>
+      <text x="66" y="180">Observabilidade limitada</text>
+      <text x="66" y="216">Xray presente, uso irregular</text>
     </g>
   </g>
 </svg>

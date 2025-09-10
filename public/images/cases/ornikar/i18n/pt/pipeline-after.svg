@@ -1,22 +1,104 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540">
-  <rect width="1200" height="540" fill="#ffffff"/>
-  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" fill="#0f172a">
-    <text x="600" y="56" font-size="26" font-weight="700" text-anchor="middle">Depois: E2E robusto, runs em PR, paralelização &amp; relatório claro</text>
+<!-- public/images/cases/ornikar/pipeline-after.pt.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" role="img" width="1200" height="540" viewBox="0 0 1200 540">
+  <title>Ornikar — Depois: E2E robusto, execuções de PR, paralelização &amp; reporting claro</title>
+  <desc>Pipeline premium escura: cartões negros com rebordo dourado, setas brancas, feixes dourados oblíquos. Tagline maior no rodapé.</desc>
+
+  <defs>
+    <radialGradient id="bgRad" cx="50%" cy="45%" r="80%">
+      <stop offset="0"   stop-color="#111111"/>
+      <stop offset="0.7" stop-color="#0C0C0C"/>
+      <stop offset="1"   stop-color="#080808"/>
+    </radialGradient>
+
+    <linearGradient id="beamA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#D6B36A" stop-opacity="0"/>
+      <stop offset="0.45" stop-color="#D6B36A" stop-opacity=".14"/>
+      <stop offset="0.55" stop-color="#D6B36A" stop-opacity=".16"/>
+      <stop offset="1"   stop-color="#D6B36A" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="beamB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#D6B36A" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#D6B36A" stop-opacity=".10"/>
+      <stop offset="1"   stop-color="#D6B36A" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="goldStroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#D6B36A" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity=".08"/>
+    </linearGradient>
+
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000" flood-opacity=".35"/>
+    </filter>
+
+    <filter id="glowWhite" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2" result="b1"/>
+      <feMerge><feMergeNode in="b1"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D6B36A"/>
+    </linearGradient>
+
+    <marker id="arrowHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#FFFFFF" />
+    </marker>
+  </defs>
+
+  <rect width="1200" height="540" fill="url(#bgRad)"/>
+  <rect x="-200" y="48"  width="1600" height="170" fill="url(#beamA)" transform="rotate(9 600 130)"  opacity=".9"/>
+  <rect x="-260" y="326" width="1600" height="150" fill="url(#beamB)" transform="rotate(-9 600 390)" opacity=".9"/>
+
+  <rect x="24" y="24" width="1152" height="492" rx="20" fill="none" stroke="#FFFFFF20"/>
+
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" text-rendering="geometricPrecision">
+    <text x="600" y="66" font-size="28" font-weight="800" text-anchor="middle" fill="url(#titleGrad)">
+      Depois: E2E robusto, execuções de PR, paralelização &amp; reporting claro
+    </text>
   </g>
-  <g transform="translate(80,180)">
-    <rect x="0" y="0" width="180" height="90" rx="12" fill="#2563eb" opacity="0.95"/><text x="90" y="54" text-anchor="middle" font-size="16" font-weight="600" fill="#fff">Código (PR)</text>
-    <rect x="220" y="0" width="180" height="90" rx="12" fill="#2563eb" opacity="0.95"/><text x="310" y="54" text-anchor="middle" font-size="16" font-weight="600" fill="#fff">Build</text>
-    <rect x="440" y="-52" width="220" height="90" rx="12" fill="#22c55e" opacity="0.95"/><text x="550" y="-18" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">E2E UI (Selenium/Playwright)</text>
-    <rect x="440" y="62" width="220" height="90" rx="12" fill="#22c55e" opacity="0.95"/><text x="550" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">API (Axios)</text>
-    <rect x="700" y="0" width="180" height="90" rx="12" fill="#0ea5e9" opacity="0.95"/><text x="790" y="54" text-anchor="middle" font-size="16" font-weight="600" fill="#fff">Relatório HTML</text>
-    <rect x="920" y="0" width="180" height="90" rx="12" fill="#16a34a" opacity="0.95"/><text x="1010" y="54" text-anchor="middle" font-size="16" font-weight="600" fill="#fff">Release</text>
-    <g stroke="#94a3b8" stroke-width="3" fill="none" stroke-linecap="round">
-      <path d="M180,45 H220"/><path d="M400,45 H440"/><path d="M660,45 H700"/><path d="M880,45 H920"/>
-      <path d="M550,-52 V-12"/><path d="M550,62 V2"/>
+
+  <g transform="translate(80,190)" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial">
+    <g filter="url(#cardShadow)">
+      <rect x="0"   y="0"   width="180" height="90" rx="14" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+      <text x="90"  y="56" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">Código (PR)</text>
+    </g>
+    <g filter="url(#cardShadow)">
+      <rect x="220" y="0"   width="180" height="90" rx="14" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+      <text x="310" y="56" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">Build</text>
+    </g>
+    <g filter="url(#cardShadow)">
+      <rect x="440" y="-50" width="220" height="90" rx="14" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+      <text x="550" y="-16" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">E2E UI (Selenium/Playwright)</text>
+    </g>
+    <g filter="url(#cardShadow)">
+      <rect x="440" y="60" width="220" height="90" rx="14" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+      <text x="550" y="94" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">API (Axios)</text>
+    </g>
+    <g filter="url(#cardShadow)">
+      <rect x="700" y="0" width="180" height="90" rx="14" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+      <text x="790" y="56" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">Relatório HTML</text>
+    </g>
+    <g filter="url(#cardShadow)">
+      <rect x="920" y="0" width="180" height="90" rx="14" fill="#0B0B0B" stroke="url(#goldStroke)"/>
+      <text x="1010" y="56" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">Release</text>
+    </g>
+
+    <g stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none" filter="url(#glowWhite)" marker-end="url(#arrowHead)">
+      <path d="M180,45 H220"/>
+      <path d="M400,45 H440"/>
+      <path d="M660,-5 H700"/>
+      <path d="M660,95 H700"/>
+      <path d="M880,45 H920"/>
     </g>
   </g>
-  <g fill="#334155" font-size="14">
-    <text x="600" y="420" text-anchor="middle">Seletores estáveis (Page Objects), builders de dados, randomização controlada, retries limitados, waits progressivos</text>
-    <text x="600" y="444" text-anchor="middle">~25 min/run • 2 execuções/dia • paralelizado • screenshots &amp; logs de API • Slack (Insurance/Growth/QA) &amp; e-mail ao Head of QA</text>
+
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" fill="#FFFFFFE6" text-anchor="middle">
+    <text x="600" y="455" font-size="18">
+      Seletores sólidos (Page Objects), builders de dados de teste, randomização controlada, retries limitados, waits progressivos
+    </text>
+    <text x="600" y="485" font-size="18">
+      ~25 min/run • 2 execuções/dia • paralelização • screenshots &amp; logs de API • Slack (Seguros/Growth/QA) &amp; email do Head of QA
+    </text>
   </g>
 </svg>
